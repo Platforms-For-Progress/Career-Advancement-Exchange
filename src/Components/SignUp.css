@@ -11,17 +11,10 @@
     padding: 2%;
     background-color: rgb(183, 176, 199);
     /* float: left; */
-    display: flex;
+    /* display: flex; */
 
 }
-.float1 {
-    float: left;
-    
 
-}
-.float2 {
-    float:right;
-}
 .imag {
    
     
