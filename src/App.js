@@ -8,6 +8,7 @@ import Contact from './Components/Contact';
 import Involved from './Components/Involved';
 import PastWork from './Components/PastWork';
 import Login from './Components/Login';
+import SignUp from './Components/SignUp';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Involved path='/involved' />
         <PastWork path='/pastwork' />
         <Login path='/login' />
+        <SignUp path='/signup' />
         
 
       </Router>

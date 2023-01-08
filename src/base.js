@@ -9,6 +9,7 @@ import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
   apiKey: "AIzaSyCP_dzafEk6y0dHK1ZtNUBwqlI2-Xfl-SY",
   authDomain: "platforms-for-progress.firebaseapp.com",
+  databaseURL: "https://platforms-for-progress-default-rtdb.firebaseio.com",
   projectId: "platforms-for-progress",
   storageBucket: "platforms-for-progress.appspot.com",
   messagingSenderId: "108726206780",
@@ -17,5 +18,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
+export const auth = getAuth();
+export const db = getDatabase(app);
+export const firestore = getFirestore(app);
+export const storage = getStorage(app);
 const analytics = getAnalytics(app);
