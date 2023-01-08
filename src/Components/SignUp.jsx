@@ -13,7 +13,7 @@ import { ref, set } from "firebase/database";
 // import {app} from "../base.js";
 import { auth, db } from "../base.js";
 import "./SignUp.css";
-import imag from '../img/webdesign.png';
+
 
 const { TextArea } = Input;
 
@@ -89,12 +89,11 @@ const SignUp = (props) => {
 
         <br></br>
         <div className='signup_container'>
-        <div className='float1'>
-        <img class="imag" src={imag} />
+       
         
-        </div>
-        <a href='https://pngtree.com/so/Vector'>web design png</a>
-        <div className='float2'>
+ 
+   
+        
         <div className="input_container">
             <div className="input_title">
                 <h2>
@@ -153,7 +152,7 @@ const SignUp = (props) => {
             </div>
             </div>
         </div>
-    </div>
+  
             
   )
 }
