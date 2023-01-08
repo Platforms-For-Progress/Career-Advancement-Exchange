@@ -7,7 +7,7 @@ const Home = () => {
       sequence={[
         'Hi!', // Types 'One'
         1000, // Waits 1s
-        'Hi! Welcome to Platforms for Progress', // Deletes 'One' and types 'Two'
+        'Hi! Welcome to Career Advancement Exhange', // Deletes 'One' and types 'Two'
         // 10000,
         
         
@@ -26,7 +26,7 @@ const Home = () => {
       sequence={[
         4000,
 
-        'We are an organization created to uplift those seeking jobs as well as mentor the next generation of web developers.',
+        'Our mission is to help break down barriers for those traditionally underrepresented in the workforce by providing a platform to showcase their talents and experiences. We believe in empowering and enhancing job opportunities by creating personalized websites that maximize employment based on skill level. Join us and let us help you reach the career of your dreams!',
        
 
         () => {
