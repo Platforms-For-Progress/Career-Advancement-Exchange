@@ -1,0 +1,13 @@
+.background {
+  background-image: linear-gradient(90deg, rgb(104, 181, 208), rgba(156, 104, 215, 0.687));
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  min-width: 100vh;
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+  padding-bottom: 100px;
+}
