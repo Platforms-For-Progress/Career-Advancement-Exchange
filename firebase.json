@@ -1,6 +1,8 @@
 {
   "hosting": {
-    "public": "public",
+    "site": "career-advancement-exchange",
+    "public": "build",
+    
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -12,5 +14,8 @@
         "destination": "/index.html"
       }
     ]
+  },
+  "database": {
+    "rules": "database.rules.json"
   }
 }

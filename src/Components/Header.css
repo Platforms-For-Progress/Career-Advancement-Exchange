@@ -11,7 +11,16 @@
     color:white;
     top: 0;
 }
-
+.spanned {
+    margin-right: 2vh;
+    color: black;
+    /* padding: 0.2%; */
+    /* outline: 1px solid black; */
+}
+.spanned:hover {
+    font-weight: bold;
+    color: black;
+}
 .spacing{
     margin-left: 2vh;
     /* color: white; */

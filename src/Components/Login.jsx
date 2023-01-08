@@ -1,6 +1,11 @@
 import { TypeAnimation } from 'react-type-animation';
+import { useNavigate } from 'react-router-dom';
+import { navigate } from '@reach/router';
 import './Login.css';
 const Login = () => {
+  const navSignUp = () => {
+    navigate('/signup');
+  };
   return (
     <div className="login">
     <TypeAnimation
@@ -17,6 +22,9 @@ const Login = () => {
     //   repeat={Infinity}
       style={{ fontSize: '2em', cursor: false }}
     />
+    <h3 onClick={navSignUp}>Need to Sign Up? Click Here!</h3>
+    
+
 
     </div>
   );
