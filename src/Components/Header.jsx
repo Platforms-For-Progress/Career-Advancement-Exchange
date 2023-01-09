@@ -8,8 +8,35 @@ import NavItem from 'react-bootstrap/NavItem'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 // import MenuItem from 'react-bootstrap/DropdownMenu'
 import './Header.css'
+import { useState } from 'react';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+// import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+
 
 function Header() {
+  const [signedIn, setSignedIn] = useState(false);
+  const [name, setName] = useState("");
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+  if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      setSignedIn(true);
+      setName(user.displayName);
+      // ...
+  } else {
+      // User is signed out
+      // ...
+      console.log("no user");
+      setSignedIn(false);
+  }
+  });
+  const logout = () => {
+    auth.signOut();
+    window.open("/signin")
+  };
+ 
+  
   return (
 //     <Navbar bg="dark" variant="dark">
 //     <Container>
@@ -27,11 +54,24 @@ function Header() {
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="me-auto">
+    
       <Nav.Link href="/about">About</Nav.Link>
       <Nav.Link href="/involved">Get Involved</Nav.Link>
       <Nav.Link href="/pastwork">Past Work</Nav.Link>
       <Nav.Link href="/contact">Contact Us</Nav.Link>
+      <div>
+      {
+     signedIn
+      ? (
+        <Nav.Link href="/profile">Profile</Nav.Link>
+      )
+      : (
+        <></>
+      )
+      }
+      </div>
       {/* <Nav.Link href="/login">Login</Nav.Link> */}
+      
       
   
     </Nav>
@@ -39,7 +79,32 @@ function Header() {
       Login / Signup
      </span> */}
      {/* <Nav className="me-auto"> */}
-     <Nav.Link href="/login" className='spanned'>Login / Sign Up</Nav.Link>
+     <div className='spanned'>
+     <div>
+      {
+     signedIn
+      ? (
+        <Nav.Link onClick={logout}>Log Out</Nav.Link>
+      )
+      : (
+        <Nav.Link href="/login">Login / Signup</Nav.Link>
+      )
+      }
+      </div>
+     {/* {signedIn && <Nav.Link>
+      <Nav.Link href="/profile">Profile</Nav.Link>
+      
+    </Nav.Link>
+     
+     }
+     {!signedIn && <Nav.Link>
+        <Nav.Link href="/login">Login / Signup</Nav.Link>
+        </Nav.Link>
+      } */}
+      </div>
+
+     
+     
      {/* </Nav> */}
   </Navbar.Collapse>
 

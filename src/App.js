@@ -9,6 +9,8 @@ import Involved from './Components/Involved';
 import PastWork from './Components/PastWork';
 import Login from './Components/Login';
 import SignUp from './Components/SignUp';
+import Profile from './Components/Profile';
+import Request from './Components/Request';
 
 function App() {
   return (
@@ -22,7 +24,8 @@ function App() {
         <PastWork path='/pastwork' />
         <Login path='/login' />
         <SignUp path='/signup' />
-        
+        <Profile path='/profile' />
+        <Request path='/request' />
 
       </Router>
       {/* <p>Hello Mate</p> */}

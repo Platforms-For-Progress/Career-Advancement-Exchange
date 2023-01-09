@@ -47,6 +47,7 @@ const SignUp = (props) => {
     const onSignUp = (e) => {
         e.preventDefault();
         function onRegister() {
+            
           createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
               set(ref(db, "users/" + userCredential.user.uid), {

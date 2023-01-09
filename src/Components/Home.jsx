@@ -1,6 +1,7 @@
 import { TypeAnimation } from 'react-type-animation';
 import './Home.css';
 const Home = () => {
+  
   return (
     <div className="homez">
     <TypeAnimation
