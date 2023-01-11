@@ -38,3 +38,9 @@
     margin-block: 2%;
     
 }
+@media screen and (max-width:1000px) {
+    .req {
+        width: 150%;
+        margin-left: -25.5%;
+    }
+}

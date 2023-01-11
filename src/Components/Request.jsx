@@ -11,6 +11,7 @@ import { getDatabase, ref, set, push } from "firebase/database";
 import { getFirestore } from 'firebase/firestore';
 import {doc, setDoc} from 'firebase/firestore'
 import { async } from '@firebase/util';
+import { useEffect } from 'react';
 // import { await } from 'react-router-dom';
 // import {await}
 
@@ -65,43 +66,84 @@ const Request = () => {
     const [fname, setFname] = useState("");
     const [lname, setLname] = useState("");
     const [ideas, setIdeas] = useState("");
+    const [data, setUserData] = useState([]);
+    const auth = getAuth();
+    const user = auth.currentUser;
+    
+    const db2 = getFirestore();
     const onFnameChange = (event) => setFname(event.target.value);
     const onLnameChange = (event) => setLname(event.target.value);
     const onIdeaChange = (event) => setIdeas(event.target.value);
+    // useEffect(() => {
+        
+    //     db2.collection("userRequestedWebsites/"+user.uid).onSnapshot((snapshot) => {
+    //       setUserData(
+    //         snapshot.docs.map((doc) => ({
+    //           firstName: fname,
+    //           lastName: lname,
+    //           idea: ideas
+    //         }))
+    //       );
+    //     });
+    //     console.log({ data });
+    //   }, []);
+      
+    //   const submit = () => {
+        const submit = (e) => {
+            
+            setUid(user.uid);
+        // db=getFirestore();
     
-    const writeUserData = (e) => { 
-        console.log('writing user data');
+            console.log(user.uid);
+            // e.preventDefault();
+            // db2.collection("userRequestedWebsites/"+user.uid).add({
+            setDoc(doc(db2,"userRequestedWebsites", user.uid), {
+                firstName: fname,
+                lastName: lname,
+                idea: ideas
+            });
+            setFname("");
+            setLname("");
+            setIdeas("");
+            setUid("");
+            // alert("You have been added to our database! You will hear back from us within a week :)");
+        };
+      
         
-        // const auth = getAuth();
+
+    // const writeUserData = (e) => { 
+    //     console.log('writing user data');
         
-        const auth = getAuth();
-        const user = auth.currentUser;
-        setUid(user.uid);
+    //     // const auth = getAuth();
+        
+    //     const auth = getAuth();
+    //     const user = auth.currentUser;
+    //     setUid(user.uid);
        
     
-        console.log(user.uid);
-        const db = getDatabase();
-        const ref = ref(db, "userRequestedWebsites/" + "1")
-        const userRef = ref.child(user.uid);
-        userRef.set({
-            firstName: fname,
-            lastName: lname,
-            idea: ideas
-        })
-        // const db = getFirestore();
-        // function onCreate() {
-        // const setData = async() =>
-        // async (dispatch) => {
-        //     try {
-        //         await user.set(doc(db, "userRequestedWebsites", "1"), {
-        //             firstName: "Los Angeles",
-        //             lastName: "CA",
-        //             idea: "USA"
-        //           });
-        //           alert("donr")
-        //     } catch (error) {
-        //         alert("whoops");
-        //     }
+    //     console.log(user.uid);
+    //     const db = getDatabase();
+    //     const ref = ref(db, "userRequestedWebsites/" + "1")
+    //     const userRef = ref.child(user.uid);
+    //     userRef.set({
+    //         firstName: fname,
+    //         lastName: lname,
+    //         idea: ideas
+    //     })
+    //     // const db = getFirestore();
+    //     // function onCreate() {
+    //     // const setData = async() =>
+    //     // async (dispatch) => {
+    //     //     try {
+    //     //         await user.set(doc(db, "userRequestedWebsites", "1"), {
+    //     //             firstName: "Los Angeles",
+    //     //             lastName: "CA",
+    //     //             idea: "USA"
+    //     //           });
+    //     //           alert("donr")
+    //     //     } catch (error) {
+    //     //         alert("whoops");
+    //     //     }
         // };
         // setData();
         
@@ -126,7 +168,7 @@ const Request = () => {
         
         // onCreate();
         //     }
-    }
+    // }
     const contact = () => {
         
         console.log('contact');
@@ -159,7 +201,7 @@ const Request = () => {
               <label htmlFor="exampleFormControlTextarea1">What are some things you would want to include on your website? <br></br>Any secret talents or fun facts?<br></br>*This doesn't need to be comprehensive and is just a starting point*</label>
               <textarea className="form-control" id="websitegoals" rows="3" onChange={onIdeaChange}></textarea>
           </div>
-          <button type="submit" class="btn btn-primary" onClick={()=>writeUserData()}>Submit</button>
+          <button type="submit" class="btn btn-primary" onClick={submit}>Submit</button>
           
       </form>
       </div>
