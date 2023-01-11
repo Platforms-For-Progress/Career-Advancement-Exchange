@@ -1,6 +1,7 @@
 import { TypeAnimation } from 'react-type-animation';
 import './Home.css';
 const Home = () => {
+  
   return (
     <div className="homez">
     <TypeAnimation
@@ -33,10 +34,10 @@ const Home = () => {
           console.log('Done typing!'); // Place optional callbacks anywhere in the array
         }
       ]}
-      wrapper="div"
+      wrapper="homez"
       cursor={false}
       repeat={Infinity}
-      style={{ fontSize: '2em', font: 'monospace', cursor: false }}
+      style={{  cursor: false }}
     />
     </div>
   );
