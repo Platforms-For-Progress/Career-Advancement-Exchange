@@ -70,16 +70,20 @@ const Profile = () => {
     <div class="row-z">
     <div class="column" onClick={toReq}>
         <h3>Request a personal website</h3>
-        <p>Request a personal website to showcase your skills and projects!</p>
+        <p>Request a personal website to showcase your skills and projects</p>
 
     </div>
     <div class="column">
         <h3>Check the status of your website</h3>
-        <p>Check the status of your website and see when it will be ready!</p>
+        <p>Check the status of your website and see when it will be ready</p>
+    </div>
+    <div class="column">
+        <h3>Upload Documents</h3>
+        <p>Submit documents/pictures/media to be added to your website</p>
     </div>
     <div class="column">
         <h3>Account Settings</h3>
-        <p>Change your account settings and update your information!</p>
+        <p>Change your account settings and update your information</p>
     </div>
     
     </div>

@@ -28,7 +28,8 @@ const Login = () => {
           const uid = user.uid;
           console.log(uid);
           // navigate('/profile');
-          window.open('/profile');
+          navigate('/profile');
+          window.location.reload();
           console.log(user.displayName);
           // ...
         } else {
@@ -37,7 +38,9 @@ const Login = () => {
         }
       });
       const navSignUp = () => {
-        window.open('/signup');
+        navigate('/signup');
+        window.location.reload();
+        
       };
       const onLogin = () => {
         console.log('login');
