@@ -89,6 +89,8 @@ const Request = () => {
     //   }, []);
       
     //   const submit = () => {
+        // set user 
+        // setUserData(["sCpKK  00mitXa7NM4FW0gyfJBkeO2"])
         const submit = (e) => {
             
             setUid(user.uid);
@@ -97,15 +99,27 @@ const Request = () => {
             console.log(user.uid);
             // e.preventDefault();
             // db2.collection("userRequestedWebsites/"+user.uid).add({
+            const db2 = getFirestore();
             setDoc(doc(db2,"userRequestedWebsites", user.uid), {
+                uid: user.uid,
                 firstName: fname,
                 lastName: lname,
-                idea: ideas
+                idea: ideas,
+                
+                
             });
+            // var collection = getFirestore().collection("userRequestedWebsites");
+            // collection.add("hello","goodbye");
+            console.log("submit called")
             setFname("");
             setLname("");
             setIdeas("");
             setUid("");
+            // navigate("/profile");
+            // // TODO: navigate to status when created
+            // window.location.reload();
+            
+
             // alert("You have been added to our database! You will hear back from us within a week :)");
         };
       
@@ -201,7 +215,7 @@ const Request = () => {
               <label htmlFor="exampleFormControlTextarea1">What are some things you would want to include on your website? <br></br>Any secret talents or fun facts?<br></br>*This doesn't need to be comprehensive and is just a starting point*</label>
               <textarea className="form-control" id="websitegoals" rows="3" onChange={onIdeaChange}></textarea>
           </div>
-          <button type="submit" class="btn btn-primary" onClick={submit}>Submit</button>
+          <div className="submits" onClick={submit}><p>Submit</p></div>
           
       </form>
       </div>

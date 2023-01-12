@@ -38,6 +38,13 @@
     margin-block: 2%;
     
 }
+.submits {
+   
+    outline: 1px solid rgba(20, 2, 42, 0.461);
+    background-color: rgba(155, 137, 179, 0.7);
+    width:20%;
+    margin:auto;
+}
 @media screen and (max-width:1000px) {
     .req {
         width: 150%;
