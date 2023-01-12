@@ -33,3 +33,22 @@
     margin-left: 7%;
     /* margin-left: 5%; */
 }
+@media screen and (max-width:1000px) {
+    .leftside {
+        margin-top: -20%;
+        margin-left: 7%;
+        float: left;
+        width: 100%;
+        /* margin:auto; */
+    }
+    .prof {
+        display: inline-block;
+    }
+    .rightside {
+        /* float: left; */
+        margin-bottom: 20%;
+        margin-right:20%;
+
+        padding: 2%;
+    }
+}
