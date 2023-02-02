@@ -12,9 +12,19 @@ import { getFirestore } from 'firebase/firestore';
 import {doc, setDoc} from 'firebase/firestore'
 import { async } from '@firebase/util';
 import { useEffect } from 'react';
+import { auth, firestore } from '../base';
 // import { await } from 'react-router-dom';
 // import {await}
+// import {connectAuthEmulator} from 'firebase/auth';
 
+// function getCustomAuth() {
+//   const auth = getAuth();
+//   const authUrl = 'http://localhost:9099';
+//   await fetch(authUrl);
+//   connectAuthEmulator(auth, 'http://127.0.0.1:9099/',  { disableWarnings: true });
+//   return auth;
+  
+// };
 const Request = () => {
     // const [name, setName] = useState("");
     // const [str, setStr] = useState("");
@@ -67,10 +77,10 @@ const Request = () => {
     const [lname, setLname] = useState("");
     const [ideas, setIdeas] = useState("");
     const [data, setUserData] = useState([]);
-    const auth = getAuth();
+    // const auth = getCustomAuth();
     const user = auth.currentUser;
     
-    const db2 = getFirestore();
+    // const db2 = getFirestore();
     const onFnameChange = (event) => setFname(event.target.value);
     const onLnameChange = (event) => setLname(event.target.value);
     const onIdeaChange = (event) => setIdeas(event.target.value);
@@ -99,8 +109,8 @@ const Request = () => {
             console.log(user.uid);
             // e.preventDefault();
             // db2.collection("userRequestedWebsites/"+user.uid).add({
-            const db2 = getFirestore();
-            setDoc(doc(db2,"userRequestedWebsites", user.uid), {
+            // const db2 = getFirestore();
+            setDoc(doc(firestore,"userRequestedWebsites", user.uid), {
                 uid: user.uid,
                 firstName: fname,
                 lastName: lname,
@@ -115,8 +125,9 @@ const Request = () => {
             setLname("");
             setIdeas("");
             setUid("");
-            // navigate("/profile");
-            // // TODO: navigate to status when created
+            navigate("/profile");
+            window.location.reload();
+            // TODO: navigate to status when created
             // window.location.reload();
             
 

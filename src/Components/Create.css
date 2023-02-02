@@ -1,0 +1,109 @@
+.creator {
+    font-family: 'Zilla Slab', serif;
+    font-weight: bold;
+    margin: 4%;
+    cursor: false;
+}
+.form-group2 {
+    width: 100%;
+    /* margin:auto; */
+    text-align: center;
+    /* margin-left: 3%; */
+    /* float:left; */
+    /* float: center; */
+    margin:auto;
+    margin-bottom: 2%;
+    /* clear: left; */
+
+    
+}
+.form-control2 {
+    display: inline-block;
+    /* vertical-align: middle; */
+    width: 15vw;
+    /* margin: 2%; */
+    margin-left: 1%;
+    /* margin:auto; */
+
+    /* margin-left: 1%; */
+    /* margin-bottom: 2%; */
+
+}
+.form-control22 {
+    display: inline-block;
+    /* vertical-align: middle; */
+    width: 15vw;
+    /* margin: 2%; */
+    margin-left: 1%;
+    margin-right: -3%;
+    /* margin:auto; */
+
+    /* margin-left: 1%; */
+    /* margin-bottom: 2%; */
+
+}
+.form-control3 {
+    display: inline-block;
+    vertical-align: middle;
+    /* width: 30vw; */
+    /* margin: 2%; */
+    margin-right: 4%;
+    margin-left: 1%;
+    
+    width: 29vw;
+    /* margin-bottom: 2%; */
+
+}
+.form-control4 {
+    display: inline-block;
+    vertical-align: middle;
+    /* width: 30vw; */
+    /* margin: 2%; */
+    margin-right: 7%;
+    margin-left: 1%;
+    width: 29vw;
+    /* margin-bottom: 2%; */
+
+}
+.form-control4 {
+    display: inline-block;
+    vertical-align: middle;
+    /* width: 30vw; */
+    /* margin: 2%; */
+    margin-right: 7%;
+    margin-left: 1%;
+    width: 29vw;
+    /* margin-bottom: 2%; */
+
+}
+.form-control5 {
+    display: inline-block;
+    vertical-align: middle;
+    /* width: 30vw; */
+    /* margin: 2%; */
+    margin-right: 5%;
+    margin-left: 1%;
+    width: 29vw;
+    /* margin-bottom: 2%; */
+
+}
+.formmy2 {
+    outline: 1px solid black;
+    padding: 2%;
+    background-color: rgba(155, 137, 179, 0.3)   ;
+    width: 70%;
+    /* margin-right: 20%; */
+    margin: auto;
+    text-align: center;
+    
+    /* margin-left: 20%; */
+}
+.form-group {
+    margin-top: 2%;
+}
+.form-control-file {
+    margin-left: 1%;
+    margin-right: -17%;
+    /* margin:auto; */
+    /* display: inline; */
+}

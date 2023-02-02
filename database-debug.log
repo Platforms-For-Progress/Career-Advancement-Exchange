@@ -1,0 +1,14 @@
+19:46:16.600 [NamespaceSystem-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
+19:46:16.702 [main] INFO com.firebase.server.forge.App$ - Listening at 127.0.0.1:9000
+19:46:22.303 [NamespaceSystem-akka.actor.default-dispatcher-6] INFO com.firebase.core.namespace.NamespaceActor - platforms-for-progress-default-rtdb successfully activated FBKV (SurveyIdle(0)) wait: 124ms, init: 0ms
+19:46:22.360 [NamespaceSystem-blocking-namespace-operation-dispatcher-7] INFO com.firebase.core.namespace.StateManager - Namespace platforms-for-progress-default-rtdb status Active to Active
+19:47:10.103 [FirebaseWorkerPool-1-4] WARN com.firebase.core.persistence.backend.dummy.EmulatorMetadataPersistence - Multiple projectIds are not recommended in single project mode. Requested 
+namespace platforms-for-progress, but the emulator is configured for platforms-for-progress-default-rtdb. To 
+opt-out of single project mode add/set the single_project_mode: false property in 
+the firebase.json emulators config. 
+19:47:10.106 [NamespaceSystem-akka.actor.default-dispatcher-6] INFO com.firebase.core.namespace.NamespaceActor - platforms-for-progress successfully activated FBKV (SurveyIdle(0)) wait: 1ms, init: 0ms
+19:49:42.051 [Thread-0] INFO com.firebase.server.forge.App$ - Attempting graceful shutdown.
+19:49:42.081 [NamespaceSystem-akka.actor.default-dispatcher-9] INFO com.firebase.core.namespace.Terminator$Terminator - 2 actors left to terminate: platforms-for-progress-default-rtdb, platforms-for-progress
+19:49:42.088 [NamespaceSystem-akka.actor.default-dispatcher-6] INFO com.firebase.core.namespace.NamespaceActor - stopped namespace actor for platforms-for-progress
+19:49:42.089 [NamespaceSystem-akka.actor.default-dispatcher-9] INFO com.firebase.core.namespace.NamespaceActor - stopped namespace actor for platforms-for-progress-default-rtdb
+19:49:42.092 [Thread-0] INFO com.firebase.server.forge.App$ - Graceful shutdown complete.

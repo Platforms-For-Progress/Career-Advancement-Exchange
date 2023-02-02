@@ -11,8 +11,19 @@ import Login from './Components/Login';
 import SignUp from './Components/SignUp';
 import Profile from './Components/Profile';
 import Request from './Components/Request';
-
+import Internal from './Components/Internal';
+import Story from './Components/Story';
+import Edit from './Components/Edit'
+import { useEffect } from 'react'
+import Create from './Components/Create';
 function App() {
+  useEffect(() => {    
+    window.onpageshow = function(event) {
+      if (event.persisted) {
+        window.location.reload();
+      }
+    };
+ }, []);
   return (
     <div className="background">
       <Header />
@@ -26,6 +37,10 @@ function App() {
         <SignUp path='/signup' />
         <Profile path='/profile' />
         <Request path='/request' />
+        <Internal path='/internal' />
+        <Story path="/story/:uid" />
+        <Edit path="/edit/:uid" />
+        <Create path="/create"/>
 
       </Router>
       {/* <p>Hello Mate</p> */}
