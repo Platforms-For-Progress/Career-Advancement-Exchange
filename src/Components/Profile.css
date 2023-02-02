@@ -23,7 +23,7 @@
 .leftside {
     float: right;
     width: 50%;
-    margin-top: -8%;
+    margin-top: -9%;
     margin-right: 10%;
 }
 .rightside {
@@ -32,6 +32,17 @@
     margin-top: 7%;
     margin-left: 7%;
     /* margin-left: 5%; */
+}
+.internal {
+    outline: 1px solid black;
+    width: 30%;
+    padding: 2%;
+    /* margin: 2%; */
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+    /* float: left; */
+    /* margin: auto;
+    float: left; */
+
 }
 @media screen and (max-width:1000px) {
     .leftside {

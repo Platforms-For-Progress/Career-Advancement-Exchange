@@ -6,11 +6,21 @@ import { onAuthStateChanged } from "firebase/auth";
 import './Profile.css';
 // import { Navigate } from 'react-router-dom';
 import { navigate } from '@reach/router';
-
-
+import {connectAuthEmulator} from 'firebase/auth';
+import { auth, firestore } from '../base';
+import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore';
+// function getCustomAuth() {
+//   const auth = getAuth();
+//   const authUrl = 'http://localhost:9099';
+//   await fetch(authUrl);
+//   connectAuthEmulator(auth, 'http://127.0.0.1:9099/',  { disableWarnings: true });
+//   return auth;
+  
+// };
 const Profile = () => {
     const [name, setName] = useState("");
     const [str, setStr] = useState("");
+    const [isAdmin,setIsAdmin] = useState(false);
     // const auth = getAuth();
     // const user = auth.currentUser;
     // if (user !== null) {
@@ -18,9 +28,28 @@ const Profile = () => {
     //     console.log(name);
     // }
 
-    const auth = getAuth();
+    // const auth = getCustomAuth();const [isAdmin, setIsAdmin] = useState(false);
+      async function getAdmin(uid) {
+        // const db = firestore;
+        const docRef = doc(firestore, "admins", uid);
+        const docSnap = await getDoc(docRef);
+        console.log(uid);
+        if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            setIsAdmin(true);
+          
+        } else {
+        // doc.data() will be undefined in this case
+            console.log("No such document!");
+            console.log("no user");
+            console.log(uid);
+            setIsAdmin(false);
+        }
+    };
+    
     onAuthStateChanged(auth, (user) => {
-    if (user) {
+      getAdmin(user.uid);
+    if (user&&isAdmin) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
@@ -29,10 +58,17 @@ const Profile = () => {
         setName(user.displayName);
         setStr("Welcome, " + user.displayName);
         // ...
-    } else {
+    } else if (!isAdmin){
         // User is signed out
         // ...
-        console.log("no user");
+        console.log("not admin");
+        setName(user.displayName);
+        setStr("Welcome, " + user.displayName);
+        
+
+    } else {
+      navigate("/signin");
+        window.location.reload();
     }
     });
     const logout = () => {
@@ -45,6 +81,11 @@ const Profile = () => {
         navigate("/request");
         window.location.reload();
       };
+      const navInternal = () => {
+        navigate("/internal");
+        window.location.reload();
+      }
+      
     // const auth = getAuth();
     // const user = auth.currentUser;
 
@@ -65,22 +106,42 @@ const Profile = () => {
     <div className="rightside">
     <h1>{str}</h1>
     <p onClick={logout}>Not you? Click here to log out!</p>
+   
     </div>
+    
     <div className="leftside">
     <div class="row-z">
-    <div class="column" onClick={toReq}>
+    <div>
+      {
+     isAdmin
+      ? (
+        <div class="column" onClick={navInternal}>
+        <h3>Internal</h3>
+        <p>Click here to manage user requested websites</p>
+        </div>
+      )
+      : (
+        <div>
+        <div class="column" onClick={toReq}>
+
         <h3>Request a personal website</h3>
         <p>Request a personal website to showcase your skills and projects</p>
 
-    </div>
-    <div class="column">
-        <h3>Check the status of your website</h3>
-        <p>Check the status of your website and see when it will be ready</p>
-    </div>
-    <div class="column">
-        <h3>Upload Documents</h3>
-        <p>Submit documents/pictures/media to be added to your website</p>
-    </div>
+        </div>
+            <div class="column">
+            <h3>Check the status of your website</h3>
+            <p>Check the status of your website and see when it will be ready</p>
+        </div>
+        <div class="column">
+            <h3>Upload Documents</h3>
+            <p>Submit documents/pictures/media to be added to your website</p>
+        </div>
+        </div>
+      )
+      }
+      </div>
+   
+   
     <div class="column">
         <h3>Account Settings</h3>
         <p>Change your account settings and update your information</p>

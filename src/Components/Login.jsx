@@ -6,11 +6,24 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // import { provider } from '../base'; 
 import './Login.css';
-import { signInWithGoogle } from '../base';
+import { firestore, signInWithGoogle } from '../base';
 import googlelogin from './googlelogin';
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-
+import { set, ref } from 'firebase/database';
+import { db } from '../base';
+import { getFirestore, setDoc, doc } from 'firebase/firestore';
+import {connectAuthEmulator} from 'firebase/auth';
+import { auth } from '../base';
+// import {getCustomAuth} from '../base.js'
+// async function getCustomAuth() {
+//   const auth = getAuth();
+//   const authUrl = 'http://localhost:9099';
+//   await fetch(authUrl);
+//   connectAuthEmulator(auth, 'http://127.0.0.1:9099/',  { disableWarnings: true });
+//   return auth;
+  
+// };
 const Login = () => {
   
 
@@ -19,21 +32,47 @@ const Login = () => {
 
       const onEmailChange = (event) => setEmail(event.target.value)
       const onPasswordChange = (event) => setPassword(event.target.value)
-      const auth = getAuth();
+      // const auth = getCustomAuth();
       onAuthStateChanged(auth, (user) => {
         if (user) {
           // User is signed in, see docs for a list of available properties
           // https://firebase.google.com/docs/reference/js/firebase.User
       
+          
           const uid = user.uid;
           console.log(uid);
+          // set(ref(db, "users/" + user.uid), {
+          //   firstName: user.displayName,
+          //   // lastName: lastName,
+          //   email: email,
+          //   role: "user",
+          // });
+          // const db2 = getFirestore();
+          // user.displayName = 
+          function writeData() {
+            setDoc(doc(firestore,"userRequestedWebsites", user.uid), {
+                uid: user.uid,
+                firstName: user.displayName,
+                role: "user"
+                // lastName: lname,
+                // idea: ideas,
+                
+                
+            });
+          }
+          
+            console.log("done!")
           // navigate('/profile');
+          writeData();
           navigate('/profile');
           window.location.reload();
           console.log(user.displayName);
-          // ...
+          
+          // console.log("done!");
+          
         } else {
           // User is signed out
+          console.log("signed out");
           // ...
         }
       });
@@ -44,8 +83,8 @@ const Login = () => {
       };
       const onLogin = () => {
         console.log('login');
-        // signInWithGoogle();
         googlelogin();
+        
       };
       const handleSubmit = (e) => {
         // e.preventDefault();
@@ -60,10 +99,18 @@ const Login = () => {
 
         // navigate('/home')
         console.log(email, password)
-
-        signInWithEmailAndPassword(auth, email, password)
+        // const auth2 = getCustomAuth();
+        function onRegister() {
+        signInWithEmailAndPassword(auth  , email, password)
         .then(function(result) {
             console.log('user signed in')
+            // const auth = getCustomAuth();
+            const user = auth.currentUser;
+            console.log(user.uid);
+            
+            
+        
+          
             setEmail('')
             setPassword('')
             window.open('/profile')
@@ -74,6 +121,8 @@ const Login = () => {
             setPassword('')
             alert(error.message)
         });
+        }
+        onRegister();
       };
       return (
         <div className="login">
@@ -110,7 +159,7 @@ const Login = () => {
     </div>
     </div>
     {/* <br></br> */}
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" onClick={handleSubmit} class="btn btn-primary">Submit</button>
     <br></br>
     <div className='add'></div>
     <p onClick={navSignUp}>Need to Sign Up? Click Here!</p> 

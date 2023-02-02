@@ -11,8 +11,9 @@ import { ref, set } from "firebase/database";
 // import { getAuth } from "firebase/auth";
 // import { getDatabase } from "firebase/database";
 // import {app} from "../base.js";
-import { auth, db } from "../base.js";
+import { auth, db, firestore } from "../base.js";
 import "./SignUp.css";
+import { getAuth } from 'firebase/auth';
 
 
 const { TextArea } = Input;
@@ -50,16 +51,20 @@ const SignUp = (props) => {
             
           createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-              set(ref(db, "users/" + userCredential.user.uid), {
+              set(ref(firestore, "users/" + userCredential.user.uid), {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
+                role: "user",
+                
               });
             })
             .catch((error) => console.log(error));
         }
         onRegister();
-
+        const auth = getAuth();
+        const user = auth.currentUser;
+        user.displayName = firstName;
         setEmail("")
         setPassword("")
         setFirstName("")

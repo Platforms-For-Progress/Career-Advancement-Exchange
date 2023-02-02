@@ -10,13 +10,14 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import './Header.css'
 import { useState } from 'react';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth } from '../base';
 // import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 
 function Header() {
   const [signedIn, setSignedIn] = useState(false);
   const [name, setName] = useState("");
-  const auth = getAuth();
+  // const auth = getAuth();
   onAuthStateChanged(auth, (user) => {
   if (user) {
       // User is signed in, see docs for a list of available properties
@@ -33,7 +34,8 @@ function Header() {
   });
   const logout = () => {
     auth.signOut();
-    window.open("/signin")
+
+    window.location.reload("/signin")
   };
  
   
