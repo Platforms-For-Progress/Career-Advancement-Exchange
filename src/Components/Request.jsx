@@ -101,7 +101,7 @@ const Request = () => {
     //   const submit = () => {
         // set user 
         // setUserData(["sCpKK  00mitXa7NM4FW0gyfJBkeO2"])
-        const submit = (e) => {
+        async function submit() {
             
             setUid(user.uid);
         // db=getFirestore();
@@ -117,16 +117,21 @@ const Request = () => {
                 idea: ideas,
                 
                 
+            }).then(()=> {
+                setFname("");
+                setLname("");
+                setIdeas("");
+                setUid("");
+                navigate("/profile");
+                window.location.reload();
+
             });
+                
+            
             // var collection = getFirestore().collection("userRequestedWebsites");
             // collection.add("hello","goodbye");
             console.log("submit called")
-            setFname("");
-            setLname("");
-            setIdeas("");
-            setUid("");
-            navigate("/profile");
-            window.location.reload();
+            
             // TODO: navigate to status when created
             // window.location.reload();
             
