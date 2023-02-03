@@ -14,6 +14,7 @@ import { ref, set } from "firebase/database";
 import { auth, db, firestore } from "../base.js";
 import "./SignUp.css";
 import { getAuth } from 'firebase/auth';
+import { getFirestore, doc, setDoc } from 'firebase/firestore/lite';
 
 
 const { TextArea } = Input;
@@ -45,31 +46,39 @@ const SignUp = (props) => {
     // }
     // const auth = getAuth();
     // const db = getDatabase();
-    const onSignUp = (e) => {
+    const onSignUp = async (e) => {
         e.preventDefault();
-        function onRegister() {
+        async function onRegister() {
             
           createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-              set(ref(firestore, "users/" + userCredential.user.uid), {
+                console.log('uc: ',userCredential)
+              setDoc(doc(firestore, "users", userCredential.user.uid), {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
                 role: "user",
                 
+              }).then((result) => {
+                console.log('result: ',result);
+                setEmail("")
+                setPassword("")
+                setFirstName("")
+                setLastName("")
+                navigate('/login')
               });
             })
             .catch((error) => console.log(error));
         }
-        onRegister();
-        const auth = getAuth();
-        const user = auth.currentUser;
-        user.displayName = firstName;
-        setEmail("")
-        setPassword("")
-        setFirstName("")
-        setLastName("")
-        navigate('/login')
+        await onRegister();
+        // const auth = getAuth();
+        // const user = auth.currentUser;
+
+        // setEmail("")
+        // setPassword("")
+        // setFirstName("")
+        // setLastName("")
+        // navigate('/login')
       };
 
   return (
