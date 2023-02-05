@@ -44,7 +44,7 @@
     float: left; */
 
 }
-@media screen and (max-width:1000px) {
+@media screen and (max-width:1270px) {
     .leftside {
         margin-top: -20%;
         margin-left: 7%;
