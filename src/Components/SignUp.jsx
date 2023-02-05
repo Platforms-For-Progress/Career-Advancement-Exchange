@@ -48,7 +48,7 @@ const SignUp = (props) => {
     const onSignUp = (e) => {
         e.preventDefault();
         function onRegister() {
-            
+            const auth = getAuth();
           createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
               set(ref(firestore, "users/" + userCredential.user.uid), {

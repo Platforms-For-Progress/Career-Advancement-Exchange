@@ -160,7 +160,7 @@ const Internal = () => {
   return (
     <div className='internalz'>
     {/* <div className='card2'> */}
-    <div className='create' onClick={goToCreate}>Create User</div>
+    <div className='create' onClick={goToCreate}>Create User Requested Website</div>
     {info.map(function(d, idx){
         // <div className='card2'>
          return (<p className='card2' onClick={()=>goToCard(d.uid)}>{d.firstName} {d.lastName}<br></br>User ID: {d.uid}</p>)

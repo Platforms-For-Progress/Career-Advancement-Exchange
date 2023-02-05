@@ -16,6 +16,7 @@ import Story from './Components/Story';
 import Edit from './Components/Edit'
 import { useEffect } from 'react'
 import Create from './Components/Create';
+import Assign from './Components/Assign';
 function App() {
   useEffect(() => {    
     window.onpageshow = function(event) {
@@ -41,6 +42,7 @@ function App() {
         <Story path="/story/:uid" />
         <Edit path="/edit/:uid" />
         <Create path="/create"/>
+        <Assign path="/assign/:uid"/>
 
       </Router>
       {/* <p>Hello Mate</p> */}
