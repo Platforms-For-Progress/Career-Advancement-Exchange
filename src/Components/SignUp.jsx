@@ -15,6 +15,7 @@ import { auth, db, firestore } from "../base.js";
 import "./SignUp.css";
 import { getAuth } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { updateProfile } from "firebase/auth";
 
 const { TextArea } = Input;
 
@@ -64,6 +65,10 @@ const SignUp = (props) => {
           role: "user",
         }
       );
+      // update user display name with updateProfile
+      await updateProfile(auth.currentUser, {
+        displayName: firstName + " " + lastName,
+      });
       setEmail("");
       setPassword("");
       setFirstName("");
