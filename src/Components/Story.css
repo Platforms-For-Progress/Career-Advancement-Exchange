@@ -35,9 +35,26 @@
 .edit {
     outline: 1px solid black;
     background-color: rgba(155, 137, 179, 0.5)   ;
-    width: 20%;
+    width: 100%;
     margin: auto;
+    /* margin-left: 2%;
+    margin-right: 2%; */
+    margin-inline-start: 1%;
+    margin-inline-end: 1%;
     text-align: center;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 
+}
+.edit_large {
+    margin:auto;
+    width: 71.5%;
+    display: inline-flex;
+    margin-top : 1%;
+    float:right;
+    margin-right: 14.25%;
+    /* margin-left: 25%; */
+    /* margin-inline-start: 2%;
+    margin-inline-end: 2%;
+    margin-left: 2%; */
+    /* float: center; */
 }

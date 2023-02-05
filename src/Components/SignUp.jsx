@@ -48,8 +48,9 @@ const SignUp = (props) => {
     // const db = getDatabase();
     const onSignUp = async (e) => {
         e.preventDefault();
-        async function onRegister() {
-            
+
+       async function onRegister() {
+
           createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log('uc: ',userCredential)

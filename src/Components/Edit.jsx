@@ -21,9 +21,34 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 function Edit() {
+    function navBack() {
+        navigate('/story/'+lookupUID);
+        window.location.reload();
+    }
     const [toEdit, setToEdit] = useState("");
     const [update, setUpdate] = useState("");
     // const db = getFirestore();
+    onAuthStateChanged(auth, (user) => {
+        if (user ) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            const uid = user.uid;
+            console.log(user.displayName);
+            console.log(user.role)
+            console.log("here");
+            // setName(user.displayName);
+            // setStr("Welcome, " + user.displayName);
+            
+            // ...
+        } else {
+            // User is signed out
+            // ...
+            console.log("no user");
+            navigate("/signin");
+            window.location.reload();
+    
+        }
+        });
     async function ed() {
         setToEdit(document.getElementById('q1').value);
         setUpdate(document.getElementById('q2').value);
@@ -77,10 +102,11 @@ function Edit() {
                     
                     <Form.Control id='q2' placeholder="Updated Value" />
                 </Form.Group>
-                <div className='edit' onClick={()=>ed()}>
+                <div className='edit1' onClick={()=>ed()}>
                     <p>Submit</p>
                 </div>
             </div>
+            <div className='edit2' onClick={navBack}>Back to User Requested Website</div>
         </div>
         // <div class="modal" tabindex="-1" role="dialog">
         // <div class="modal-dialog" role="document">

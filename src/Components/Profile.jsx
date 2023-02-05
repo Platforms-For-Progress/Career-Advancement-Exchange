@@ -27,7 +27,27 @@ const Profile = () => {
     //     setName(user.displayName);
     //     console.log(name);
     // }
-
+    onAuthStateChanged(auth, (user) => {
+      if (user ) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          const uid = user.uid;
+          console.log(user.displayName);
+          console.log(user.role)
+          console.log("here");
+          // setName(user.displayName);
+          // setStr("Welcome, " + user.displayName);
+          
+          // ...
+      } else {
+          // User is signed out
+          // ...
+          console.log("no user");
+          navigate("/signin");
+          window.location.reload();
+  
+      }
+      });
     // const auth = getCustomAuth();const [isAdmin, setIsAdmin] = useState(false);
       async function getAdmin(uid) {
         // const db = firestore;

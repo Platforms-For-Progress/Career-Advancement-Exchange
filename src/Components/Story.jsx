@@ -37,10 +37,21 @@ const Story = () => {
     const [idea, setIdea] = useState("");
     const [developed, setDeveloped] = useState("");
     const [special, setSpecial] = useState("");
+    const [assigned, setAssigned] = useState("");
    
     function navEdit() {
         navigate("/edit/"+lookupUID);
         window.location.reload();
+
+    }
+    function navDelete() {
+        console.log("delete");
+
+    }
+    function navAssign() {
+        navigate("/assign/"+lookupUID);
+        window.location.reload();
+        console.log("assign");
 
     }
     function navInternal() {
@@ -53,6 +64,10 @@ const Story = () => {
         // const db = getFirestore();
         const docRef = doc(firestore, "userRequestedWebsites", uid);
         const docSnap = await getDoc(docRef);
+        // const user = auth.currentUser;
+        // const docRef2 = doc(firestore, "admins", user.uid);
+        // const docSnap2 = await getDoc(docRef2);
+
     
         if (docSnap.exists()) {
             console.log("Document data:", docSnap.data());
@@ -62,12 +77,15 @@ const Story = () => {
             const idea = docSnap.data().idea;
             const developedIdea = docSnap.data().developed;
             const specialNotes = docSnap.data().special;
+            const assignedTo = docSnap.data().assignedTo;
+            // const assignedTo = docSnap2.data().assignedTo;
 
             setFname(fname);
             setLname(lname);
             setIdea(idea);
             setDeveloped(developedIdea);
             setSpecial(specialNotes);
+            setAssigned(assignedTo);
             // const  dataArr = [fname, lname,idea];
             // console.log(docSnap.data().firstName);
             // console.log(dataArr[1]);
@@ -201,18 +219,31 @@ const Story = () => {
 
 
   return (
+    
     <div className='story'>
         {/* <p>Hello!</p> */}
+        
         <div className='story1'>
         <p>User ID: {lookupUID}</p>
+        <p>Assigned to: {assigned} </p>
         <p>First Name: {fname} <br></br>Last Name: {lname}</p>
         <p>Initial Ideas: {idea}</p>
         <p>Documents: </p>
         <p>Developed Idea Notes: {developed} </p>
         <p>Special Notes: {special} </p>
-        <div className='edit' onClick={()=>navEdit()}><p>Edit Entry</p></div>
+        
+
+        
+
         </div>
-        <div className = 'story2' onClick={navInternal}><p>Return to dashboard</p></div>
+        <div className='edit_large'>
+        <div className='edit' onClick={()=>navEdit()}><p>Edit Entry</p></div>
+        <div className = 'edit' onClick={()=>navDelete()}><p>Delete Entry</p></div>
+        <div className = 'edit' onClick={()=>navAssign()}><p>Assign Person to Entry</p></div>
+        <div className = 'edit' onClick={navInternal}><p>Return to dashboard</p></div>
+        </div>
+        
+        {/* <div className = 'story2' onClick={navInternal}><p>Return to dashboard</p></div> */}
         {/* <p>{this.props.match.params.uid}</p> */}
     {/* <div className='card2'> */}
     {/* <div className='create'>Create User</div>

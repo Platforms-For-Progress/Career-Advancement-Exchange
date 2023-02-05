@@ -7,7 +7,7 @@ import { TypeAnimation } from 'react-type-animation';
 // import { app } from "../base.js";
 // import "./Signup.css";
 // import { createUser } from "firebase/auth";
-
+import { onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from "react-router-dom";
 import { push, ref, set } from "firebase/database";
 // import { getAuth } from "firebase/auth";
@@ -27,8 +27,28 @@ function getCustomAuth() {
   
 };
 const Create = () => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        
+        console.log(user.displayName);
+        console.log("here");
+        // setName(user.displayName);
+        // setStr("Welcome, " + user.displayName);
+        
+        // ...
+    } else {
+        // User is signed out
+        // ...
+        console.log("no user");
+        navigate("/signin");
+        window.location.reload();
+
+    }
+    });
     const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    // const [password, setPassword] = useState("")
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [uid, setUid] = useState("");
@@ -38,23 +58,25 @@ const Create = () => {
     
     const onEmailChange = (event) => setEmail(event.target.value);
     console.log(email);
-    const onPasswordChange = (event) => setPassword(event.target.value);
+    // const onPasswordChange = (event) =>/ setPassword(event.target.value);
     const onFirstNameChange = (event) => setFirstName(event.target.value);
     const onLastNameChange = (event) => setLastName(event.target.value);
     const onIdeaChange = (event) => setIdea(event.target.value);
     const onSpecialChange = (event) => setSpecial(event.target.value);
     const onDevelopedChange = (event) => setDeveloped(event.target.value);
-    const onSignUp = (e) => {
-      setFirstName(document.getElementById('fname').value);
-            setLastName(document.getElementById('lname').value);
-            setPassword(document.getElementById('pass').value);
-            setEmail(document.getElementById('email').value);
-        setIdea(document.getElementById('initideas').value);
-        setSpecial(document.getElementById('special').value);
-        setDeveloped(document.getElementById('developed').value);
+    // const onSignUp = (e) => {
+        // setFirstName(document.getElementById('fname').value);
+        
+        // setLastName(document.getElementById('lname').value);
+        //     // setPassword(document.getElementById('pass').value);
+        // setEmail(document.getElementById('email').value);
+        // setIdea(document.getElementById('initideas').value);
+        // setSpecial(document.getElementById('special').value);
+        // setDeveloped(document.getElementById('developed').value);
         
         // e.preventDefault();
-        console.log("on click");
+        
+        
         
         async function onRegister() {
             // do this differently maybe firebase admin sdk...
@@ -67,8 +89,15 @@ const Create = () => {
           //   setUid(user.user.uid);
           // });
           // useEffect(()=> {
-            push(doc(firestore,"userRequestedWebsites", firstName), {
-              // uid: user.uid,
+            console.log("on click");
+            console.log(firstName);
+            console.log(lastName);
+            console.log(ideas);
+            console.log(developed);
+            console.log(special);
+            console.log(firestore);
+            setDoc(doc(firestore,"userRequestedWebsites", firstName), {
+              uid: firstName,
               firstName: firstName,
               lastName: lastName,
               idea: ideas,
@@ -78,12 +107,8 @@ const Create = () => {
               
             }).then(()=> {
               alert(firstName + " added");
-            });
-          // })
-             
-              
               setEmail("")
-              setPassword("")
+              // setPassword("")
               setFirstName("")
               setLastName("");
               setDeveloped("");
@@ -91,22 +116,27 @@ const Create = () => {
               setSpecial("");
               navigate("/internal");
               window.location.reload();
+            });
+          // })
+             
+              
+             
             
             
-        }
+        };
         // useEffect(()=> {
-        onRegister();
+        
         // })
         // onRegister();
         // const auth = getAuth();
-        const user = auth.currentUser;
-        user.displayName = firstName;
+        // const user = auth.currentUser;
+        // user.displayName = firstName;
         
         
         // navigate('/internal');
         // window.location.reload();
         
-      };
+      
       
     return (
         <div className="creator">
@@ -125,10 +155,10 @@ const Create = () => {
             <label for="fname">Email:</label>
             <input type="lname" class="form-control22" id="email" placeholder="Email" onChange={onEmailChange} />
             </div>
-            <div class="form-group2">
+            {/* <div class="form-group2">
             <label for="fname">Password:</label>
             <input type="lname" class="form-control2" id="pass"  placeholder="Password" onChange={onPasswordChange} />
-        </div>
+        </div> */}
         {/* <div class="form-group2">
             <label for="fname">First Name:</label>
             <input type="fname" class="form-control2" id="fname" placeholder="First Name"/>
@@ -154,7 +184,7 @@ const Create = () => {
             <input type="file" class="form-control-file" id="documents"/>
         </div>
         </form>
-        <div className='edit' onClick={()=>onSignUp()}><p>Submit</p></div>
+        <div className='edit' onClick={onRegister}><p>Submit</p></div>
         </div>
         
       </div>
