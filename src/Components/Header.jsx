@@ -52,7 +52,7 @@ function Header() {
 //   </Navbar>
 <Navbar className="color-nav" expand="lg" sticky='top'>
 
-  <Navbar.Brand href="/home" className='spacing'>Career Advancement Exhange</Navbar.Brand>
+  <Navbar.Brand href="/home" className='spacing'>Career Advancement Exchange</Navbar.Brand>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="me-auto">

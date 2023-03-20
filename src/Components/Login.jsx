@@ -63,7 +63,7 @@ const Login = () => {
           
             console.log("done!")
           // navigate('/profile');
-          writeData();
+          writeData();  
           navigate('/profile');
           window.location.reload();
           console.log(user.displayName);

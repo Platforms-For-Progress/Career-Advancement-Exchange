@@ -17,6 +17,8 @@ import Edit from './Components/Edit'
 import { useEffect } from 'react'
 import Create from './Components/Create';
 import Assign from './Components/Assign';
+import Status from './Components/Status';
+import Collab from './Components/Collab';
 function App() {
   useEffect(() => {    
     window.onpageshow = function(event) {
@@ -37,12 +39,14 @@ function App() {
         <Login path='/login' />
         <SignUp path='/signup' />
         <Profile path='/profile' />
-        <Request path='/request' />
+        <Request path='/request/:uid' />
         <Internal path='/internal' />
         <Story path="/story/:uid" />
         <Edit path="/edit/:uid" />
         <Create path="/create"/>
         <Assign path="/assign/:uid"/>
+        <Status path="/status/:uid"/>
+        <Collab path="/collab/:uid"/>
 
       </Router>
       {/* <p>Hello Mate</p> */}
