@@ -19,6 +19,7 @@ import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore';
 // };
 const Profile = () => {
     const [name, setName] = useState("");
+    const [uid, setUid] = useState("");
     const [str, setStr] = useState("");
     const [isAdmin,setIsAdmin] = useState(false);
     // const auth = getAuth();
@@ -32,6 +33,7 @@ const Profile = () => {
           // User is signed in, see docs for a list of available properties
           // https://firebase.google.com/docs/reference/js/firebase.User
           const uid = user.uid;
+          setUid(uid);
           console.log(user.displayName);
           console.log(user.role)
           console.log("here");
@@ -98,7 +100,7 @@ const Profile = () => {
       };
 
       const toReq = () => {
-        navigate("/request");
+        navigate("/request/"+uid);
         window.location.reload();
       };
       const navInternal = () => {

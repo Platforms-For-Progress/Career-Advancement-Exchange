@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { connectAuthEmulator, getAuth } from "firebase/auth";
+import { connectAuthEmulator, getAuth, onAuthStateChanged } from "firebase/auth";
 import { connectDatabaseEmulator, getDatabase } from "firebase/database";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
@@ -19,6 +19,7 @@ import { connectFirestoreEmulator } from "firebase/firestore";
 //   connectAuthEmulator(auth, "127.0.0.1:9099");
 //   return auth;
 // };
+
 
 function getCustomAuth() {
   const auth = getAuth();
@@ -67,7 +68,7 @@ export const firestore = getFirestore(app);
 // export const firestore = getCustomFirestore();
 export const storage = getStorage(app);
 const analytics = getAnalytics(app);
-
+// export const uid = getUser();
 // export const auth = firebase.auth();
 
 const provider = new GoogleAuthProvider();

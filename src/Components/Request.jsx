@@ -9,10 +9,11 @@ import { navigate  } from '@reach/router';
 // import {Route, useNavigate} from 'react-router-dom';
 import { getDatabase, ref, set, push } from "firebase/database";
 import { getFirestore } from 'firebase/firestore';
-import {doc, setDoc} from 'firebase/firestore'
+import {doc, setDoc, getDoc} from 'firebase/firestore'
 import { async } from '@firebase/util';
 import { useEffect } from 'react';
 import { auth, firestore } from '../base';
+// import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
 // import { await } from 'react-router-dom';
 // import {await}
 // import {connectAuthEmulator} from 'firebase/auth';
@@ -26,6 +27,8 @@ import { auth, firestore } from '../base';
   
 // };
 const Request = () => {
+    
+    
     // const [name, setName] = useState("");
     // const [str, setStr] = useState("");
     // // const auth = getAuth();
@@ -36,22 +39,8 @@ const Request = () => {
     // // }
 
     // const auth = getAuth();
-    // onAuthStateChanged(auth, (user) => {
-    // if (user) {
-    //     // User is signed in, see docs for a list of available properties
-    //     // https://firebase.google.com/docs/reference/js/firebase.User
-    //     const uid = user.uid;
-    //     console.log(user.displayName);
-    //     console.log("here");
-    //     setName(user.displayName);
-    //     setStr("Welcome, " + user.displayName);
-    //     // ...
-    // } else {
-    //     // User is signed out
-    //     // ...
-    //     console.log("no user");
-    // }
-    // });
+    
+   
     // const logout = () => {
     //     auth.signOut();
     //     window.open("/signin")
@@ -73,13 +62,16 @@ const Request = () => {
     
     // const navigate = useNavigate();
     const [uid, setUid] = useState("");
+    
     const [fname, setFname] = useState("");
     const [lname, setLname] = useState("");
     const [ideas, setIdeas] = useState("");
     const [data, setUserData] = useState([]);
+    const [userFilledOut, setUserFilledOut] = useState(false);
     // const auth = getCustomAuth();
     const user = auth.currentUser;
     
+        
     // const db2 = getFirestore();
     const onFnameChange = (event) => setFname(event.target.value);
     const onLnameChange = (event) => setLname(event.target.value);
@@ -101,11 +93,18 @@ const Request = () => {
     //   const submit = () => {
         // set user 
         // setUserData(["sCpKK  00mitXa7NM4FW0gyfJBkeO2"])
+        // setUid(user.uid);
+        // console.log(user.uid);
+        
+    
+    //   useEffect(() => {
+        // getUid();
+        console.log(uid);
         async function submit() {
             
-            setUid(user.uid);
+            
         // db=getFirestore();
-    
+            
             console.log(user.uid);
             // e.preventDefault();
             // db2.collection("userRequestedWebsites/"+user.uid).add({
@@ -204,10 +203,71 @@ const Request = () => {
         console.log('contact');
         // signInWithGoogle();
         // googlelogin();
-        navigate('/contact');
-        window.location.reload();
+        // navigate('/contact');
+        // window.location.reload();
+        window.location.href = "/contact";
 
       };
+      
+    // setUid(user.uid);
+    
+    
+    // console.log(uid);
+    // setUid(window.location.href.split("/")[4]);
+    
+      useEffect(() => {
+        setUid(window.location.href.split("/")[4]);
+        // getUid();
+        console.log(uid);
+        async function checkIfFilledOut() {
+            // uid = window.location.href.split("/")[4];
+            const firestore = getFirestore();
+            const docRef = doc(firestore, "userRequestedWebsites", window.location.href.split("/")[4]);
+            console.log(uid);
+            const docSnap = await getDoc(docRef).then((doc) => {
+                if (doc.exists()) {
+                    console.log("Document data:", doc.data());
+                    setUserFilledOut(true);
+                    navigate('/status/'+window.location.href.split("/")[4]);
+                    window.location.reload();
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+        
+                
+            // if (docSnap.exists()) {
+                
+            //     console.log('Document data:', docSnap.data());
+            //     setUserFilledOut(true);
+            //     navigate('/status/'+uid);
+            //     window.location.reload();
+            // } else {
+            //     console.log('No such document!');
+                
+            // }
+        }
+        checkIfFilledOut();
+        
+        
+
+        
+    //     // const auth = getAuth();
+    //     // const user = auth.currentUser;
+    //     // if (user) {
+    //     // // User is signed in, see docs for a list of available properties
+    //     // // https://firebase.google.com/docs/reference/js/firebase.User
+    //     // setName(user.displayName);
+    
+    
+    //     // } else {
+    //     // // No user is signed in.
+
+    //     // }
+      }, []);
   return (
     <div className='req'>
     <div className='req2'>
@@ -240,7 +300,7 @@ const Request = () => {
             <h3>FAQ</h3>
             <p>Click here to view common questions</p>
         </div>
-        <div className='col-md' onClick={()=>contact()}>
+        <div className='col-md' onClick={contact}>
             <h3>Contact Us</h3>
             <p>Click here to send us a message</p>
         </div>

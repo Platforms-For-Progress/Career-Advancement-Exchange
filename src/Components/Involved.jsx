@@ -18,7 +18,12 @@ const Involved = () => {
       style={{ fontSize: '2em', cursor: false }}
     />
 
+      <p>Please contact us if interested in becoming a part of our team! We are looking for software engineer interns, marketing interns, and fundraising interns for Summer 2023.</p>
+
+    
     </div>
+
+    
   );
 };
 export default Involved;
