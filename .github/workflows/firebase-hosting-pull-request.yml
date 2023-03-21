@@ -15,3 +15,5 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_PLATFORMS_FOR_PROGRESS }}'
           projectId: platforms-for-progress
+
+permissions: read-all && write-all
