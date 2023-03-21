@@ -1,26 +1,38 @@
 {
   "hosting": {
+    "site": "career-advancement-exchange",
     "public": "build",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ]
   },
+  "database": {
+    "rules": "database.rules.json"
+  },
   "emulators": {
-    "singleProjectMode": true,
     "auth": {
       "port": 9099
     },
-    "firestore": {
-      "port": 8080
+    "database": {
+      "port": 9000
     },
     "hosting": {
-      "host": "localhost",
       "port": 3000
     },
     "ui": {
       "enabled": true
+    },
+    "singleProjectMode": true,
+    "firestore": {
+      "port": 8081
     }
   }
 }
