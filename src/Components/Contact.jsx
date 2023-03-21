@@ -1,6 +1,6 @@
 import { TypeAnimation } from 'react-type-animation';
 import './Contact.css';
-const About = () => {
+const Contact = () => {
   return (
     <div className="contacts">
     <TypeAnimation
@@ -18,7 +18,8 @@ const About = () => {
       style={{ fontSize: '2em', cursor: false }}
     />
     
+ 
     </div>
   );
 };
-export default About;
+export default Contact;
