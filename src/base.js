@@ -1,9 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { connectAuthEmulator, getAuth, onAuthStateChanged } from "firebase/auth";
+import {
+  connectAuthEmulator,
+  getAuth,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { connectDatabaseEmulator, getDatabase } from "firebase/database";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { GoogleAuthProvider } from "firebase/auth";
 import { connectFirestoreEmulator } from "firebase/firestore";
@@ -20,7 +24,6 @@ import { connectFirestoreEmulator } from "firebase/firestore";
 //   return auth;
 // };
 
-
 function getCustomAuth() {
   const auth = getAuth();
 
@@ -33,8 +36,44 @@ function getCustomAuth() {
 
 function getCustomFirestore() {
   const db = getFirestore();
-  connectFirestoreEmulator(db, "localhost", 8080);
-  return db;
+  connectFirestoreEmulator(db, "localhost", 8081);
+
+  // Create users collection
+  const usersCollection = collection(db, "users");
+  const addUser = async (userId, email, firstname, lastname, admin_status) => {
+    await setDoc(doc(usersCollection, userId), {
+      email,
+      firstname,
+      lastname,
+      admin_status,
+    });
+  };
+
+  // Create requests collection
+  const requestsCollection = collection(db, "requests");
+  const addRequest = async (
+    request_id,
+    user_id,
+    request_data,
+    status,
+    admin_ids
+  ) => {
+    await setDoc(doc(requestsCollection, request_id), {
+      user_id,
+      request_data,
+      status,
+      admin_ids,
+    });
+  };
+
+  // Return an object containing the required collections and documents
+  return {
+    db,
+    usersCollection,
+    addUser,
+    requestsCollection,
+    addRequest,
+  };
 }
 
 function getCustomDb() {
@@ -60,14 +99,19 @@ const firebaseConfig = {
 // Initialize Firebase
 
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth();
 
-export const db = getDatabase(app);
-// export const db = getCustomDb();
-export const firestore = getFirestore(app);
-// export const firestore = getCustomFirestore();
+export const auth = getAuth();
+// export const auth = getCustomAuth();
+
+// export const db = getDatabase(app);
+export const db = getCustomDb();
+
+// export const firestore = getFirestore(app);
+export const firestore = getCustomFirestore();
+
 export const storage = getStorage(app);
 const analytics = getAnalytics(app);
+
 // export const uid = getUser();
 // export const auth = firebase.auth();
 

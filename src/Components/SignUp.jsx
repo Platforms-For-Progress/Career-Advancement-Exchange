@@ -13,8 +13,7 @@ import { ref, set } from "firebase/database";
 // import {app} from "../base.js";
 import { auth, db, firestore } from "../base.js";
 import "./SignUp.css";
-import { getAuth } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
 
 const { TextArea } = Input;
