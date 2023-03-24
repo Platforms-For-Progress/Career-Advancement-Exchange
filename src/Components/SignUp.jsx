@@ -29,80 +29,42 @@ const SignUp = (props) => {
   const onFirstNameChange = (event) => setFirstName(event.target.value);
   const onLastNameChange = (event) => setLastName(event.target.value);
 
-  // const onSignUp = () => {
-  //     console.log('sign up')
-  //     console.log(email, password, firstName, lastName)
-
-  //     // createUserWithEmailAndPassword(auth, email, password)
-  //     //     .catch(function(error) {
-  //     //         console.log('error in signup')
-  //     //     });
-
-  //     setEmail('')
-  //     setPassword('')
-  //     setFirstName('')
-  //     setLastName('')
-  // }
-  // const auth = getAuth();
-  // const db = getDatabase();
   const onSignUp = async (e) => {
     e.preventDefault();
 
+    if (
+      email === "" ||
+      password === "" ||
+      firstName === "" ||
+      lastName === ""
+    ) {
+      alert("Please fill in all fields");
+      return;
+    }
+
     async function onRegister() {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      const result = await setDoc(
-        doc(firestore, "users", userCredential.user.uid),
-        {
-          firstName,
-          lastName,
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
           email,
-          role: "user",
-        }
-      );
-      // update user display name with updateProfile
-      await updateProfile(auth.currentUser, {
-        displayName: firstName + " " + lastName,
-      });
-      setEmail("");
-      setPassword("");
-      setFirstName("");
-      setLastName("");
-      navigate("/login");
-      window.location.reload();
+          password
+        );
 
-      // createUserWithEmailAndPassword(auth, email, password)
-      //   .then((userCredential) => {
-      //     console.log("uc: ", userCredential);
-      //     setDoc(doc(firestore, "users", userCredential.user.uid), {
-      //       firstName: firstName,
-      //       lastName: lastName,
-      //       email: email,
-      //       role: "user",
-      //     }).then((result) => {
-      //       console.log("result: ", result);
-      //       setEmail("");
-      //       setPassword("");
-      //       setFirstName("");
-      //       setLastName("");
-      //       navigate("/login");
-      //     });
-      //   })
-      //   .catch((error) => console.log(error));
+        const user = userCredential.user;
+
+        firestore.addUser(user.uid, user.email, firstName, lastName, 0);
+        await updateProfile(auth.currentUser, {
+          displayName: firstName + " " + lastName,
+        });
+
+        navigate("/login");
+        window.location.reload();
+      } catch (error) {
+        alert(error.message);
+        return;
+      }
     }
     await onRegister();
-    // const auth = getAuth();
-    // const user = auth.currentUser;
-
-    // setEmail("")
-    // setPassword("")
-    // setFirstName("")
-    // setLastName("")
-    // navigate('/login')
   };
 
   return (

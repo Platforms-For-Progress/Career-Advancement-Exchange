@@ -9,7 +9,11 @@ import "./DBDashboard.css";
 
 const DBDashboard = () => {
   const [displayDocs, setDisplayDocs] = useState({});
-  const [collectionPaths, setCollectionPaths] = useState(["test", "users"]);
+  const [collectionPaths, setCollectionPaths] = useState([
+    "test",
+    "users",
+    "requests",
+  ]);
 
   // useEffect(() => {
   //   const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -61,6 +65,7 @@ const DBDashboard = () => {
       lastname,
       admin_status
     );
+    window.location.reload();
   };
 
   // Returns a list of documents at the given path in the firestore
