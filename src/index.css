@@ -209,3 +209,16 @@ code {
   /* transform: translate(0, -5%); */
   /* scale: 0.5; */
 }
+
+.formItem {
+  margin-bottom: 2vh;
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  min-width: 100vw;
+  /* margin-left: 2vw; */
+  /* margin-right: 2vw; */
+}
+.Uni {
+  margin: 2vw;
+}

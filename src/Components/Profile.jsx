@@ -107,6 +107,11 @@ const Profile = () => {
         navigate("/internal");
         window.location.reload();
       }
+
+      const toStatus = () => {
+        navigate("/status/"+uid);
+        window.location.reload();
+      }
       
     // const auth = getAuth();
     // const user = auth.currentUser;
@@ -150,7 +155,7 @@ const Profile = () => {
         <p>Request a personal website to showcase your skills and projects</p>
 
         </div>
-            <div class="column">
+            <div class="column" onClick={toStatus}>
             <h3>Check the status of your website</h3>
             <p>Check the status of your website and see when it will be ready</p>
         </div>
