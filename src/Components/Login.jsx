@@ -30,95 +30,48 @@ const Login = () => {
 
   const onEmailChange = (event) => setEmail(event.target.value);
   const onPasswordChange = (event) => setPassword(event.target.value);
-  // const auth = getCustomAuth();
+
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-
-      const uid = user.uid;
-      console.log(uid);
-      // set(ref(db, "users/" + user.uid), {
-      //   firstName: user.displayName,
-      //   // lastName: lastName,
-      //   email: email,
-      //   role: "user",
-      // });
-      // const db2 = getFirestore();
-      // user.displayName =
-      function writeData() {
-        setDoc(doc(firestore, "userRequestedWebsites", user.uid), {
-          uid: user.uid,
-          firstName: user.displayName,
-          role: "user",
-          // lastName: lname,
-          // idea: ideas,
-        });
-      }
-
-      console.log("done!");
-      // navigate('/profile');
-      // writeData();
+      console.log(user.displayName, " is signed in");
       navigate("/profile");
       window.location.reload();
-      console.log(user.displayName);
-
-      // console.log("done!");
     } else {
-      // User is signed out
       console.log("signed out");
-      // ...
     }
   });
+
   const navSignUp = () => {
     navigate("/signup");
     window.location.reload();
   };
-  const onLogin = () => {
+
+  const onGoogleLogin = () => {
     console.log("login");
     googlelogin();
   };
-  const handleSubmit = (e) => {
-    // e.preventDefault();
-    // function onRegister() {
-    //   signInWithEmailAndPassword(auth, email, password).catch((error) =>
-    //     console.log(error)
-    //   );
-    // }
-    // onRegister();
-    // setEmail("")
-    // setPassword("")
 
-    // navigate('/home')
-    console.log(email, password);
-    // const auth2 = getCustomAuth();
-    function onRegister() {
-      signInWithEmailAndPassword(auth, email, password)
-        .then(function (result) {
-          console.log("user signed in");
-          // const auth = getCustomAuth();
-          const user = auth.currentUser;
-          console.log(user.uid);
-
-          setEmail("");
-          setPassword("");
-          window.open("/profile");
-        })
-        .catch(function (error) {
-          console.log("there was an error signing in");
-          console.log(error);
-          setPassword("");
-          alert(error.message);
-        });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log("email:", email);
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log("user signed in");
+      setEmail("");
+      setPassword("");
+      navigate("/profile");
+    } catch (error) {
+      console.log("there was an error signing in");
+      setPassword("");
+      alert(error.message);
     }
-    onRegister();
   };
+
   return (
     <div className="login">
       <TypeAnimation
         sequence={[
-          "Login", // Types 'One'
-
+          "Login",
           () => {
             console.log("Done typing!"); // Place optional callbacks anywhere in the array
           },
@@ -130,7 +83,7 @@ const Login = () => {
       />
       <div className="cont">
         <div className="section1">
-          <button onClick={onLogin}>Login with Google</button>
+          <button onClick={onGoogleLogin}>Login with Google</button>
         </div>
         <div className="middlecont">
           <p>OR</p>
@@ -145,6 +98,8 @@ const Login = () => {
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
+                value={email}
+                onChange={onEmailChange}
               ></input>
             </div>
             <div class="form-group">
@@ -154,6 +109,8 @@ const Login = () => {
                 class="form-control"
                 id="exampleInputPassword1"
                 placeholder="Password"
+                value={password}
+                onChange={onPasswordChange}
               ></input>
             </div>
           </div>
