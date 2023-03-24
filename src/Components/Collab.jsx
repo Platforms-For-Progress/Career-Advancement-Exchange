@@ -867,7 +867,7 @@ const Collab = () => {
         <br></br>
         <br></br>
         <div className="backgroundImage" >
-          <p>Please allow image to load before generating a new image</p>
+          {/* <p>Please allow image to load before generating a new image</p> */}
           {/* <img src={backgroundImageURL} alt="backgroundImage" width="500" /> */}
         </div>
         <br></br>
