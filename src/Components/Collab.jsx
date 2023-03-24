@@ -858,17 +858,17 @@ const Collab = () => {
         
         <br></br>
         <br></br>
-        <h3>Generate Background Image</h3>
+        {/* <h3>Generate Background Image</h3> */}
         
         
         <br></br>
-        <button onClick={handleImage}>Generate</button>
+        {/* <button onClick={handleImage}>Generate</button> */}
         {/* display background image */}
         <br></br>
         <br></br>
         <div className="backgroundImage" >
           <p>Please allow image to load before generating a new image</p>
-          <img src={backgroundImageURL} alt="backgroundImage" width="500" />
+          {/* <img src={backgroundImageURL} alt="backgroundImage" width="500" /> */}
         </div>
         <br></br>
         <br></br>
