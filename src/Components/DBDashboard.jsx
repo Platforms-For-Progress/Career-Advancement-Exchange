@@ -3,6 +3,7 @@ import { useState } from "react";
 import { auth, firestore } from "../base";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, setDoc, getDoc, getDocs } from "firebase/firestore";
+
 import { render } from "@testing-library/react";
 
 import "./DBDashboard.css";
@@ -57,7 +58,7 @@ const DBDashboard = () => {
     }
     const firstname = prompt("Enter your first name");
     const lastname = prompt("Enter your last name");
-    const admin_status = prompt("Admin status (0,1,2)");
+    const admin_status = parseInt(prompt("Admin status (0,1,2)"));
     await firestore.addUser(
       user.uid,
       user.email,

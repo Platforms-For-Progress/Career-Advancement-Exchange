@@ -1,18 +1,18 @@
-import { useReducer } from 'react';
-import { TypeAnimation } from 'react-type-animation';
-import { useState } from 'react';
+import { useReducer } from "react";
+import { TypeAnimation } from "react-type-animation";
+import { useState } from "react";
 import { getAuth } from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
-import './Request.css';
-import { navigate  } from '@reach/router';
+import "./Request.css";
+import { navigate } from "@reach/router";
 // import { useNavigate } from 'react-router-dom';
 // import {Route, useNavigate} from 'react-router-dom';
 import { getDatabase, ref, set, push } from "firebase/database";
-import { getFirestore } from 'firebase/firestore';
-import {doc, setDoc, getDoc} from 'firebase/firestore'
-import { async } from '@firebase/util';
-import { useEffect } from 'react';
-import { auth, firestore } from '../base';
+import { getFirestore } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { async } from "@firebase/util";
+import { useEffect } from "react";
+import { auth, firestore } from "../base";
 // import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
 // import { await } from 'react-router-dom';
 // import {await}
@@ -24,290 +24,297 @@ import { auth, firestore } from '../base';
 //   await fetch(authUrl);
 //   connectAuthEmulator(auth, 'http://127.0.0.1:9099/',  { disableWarnings: true });
 //   return auth;
-  
+
 // };
 const Request = () => {
-    
-    
-    // const [name, setName] = useState("");
-    // const [str, setStr] = useState("");
-    // // const auth = getAuth();
-    // // const user = auth.currentUser;
-    // // if (user !== null) {
-    // //     setName(user.displayName);
-    // //     console.log(name);
-    // // }
+  // const [name, setName] = useState("");
+  // const [str, setStr] = useState("");
+  // // const auth = getAuth();
+  // // const user = auth.currentUser;
+  // // if (user !== null) {
+  // //     setName(user.displayName);
+  // //     console.log(name);
+  // // }
 
-    // const auth = getAuth();
-    
-   
-    // const logout = () => {
-    //     auth.signOut();
-    //     window.open("/signin")
-    //   };
-    // const auth = getAuth();
-    // const user = auth.currentUser;
+  // const auth = getAuth();
 
-    // if (user) {
-    // // User is signed in, see docs for a list of available properties
-    // // https://firebase.google.com/docs/reference/js/firebase.User
-    // setName(user.displayName);
-    // console.log(user.displayName);
-    // console.log(auth.currentUser.displayName);
-    // // ...
-    // } else {
-    // // No user is signed in.
-    //     console.log("No user signed in");
-    // }
-    
-    // const navigate = useNavigate();
-    const [uid, setUid] = useState("");
-    
-    const [fname, setFname] = useState("");
-    const [lname, setLname] = useState("");
-    const [ideas, setIdeas] = useState("");
-    const [data, setUserData] = useState([]);
-    const [userFilledOut, setUserFilledOut] = useState(false);
-    // const auth = getCustomAuth();
-    const user = auth.currentUser;
-    
-        
+  // const logout = () => {
+  //     auth.signOut();
+  //     window.open("/signin")
+  //   };
+  // const auth = getAuth();
+  // const user = auth.currentUser;
+
+  // if (user) {
+  // // User is signed in, see docs for a list of available properties
+  // // https://firebase.google.com/docs/reference/js/firebase.User
+  // setName(user.displayName);
+  // console.log(user.displayName);
+  // console.log(auth.currentUser.displayName);
+  // // ...
+  // } else {
+  // // No user is signed in.
+  //     console.log("No user signed in");
+  // }
+
+  // const navigate = useNavigate();
+  const [uid, setUid] = useState("");
+
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [ideas, setIdeas] = useState("");
+  const [data, setUserData] = useState([]);
+  const [userFilledOut, setUserFilledOut] = useState(false);
+  // const auth = getCustomAuth();
+  const user = auth.currentUser;
+
+  // const db2 = getFirestore();
+  const onFnameChange = (event) => setFname(event.target.value);
+  const onLnameChange = (event) => setLname(event.target.value);
+  const onIdeaChange = (event) => setIdeas(event.target.value);
+  // useEffect(() => {
+
+  //     db2.collection("userRequestedWebsites/"+user.uid).onSnapshot((snapshot) => {
+  //       setUserData(
+  //         snapshot.docs.map((doc) => ({
+  //           firstName: fname,
+  //           lastName: lname,
+  //           idea: ideas
+  //         }))
+  //       );
+  //     });
+  //     console.log({ data });
+  //   }, []);
+
+  //   const submit = () => {
+  // set user
+  // setUserData(["sCpKK  00mitXa7NM4FW0gyfJBkeO2"])
+  // setUid(user.uid);
+  // console.log(user.uid);
+
+  //   useEffect(() => {
+  // getUid();
+  console.log(uid);
+  async function submit() {
+    // db=getFirestore();
+
+    console.log(user.uid);
+    // e.preventDefault();
+    // db2.collection("userRequestedWebsites/"+user.uid).add({
     // const db2 = getFirestore();
-    const onFnameChange = (event) => setFname(event.target.value);
-    const onLnameChange = (event) => setLname(event.target.value);
-    const onIdeaChange = (event) => setIdeas(event.target.value);
-    // useEffect(() => {
-        
-    //     db2.collection("userRequestedWebsites/"+user.uid).onSnapshot((snapshot) => {
-    //       setUserData(
-    //         snapshot.docs.map((doc) => ({
-    //           firstName: fname,
-    //           lastName: lname,
-    //           idea: ideas
-    //         }))
-    //       );
-    //     });
-    //     console.log({ data });
-    //   }, []);
-      
-    //   const submit = () => {
-        // set user 
-        // setUserData(["sCpKK  00mitXa7NM4FW0gyfJBkeO2"])
-        // setUid(user.uid);
-        // console.log(user.uid);
-        
-    
-    //   useEffect(() => {
-        // getUid();
-        console.log(uid);
-        async function submit() {
-            
-            
-        // db=getFirestore();
-            
-            console.log(user.uid);
-            // e.preventDefault();
-            // db2.collection("userRequestedWebsites/"+user.uid).add({
-            // const db2 = getFirestore();
-            setDoc(doc(firestore,"userRequestedWebsites", user.uid), {
-                uid: user.uid,
-                firstName: fname,
-                lastName: lname,
-                idea: ideas,
-                
-                
-            }).then(()=> {
-                setFname("");
-                setLname("");
-                setIdeas("");
-                setUid("");
-                navigate("/profile");
-                window.location.reload();
+    setDoc(doc(firestore, "userRequestedWebsites", user.uid), {
+      uid: user.uid,
+      firstName: fname,
+      lastName: lname,
+      idea: ideas,
+    }).then(() => {
+      setFname("");
+      setLname("");
+      setIdeas("");
+      setUid("");
+      navigate("/profile");
+      window.location.reload();
+    });
 
-            });
-                
-            
-            // var collection = getFirestore().collection("userRequestedWebsites");
-            // collection.add("hello","goodbye");
-            console.log("submit called")
-            
-            // TODO: navigate to status when created
-            // window.location.reload();
-            
+    // var collection = getFirestore().collection("userRequestedWebsites");
+    // collection.add("hello","goodbye");
+    console.log("submit called");
 
-            // alert("You have been added to our database! You will hear back from us within a week :)");
-        };
-      
-        
+    // TODO: navigate to status when created
+    // window.location.reload();
 
-    // const writeUserData = (e) => { 
-    //     console.log('writing user data');
-        
-    //     // const auth = getAuth();
-        
-    //     const auth = getAuth();
-    //     const user = auth.currentUser;
-    //     setUid(user.uid);
-       
-    
-    //     console.log(user.uid);
-    //     const db = getDatabase();
-    //     const ref = ref(db, "userRequestedWebsites/" + "1")
-    //     const userRef = ref.child(user.uid);
-    //     userRef.set({
-    //         firstName: fname,
-    //         lastName: lname,
-    //         idea: ideas
-    //     })
-    //     // const db = getFirestore();
-    //     // function onCreate() {
-    //     // const setData = async() =>
-    //     // async (dispatch) => {
-    //     //     try {
-    //     //         await user.set(doc(db, "userRequestedWebsites", "1"), {
-    //     //             firstName: "Los Angeles",
-    //     //             lastName: "CA",
-    //     //             idea: "USA"
-    //     //           });
-    //     //           alert("donr")
-    //     //     } catch (error) {
-    //     //         alert("whoops");
-    //     //     }
-        // };
-        // setData();
-        
-            // set(ref(db, "userRequestedWebsites/" + "1"), {
-            //     // username: name,
-            //     // console.log("added to db");
-            //     firstName: fname,
-            //     lastName: lname,
-            //     idea: ideas
+    // alert("You have been added to our database! You will hear back from us within a week :)");
+  }
 
-            //     // email: email,
-            // // profile_picture : imageUrl
-            // }).then(()=> {
-            //     alert("added to db");
-            //     console.log("beep boop");
-            // }).catch((error) => {
-            //     alert(error);
-            // });
-            // console.log("added to db");
-    // }
-    //     // alert("added to db");
-        
-        // onCreate();
-        //     }
-    // }
-    const contact = () => {
-        
-        console.log('contact');
-        // signInWithGoogle();
-        // googlelogin();
-        // navigate('/contact');
-        // window.location.reload();
-        window.location.href = "/contact";
+  // const writeUserData = (e) => {
+  //     console.log('writing user data');
 
-      };
-      
-    // setUid(user.uid);
-    
-    
-    // console.log(uid);
-    // setUid(window.location.href.split("/")[4]);
-    
-      useEffect(() => {
-        setUid(window.location.href.split("/")[4]);
-        // getUid();
-        console.log(uid);
-        async function checkIfFilledOut() {
-            // uid = window.location.href.split("/")[4];
-            const firestore = getFirestore();
-            const docRef = doc(firestore, "userRequestedWebsites", window.location.href.split("/")[4]);
-            console.log(uid);
-            const docSnap = await getDoc(docRef).then((doc) => {
-                if (doc.exists()) {
-                    console.log("Document data:", doc.data());
-                    setUserFilledOut(true);
-                    navigate('/status/'+window.location.href.split("/")[4]);
-                    window.location.reload();
-                } else {
-                    // doc.data() will be undefined in this case
-                    console.log("No such document!");
-                }
-            }).catch((error) => {
-                console.log("Error getting document:", error);
-            });
-        
-                
-            // if (docSnap.exists()) {
-                
-            //     console.log('Document data:', docSnap.data());
-            //     setUserFilledOut(true);
-            //     navigate('/status/'+uid);
-            //     window.location.reload();
-            // } else {
-            //     console.log('No such document!');
-                
-            // }
-        }
-        checkIfFilledOut();
-        
-        
+  //     // const auth = getAuth();
 
-        
+  //     const auth = getAuth();
+  //     const user = auth.currentUser;
+  //     setUid(user.uid);
+
+  //     console.log(user.uid);
+  //     const db = getDatabase();
+  //     const ref = ref(db, "userRequestedWebsites/" + "1")
+  //     const userRef = ref.child(user.uid);
+  //     userRef.set({
+  //         firstName: fname,
+  //         lastName: lname,
+  //         idea: ideas
+  //     })
+  //     // const db = getFirestore();
+  //     // function onCreate() {
+  //     // const setData = async() =>
+  //     // async (dispatch) => {
+  //     //     try {
+  //     //         await user.set(doc(db, "userRequestedWebsites", "1"), {
+  //     //             firstName: "Los Angeles",
+  //     //             lastName: "CA",
+  //     //             idea: "USA"
+  //     //           });
+  //     //           alert("donr")
+  //     //     } catch (error) {
+  //     //         alert("whoops");
+  //     //     }
+  // };
+  // setData();
+
+  // set(ref(db, "userRequestedWebsites/" + "1"), {
+  //     // username: name,
+  //     // console.log("added to db");
+  //     firstName: fname,
+  //     lastName: lname,
+  //     idea: ideas
+
+  //     // email: email,
+  // // profile_picture : imageUrl
+  // }).then(()=> {
+  //     alert("added to db");
+  //     console.log("beep boop");
+  // }).catch((error) => {
+  //     alert(error);
+  // });
+  // console.log("added to db");
+  // }
+  //     // alert("added to db");
+
+  // onCreate();
+  //     }
+  // }
+  const contact = () => {
+    console.log("contact");
+    // signInWithGoogle();
+    // googlelogin();
+    // navigate('/contact');
+    // window.location.reload();
+    window.location.href = "/contact";
+  };
+
+  // setUid(user.uid);
+
+  // console.log(uid);
+  // setUid(window.location.href.split("/")[4]);
+
+  useEffect(() => {
+    setUid(window.location.href.split("/")[4]);
+    // getUid();
+    console.log(uid);
+    async function checkIfFilledOut() {
+      // uid = window.location.href.split("/")[4];
+      const firestore = getFirestore();
+      const docRef = doc(
+        firestore,
+        "userRequestedWebsites",
+        window.location.href.split("/")[4]
+      );
+      console.log(uid);
+      const docSnap = await getDoc(docRef)
+        .then((doc) => {
+          if (doc.exists()) {
+            console.log("Document data:", doc.data());
+            setUserFilledOut(true);
+            navigate("/status/" + window.location.href.split("/")[4]);
+            window.location.reload();
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        })
+        .catch((error) => {
+          console.log("Error getting document:", error);
+        });
+
+      // if (docSnap.exists()) {
+
+      //     console.log('Document data:', docSnap.data());
+      //     setUserFilledOut(true);
+      //     navigate('/status/'+uid);
+      //     window.location.reload();
+      // } else {
+      //     console.log('No such document!');
+
+      // }
+    }
+    checkIfFilledOut();
+
     //     // const auth = getAuth();
     //     // const user = auth.currentUser;
     //     // if (user) {
     //     // // User is signed in, see docs for a list of available properties
     //     // // https://firebase.google.com/docs/reference/js/firebase.User
     //     // setName(user.displayName);
-    
-    
+
     //     // } else {
     //     // // No user is signed in.
 
     //     // }
-      }, []);
+  }, []);
   return (
-    <div className='req'>
-    <div className='req2'>
-    <div className='mainform'>
-    <form className='formmy'>
-    <p>Please fill out this short form and we will email you with further information</p>
-          <div className="form-group">
+    <div className="req">
+      <div className="req2">
+        <div className="mainform">
+          <form className="formmy">
+            <p>
+              Please fill out this short form and we will email you with further
+              information
+            </p>
+            <div className="form-group">
               <label htmlFor="exampleFormControlInput1">First Name</label>
-              <input type="fname" className="form-control" id="fname" placeholder="First Name" onChange={onFnameChange}>
-              </input></div>
-              <div className="form-group">
+              <input
+                type="fname"
+                className="form-control"
+                id="fname"
+                placeholder="First Name"
+                onChange={onFnameChange}
+              ></input>
+            </div>
+            <div className="form-group">
               <label htmlFor="exampleFormControlInput1">Last Name</label>
-              <input type="lname" className="form-control" id="lname" placeholder="Last Name" onChange={onLnameChange}>
-              </input></div>
+              <input
+                type="lname"
+                className="form-control"
+                id="lname"
+                placeholder="Last Name"
+                onChange={onLnameChange}
+              ></input>
+            </div>
 
-              {/* <div class="form-group">
+            {/* <div class="form-group">
               <label for="exampleFormControlInput1">First Name</label>
               <input type="fname" class="form-control" id="fname" placeholder="First Name">
               </input></div> */}
-          <div className="form-group">
-              <label htmlFor="exampleFormControlTextarea1">What are some things you would want to include on your website? <br></br>Any secret talents or fun facts?<br></br>*This doesn't need to be comprehensive and is just a starting point*</label>
-              <textarea className="form-control" id="websitegoals" rows="3" onChange={onIdeaChange}></textarea>
-          </div>
-          <div className="submits" onClick={submit}><p>Submit</p></div>
-          
-      </form>
-      </div>
-      <div className='row'>
-        <div className='col-md'>
+            <div className="form-group">
+              <label htmlFor="exampleFormControlTextarea1">
+                What are some things you would want to include on your website?{" "}
+                <br></br>Any secret talents or fun facts?<br></br>*This doesn't
+                need to be comprehensive and is just a starting point*
+              </label>
+              <textarea
+                className="form-control"
+                id="websitegoals"
+                rows="3"
+                onChange={onIdeaChange}
+              ></textarea>
+            </div>
+            <div className="submits" onClick={submit}>
+              <p>Submit</p>
+            </div>
+          </form>
+        </div>
+        <div className="row">
+          <div className="col-md">
             <h3>FAQ</h3>
             <p>Click here to view common questions</p>
-        </div>
-        <div className='col-md' onClick={contact}>
+          </div>
+          <div className="col-md" onClick={contact}>
             <h3>Contact Us</h3>
             <p>Click here to send us a message</p>
+          </div>
         </div>
       </div>
-      </div>
-      </div>
-      
+    </div>
   );
 };
 export default Request;

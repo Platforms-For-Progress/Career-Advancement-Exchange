@@ -10,9 +10,7 @@ import { firestore, signInWithGoogle } from "../base";
 import googlelogin from "./googlelogin";
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { set, ref } from "firebase/database";
-import { db } from "../base";
-import { getFirestore, setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 import { connectAuthEmulator } from "firebase/auth";
 import { auth } from "../base";
 // import {getCustomAuth} from '../base.js'
@@ -51,15 +49,34 @@ const Login = () => {
     googlelogin();
   };
 
+  const addUserIfNotExists = async (user) => {
+    const usersCollection = firestore.usersCollection;
+    const userDoc = doc(usersCollection, user.uid);
+    const userDocSnap = await getDoc(userDoc);
+    if (!userDocSnap.exists()) {
+      console.log("user doesn't exist in db, adding them");
+      const split = user.displayName.split(" ");
+      if (split.length < 2) {
+        alert("Please enter your full name in your Google account");
+        return;
+      }
+      const firstName = split(" ")[0];
+      const lastName = split(" ")[1];
+      await firestore.addUser(user.uid, user.email, firstName, lastName, 0);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       console.log("email:", email);
       await signInWithEmailAndPassword(auth, email, password);
       console.log("user signed in");
+      // await addUserIfNotExists(auth.currentUser);
       setEmail("");
       setPassword("");
       navigate("/profile");
+      window.location.reload();
     } catch (error) {
       console.log("there was an error signing in");
       setPassword("");

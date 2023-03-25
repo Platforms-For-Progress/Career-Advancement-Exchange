@@ -1,94 +1,31 @@
-import { useReducer } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { TypeAnimation } from "react-type-animation";
-import { useState } from "react";
 import { getAuth } from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
-import "./Profile.css";
-// import { Navigate } from 'react-router-dom';
 import { navigate } from "@reach/router";
-import { connectAuthEmulator } from "firebase/auth";
 import { auth, firestore } from "../base";
-import { getFirestore, setDoc, doc, getDoc } from "firebase/firestore";
-// function getCustomAuth() {
-//   const auth = getAuth();
-//   const authUrl = 'http://localhost:9099';
-//   await fetch(authUrl);
-//   connectAuthEmulator(auth, 'http://127.0.0.1:9099/',  { disableWarnings: true });
-//   return auth;
+import { setDoc, doc, getDoc } from "firebase/firestore";
+import "./Profile.css";
 
-// };
 const Profile = () => {
-  const [name, setName] = useState("");
-  const [uid, setUid] = useState("");
-  const [str, setStr] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
-  // const auth = getAuth();
-  // const user = auth.currentUser;
-  // if (user !== null) {
-  //     setName(user.displayName);
-  //     console.log(name);
-  // }
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      setUid(uid);
-      console.log(user.displayName);
-      console.log(user.role);
-      console.log("here");
-      // setName(user.displayName);
-      // setStr("Welcome, " + user.displayName);
+  const [userAdminStatus, setUserAdminStatus] = useState(null);
 
-      // ...
-    } else {
-      // User is signed out
-      // ...
-      console.log("no user");
-      navigate("/signin");
-      window.location.reload();
-    }
-  });
-  // const auth = getCustomAuth();const [isAdmin, setIsAdmin] = useState(false);
-  async function getAdmin(uid) {
-    // const db = firestore;
-    const docRef = doc(firestore, "admins", uid);
-    const docSnap = await getDoc(docRef);
-    console.log(uid);
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      setIsAdmin(true);
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-      console.log("no user");
-      console.log(uid);
-      setIsAdmin(false);
-    }
-  }
-
-  onAuthStateChanged(auth, (user) => {
-    getAdmin(user.uid);
-    if (user && isAdmin) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      console.log(user.displayName);
-      console.log("here");
-      setName(user.displayName);
-      setStr("Welcome, " + user.displayName);
-      // ...
-    } else if (!isAdmin) {
-      console.log("not admin");
-      setName(user.displayName);
-      setStr("Welcome, " + user.displayName);
-    } else {
-      // User is signed out
-      // ...
-      navigate("/signin");
-      window.location.reload();
-    }
-  });
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        console.log("User is signed in");
+        const admin_status = await firestore.getAdminStatus(user.uid);
+        // setUserAdminStatus(admin_status);
+        console.log("admin status:", admin_status);
+        setUserAdminStatus(admin_status);
+      } else {
+        console.log("User is signed out");
+        navigate("/signin");
+        window.location.reload();
+      }
+    });
+    return () => unsubscribe;
+  }, []);
 
   const logout = () => {
     auth.signOut();
@@ -97,7 +34,7 @@ const Profile = () => {
   };
 
   const toReq = () => {
-    navigate("/request/" + uid);
+    navigate("/request/" + auth.currentUser.uid);
     window.location.reload();
   };
   const navInternal = () => {
@@ -105,63 +42,83 @@ const Profile = () => {
     window.location.reload();
   };
 
-  // const auth = getAuth();
-  // const user = auth.currentUser;
+  const navDBDashboard = () => {
+    navigate("/dbdashboard");
+    window.location.reload();
+  };
 
-  // if (user) {
-  // // User is signed in, see docs for a list of available properties
-  // // https://firebase.google.com/docs/reference/js/firebase.User
-  // setName(user.displayName);
-  // console.log(user.displayName);
-  // console.log(auth.currentUser.displayName);
-  // // ...
-  // } else {
-  // // No user is signed in.
-  //     console.log("No user signed in");
-  // }
+  const addCurrentUser = async () => {
+    const user = auth.currentUser;
+    const uid = user.uid;
+    const firstName = prompt("Enter your first name");
+    const lastName = prompt("Enter your last name");
+    const email = user.email;
+    const adminStatus = parseInt(prompt("Enter your admin status"));
+    await firestore.addUser(uid, email, firstName, lastName, adminStatus);
+    window.location.reload();
+  };
 
   return (
     <div className="prof">
       <div className="rightside">
-        <h1>{str}</h1>
+        <h1>
+          Welcome,{" "}
+          {!auth.currentUser ? (
+            <div className="spinner-border" role="status"></div>
+          ) : (
+            <>{auth.currentUser.displayName}</>
+          )}
+        </h1>
+        <h2>Admin status: {userAdminStatus}</h2>
+        <button
+          onClick={addCurrentUser}
+          className="btn btn-primary btn-large btn-block"
+        >
+          Add yourself to firestore
+        </button>
         <p onClick={logout}>Not you? Click here to log out!</p>
       </div>
 
       <div className="leftside">
-        <div class="row-z">
+        <div className="row-z">
           <div>
-            {isAdmin ? (
-              <div class="column" onClick={navInternal}>
-                <h3>Internal</h3>
-                <p>Click here to manage user requested websites</p>
-              </div>
+            {userAdminStatus > 0 ? (
+              <>
+                <div className="column" onClick={navInternal}>
+                  <h3>Internal</h3>
+                  <p>Click here to manage user requested websites</p>
+                </div>
+                <div className="column" onClick={navDBDashboard}>
+                  <h3>Database Dashboard</h3>
+                </div>
+              </>
             ) : (
-              <div>
-                <div class="column" onClick={toReq}>
-                  <h3>Request a personal website</h3>
-                  <p>
-                    Request a personal website to showcase your skills and
-                    projects
-                  </p>
-                </div>
-                <div class="column">
-                  <h3>Check the status of your website</h3>
-                  <p>
-                    Check the status of your website and see when it will be
-                    ready
-                  </p>
-                </div>
-                <div class="column">
-                  <h3>Upload Documents</h3>
-                  <p>
-                    Submit documents/pictures/media to be added to your website
-                  </p>
-                </div>
-              </div>
+              <></>
             )}
+            <div>
+              <div className="column" onClick={toReq}>
+                <h3>Request a personal website</h3>
+                <p>
+                  Request a personal website to showcase your skills and
+                  projects
+                </p>
+              </div>
+              <div className="column">
+                <h3>Check the status of your website</h3>
+                <p>
+                  Check the status of your website and see when it will be ready
+                </p>
+              </div>
+              <div className="column">
+                <h3>Upload Documents</h3>
+                <p>
+                  Submit documents/pictures/media to be added to your website
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="column">
+          <div className="column">
             <h3>Account Settings</h3>
             <p>Change your account settings and update your information</p>
           </div>

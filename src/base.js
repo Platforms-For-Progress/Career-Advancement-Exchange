@@ -7,7 +7,13 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { connectDatabaseEmulator, getDatabase } from "firebase/database";
-import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  doc,
+  setDoc,
+  getDoc,
+} from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { GoogleAuthProvider } from "firebase/auth";
 import { connectFirestoreEmulator } from "firebase/firestore";
@@ -49,6 +55,16 @@ function getCustomFirestore() {
     });
   };
 
+  const getAdminStatus = async (userId) => {
+    const userDoc = doc(usersCollection, userId);
+    const userSnap = await getDoc(userDoc);
+    if (userSnap.exists()) {
+      return userSnap.data().admin_status;
+    } else {
+      return 0;
+    }
+  };
+
   // Create requests collection
   const requestsCollection = collection(db, "requests");
   const addRequest = async (
@@ -71,6 +87,7 @@ function getCustomFirestore() {
     db,
     usersCollection,
     addUser,
+    getAdminStatus,
     requestsCollection,
     addRequest,
   };
