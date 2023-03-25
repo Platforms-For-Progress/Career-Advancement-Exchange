@@ -13,244 +13,69 @@ import { doc, setDoc, getDoc } from "firebase/firestore";
 import { async } from "@firebase/util";
 import { useEffect } from "react";
 import { auth, firestore } from "../base";
-// import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
-// import { await } from 'react-router-dom';
-// import {await}
-// import {connectAuthEmulator} from 'firebase/auth';
 
-// function getCustomAuth() {
-//   const auth = getAuth();
-//   const authUrl = 'http://localhost:9099';
-//   await fetch(authUrl);
-//   connectAuthEmulator(auth, 'http://127.0.0.1:9099/',  { disableWarnings: true });
-//   return auth;
-
-// };
 const Request = () => {
-  // const [name, setName] = useState("");
-  // const [str, setStr] = useState("");
-  // // const auth = getAuth();
-  // // const user = auth.currentUser;
-  // // if (user !== null) {
-  // //     setName(user.displayName);
-  // //     console.log(name);
-  // // }
-
-  // const auth = getAuth();
-
-  // const logout = () => {
-  //     auth.signOut();
-  //     window.open("/signin")
-  //   };
-  // const auth = getAuth();
-  // const user = auth.currentUser;
-
-  // if (user) {
-  // // User is signed in, see docs for a list of available properties
-  // // https://firebase.google.com/docs/reference/js/firebase.User
-  // setName(user.displayName);
-  // console.log(user.displayName);
-  // console.log(auth.currentUser.displayName);
-  // // ...
-  // } else {
-  // // No user is signed in.
-  //     console.log("No user signed in");
-  // }
-
-  // const navigate = useNavigate();
-  const [uid, setUid] = useState("");
-
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
+  const [email, setEmail] = useState("");
   const [ideas, setIdeas] = useState("");
-  const [data, setUserData] = useState([]);
-  const [userFilledOut, setUserFilledOut] = useState(false);
-  // const auth = getCustomAuth();
-  const user = auth.currentUser;
+  const [requestReason, setRequestReason] = useState("");
+  const [requestOtherReason, setRequestOtherReason] = useState("");
 
-  // const db2 = getFirestore();
   const onFnameChange = (event) => setFname(event.target.value);
   const onLnameChange = (event) => setLname(event.target.value);
+  const onEmailChange = (event) => setEmail(event.target.value);
   const onIdeaChange = (event) => setIdeas(event.target.value);
-  // useEffect(() => {
-
-  //     db2.collection("userRequestedWebsites/"+user.uid).onSnapshot((snapshot) => {
-  //       setUserData(
-  //         snapshot.docs.map((doc) => ({
-  //           firstName: fname,
-  //           lastName: lname,
-  //           idea: ideas
-  //         }))
-  //       );
-  //     });
-  //     console.log({ data });
-  //   }, []);
-
-  //   const submit = () => {
-  // set user
-  // setUserData(["sCpKK  00mitXa7NM4FW0gyfJBkeO2"])
-  // setUid(user.uid);
-  // console.log(user.uid);
-
-  //   useEffect(() => {
-  // getUid();
-  console.log(uid);
-  async function submit() {
-    // db=getFirestore();
-
-    console.log(user.uid);
-    // e.preventDefault();
-    // db2.collection("userRequestedWebsites/"+user.uid).add({
-    // const db2 = getFirestore();
-    setDoc(doc(firestore, "userRequestedWebsites", user.uid), {
-      uid: user.uid,
-      firstName: fname,
-      lastName: lname,
-      idea: ideas,
-    }).then(() => {
-      setFname("");
-      setLname("");
-      setIdeas("");
-      setUid("");
-      navigate("/profile");
-      window.location.reload();
-    });
-
-    // var collection = getFirestore().collection("userRequestedWebsites");
-    // collection.add("hello","goodbye");
-    console.log("submit called");
-
-    // TODO: navigate to status when created
-    // window.location.reload();
-
-    // alert("You have been added to our database! You will hear back from us within a week :)");
-  }
-
-  // const writeUserData = (e) => {
-  //     console.log('writing user data');
-
-  //     // const auth = getAuth();
-
-  //     const auth = getAuth();
-  //     const user = auth.currentUser;
-  //     setUid(user.uid);
-
-  //     console.log(user.uid);
-  //     const db = getDatabase();
-  //     const ref = ref(db, "userRequestedWebsites/" + "1")
-  //     const userRef = ref.child(user.uid);
-  //     userRef.set({
-  //         firstName: fname,
-  //         lastName: lname,
-  //         idea: ideas
-  //     })
-  //     // const db = getFirestore();
-  //     // function onCreate() {
-  //     // const setData = async() =>
-  //     // async (dispatch) => {
-  //     //     try {
-  //     //         await user.set(doc(db, "userRequestedWebsites", "1"), {
-  //     //             firstName: "Los Angeles",
-  //     //             lastName: "CA",
-  //     //             idea: "USA"
-  //     //           });
-  //     //           alert("donr")
-  //     //     } catch (error) {
-  //     //         alert("whoops");
-  //     //     }
-  // };
-  // setData();
-
-  // set(ref(db, "userRequestedWebsites/" + "1"), {
-  //     // username: name,
-  //     // console.log("added to db");
-  //     firstName: fname,
-  //     lastName: lname,
-  //     idea: ideas
-
-  //     // email: email,
-  // // profile_picture : imageUrl
-  // }).then(()=> {
-  //     alert("added to db");
-  //     console.log("beep boop");
-  // }).catch((error) => {
-  //     alert(error);
-  // });
-  // console.log("added to db");
-  // }
-  //     // alert("added to db");
-
-  // onCreate();
-  //     }
-  // }
-  const contact = () => {
-    console.log("contact");
-    // signInWithGoogle();
-    // googlelogin();
-    // navigate('/contact');
-    // window.location.reload();
-    window.location.href = "/contact";
-  };
-
-  // setUid(user.uid);
-
-  // console.log(uid);
-  // setUid(window.location.href.split("/")[4]);
+  const onRequestReasonChange = (event) => setRequestReason(event.target.value);
+  const onRequestOtherReasonChange = (event) =>
+    setRequestOtherReason(event.target.value);
 
   useEffect(() => {
-    setUid(window.location.href.split("/")[4]);
-    // getUid();
-    console.log(uid);
-    async function checkIfFilledOut() {
-      // uid = window.location.href.split("/")[4];
-      const firestore = getFirestore();
-      const docRef = doc(
-        firestore,
-        "userRequestedWebsites",
-        window.location.href.split("/")[4]
-      );
-      console.log(uid);
-      const docSnap = await getDoc(docRef)
-        .then((doc) => {
-          if (doc.exists()) {
-            console.log("Document data:", doc.data());
-            setUserFilledOut(true);
-            navigate("/status/" + window.location.href.split("/")[4]);
-            window.location.reload();
-          } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-          }
-        })
-        .catch((error) => {
-          console.log("Error getting document:", error);
-        });
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        navigate("/signin");
+        window.location.reload();
+      } else {
+        const usersCollection = firestore.usersCollection;
+        const userDocRef = doc(usersCollection, user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        const userData = userDocSnap.data();
 
-      // if (docSnap.exists()) {
-
-      //     console.log('Document data:', docSnap.data());
-      //     setUserFilledOut(true);
-      //     navigate('/status/'+uid);
-      //     window.location.reload();
-      // } else {
-      //     console.log('No such document!');
-
-      // }
-    }
-    checkIfFilledOut();
-
-    //     // const auth = getAuth();
-    //     // const user = auth.currentUser;
-    //     // if (user) {
-    //     // // User is signed in, see docs for a list of available properties
-    //     // // https://firebase.google.com/docs/reference/js/firebase.User
-    //     // setName(user.displayName);
-
-    //     // } else {
-    //     // // No user is signed in.
-
-    //     // }
+        setFname(userData.firstname);
+        setLname(userData.lastname);
+        setEmail(userData.email);
+      }
+    });
+    return () => unsubscribe;
   }, []);
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    const user = auth.currentUser;
+    if (fname == "" || lname == "" || email == "") {
+      alert("Please fill out all fields");
+    }
+
+    const req_id = await firestore.addRequest(
+      user.uid,
+      {
+        request_reason:
+          requestReason != "Other" ? requestReason : requestOtherReason,
+        request_idea: ideas,
+      },
+      0,
+      []
+    );
+
+    navigate("/status/" + req_id);
+    window.location.reload();
+  };
+
+  const navContact = () => {
+    navigate("/contact");
+    window.location.reload();
+  };
+
   return (
     <div className="req">
       <div className="req2">
@@ -261,30 +86,41 @@ const Request = () => {
               information
             </p>
             <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">First Name</label>
+              <label htmlFor="fname">First Name</label>
               <input
                 type="fname"
                 className="form-control"
                 id="fname"
-                placeholder="First Name"
+                placeholder="Enter your first name"
+                value={fname}
                 onChange={onFnameChange}
+                required
               ></input>
             </div>
             <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">Last Name</label>
+              <label htmlFor="lname">Last Name</label>
               <input
-                type="lname"
+                type="text"
                 className="form-control"
                 id="lname"
-                placeholder="Last Name"
+                placeholder="Enter your last name"
+                value={lname}
                 onChange={onLnameChange}
+                required
               ></input>
             </div>
-
-            {/* <div class="form-group">
-              <label for="exampleFormControlInput1">First Name</label>
-              <input type="fname" class="form-control" id="fname" placeholder="First Name">
-              </input></div> */}
+            <div className="form-group">
+              <label htmlFor="email">Email Address</label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                placeholder="Enter your email address"
+                value={email}
+                onChange={onEmailChange}
+                required
+              />
+            </div>
             <div className="form-group">
               <label htmlFor="exampleFormControlTextarea1">
                 What are some things you would want to include on your website?{" "}
@@ -293,14 +129,64 @@ const Request = () => {
               </label>
               <textarea
                 className="form-control"
-                id="websitegoals"
+                id="ideas"
                 rows="3"
+                value={ideas}
                 onChange={onIdeaChange}
               ></textarea>
             </div>
-            <div className="submits" onClick={submit}>
-              <p>Submit</p>
+            <div className="form-group">
+              <label htmlFor="reasonSelect">Reason for Request</label>
+              <select
+                className="form-control"
+                id="reasonSelect"
+                value={requestReason}
+                onChange={onRequestReasonChange}
+              >
+                <option value="">Select a reason</option>
+                <option value="seeking employment">Seeking Employment</option>
+                <option value="looking for freelance work">
+                  Looking for Freelance Work
+                </option>
+                <option value="want to showcase work to potential clients">
+                  Want to Showcase Work to Potential Clients
+                </option>
+                <option value="building personal brand">
+                  Building Personal Brand
+                </option>
+                <option value="looking to switch careers">
+                  Looking to Switch Careers
+                </option>
+                <option value="showcasing personal projects">
+                  Showcasing Personal Projects
+                </option>
+                <option value="seeking collaboration opportunities">
+                  Seeking Collaboration Opportunities
+                </option>
+                <option value="want to improve digital presence">
+                  Want to Improve Digital Presence
+                </option>
+                <option value="need website for personal or professional blog">
+                  Need Website for Personal or Professional Blog
+                </option>
+                <option value="other">Other</option>
+              </select>
+              {requestReason === "other" && (
+                <div className="form-group">
+                  <label htmlFor="otherReasonInput">Please Specify:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="otherReasonInput"
+                    value={requestOtherReason}
+                    onChange={onRequestOtherReasonChange}
+                  />
+                </div>
+              )}
             </div>
+            <button type="submit" className="submits" onClick={onSubmit}>
+              Submit
+            </button>
           </form>
         </div>
         <div className="row">
@@ -308,7 +194,7 @@ const Request = () => {
             <h3>FAQ</h3>
             <p>Click here to view common questions</p>
           </div>
-          <div className="col-md" onClick={contact}>
+          <div className="col-md" onClick={navContact}>
             <h3>Contact Us</h3>
             <p>Click here to send us a message</p>
           </div>

@@ -9,15 +9,18 @@ import "./Profile.css";
 
 const Profile = () => {
   const [userAdminStatus, setUserAdminStatus] = useState(null);
+  const [userHasRequest, setUserHasRequest] = useState(false);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         console.log("User is signed in");
         const admin_status = await firestore.getAdminStatus(user.uid);
+        const user_requests = await firestore.getRequestsByUser(user.uid);
         // setUserAdminStatus(admin_status);
         console.log("admin status:", admin_status);
         setUserAdminStatus(admin_status);
+        setUserHasRequest(user_requests.length > 0);
       } else {
         console.log("User is signed out");
         navigate("/signin");
@@ -34,7 +37,8 @@ const Profile = () => {
   };
 
   const toReq = () => {
-    navigate("/request/" + auth.currentUser.uid);
+    // navigate("/request/" + auth.currentUser.uid);
+    navigate("/request/");
     window.location.reload();
   };
   const navInternal = () => {
@@ -44,6 +48,11 @@ const Profile = () => {
 
   const navDBDashboard = () => {
     navigate("/dbdashboard");
+    window.location.reload();
+  };
+
+  const navViewRequests = () => {
+    navigate("/request/" + auth.currentUser.uid);
     window.location.reload();
   };
 
@@ -60,24 +69,25 @@ const Profile = () => {
 
   return (
     <div className="prof">
-      <div className="rightside">
-        <h1>
-          Welcome,{" "}
-          {!auth.currentUser ? (
-            <div className="spinner-border" role="status"></div>
-          ) : (
-            <>{auth.currentUser.displayName}</>
-          )}
-        </h1>
-        <h2>Admin status: {userAdminStatus}</h2>
-        <button
-          onClick={addCurrentUser}
-          className="btn btn-primary btn-large btn-block"
-        >
-          Add yourself to firestore
-        </button>
-        <p onClick={logout}>Not you? Click here to log out!</p>
-      </div>
+      {auth.currentUser ? (
+        <div className="rightside">
+          <h1>Welcome, {auth.currentUser.displayName}</h1>
+          <h2>Admin status: {userAdminStatus}</h2>
+          <button
+            onClick={addCurrentUser}
+            className="btn btn-primary btn-large btn-block"
+          >
+            Add yourself to firestore
+          </button>
+          <p onClick={logout}>Not you? Click here to log out!</p>
+        </div>
+      ) : (
+        <div className="rightside">
+          <h1>
+            Welcome, <div className="spinner-border" role="status"></div>
+          </h1>
+        </div>
+      )}
 
       <div className="leftside">
         <div className="row-z">
@@ -103,12 +113,17 @@ const Profile = () => {
                   projects
                 </p>
               </div>
-              <div className="column">
-                <h3>Check the status of your website</h3>
-                <p>
-                  Check the status of your website and see when it will be ready
-                </p>
-              </div>
+              {userHasRequest ? (
+                <div className="column" onClick={navViewRequests}>
+                  <h3>Check the status of your requests</h3>
+                  <p>
+                    Check the status of your website and see when it will be
+                    ready
+                  </p>
+                </div>
+              ) : (
+                <></>
+              )}
               <div className="column">
                 <h3>Upload Documents</h3>
                 <p>

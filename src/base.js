@@ -13,6 +13,10 @@ import {
   doc,
   setDoc,
   getDoc,
+  getDocs,
+  query,
+  where,
+  addDoc,
 } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { GoogleAuthProvider } from "firebase/auth";
@@ -67,18 +71,33 @@ function getCustomFirestore() {
 
   // Create requests collection
   const requestsCollection = collection(db, "requests");
-  const addRequest = async (
-    request_id,
-    user_id,
-    request_data,
-    status,
-    admin_ids
-  ) => {
-    await setDoc(doc(requestsCollection, request_id), {
+  const addRequest = async (user_id, request_data, status, admin_ids) => {
+    const doc = await addDoc(requestsCollection, {
       user_id,
       request_data,
       status,
       admin_ids,
+    });
+    return doc.id;
+  };
+  const getRequest = async (requestId) => {
+    // dont use requestsCollection
+    const docRef = doc(db, "requests", requestId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return { id: docSnap.id, ...docSnap.data() };
+    } else {
+      return null;
+    }
+  };
+
+  // querys all requests made by userid
+  const getRequestsByUser = async (userId) => {
+    const querySnapshot = await getDocs(
+      query(requestsCollection, where("user_id", "==", userId))
+    );
+    return querySnapshot.docs.map((doc) => {
+      return { id: doc.id, ...doc.data() };
     });
   };
 
@@ -90,6 +109,8 @@ function getCustomFirestore() {
     getAdminStatus,
     requestsCollection,
     addRequest,
+    getRequest,
+    getRequestsByUser,
   };
 }
 

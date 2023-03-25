@@ -20,6 +20,7 @@ import Assign from "./Components/Assign";
 import Status from "./Components/Status";
 import Collab from "./Components/Collab";
 import DBDashboard from "./Components/DBDashboard";
+import ViewRequests from "./Components/ViewRequests";
 
 function App() {
   useEffect(() => {
@@ -41,15 +42,16 @@ function App() {
         <Login path="/login" />
         <SignUp path="/signup" />
         <Profile path="/profile" />
-        <Request path="/request/:uid" />
+        <Request path="/request/" />
         <Internal path="/internal" />
         <Story path="/story/:uid" />
         <Edit path="/edit/:uid" />
         <Create path="/create" />
         <Assign path="/assign/:uid" />
-        <Status path="/status/:uid" />
-        <Collab path="/collab/:uid" />
+        <Status path="/status/:rid" />
+        <Collab path="/collab/:rid" />
         <DBDashboard path="/dbdashboard" />
+        <ViewRequests path="/request/:uid" />
       </Router>
       {/* <p>Hello Mate</p> */}
     </div>
