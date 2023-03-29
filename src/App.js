@@ -19,6 +19,7 @@ import Create from './Components/Create';
 import Assign from './Components/Assign';
 import Status from './Components/Status';
 import Collab from './Components/Collab';
+import Upload from './Components/Upload';
 function App() {
   useEffect(() => {    
     window.onpageshow = function(event) {
@@ -47,6 +48,7 @@ function App() {
         <Assign path="/assign/:uid"/>
         <Status path="/status/:uid"/>
         <Collab path="/collab/:uid"/>
+        <Upload path="/upload"/>
 
       </Router>
       {/* <p>Hello Mate</p> */}
