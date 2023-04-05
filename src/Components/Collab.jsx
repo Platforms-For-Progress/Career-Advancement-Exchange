@@ -8,6 +8,7 @@ import "../index.css";
 import FontPicker from "font-picker-react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../base.js";
+import { useParams } from "@reach/router";
 
 // import fontpicker api key from .env
 const fontPickerApiKey = process.env.REACT_APP_FONTPICKER_API_KEY;
@@ -41,6 +42,8 @@ const AddEducation = () => {
 };
 
 const Collab = () => {
+  const { rid } = useParams();
+
   const [colorPicker, setColorPicker] = useState(false);
   const [education, setEducation] = useState(false);
   const [work, setWork] = useState(false);

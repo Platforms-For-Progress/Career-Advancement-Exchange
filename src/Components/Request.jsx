@@ -60,8 +60,11 @@ const Request = () => {
       user.uid,
       {
         request_reason:
-          requestReason != "Other" ? requestReason : requestOtherReason,
+          requestReason !== "Other" ? requestReason : requestOtherReason,
         request_idea: ideas,
+        request_fname: fname,
+        request_lname: lname,
+        request_email: email,
       },
       0,
       []

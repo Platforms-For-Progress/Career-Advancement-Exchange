@@ -44,11 +44,11 @@ function App() {
         <Profile path="/profile" />
         <Request path="/request/" />
         <Internal path="/internal" />
-        <Story path="/story/:uid" />
-        <Edit path="/edit/:uid" />
         <Create path="/create" />
-        <Assign path="/assign/:uid" />
         <Status path="/status/:rid" />
+        <Assign path="/assign/:rid" />
+        <Edit path="/edit/:rid" />
+        <Story path="/story/:rid" />
         <Collab path="/collab/:rid" />
         <DBDashboard path="/dbdashboard" />
         <ViewRequests path="/request/:uid" />

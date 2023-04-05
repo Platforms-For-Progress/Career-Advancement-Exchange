@@ -4,6 +4,7 @@
     margin: 4%;
     cursor: false;
     color: black;
+    height: 100vh;
 }
 .row-z {
     /* display: flex; */

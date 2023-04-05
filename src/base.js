@@ -69,6 +69,11 @@ function getCustomFirestore() {
     }
   };
 
+  const changeAdminStatus = async (userId, admin_status) => {
+    const userDoc = doc(usersCollection, userId);
+    await setDoc(userDoc, { admin_status }, { merge: true });
+  };
+
   // Create requests collection
   const requestsCollection = collection(db, "requests");
   const addRequest = async (user_id, request_data, status, admin_ids) => {
@@ -107,6 +112,7 @@ function getCustomFirestore() {
     usersCollection,
     addUser,
     getAdminStatus,
+    changeAdminStatus,
     requestsCollection,
     addRequest,
     getRequest,

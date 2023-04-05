@@ -63,7 +63,19 @@ const Profile = () => {
     const lastName = prompt("Enter your last name");
     const email = user.email;
     const adminStatus = parseInt(prompt("Enter your admin status"));
+    if (!firstName || !lastName || !email || !adminStatus) {
+      alert("Please enter all fields");
+      return;
+    }
     await firestore.addUser(uid, email, firstName, lastName, adminStatus);
+    window.location.reload();
+  };
+
+  const changeAdminStatus = async () => {
+    const user = auth.currentUser;
+    const uid = user.uid;
+    const adminStatus = parseInt(prompt("Enter your admin status"));
+    await firestore.changeAdminStatus(uid, adminStatus);
     window.location.reload();
   };
 
@@ -73,12 +85,14 @@ const Profile = () => {
         <div className="rightside">
           <h1>Welcome, {auth.currentUser.displayName}</h1>
           <h2>Admin status: {userAdminStatus}</h2>
-          <button
-            onClick={addCurrentUser}
-            className="btn btn-primary btn-large btn-block"
-          >
-            Add yourself to firestore
-          </button>
+          <div>
+            <button onClick={addCurrentUser} className="btn btn-primary">
+              Add yourself to firestore
+            </button>
+            <button onClick={changeAdminStatus} className="btn btn-primary">
+              Change Admin Status
+            </button>
+          </div>
           <p onClick={logout}>Not you? Click here to log out!</p>
         </div>
       ) : (

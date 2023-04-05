@@ -3,6 +3,7 @@ import { useState } from "react";
 import { auth, firestore } from "../base";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, doc, setDoc, getDoc, getDocs } from "firebase/firestore";
+import { navigate } from "@reach/router";
 
 import { render } from "@testing-library/react";
 
@@ -10,24 +11,24 @@ import "./DBDashboard.css";
 
 const DBDashboard = () => {
   const [displayDocs, setDisplayDocs] = useState({});
-  const [collectionPaths, setCollectionPaths] = useState([
-    "test",
-    "users",
-    "requests",
-  ]);
+  const [collectionPaths, setCollectionPaths] = useState(["users", "requests"]);
 
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       console.log("User is signed in");
-  //       console.log("user:", user);
-  //       console.log("auth user:", auth.currentUser);
-  //     } else {
-  //       console.log("User is signed out");
-  //     }
-  //   });
-  //   return unsubscribe;
-  // }, []);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const adminStatus = await firestore.getAdminStatus(user.uid);
+        if (!adminStatus || adminStatus < 1) {
+          alert("You must be an admin to view this page");
+          navigate("/profile");
+          window.location.reload();
+        }
+      } else {
+        navigate("/login");
+        window.location.reload();
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const fetchDocs = async () => {
@@ -39,16 +40,6 @@ const DBDashboard = () => {
     };
     fetchDocs();
   }, [collectionPaths]);
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      console.log("User is signed in");
-      console.log("user:", user);
-      // console.log("auth user:", auth.currentUser);
-    } else {
-      console.log("User is signed out");
-    }
-  });
 
   const addCurrentUser = async () => {
     const user = auth.currentUser;

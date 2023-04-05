@@ -1,22 +1,28 @@
-import { useReducer } from 'react';
-import { TypeAnimation } from 'react-type-animation';
-import { useState } from 'react';
+import { useReducer } from "react";
+import { TypeAnimation } from "react-type-animation";
+import { useState } from "react";
 import { getAuth } from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
-import './Story.css';
+import "./Story.css";
 // import {}
 // import { Navigate } from 'react-router-dom';
-import { navigate } from '@reach/router';
-import {connectAuthEmulator} from 'firebase/auth';
-import { auth, firestore } from '../base';
-import { getDatabase } from 'firebase/database';
-import { doc, getDocs, getDoc, getFirestore, collection } from "firebase/firestore";
-import { validateArgCount } from '@firebase/util';
-import {useEffect} from 'react'
-import {useParams} from 'react-router-dom'
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { navigate } from "@reach/router";
+import { connectAuthEmulator } from "firebase/auth";
+import { auth, firestore } from "../base";
+import { getDatabase } from "firebase/database";
+import {
+  doc,
+  getDocs,
+  getDoc,
+  getFirestore,
+  collection,
+} from "firebase/firestore";
+import { validateArgCount } from "@firebase/util";
+import { useEffect } from "react";
+import { useParams } from "@reach/router";
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // function getCustomAuth() {
 //   const auth = getAuth();
@@ -24,239 +30,122 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 //   await fetch(authUrl);
 //   connectAuthEmulator(auth, 'http://127.0.0.1:9099/',  { disableWarnings: true });
 //   return auth;
-  
+
 // };
 
-
 const Story = () => {
-    // super(props);
-    
-    const [lookupUID, setLookupUID] = useState("");
-    const [fname, setFname] = useState("");
-    const [lname, setLname] = useState("");
-    const [idea, setIdea] = useState("");
-    const [developed, setDeveloped] = useState("");
-    const [special, setSpecial] = useState("");
-    const [assigned, setAssigned] = useState("");
-   
-    function navEdit() {
-        navigate("/edit/"+lookupUID);
-        window.location.reload();
+  // super(props);
 
-    }
-    function navDelete() {
-        console.log("delete");
+  const { rid } = useParams();
+  const [lookupUID, setLookupUID] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [idea, setIdea] = useState("");
+  const [developed, setDeveloped] = useState("");
+  const [special, setSpecial] = useState("");
+  const [assigned, setAssigned] = useState("");
 
-    }
-    function navAssign() {
-        navigate("/assign/"+lookupUID);
-        window.location.reload();
-        console.log("assign");
+  function navEdit() {
+    // navigate("/edit/" + lookupUID);
+    navigate("/edit/" + rid);
+    window.location.reload();
+  }
+  function navDelete() {
+    console.log("delete");
+  }
+  function navAssign() {
+    navigate("/assign/" + rid);
+    window.location.reload();
+    console.log("assign");
+  }
+  function navInternal() {
+    navigate("/internal");
+    window.location.reload();
+  }
 
-    }
-    function navInternal() {
-        navigate("/internal");
-        window.location.reload();
-
-    }
-
-    async function getStoryInfo(uid) {
-        // const db = getFirestore();
-        const docRef = doc(firestore, "userRequestedWebsites", uid);
-        const docSnap = await getDoc(docRef);
-        // const user = auth.currentUser;
-        // const docRef2 = doc(firestore, "admins", user.uid);
-        // const docSnap2 = await getDoc(docRef2);
-
-    
-        if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data());
-            
-            const fname = docSnap.data().firstName;
-            const lname = docSnap.data().lastName;
-            const idea = docSnap.data().idea;
-            const developedIdea = docSnap.data().developed;
-            const specialNotes = docSnap.data().special;
-            const assignedTo = docSnap.data().assignedTo;
-            // const assignedTo = docSnap2.data().assignedTo;
-
-            setFname(fname);
-            setLname(lname);
-            setIdea(idea);
-            setDeveloped(developedIdea);
-            setSpecial(specialNotes);
-            setAssigned(assignedTo);
-            // const  dataArr = [fname, lname,idea];
-            // console.log(docSnap.data().firstName);
-            // console.log(dataArr[1]);
-            // docSnap.data().map(function(d,idx)) {
-    
-            // }
-            // docSnap.data().map(function(d, idx) {
-            //     dataArr.push(d.firstName);
-    
-            // })
-    
-            // return dataArr;
-            // return true;
-        } else {
-        // doc.data() will be undefined in this case
-            console.log("No such document!");
-            console.log("no user");
-            console.log(uid);
-                // navigate("/profile");
-                // window.location.reload();
-                // return  false;
-        }
-    };
-    
-    // onAuthStateChanged(auth, (user) => {
-    //     if (user) {
-    //         // User is signed in, see docs for a list of available properties
-    //         // https://firebase.google.com/docs/reference/js/firebase.User
-    //         const uid = user.uid;
-    //         console.log(user.displayName);
-    //         console.log(user.role)
-    //         console.log("here");
-    //         // setName(user.displayName);
-    //         // setStr("Welcome, " + user.displayName);
-            
-    //         // ...
-    //     } else {
-    //         // User is signed out
-    //         // ...
-    //         console.log("no user");
-    //         navigate("/signin");
-    //         window.location.reload();
-    
-    //     }
-    //     });
-        
-    
-    
-
-    // const auth = getAuth();
+  async function getStoryInfo(rid) {
+    // const db = getFirestore();
+    const docRef = doc(firestore.db, "requests", rid);
+    const docSnap = await getDoc(docRef);
     // const user = auth.currentUser;
-    // if (user !== null) {
-    //     setName(user.displayName);
-    //     console.log(name);
-    // }
+    // const docRef2 = doc(firestore, "admins", user.uid);
+    // const docSnap2 = await getDoc(docRef2);
 
-    // const auth = getCustomAuth();
-    
-    // onAuthStateChanged(auth, (user) => {
-    // if (user ) {
-    //     // User is signed in, see docs for a list of available properties
-    //     // https://firebase.google.com/docs/reference/js/firebase.User
-    //     const uid = user.uid;
-    //     console.log(user.displayName);
-    //     console.log("here");
-      
-    //     // ...
-    // } else {
-    //     // User is signed out
-    //     // ...
-    //     console.log("no user");
-    //     navigate("/signin");
-    //     window.location.reload();
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
 
-    // }
-    // });
-    // const logout = () => {
-    //     auth.signOut();
-    //     navigate("/signin");
-    //     window.location.reload();
-    //   };
+      console.log(docSnap.data());
+      const req_data = docSnap.data().request_data;
+      const fname = req_data.request_fname;
+      const lname = req_data.request_lname;
+      const idea = req_data.request_idea;
+      const developedIdea = req_data.request_developed;
+      const specialNotes = req_data.request_special;
+      const admin_ids = docSnap.data().admin_ids;
+      // const assignedTo = docSnap2.data().assignedTo;
 
-    //   const toReq = () => {
-    //     navigate("/request");
-    //     window.location.reload();
-    //   };
-    // const auth = getAuth();
-    // const user = auth.currentUser;
+      setFname(fname);
+      setLname(lname);
+      setIdea(idea);
+      setDeveloped(developedIdea);
+      setSpecial(specialNotes);
+      setAssigned(admin_ids);
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+      console.log("no user");
+      //   console.log(uid);
+      // navigate("/profile");
+      // window.location.reload();
+      // return  false;
+    }
+  }
 
-    // if (user) {
-    // // User is signed in, see docs for a list of available properties
-    // // https://firebase.google.com/docs/reference/js/firebase.User
-    // setName(user.displayName);
-    // console.log(user.displayName);
-    // console.log(auth.currentUser.displayName);
-    // // ...
-    // } else {
-    // // No user is signed in.
-    //     console.log("No user signed in");
-    // }
-    // const data = getItems();
-    // getItems();
-    
-    // const webz2 = getItems();
-        // getStoryInfo()
-        // let { uid } = useParams();
-        // console.log(uid);
-        // console.log("here");
-        // const router = useRouter();
-        // const uid = router.query.id;
-        // this.props.match.params = this.props.match.params.bind(this);
-        // let {uid} = this.props.match.params.uid;
-        // console.log( {uid});
-        // console.log(window.location.pathname);
-        useEffect(()=> {
-            const tempUID = window.location.pathname.slice(7,);
-            setLookupUID(tempUID);
-            console.log(tempUID);
-            getStoryInfo(lookupUID);
-            
-            console.log("Important");
-            // console.log(data[1]);
-            // setFname(data.firstName);
-
-        })
-        
-        // console.log(tempUID);
-        
-        // const qty = router.query.qty;
-        // const size = router.query.size;
-
+  useEffect(() => {
+    getStoryInfo(rid);
+  }, [rid]);
 
   return (
-    
-    <div className='story'>
-        {/* <p>Hello!</p> */}
-        
-        <div className='story1'>
-        <p>User ID: {lookupUID}</p>
+    <div className="story">
+      <div className="story1">
+        <p>Request ID: {rid}</p>
         <p>Assigned to: {assigned} </p>
-        <p>First Name: {fname} <br></br>Last Name: {lname}</p>
+        <p>
+          First Name: {fname} <br></br>Last Name: {lname}
+        </p>
         <p>Initial Ideas: {idea}</p>
         <p>Documents: </p>
         <p>Developed Idea Notes: {developed} </p>
         <p>Special Notes: {special} </p>
-        
-
-        
-
+      </div>
+      <div className="edit_large">
+        <div className="edit" onClick={() => navEdit()}>
+          <p>Edit Entry</p>
         </div>
-        <div className='edit_large'>
-        <div className='edit' onClick={()=>navEdit()}><p>Edit Entry</p></div>
-        <div className = 'edit' onClick={()=>navDelete()}><p>Delete Entry</p></div>
-        <div className = 'edit' onClick={()=>navAssign()}><p>Assign Person to Entry</p></div>
-        <div className = 'edit' onClick={navInternal}><p>Return to dashboard</p></div>
+        <div className="edit" onClick={() => navDelete()}>
+          <p>Delete Entry</p>
         </div>
-        
-        {/* <div className = 'story2' onClick={navInternal}><p>Return to dashboard</p></div> */}
-        {/* <p>{this.props.match.params.uid}</p> */}
-    {/* <div className='card2'> */}
-    {/* <div className='create'>Create User</div>
+        <div className="edit" onClick={() => navAssign()}>
+          <p>Assign Person to Entry</p>
+        </div>
+        <div className="edit" onClick={navInternal}>
+          <p>Return to dashboard</p>
+        </div>
+      </div>
+
+      {/* <div className = 'story2' onClick={navInternal}><p>Return to dashboard</p></div> */}
+      {/* <p>{this.props.match.params.uid}</p> */}
+      {/* <div className='card2'> */}
+      {/* <div className='create'>Create User</div>
     {info.map(function(d, idx){
         // <div className='card2'>
          return (<p className='card2' onClick={goToCard}>{d.firstName} {d.lastName}<br></br>User ID: {d.uid}</p>)
         //  </div>
        })} */}
-    {/* </div> */}
-    
-    {/* <ul>{getItems()}</ul> */}
+      {/* </div> */}
+
+      {/* <ul>{getItems()}</ul> */}
     </div>
-    
   );
 };
 export default Story;
