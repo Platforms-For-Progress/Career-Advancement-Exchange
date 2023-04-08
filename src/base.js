@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {
@@ -22,17 +21,7 @@ import { getStorage } from "firebase/storage";
 import { GoogleAuthProvider } from "firebase/auth";
 import { connectFirestoreEmulator } from "firebase/firestore";
 
-// TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
-// function getCustomAuth() {
-//   const auth = getAuth();
-//   connectAuthEmulator(auth, "127.0.0.1:9099");
-//   return auth;
-// };
 
 function getCustomAuth() {
   const auth = getAuth();
@@ -47,15 +36,32 @@ function getCustomAuth() {
 function getCustomFirestore() {
   const db = getFirestore();
   connectFirestoreEmulator(db, "localhost", 8081);
+  return db;
+}
 
+function getFirestoreObject(db) {
   // Create users collection
   const usersCollection = collection(db, "users");
-  const addUser = async (userId, email, firstname, lastname, admin_status) => {
+  const addUser = async (userId, email, name, admin_status) => {
     await setDoc(doc(usersCollection, userId), {
       email,
-      firstname,
-      lastname,
+      name,
       admin_status,
+    });
+  };
+  const getUsers = async () => {
+    const querySnapshot = await getDocs(query(usersCollection));
+    return querySnapshot.docs.map((doc) => {
+      return { id: doc.id, ...doc.data() };
+    });
+  };
+
+  const getAdmins = async () => {
+    const querySnapshot = await getDocs(
+      query(usersCollection, where("admin_status", ">=", 1))
+    );
+    return querySnapshot.docs.map((doc) => {
+      return { id: doc.id, ...doc.data() };
     });
   };
 
@@ -86,7 +92,6 @@ function getCustomFirestore() {
     return doc.id;
   };
   const getRequest = async (requestId) => {
-    // dont use requestsCollection
     const docRef = doc(db, "requests", requestId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -106,10 +111,26 @@ function getCustomFirestore() {
     });
   };
 
+  const addRequestAdmin = async (requestId, admin_id) => {
+    const docRef = doc(db, "requests", requestId);
+    // add admin_id to array of admin_ids in request
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const admin_ids = docSnap.data().admin_ids;
+      if (admin_ids.includes(admin_id)) {
+        return;
+      }
+      admin_ids.push(admin_id);
+      await setDoc(docRef, { admin_ids }, { merge: true });
+    }
+  };
+
   // Return an object containing the required collections and documents
   return {
     db,
     usersCollection,
+    getUsers,
+    getAdmins,
     addUser,
     getAdminStatus,
     changeAdminStatus,
@@ -117,6 +138,7 @@ function getCustomFirestore() {
     addRequest,
     getRequest,
     getRequestsByUser,
+    addRequestAdmin,
   };
 }
 
@@ -147,11 +169,12 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
 // export const auth = getCustomAuth();
 
-// export const db = getDatabase(app);
-export const db = getCustomDb();
+export const db = getDatabase(app);
+// export const db = getCustomDb();
 
-// export const firestore = getFirestore(app);
-export const firestore = getCustomFirestore();
+// const firestoreDb = getFirestore(app);
+const firestoreDb = getCustomFirestore();
+export const firestore = getFirestoreObject(firestoreDb);
 
 export const storage = getStorage(app);
 const analytics = getAnalytics(app);

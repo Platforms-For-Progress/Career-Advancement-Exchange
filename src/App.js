@@ -21,6 +21,7 @@ import Status from "./Components/Status";
 import Collab from "./Components/Collab";
 import DBDashboard from "./Components/DBDashboard";
 import ViewRequests from "./Components/ViewRequests";
+import ManageAdmin from "./Components/ManageAdmin";
 
 function App() {
   useEffect(() => {
@@ -52,6 +53,7 @@ function App() {
         <Collab path="/collab/:rid" />
         <DBDashboard path="/dbdashboard" />
         <ViewRequests path="/request/:uid" />
+        <ManageAdmin path="/manageadmin" />
       </Router>
       {/* <p>Hello Mate</p> */}
     </div>

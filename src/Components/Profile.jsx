@@ -41,6 +41,11 @@ const Profile = () => {
     navigate("/request/");
     window.location.reload();
   };
+
+  const navManageAdmin = () => {
+    navigate("/manageadmin");
+    window.location.reload();
+  };
   const navInternal = () => {
     navigate("/internal");
     window.location.reload();
@@ -86,9 +91,6 @@ const Profile = () => {
           <h1>Welcome, {auth.currentUser.displayName}</h1>
           <h2>Admin status: {userAdminStatus}</h2>
           <div>
-            <button onClick={addCurrentUser} className="btn btn-primary">
-              Add yourself to firestore
-            </button>
             <button onClick={changeAdminStatus} className="btn btn-primary">
               Change Admin Status
             </button>
@@ -106,6 +108,16 @@ const Profile = () => {
       <div className="leftside">
         <div className="row-z">
           <div>
+            {userAdminStatus > 1 ? (
+              <>
+                <div className="column" onClick={navManageAdmin}>
+                  <h3>Manage Admins</h3>
+                  <p>Click here to manage admin status of users</p>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
             {userAdminStatus > 0 ? (
               <>
                 <div className="column" onClick={navInternal}>

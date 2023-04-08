@@ -15,15 +15,17 @@ import { useEffect } from "react";
 import { auth, firestore } from "../base";
 
 const Request = () => {
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
+  // const [fname, setFname] = useState("");
+  // const [lname, setLname] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [ideas, setIdeas] = useState("");
   const [requestReason, setRequestReason] = useState("");
   const [requestOtherReason, setRequestOtherReason] = useState("");
 
-  const onFnameChange = (event) => setFname(event.target.value);
-  const onLnameChange = (event) => setLname(event.target.value);
+  // const onFnameChange = (event) => setFname(event.target.value);
+  // const onLnameChange = (event) => setLname(event.target.value);
+  const onNameChange = (event) => setName(event.target.value);
   const onEmailChange = (event) => setEmail(event.target.value);
   const onIdeaChange = (event) => setIdeas(event.target.value);
   const onRequestReasonChange = (event) => setRequestReason(event.target.value);
@@ -41,8 +43,9 @@ const Request = () => {
         const userDocSnap = await getDoc(userDocRef);
         const userData = userDocSnap.data();
 
-        setFname(userData.firstname);
-        setLname(userData.lastname);
+        // setFname(userData.firstname);
+        // setLname(userData.lastname);
+        setName(userData.name);
         setEmail(userData.email);
       }
     });
@@ -52,8 +55,12 @@ const Request = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     const user = auth.currentUser;
-    if (fname == "" || lname == "" || email == "") {
+    // if (fname == "" || lname == "" || email == "") {
+    //   alert("Please fill out all fields");
+    // }
+    if (!user || name == "" || email == "") {
       alert("Please fill out all fields");
+      return;
     }
 
     const req_id = await firestore.addRequest(
@@ -62,8 +69,9 @@ const Request = () => {
         request_reason:
           requestReason !== "Other" ? requestReason : requestOtherReason,
         request_idea: ideas,
-        request_fname: fname,
-        request_lname: lname,
+        // request_fname: fname,
+        // request_lname: lname,
+        request_name: name,
         request_email: email,
       },
       0,
@@ -89,18 +97,18 @@ const Request = () => {
               information
             </p>
             <div className="form-group">
-              <label htmlFor="fname">First Name</label>
+              <label htmlFor="name"> Name</label>
               <input
-                type="fname"
+                type="name"
                 className="form-control"
-                id="fname"
-                placeholder="Enter your first name"
-                value={fname}
-                onChange={onFnameChange}
+                id="name"
+                placeholder="Enter your name"
+                value={name}
+                onChange={onNameChange}
                 required
               ></input>
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="lname">Last Name</label>
               <input
                 type="text"
@@ -111,7 +119,7 @@ const Request = () => {
                 onChange={onLnameChange}
                 required
               ></input>
-            </div>
+            </div> */}
             <div className="form-group">
               <label htmlFor="email">Email Address</label>
               <input

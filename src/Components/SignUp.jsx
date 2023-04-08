@@ -52,7 +52,7 @@ const SignUp = (props) => {
 
         const user = userCredential.user;
 
-        firestore.addUser(user.uid, user.email, firstName, lastName, 0);
+        firestore.addUser(user.uid, user.email, firstName + " " + lastName, 0);
         await updateProfile(auth.currentUser, {
           displayName: firstName + " " + lastName,
         });

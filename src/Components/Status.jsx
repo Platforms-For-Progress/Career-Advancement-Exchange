@@ -43,8 +43,8 @@ const Status = () => {
             Our team will review your request and get back to you as soon as
             possible.
           </h2>
-          <p>Ideas: {requestObject.request_data.request_idea}</p>
-          <p>Reason for request: {requestObject.request_data.request_reason}</p>
+          {/* <p>Ideas: {requestObject.request_data.request_idea}</p>
+          <p>Reason for request: {requestObject.request_data.request_reason}</p> */}
         </div>
         <div className="coller2" onClick={goToCollab}>
           <h2>Visit Creation Page</h2>

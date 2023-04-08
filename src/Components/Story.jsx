@@ -38,8 +38,7 @@ const Story = () => {
 
   const { rid } = useParams();
   const [lookupUID, setLookupUID] = useState("");
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
+  const [name, setName] = useState("");
   const [idea, setIdea] = useState("");
   const [developed, setDeveloped] = useState("");
   const [special, setSpecial] = useState("");
@@ -76,16 +75,14 @@ const Story = () => {
 
       console.log(docSnap.data());
       const req_data = docSnap.data().request_data;
-      const fname = req_data.request_fname;
-      const lname = req_data.request_lname;
+      const name = req_data.request_name;
       const idea = req_data.request_idea;
       const developedIdea = req_data.request_developed;
       const specialNotes = req_data.request_special;
       const admin_ids = docSnap.data().admin_ids;
       // const assignedTo = docSnap2.data().assignedTo;
 
-      setFname(fname);
-      setLname(lname);
+      setName(name);
       setIdea(idea);
       setDeveloped(developedIdea);
       setSpecial(specialNotes);
@@ -110,9 +107,7 @@ const Story = () => {
       <div className="story1">
         <p>Request ID: {rid}</p>
         <p>Assigned to: {assigned} </p>
-        <p>
-          First Name: {fname} <br></br>Last Name: {lname}
-        </p>
+        <p>Name: {name}</p>
         <p>Initial Ideas: {idea}</p>
         <p>Documents: </p>
         <p>Developed Idea Notes: {developed} </p>
