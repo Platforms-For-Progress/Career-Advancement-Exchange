@@ -28,10 +28,10 @@ const ViewRequests = () => {
 
   return (
     <div>
-      <h1>View your requests, user {uid}</h1>
+      <h1>View your requests, {auth.currentUser?.displayName}</h1>
       {userRequests.map((request) => {
         return (
-          <div className="card2" onClick={() => navRequest(request.id)}>
+          <div className="story1" onClick={() => navRequest(request.id)}>
             <h2>{request.id}</h2>
             <p>Status: {request.status}</p>
             <p>Ideas: {request.request_data.request_idea}</p>

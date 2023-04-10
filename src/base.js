@@ -49,6 +49,15 @@ function getFirestoreObject(db) {
       admin_status,
     });
   };
+  const getUser = async (userId) => {
+    const docRef = doc(usersCollection, userId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return { id: docSnap.id, ...docSnap.data() };
+    } else {
+      return null;
+    }
+  };
   const getUsers = async () => {
     const querySnapshot = await getDocs(query(usersCollection));
     return querySnapshot.docs.map((doc) => {
@@ -125,10 +134,25 @@ function getFirestoreObject(db) {
     }
   };
 
+  const removeRequestAdmin = async (requestId, admin_id) => {
+    const docRef = doc(db, "requests", requestId);
+    // remove admin_id from array of admin_ids in request
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const admin_ids = docSnap.data().admin_ids;
+      if (!admin_ids.includes(admin_id)) {
+        return;
+      }
+      admin_ids.splice(admin_ids.indexOf(admin_id), 1);
+      await setDoc(docRef, { admin_ids }, { merge: true });
+    }
+  };
+
   // Return an object containing the required collections and documents
   return {
     db,
     usersCollection,
+    getUser,
     getUsers,
     getAdmins,
     addUser,
@@ -139,6 +163,7 @@ function getFirestoreObject(db) {
     getRequest,
     getRequestsByUser,
     addRequestAdmin,
+    removeRequestAdmin,
   };
 }
 
