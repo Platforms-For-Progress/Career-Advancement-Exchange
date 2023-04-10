@@ -9,6 +9,7 @@ import FontPicker from "font-picker-react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../base.js";
 // import { env } from "process";
+import { useParams } from "@reach/router";
 // import {fontPickerApiKey} from "../env.js"
 import { firestore } from "../base.js";
 // import { openai } from 'openai';
@@ -64,6 +65,7 @@ async function test(color) {
 // const openaiApiKey = process.env.REACT_APP_OPENAI_API_KEY;
 // const openai = require('openai-api');
 // openai.api_key =  "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";
+import { useParams } from "@reach/router";
 
 
 const AddEducation = () => {
@@ -95,6 +97,8 @@ const AddEducation = () => {
 };
 
 const Collab = () => {
+  const { rid } = useParams();
+
   const [colorPicker, setColorPicker] = useState(false);
   const [education, setEducation] = useState(false);
   const [work, setWork] = useState(false);
