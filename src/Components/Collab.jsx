@@ -240,18 +240,39 @@ const Collab = () => {
   };
   const handleOnChange2 = (e) => {
     // const abc = {};
-
+    e.preventDefault();
+    console.log("NAME: " + e.target.name);
+    console.log("CLASS: " + e.target.className);
+    console.log("VALUE: " + e.target.value);
+    
     if (reset) {
       console.log("allocating new array");
       abc[e.target.name] = [];
       setReset(!reset);
     }
-    // abc[e.target.name] = {};
-    abc[e.target.name][e.target.className] = e.target.value;
+    console.log(inputValues[e.target.name][e.target.className])
 
-    // abc[(e.target.name), (e.target.className)] = e.target.value;
-    setInputValues({ ...inputValues, ...abc });
-    console.log(inputValues);
+    // check if the value has been changed
+    if (e.target.value != inputValues[e.target.name][e.target.className]) {
+      // if it has been changed, then update the value
+      console.log("change");
+      // setAbc(inputValues[e.target.name][e.target.className] = e.target.value);
+      
+        
+      setInputValues({ ...inputValues, ...abc });
+      console.log(inputValues);
+    } else {
+      console.log("no change");
+
+    }
+      // abc[e.target.name][e.target.className] = e.target.value;
+      // setInputValues({ ...inputValues, ...abc });
+      // console.log(inputValues);
+    
+   
+    
+
+    
   };
   function handleClick2() {
     setCounter(counter + 1);
@@ -271,12 +292,13 @@ const Collab = () => {
       abc2[e.target.name] = [];
       setReset2(!reset2);
     }
-    // abc[e.target.name] = {};
-    abc2[e.target.name][e.target.className] = e.target.value;
+   
+    if (e.target.value != inputValues2[e.target.name][e.target.className]) {
+      setAbc2[e.target.name][e.target.className] = e.target.value;
+      setInputValues2({ ...inputValues, ...abc });
+      console.log(inputValues);
+    }
 
-
-    // abc[(e.target.name), (e.target.className)] = e.target.value;
-    setInputValues2({ ...inputValues2, ...abc2 });
     console.log(inputValues2);
   };
 
@@ -299,12 +321,12 @@ const Collab = () => {
       abc3[e.target.name] = [];
       setReset3(!reset3);
     }
-    // abc[e.target.name] = {};
-    abc3[e.target.name][e.target.className] = e.target.value;
-
-    // abc[(e.target.name), (e.target.className)] = e.target.value;
-    setInputValues3({ ...inputValues3, ...abc3 });
-    console.log(inputValues3);
+    if (e.target.value != inputValues3[e.target.name][e.target.className]) {
+      abc3[e.target.name][e.target.className] = e.target.value;
+      setInputValues3({ ...inputValues, ...abc });
+      console.log(inputValues);
+    }
+    
   };
 
   function handleClick4() {
@@ -600,7 +622,7 @@ const Collab = () => {
               // value={inputValues[i][4]}
             ></input>
             <br></br>
-            <textarea name={i} key={e} className={5} formItem onChange={handleOnChange2}  placeholder="Description or any additional information"></textarea>
+            <textarea name={i} key={e} className={5} formItem  onChange={handleOnChange2}  placeholder="Description or any additional information"></textarea>
             <br></br>
             </>
           );
