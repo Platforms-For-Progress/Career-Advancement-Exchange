@@ -7,20 +7,23 @@ import { useEffect } from "react";
 import "../index.css";
 import FontPicker from "font-picker-react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../base.js";
 // import { env } from "process";
 import { useParams } from "@reach/router";
 // import {fontPickerApiKey} from "../env.js"
-import { firestore } from "../base.js";
+import { firestore, auth } from "../base.js";
 // import { openai } from 'openai';
 // import { env } from "proc
 import { setDoc } from "firebase/firestore";
 import { doc } from "firebase/firestore";
 import { getDoc } from "firebase/firestore";
 
-import {BackgroundPatternGenerator, Canvas, Controls} from 'react-background-pattern-generator'
+import {
+  BackgroundPatternGenerator,
+  Canvas,
+  Controls,
+} from "react-background-pattern-generator";
 // import { openai } from 'openai'
-import './Collab.css'
+import "./Collab.css";
 // import fontpicker api key from .env file
 const fontPickerApiKey = process.env.REACT_APP_FONT_PICKER_API_KEY;
 
@@ -61,10 +64,9 @@ const fontPickerApiKey = process.env.REACT_APP_FONT_PICKER_API_KEY;
 // const openai = require('openai-api');
 // openai.api_key =  "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";
 
-
 const Collab = () => {
   const { rid } = useParams();
-  
+
   const [colorPicker, setColorPicker] = useState(false);
   const [colorPicker2, setColorPicker2] = useState(false);
   const [education, setEducation] = useState(false);
@@ -104,6 +106,7 @@ const Collab = () => {
   // const state = {
   //     displayColorPicker: false,
   //   };
+  const [educationEntries, setEducationEntries] = useState([]);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -151,6 +154,7 @@ const Collab = () => {
     //     console.log("Error getting document:", error);
     //   });
   }, []);
+  const handleHeaderAddEducation = (e) => {};
   // add Input Values to firebase firestore
   async function getImage() {
     handleImage();
@@ -182,7 +186,7 @@ const Collab = () => {
     // this.setState({ displayColorPicker: false })
     setColorPicker(false);
   };
-  
+
   const popover = {
     position: "absolute",
     zIndex: "2",
@@ -298,32 +302,31 @@ const Collab = () => {
     setSelectPattern(e.target.value);
     console.log(e.target.value);
     setPattern(e.target.value);
-
   }
   const handleChangeSecondaryColor = (color) => {
     // this.setState({ background: color.hex })
     console.log(color);
     setSecondaryColor(color.hex);
   };
-  
-  function handleCloseSecondaryColor(e) { 
-    setColorPicker2(false);
 
+  function handleCloseSecondaryColor(e) {
+    setColorPicker2(false);
   }
 
-  function handleClickSecondaryColor() { 
+  function handleClickSecondaryColor() {
     setColorPicker2(!colorPicker2);
-
   }
 
   function setOpacityChange(e) {
     setOpacity(e.target.value);
     console.log(opacity);
   }
+
   function setSpacingChange(e) {
     setSpacing(e.target.value);
     console.log(spacing);
   }
+
   function hexToRgb(hex) {
     var bigint = parseInt(hex.replace("#", ""), 16);
     var r = (bigint >> 16) & 255;
@@ -354,20 +357,20 @@ const Collab = () => {
   //     });
   // }, [uid]);
   const handleOnEducationChange = (e) => {
-    console.log("VALUE",e.target.value);
-    console.log("NAME",e.target.name)
-    console.log("ID",e.target.id)
-    console.log("CLASS",e.target.className)
-    console.log("KEY",e.target.key);
+    console.log("VALUE", e.target.value);
+    console.log("NAME", e.target.name);
+    console.log("ID", e.target.id);
+    console.log("CLASS", e.target.className);
+    console.log("KEY", e.target.key);
     // setEducation(e.target.value);
     //  I want to do something like setEducationArray(educationArray[e.target.name][e.target.className] = e.target.value);
     if (educationArray[e.target.name] == undefined) {
       educationArray[e.target.name] = [];
     }
 
-    setEducationArray(  educationArray[e.target.className]=e.target.value);
-    setInputValues(inputValues[e.target.name]=educationArray);
-   
+    setEducationArray((educationArray[e.target.className] = e.target.value));
+    setInputValues((inputValues[e.target.name] = educationArray));
+
     // setEducationArray(educationArray[e.target.name][e.target.className] = e.target.value);
     console.log(educationArray);
     // setInputValues((inputValues) => ({...inputValues, [e.target.name]: educationArray}));
@@ -375,7 +378,6 @@ const Collab = () => {
     // setEducationArray(educationArray[e.target.name][e.target.className] = e.target.value);
     // setEducationArray((educationArray) => [...educationArray, e.target.value]);
     console.log(educationArray);
-    
   };
   async function handleSubmit() {
     // e.preventDefault();
@@ -395,6 +397,7 @@ const Collab = () => {
       alert("updated information");
     });
   }
+
   const handleBackgroundChange = (e) => {
     setPrompt(e.target.value);
     console.log(e.target.value);
@@ -458,54 +461,58 @@ const Collab = () => {
           </p>
         </div>
         {/* log color and secondaryColor */}
-        { console.log(color)}
-        { console.log(secondaryColor)}
-        { console.log(pattern)}
-        
-        <div
-            className="viewport"
-            style={{
-              backgroundColor: color,
-              // opacity: opacity * 0.01,
-              // backgroundOpacity: opacity * 0.01,
-              color: "black",
-              backgroundPosition: pattern =="Rhombus" 
-                ? `40px 0, 40px 0, 0 0, 0 0`
-                : pattern=="ZigZag"
-                ? `40px 0, 40px 0, 0 0, 0 0`
-                : null
-              
-              ,
-              // opacity: opacity * 0.01,
-              // set background opacity
-              backgroundRepeat: "repeat",
-              backgroundSize: pattern =="Rhombus"
-                ? `${spacing}px ${spacing}px`
-                : pattern == "ZigZag" 
-                ?  `${spacing /4}px ${spacing * 4}px`
-                : `20px, 20px`,
-              // backgroundRepeat: "repeat",
-              // backgroundSize: `${spacing}px ${spacing}px`,
-              // update background image 
+        {console.log(color)}
+        {console.log(secondaryColor)}
+        {console.log(pattern)}
 
-              background: pattern === "Wavy"
-                ? `repeating-radial-gradient(circle at 0 0, transparent 0, #ccccf6 ${spacing}px), repeating-linear-gradient(rgba(${hexToRgb(color)}, ${opacity * 0.01}),rgba(${hexToRgb(secondaryColor)}, ${opacity * 0.01}))`
-                : pattern === "Rhombus" 
+        <div
+          className="viewport"
+          style={{
+            backgroundColor: color,
+            // opacity: opacity * 0.01,
+            // backgroundOpacity: opacity * 0.01,
+            color: "black",
+            backgroundPosition:
+              pattern == "Rhombus"
+                ? `40px 0, 40px 0, 0 0, 0 0`
+                : pattern == "ZigZag"
+                ? `40px 0, 40px 0, 0 0, 0 0`
+                : null,
+
+            // opacity: opacity * 0.01,
+            // set background opacity
+            backgroundRepeat: "repeat",
+            backgroundSize:
+              pattern == "Rhombus"
+                ? `${spacing}px ${spacing}px`
+                : pattern == "ZigZag"
+                ? `${spacing / 4}px ${spacing * 4}px`
+                : `20px, 20px`,
+            // backgroundRepeat: "repeat",
+            // backgroundSize: `${spacing}px ${spacing}px`,
+            // update background image
+
+            background:
+              pattern === "Wavy"
+                ? `repeating-radial-gradient(circle at 0 0, transparent 0, #ccccf6 ${spacing}px), repeating-linear-gradient(rgba(${hexToRgb(
+                    color
+                  )}, ${opacity * 0.01}),rgba(${hexToRgb(secondaryColor)}, ${
+                    opacity * 0.01
+                  }))`
+                : pattern === "Rhombus"
                 ? `linear-gradient(135deg,${color} 25%, transparent 25%), linear-gradient(225deg, ${color} 25%, transparent 25%), linear-gradient(45deg, ${color} 25%, transparent 25%), linear-gradient(315deg, ${color} 25%, ${secondaryColor} 25%)`
                 : pattern === "ZigZag"
-                ? `linear-gradient(135deg, ${color} 25%, transparent 25%), linear-gradient(225deg, ${color} 25%, transparent 25%), linear-gradient(45deg, rgba(${hexToRgb(color)}, ${opacity * 0.01 }) 25%, transparent 25%), linear-gradient(315deg, ${color} 25%, ${secondaryColor} 25%)`
-                : pattern=="ZigZag2"
-                ? `linear-gradient(135deg, ${color} 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, ${color} 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, ${color} 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, ${color} 25%, ${secondaryColor} 25%) 0px 0/ 80px 80px` 
+                ? `linear-gradient(135deg, ${color} 25%, transparent 25%), linear-gradient(225deg, ${color} 25%, transparent 25%), linear-gradient(45deg, rgba(${hexToRgb(
+                    color
+                  )}, ${
+                    opacity * 0.01
+                  }) 25%, transparent 25%), linear-gradient(315deg, ${color} 25%, ${secondaryColor} 25%)`
+                : pattern == "ZigZag2"
+                ? `linear-gradient(135deg, ${color} 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, ${color} 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, ${color} 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, ${color} 25%, ${secondaryColor} 25%) 0px 0/ 80px 80px`
                 : null,
-                
-                
-
-                
-            }}
-            
-
-          >
-          <div className="viewportHeader" style={ {backgroundColor:color}}>
+          }}
+        >
+          <div className="viewportHeader" style={{ backgroundColor: color }}>
             <div className="rightsideViewHeader">
               <p className="apply-font">{name}</p>
             </div>
@@ -519,8 +526,34 @@ const Collab = () => {
           </div>
           <div className="previewBackground">
             <div className="previewText">
-              <p className="header1 apply-font highlighted" style={{backgroundColor:  `${secondaryColor}`}}>{name}</p>
-              <p className="header2 apply-font highlighted" style={{backgroundColor:  `${secondaryColor}`}}>Education</p>
+              <p
+                className="header1 apply-font highlighted"
+                style={{ backgroundColor: `${secondaryColor}` }}
+              >
+                {name}
+              </p>
+              <p
+                className="header2 apply-font highlighted"
+                style={{ backgroundColor: `${secondaryColor}` }}
+              >
+                Education
+              </p>
+              {educationEntries.map((entry) => (
+                <p
+                  className="header3 apply-font highlighted"
+                  style={{ backgroundColor: `${secondaryColor}` }}
+                >
+                  School: {entry.school}
+                  <br />
+                  Degree: {entry.degree}
+                  <br />
+                  Major: {entry.major} <br />
+                  Start Date: {entry.startDate}
+                  <br />
+                  End Date: {entry.endDate}
+                </p>
+              ))}
+
               {/* {Object.keys(inputValues).map((key) => (
                 <ul>
                   <h2>{inputValues[key][0]}</h2>
@@ -534,26 +567,26 @@ const Collab = () => {
                 </ul>
               ))} */}
               {console.log(inputValues)}
-             
+
               {Object.keys(inputValues).map((key) => (
-               
                 <ul>
                   <h2>{inputValues[key][0]}</h2>
-                
-
 
                   <h4>{inputValues[key][1]}</h4>
                   <h6>{inputValues[key][2]}</h6>
                   <h7>
                     {inputValues[key][3]} - {inputValues[key][4]}
-
                   </h7>
                   <p>{inputValues[key][5]}</p>
-                  
                 </ul>
               ))}
-              
-              <p className="header2 apply-font highlighted" style={{backgroundColor:  `${secondaryColor}`}}>Experience</p>
+
+              <p
+                className="header2 apply-font highlighted"
+                style={{ backgroundColor: `${secondaryColor}` }}
+              >
+                Experience
+              </p>
               {Object.keys(inputValues2).map((key) => (
                 <ul>
                   <h2>{inputValues2[key][3]}</h2>
@@ -568,7 +601,12 @@ const Collab = () => {
                   ))}
                 </ul>
               ))}
-              <p className="header2 apply-font highlighted" style={{backgroundColor:  `${secondaryColor}`}}>Custom Headers</p>
+              <p
+                className="header2 apply-font highlighted"
+                style={{ backgroundColor: `${secondaryColor}` }}
+              >
+                Custom Headers
+              </p>
               {Object.keys(inputValues3).map((key) => (
                 <ul>
                   <h2>{inputValues3[key][0]}</h2>
@@ -588,9 +626,14 @@ const Collab = () => {
       <br></br>
       <h2>Add Heading</h2>
       <br></br>
-      <button onClick={handleClick2}>Add Education</button>
+      <EducationForm
+        educationEntries={educationEntries}
+        setEducationEntries={setEducationEntries}
+      />
+      <form></form>
+      {/* <button onClick={handleHeaderAddEducation}>Add Education</button> */}
       {/* <input type="text" onChange={handleOnChange2} placeholder="School">{inputValues[0][0]}</input> */}
-      {Array.from(Array(counter)).map((e, i) => {
+      {/* {Array.from(Array(counter)).map((e, i) => {
         if (inputValues[i]) {
           return (
             <>
@@ -670,7 +713,7 @@ const Collab = () => {
                 placeholder="School"
                 // value={inputValues[i][0]}
               />
-              
+
               <input
                 type="text"
                 name={i}
@@ -729,7 +772,7 @@ const Collab = () => {
             <br></br>
           </div>
         );
-      })}
+      })} */}
       {/* <button className = "button" onClick={ handleEducationClick } >Add Education</button>
         {   education ? <div style={ popover }>
           <div style={ cover } onClick={ handleEducationClose }/>
@@ -1021,7 +1064,6 @@ const Collab = () => {
             );
           }
         })}
-        
       </div>
       <div>
         <br></br>
@@ -1033,15 +1075,22 @@ const Collab = () => {
         <br></br>
         <h4>Or Choose Pattern</h4>
         <button className="button" onClick={handleClickSecondaryColor}>
-            Pick Secondary Color
-          </button>
-          {colorPicker2 ? (
-            <div style={popover}>
-              <div style={cover} onClick={handleCloseSecondaryColor} />
-              <ChromePicker color={secondaryColor} onChange={handleChangeSecondaryColor} />
-            </div>
-          ) : null}
-        <select class="custom-select mr-sm-2" id="cssFormatting" onChange={changeSelectPattern}>
+          Pick Secondary Color
+        </button>
+        {colorPicker2 ? (
+          <div style={popover}>
+            <div style={cover} onClick={handleCloseSecondaryColor} />
+            <ChromePicker
+              color={secondaryColor}
+              onChange={handleChangeSecondaryColor}
+            />
+          </div>
+        ) : null}
+        <select
+          class="custom-select mr-sm-2"
+          id="cssFormatting"
+          onChange={changeSelectPattern}
+        >
           <option id="1">Wavy</option>
           <option id="2">Rhombus</option>
           <option id="3">ZigZag</option>
@@ -1072,10 +1121,95 @@ const Collab = () => {
         <p>Opacity</p>
         <input type="range" id="opacity" onChange={setOpacityChange}></input>
         <p>Spacing</p>
-        <input type="range" placeholder="Spacing (0 to 1)" onChange={setSpacingChange}></input>
-        
+        <input
+          type="range"
+          placeholder="Spacing (0 to 1)"
+          onChange={setSpacingChange}
+        ></input>
       </div>
     </div>
   );
 };
 export default Collab;
+
+function EducationForm({ educationEntries, setEducationEntries }) {
+  const [school, setSchool] = useState("");
+  const [degree, setDegree] = useState("");
+  const [major, setMajor] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+
+  const handleAddEducation = () => {
+    const newEntry = { school, degree, major, startDate, endDate };
+    setEducationEntries([...educationEntries, newEntry]);
+    setSchool("");
+    setDegree("");
+    setMajor("");
+    setStartDate("");
+    setEndDate("");
+  };
+
+  return (
+    <div>
+      <h2>Add Education</h2>
+      <form>
+        <label>
+          School:
+          <input
+            type="text"
+            value={school}
+            onChange={(e) => setSchool(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Degree:
+          <input
+            type="text"
+            value={degree}
+            onChange={(e) => setDegree(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Major:
+          <input
+            type="text"
+            value={major}
+            onChange={(e) => setMajor(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Start Date:
+          <input
+            type="text"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          End Date:
+          <input
+            type="text"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </label>
+        <br />
+        <button type="button" onClick={handleAddEducation}>
+          Add Education
+        </button>
+      </form>
+      <ul>
+        {educationEntries.map((entry, index) => (
+          <li key={index}>
+            {entry.school}, {entry.degree}, {entry.major}, {entry.startDate},{" "}
+            {entry.endDate}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
