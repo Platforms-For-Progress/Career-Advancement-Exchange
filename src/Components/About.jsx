@@ -50,7 +50,7 @@ const About = () => {
       
       <div className='section2'>
       <div className='rside'>
-      <img className = 'img2' src='https://media.licdn.com/dms/image/D5603AQHyqqAsXNQagw/profile-displayphoto-shrink_400_400/0/1678039342877?e=1684972800&v=beta&t=ef7VOU_9iNiBx5GnniZDOFdgO63BpIyDQo4MIPXWaK4' alt='Elisa Carrillo' width={100}/>
+      <img className = 'img2' src='https://media.licdn.com/dms/image/D5603AQH-ouMD4fkVlA/profile-displayphoto-shrink_400_400/0/1679324765152?e=1686787200&v=beta&t=l8p74tQnKDf9L_3q1FLjVdpSasZE9l0MBmcRrMd1x1M' alt='Elisa Carrillo' width={100}/>
       </div>
       <div className='lside'>
       <h4>Elisa Carrillo</h4>

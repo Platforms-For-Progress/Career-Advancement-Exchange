@@ -1,0 +1,30 @@
+/* background-color: #ccccf6;
+opacity: 0.6;
+background-image:  linear-gradient(135deg, #444cf7 25%, transparent 25%), linear-gradient(225deg, #444cf7 25%, transparent 25%), linear-gradient(45deg, #444cf7 25%, transparent 25%), linear-gradient(315deg, #444cf7 25%, #ccccf6 25%);
+background-position:  40px 0, 40px 0, 0 0, 0 0;
+background-size: 40px 40px;
+background-repeat: repeat;
+
+
+.zigzag {
+    background-color: #ccccf6;
+    opacity: 0.6;
+    background-image:  linear-gradient(135deg, #444cf7 25%, transparent 25%), linear-gradient(225deg, #444cf7 25%, transparent 25%), linear-gradient(45deg, #444cf7 25%, transparent 25%), linear-gradient(315deg, #444cf7 25%, #ccccf6 25%);
+    background-position:  40px 0, 40px 0, 0 0, 0 0;
+    background-size: 80px 80px;
+    background-repeat: repeat;
+} */
+
+.highlighted {
+    /* background-color: rgba(240, 248, 255, 0.669); */
+    margin: 5vw;
+    padding: 1vw;
+    outline: 2px solid #171719;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    
+}
+
+/* zig zag 3d
+background-color: #ccccf6;
+opacity: 0.6;
+background: linear-gradient(135deg, #444cf755 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(225deg, #444cf7 25%, transparent 25%) -40px 0/ 80px 80px, linear-gradient(315deg, #444cf755 25%, transparent 25%) 0px 0/ 80px 80px, linear-gradient(45deg, #444cf7 25%, #ccccf6 25%) 0px 0/ 80px 80px; */
