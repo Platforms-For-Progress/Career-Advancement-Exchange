@@ -13,6 +13,7 @@ import {doc, setDoc, getDoc} from 'firebase/firestore'
 import { async } from '@firebase/util';
 import { useEffect } from 'react';
 import { auth, firestore } from '../base';
+import React from 'react';
 // import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
 // import { await } from 'react-router-dom';
 // import {await}

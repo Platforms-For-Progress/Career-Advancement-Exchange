@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { getAuth } from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
 import './Internal.css';
+import React from 'react';
 // import {}
 // import { Navigate } from 'react-router-dom';
 import { navigate } from '@reach/router';

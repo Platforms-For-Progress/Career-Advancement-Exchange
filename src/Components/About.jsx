@@ -1,6 +1,7 @@
 import { TypeAnimation } from 'react-type-animation';
 import './About.css';
 import logo from '../img/CAEResize.png';
+import React from 'react';
 const About = () => {
   return (
     <div className="abouts">

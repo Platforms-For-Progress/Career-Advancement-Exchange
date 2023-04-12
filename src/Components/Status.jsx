@@ -1,5 +1,5 @@
 import '../index.css'
-
+import React from 'react';
 const Status = () => {
     const uid = window.location.href.split("/")[4];
 

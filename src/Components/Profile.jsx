@@ -9,6 +9,7 @@ import { navigate } from '@reach/router';
 import {connectAuthEmulator} from 'firebase/auth';
 import { auth, firestore } from '../base';
 import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore';
+import React from 'react';
 // function getCustomAuth() {
 //   const auth = getAuth();
 //   const authUrl = 'http://localhost:9099';
