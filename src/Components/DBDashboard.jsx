@@ -17,8 +17,8 @@ const DBDashboard = () => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         const adminStatus = await firestore.getAdminStatus(user.uid);
-        if (!adminStatus || adminStatus < 1) {
-          alert("You must be an admin to view this page");
+        if (!adminStatus || adminStatus <= 1) {
+          alert("You must be a superadmin to view this page");
           navigate("/profile");
           window.location.reload();
         }

@@ -1,31 +1,25 @@
 import React from "react";
-import { SketchPicker } from "react-color";
-import { ChromePicker } from "react-color";
-// import { ChromePicker }  from 'react-color';
-import { useState } from "react";
-import { useEffect } from "react";
-import "../index.css";
-import FontPicker from "font-picker-react";
-import { onAuthStateChanged } from "firebase/auth";
-// import { env } from "process";
-import { useParams } from "@reach/router";
-// import {fontPickerApiKey} from "../env.js"
-import { firestore, auth } from "../base.js";
-// import { openai } from 'openai';
-// import { env } from "proc
-import { setDoc } from "firebase/firestore";
-import { doc } from "firebase/firestore";
-import { getDoc } from "firebase/firestore";
+import { useState, useEffect } from "react";
 
-import {
-  BackgroundPatternGenerator,
-  Canvas,
-  Controls,
-} from "react-background-pattern-generator";
+import { SketchPicker, ChromePicker } from "react-color";
+
+import FontPicker from "font-picker-react";
+
+import { useParams } from "@reach/router";
+
+import { firestore, auth } from "../base.js";
+import { onAuthStateChanged } from "firebase/auth";
+import { setDoc, doc, getDoc } from "firebase/firestore";
+
+// import {
+//   BackgroundPatternGenerator,
+//   Canvas,
+//   Controls,
+// } from "react-background-pattern-generator";
+
 // import { openai } from 'openai'
+
 import "./Collab.css";
-// import fontpicker api key from .env file
-const fontPickerApiKey = process.env.REACT_APP_FONT_PICKER_API_KEY;
 
 // const { Configuration, OpenAIApi } = require("openai");
 // const configuration = new Configuration({
@@ -63,6 +57,7 @@ const fontPickerApiKey = process.env.REACT_APP_FONT_PICKER_API_KEY;
 // const openaiApiKey = process.env.REACT_APP_OPENAI_API_KEY;
 // const openai = require('openai-api');
 // openai.api_key =  "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";
+const fontPickerApiKey = process.env.REACT_APP_FONT_PICKER_API_KEY;
 
 const Collab = () => {
   const { rid } = useParams();
@@ -115,11 +110,7 @@ const Collab = () => {
 
         console.log(user.displayName);
         setName(user.displayName);
-        console.log("here");
-        // setName(user.displayName);
-        // setStr("Welcome, " + user.displayName);
         setUid(user.uid);
-        // ...
       } else {
         // User is signed out
         // ...
@@ -127,32 +118,6 @@ const Collab = () => {
         window.location.href = "/signin";
       }
     });
-    // setUid(window.location.href.split("/")[4]);
-    // console.log(uid);
-    // const docRef = doc(
-    //   firestore,
-    //   "userInputtedValues",
-    //   window.location.href.split("/")[4]
-    // );
-    // getDoc(docRef)
-    //   .then((doc) => {
-    //     if (doc.exists) {
-    //       console.log("Document data:", doc.data());
-    //       setInputValues(doc.data().education);
-    //       setInputValues2(doc.data().work);
-    //       setInputValues3(doc.data().addedSections);
-    //       setColor(doc.data().color);
-    //       console.log(doc.data().color);
-    //       setFont(doc.data().font);
-    //       console.log(doc.data().font);
-    //     } else {
-    //       // doc.data() will be undefined in this case
-    //       console.log("No such document!");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log("Error getting document:", error);
-    //   });
   }, []);
   const handleHeaderAddEducation = (e) => {};
   // add Input Values to firebase firestore
@@ -304,8 +269,6 @@ const Collab = () => {
     setPattern(e.target.value);
   }
   const handleChangeSecondaryColor = (color) => {
-    // this.setState({ background: color.hex })
-    console.log(color);
     setSecondaryColor(color.hex);
   };
 
@@ -356,47 +319,39 @@ const Collab = () => {
   //       console.log("Error getting document:", error);
   //     });
   // }, [uid]);
-  const handleOnEducationChange = (e) => {
-    console.log("VALUE", e.target.value);
-    console.log("NAME", e.target.name);
-    console.log("ID", e.target.id);
-    console.log("CLASS", e.target.className);
-    console.log("KEY", e.target.key);
-    // setEducation(e.target.value);
-    //  I want to do something like setEducationArray(educationArray[e.target.name][e.target.className] = e.target.value);
-    if (educationArray[e.target.name] == undefined) {
-      educationArray[e.target.name] = [];
-    }
+  // const handleOnEducationChange = (e) => {
+  //   console.log("VALUE", e.target.value);
+  //   console.log("NAME", e.target.name);
+  //   console.log("ID", e.target.id);
+  //   console.log("CLASS", e.target.className);
+  //   console.log("KEY", e.target.key);
+  //   // setEducation(e.target.value);
+  //   //  I want to do something like setEducationArray(educationArray[e.target.name][e.target.className] = e.target.value);
+  //   if (educationArray[e.target.name] == undefined) {
+  //     educationArray[e.target.name] = [];
+  //   }
 
-    setEducationArray((educationArray[e.target.className] = e.target.value));
-    setInputValues((inputValues[e.target.name] = educationArray));
-
-    // setEducationArray(educationArray[e.target.name][e.target.className] = e.target.value);
-    console.log(educationArray);
-    // setInputValues((inputValues) => ({...inputValues, [e.target.name]: educationArray}));
-    console.log(inputValues);
-    // setEducationArray(educationArray[e.target.name][e.target.className] = e.target.value);
-    // setEducationArray((educationArray) => [...educationArray, e.target.value]);
-    console.log(educationArray);
-  };
-  async function handleSubmit() {
-    // e.preventDefault();
-    console.log(inputValues);
-    console.log(inputValues2);
-    console.log(inputValues3);
-    setDoc(doc(firestore, "userInputtedValues", uid), {
-      uid: uid,
-      education: inputValues,
-      work: inputValues2,
-      addedSections: inputValues3,
-      color: color,
-      font: font,
-      backgroundImage: backgroundImageURL,
-    }).then(() => {
-      console.log("done");
-      alert("updated information");
-    });
-  }
+  //   setEducationArray((educationArray[e.target.className] = e.target.value));
+  //   setInputValues((inputValues[e.target.name] = educationArray));
+  // };
+  // async function handleSubmit() {
+  //   // e.preventDefault();
+  //   console.log(inputValues);
+  //   console.log(inputValues2);
+  //   console.log(inputValues3);
+  //   setDoc(doc(firestore, "userInputtedValues", uid), {
+  //     uid: uid,
+  //     education: inputValues,
+  //     work: inputValues2,
+  //     addedSections: inputValues3,
+  //     color: color,
+  //     font: font,
+  //     backgroundImage: backgroundImageURL,
+  //   }).then(() => {
+  //     console.log("done");
+  //     alert("updated information");
+  //   });
+  // }
 
   const handleBackgroundChange = (e) => {
     setPrompt(e.target.value);
@@ -404,9 +359,9 @@ const Collab = () => {
     console.log(prompt);
   };
 
-  useEffect(() => {
-    console.log(reset);
-  }, [reset]);
+  // useEffect(() => {
+  //   console.log(reset);
+  // }, [reset]);
 
   return (
     <div className="collab">
@@ -414,7 +369,7 @@ const Collab = () => {
       <br></br>
       <div className="startOfPage">
         <div className="left">
-          <button className="button" onClick={handleClick}>
+          <button className="btn btn-primary" onClick={handleClick}>
             Pick Background Color
           </button>
           {colorPicker ? (
@@ -429,7 +384,7 @@ const Collab = () => {
         <div className="right">
           <p>Pick Heading Font</p>
           <FontPicker
-            apiKey={fontPickerApiKey}
+            apiKey={process.env.REACT_APP_FONT_PICKER_API_KEY}
             activeFontFamily={font}
             onChange={(nextFont) =>
               setFont(nextFont.family) && console.log(font)
@@ -539,24 +494,18 @@ const Collab = () => {
                 Education
               </p>
               {educationEntries.map((entry) => (
-                <div className="header3 apply-font highlighted" style={{ backgroundColor: `${secondaryColor}` }}>
-                  <h2 >
-                    School: {entry.school}
-                  </h2>
-                  <h3 >
-                    Degree: {entry.degree}
-                  </h3>
-                  <h4 >
-                    Major: {entry.major}
-                  </h4>
-                  <h5 >
+                <div
+                  className="header3 apply-font highlighted"
+                  style={{ backgroundColor: `${secondaryColor}` }}
+                >
+                  <h2>School: {entry.school}</h2>
+                  <h3>Degree: {entry.degree}</h3>
+                  <h4>Major: {entry.major}</h4>
+                  <h5>
                     {entry.startDate} - {entry.endDate}
                   </h5>
                 </div>
               ))}
-              
-
-
 
               {/* {Object.keys(inputValues).map((key) => (
                 <ul>

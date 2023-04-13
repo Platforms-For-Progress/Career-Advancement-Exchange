@@ -6,8 +6,8 @@ import { onAuthStateChanged } from "firebase/auth";
 
 import "./Internal.css";
 
-import './Internal.css';
-import React from 'react';
+import "./Internal.css";
+import React from "react";
 
 // import {}
 // import { Navigate } from 'react-router-dom';
@@ -24,6 +24,11 @@ import {
 } from "firebase/firestore";
 import { validateArgCount } from "@firebase/util";
 import { useEffect } from "react";
+
+function goToProfile() {
+  navigate("/profile");
+  window.location.reload();
+}
 
 function goToCard(rid) {
   navigate("/story/" + rid);
@@ -66,6 +71,9 @@ const Internal = () => {
 
   return (
     <div className="internalz">
+      <div className="create" onClick={goToProfile}>
+        Back to profile
+      </div>
       <div className="create" onClick={goToCreate}>
         Create User Requested Website (/create now deprecated, manually add via
         firebase console)
@@ -75,25 +83,26 @@ const Internal = () => {
           <div className="card-body">
             <h5 className="card-title">Request: {request.id}</h5>
             <p className="card-text">Requester ID: {request.user_id}</p>
-
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                goToCard(request.id);
-                window.location.reload();
-              }}
-            >
-              View Request
-            </button>
-            <button
-              className="btn btn-primary"
-              onClick={() => {
-                navigate("/edit/" + request.id);
-                window.location.reload();
-              }}
-            >
-              Edit Request
-            </button>
+            <div>
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  goToCard(request.id);
+                  window.location.reload();
+                }}
+              >
+                View Request
+              </button>
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  navigate("/edit/" + request.id);
+                  window.location.reload();
+                }}
+              >
+                Edit Request
+              </button>
+            </div>
           </div>
         </div>
       ))}

@@ -89,12 +89,12 @@ const Profile = () => {
       {auth.currentUser ? (
         <div className="rightside">
           <h1>Welcome, {auth.currentUser.displayName}</h1>
-          <h2>Admin status: {userAdminStatus}</h2>
+          {/* <h2>Admin status: {userAdminStatus}</h2>
           <div>
             <button onClick={changeAdminStatus} className="btn btn-primary">
               Change Admin Status
             </button>
-          </div>
+          </div> */}
           <p onClick={logout}>Not you? Click here to log out!</p>
         </div>
       ) : (
@@ -108,7 +108,7 @@ const Profile = () => {
       <div className="leftside">
         <div className="row-z">
           <div>
-            {userAdminStatus > 1 ? (
+            {userAdminStatus >= 1 ? (
               <>
                 <div className="column" onClick={navManageAdmin}>
                   <h3>Manage Admins</h3>
@@ -118,19 +118,24 @@ const Profile = () => {
             ) : (
               <></>
             )}
-            {userAdminStatus > 0 ? (
+            {userAdminStatus >= 1 ? (
+              <div className="column" onClick={navDBDashboard}>
+                <h3>Database Dashboard</h3>
+              </div>
+            ) : (
+              <></>
+            )}
+            {userAdminStatus >= 1 ? (
               <>
                 <div className="column" onClick={navInternal}>
                   <h3>Internal</h3>
                   <p>Click here to manage user requested websites</p>
                 </div>
-                <div className="column" onClick={navDBDashboard}>
-                  <h3>Database Dashboard</h3>
-                </div>
               </>
             ) : (
               <></>
             )}
+
             <div>
               <div className="column" onClick={toReq}>
                 <h3>Request a personal website</h3>
