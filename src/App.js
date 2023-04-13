@@ -23,7 +23,7 @@ import Collab from "./Components/Collab";
 import DBDashboard from "./Components/DBDashboard";
 import ViewRequests from "./Components/ViewRequests";
 import ManageAdmin from "./Components/ManageAdmin";
-
+import Upload from './Components/Upload';
 
 function App() {
   useEffect(() => {
@@ -57,6 +57,7 @@ function App() {
         <DBDashboard path="/dbdashboard" />
         <ViewRequests path="/request/:uid" />
         <ManageAdmin path="/manageadmin" />
+        <Upload path="/upload"/>
 
       </Router>
       {/* <p>Hello Mate</p> */}

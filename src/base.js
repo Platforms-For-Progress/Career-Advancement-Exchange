@@ -202,6 +202,7 @@ const firestoreDb = getCustomFirestore();
 export const firestore = getFirestoreObject(firestoreDb);
 
 export const storage = getStorage(app);
+
 const analytics = getAnalytics(app);
 
 // export const uid = getUser();

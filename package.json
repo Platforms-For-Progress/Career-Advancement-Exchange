@@ -10,7 +10,7 @@
     "antd": "^5.1.2",
     "async_hooks": "1.0.0",
     "bootstrap": "^5.2.3",
-    "firebase": "^9.15.0",
+    "firebase": "^9.18.0",
     "firebase-admin": "^11.4.1",
     "firebase-functions": "^4.2.1",
     "font-picker-react": "^3.5.2",
