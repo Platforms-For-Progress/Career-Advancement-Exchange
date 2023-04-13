@@ -1,4 +1,5 @@
 import { TypeAnimation } from 'react-type-animation';
+import React from 'react';
 import './PastWork.css';
 const PastWork = () => {
   return (

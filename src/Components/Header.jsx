@@ -3,9 +3,9 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 // import {Navbar} from 'react-bootstrap/Navbar';
-import NavItem from "react-bootstrap/NavItem";
-
-import NavDropdown from "react-bootstrap/NavDropdown";
+import NavItem from 'react-bootstrap/NavItem'
+import React from 'react';
+import NavDropdown from 'react-bootstrap/NavDropdown'
 // import MenuItem from 'react-bootstrap/DropdownMenu'
 import "./Header.css";
 import { useEffect, useState } from "react";
