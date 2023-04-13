@@ -9,7 +9,7 @@ const Home = () => {
       sequence={[
         'Hi!', // Types 'One'
         1000, // Waits 1s
-        'Hi! Welcome to Career Advancement Exhange', // Deletes 'One' and types 'Two'
+        'Hi! Welcome to Career Advancement Exchange', // Deletes 'One' and types 'Two'
         // 10000,
         
         
