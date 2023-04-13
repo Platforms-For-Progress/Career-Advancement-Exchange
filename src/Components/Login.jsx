@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { navigate } from "@reach/router";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
+import React from "react";
 // import { provider } from '../base';
 import "./Login.css";
 import { firestore, signInWithGoogle } from "../base";

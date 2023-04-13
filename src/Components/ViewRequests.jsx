@@ -28,7 +28,7 @@ const ViewRequests = () => {
 
   return (
     <div>
-      <h1>View your requests, {auth.currentUser?.displayName}</h1>
+      <h1>View your requests, {auth.currentUser ? auth.currentUser.displayName : "user"}</h1>
       {userRequests.map((request) => {
         return (
           <div className="story1" onClick={() => navRequest(request.id)}>

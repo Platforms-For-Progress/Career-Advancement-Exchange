@@ -1,5 +1,5 @@
 import "../index.css";
-
+import React from "react";
 import { useParams } from "@reach/router";
 import { useEffect, useState } from "react";
 import { auth, firestore } from "../base";
@@ -34,20 +34,30 @@ const Status = () => {
 
   useEffect(() => {
     const fetchAdmins = async () => {
-      const admins = requestObject?.admin_ids.map((adminId) => {
+      if (requestObject && requestObject.admin_ids) {
+      const admins = requestObject.admin_ids.map((adminId) => {
         return (async () => {
           const admin = await firestore.getUser(adminId);
           return admin;
         })();
       });
+    
       setRequestAdmins(await Promise.all(admins));
+    
+    }
     };
     fetchAdmins();
   }, [requestObject]);
 
   const handleEmailButtonClick = (destEmail, destName) => {
     const subject = `Career Advancement Exchange Personal Portfolio Help Request`;
-    const body = `Dear ${destName},\n\nMy name is ${auth.currentUser?.displayName}. I am writing in regards to my personal portfolio request.`;
+    let currName = "User";
+    if (auth.currentUser) {
+      currName = auth.currentUser.displayName;
+
+    } 
+    
+    const body = `Dear ${destName},\n\nMy name is ${currName}. I am writing in regards to my personal portfolio request.`;
     const mailtoUrl = `mailto:${destEmail}?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;

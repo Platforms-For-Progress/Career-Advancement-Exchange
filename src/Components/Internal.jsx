@@ -3,15 +3,12 @@ import { TypeAnimation } from "react-type-animation";
 import { useState } from "react";
 import { getAuth } from "firebase/auth";
 import { onAuthStateChanged } from "firebase/auth";
-<<<<<<< HEAD
+
 import "./Internal.css";
-=======
+
 import './Internal.css';
 import React from 'react';
-<<<<<<< HEAD
->>>>>>> 4e363e0ce68e7dd71bf99d8172240d93423e27b6
-=======
->>>>>>> c0647c6966a227e8ff3954eae798c806ef161310
+
 // import {}
 // import { Navigate } from 'react-router-dom';
 import { navigate } from "@reach/router";

@@ -6,6 +6,7 @@ import { uploadBytes } from "firebase/storage";
 import { getDownloadURL } from "firebase/storage";
 import { getStorage, ref } from "firebase/storage";
 import "./Upload.css";
+import React from "react";
 function Upload() {
     const [file, setFile] = useState("");
     const [percent, setPercent] = useState(0);

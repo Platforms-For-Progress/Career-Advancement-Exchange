@@ -1,11 +1,7 @@
 import { TypeAnimation } from 'react-type-animation';
-<<<<<<< HEAD
 import { useState } from 'react';
 import { firestore } from '../base';
 import { doc, setDoc } from 'firebase/firestore';
-=======
-import React from 'react';
->>>>>>> c0647c6966a227e8ff3954eae798c806ef161310
 import './Involved.css';
 import React from 'react';
 const Involved = () => {

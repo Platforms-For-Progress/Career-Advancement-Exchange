@@ -539,20 +539,24 @@ const Collab = () => {
                 Education
               </p>
               {educationEntries.map((entry) => (
-                <p
-                  className="header3 apply-font highlighted"
-                  style={{ backgroundColor: `${secondaryColor}` }}
-                >
-                  School: {entry.school}
-                  <br />
-                  Degree: {entry.degree}
-                  <br />
-                  Major: {entry.major} <br />
-                  Start Date: {entry.startDate}
-                  <br />
-                  End Date: {entry.endDate}
-                </p>
+                <div className="header3 apply-font highlighted" style={{ backgroundColor: `${secondaryColor}` }}>
+                  <h2 >
+                    School: {entry.school}
+                  </h2>
+                  <h3 >
+                    Degree: {entry.degree}
+                  </h3>
+                  <h4 >
+                    Major: {entry.major}
+                  </h4>
+                  <h5 >
+                    {entry.startDate} - {entry.endDate}
+                  </h5>
+                </div>
               ))}
+              
+
+
 
               {/* {Object.keys(inputValues).map((key) => (
                 <ul>

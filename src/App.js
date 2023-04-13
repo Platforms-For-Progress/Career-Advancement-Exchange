@@ -24,6 +24,7 @@ import DBDashboard from "./Components/DBDashboard";
 import ViewRequests from "./Components/ViewRequests";
 import ManageAdmin from "./Components/ManageAdmin";
 import Upload from './Components/Upload';
+import React from 'react';
 
 function App() {
   useEffect(() => {
