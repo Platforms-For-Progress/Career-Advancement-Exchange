@@ -4,6 +4,7 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 20vh;
+
     font-weight: bold;
     text-align: center;
     /* margin-top: 2vh; */
@@ -19,6 +20,13 @@ h1 {
     /* box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2); */
 
 }
+@media screen and (max-width: 608px) {
+    h1 {
+        font-size: 8vh;
+    }
+}
+    
+
 
 .loading {
     height: 100vh;
