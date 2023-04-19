@@ -38,13 +38,13 @@ function App() {
   }, []);
   return (
     <div className="background">
-      {/* <Header /> */}
+      <Header />
 
       <Router>
-        {/* <Home path="/" default /> */}
-        {/* <About path="/about" /> */}
-        {/* <Portfolios path="/pastwork " /> */}
-        <Loading path="/" />
+        <Home path="/" default />
+        <About path="/about" />
+        <Portfolios path="/pastwork" />
+        {/* <Loading path="/" /> */}
         {/* <Home path="/home" default />
         <About path="/about" />
         <Contact path="/contact" />

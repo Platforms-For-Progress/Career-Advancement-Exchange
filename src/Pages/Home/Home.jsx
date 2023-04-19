@@ -13,7 +13,10 @@ const Home = () => {
                 width={1100}
                 height={200}
                 // make cx and cy dynamic
+                // cx = {()=> window.innerWidth/2}
                 cx = {window.innerWidth/2}
+                // cy = {window.innerHeight/2}
+                // cx='0'
                 className="ReactCurvedText"
                 cy='0'
                 rx='172'
@@ -21,7 +24,7 @@ const Home = () => {
                 startOffset='23'
                 reversed={false}
                 text="Career Advancement Exchange"
-                textProps={{ style: { fontSize: 30}, FontFace: 'Prata', color:" #40404", fill: "#40404" }}
+                textProps={{ style: { fontSize: 30},  color:" #40404", fill: "#40404" }}
                 textPathProps={null}
                 tspanProps={null}
                 ellipseProps={null}
