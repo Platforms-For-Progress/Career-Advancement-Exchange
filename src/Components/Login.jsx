@@ -1,20 +1,18 @@
-import { TypeAnimation } from 'react-type-animation';
-import { useNavigate } from 'react-router-dom';
-import { navigate } from '@reach/router';
+import { TypeAnimation } from "react-type-animation";
+import { useNavigate } from "react-router-dom";
+import { navigate } from "@reach/router";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
-// import { provider } from '../base'; 
-import './Login.css';
-import { firestore, signInWithGoogle } from '../base';
-import googlelogin from './googlelogin';
-import { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { set, ref } from 'firebase/database';
-import { db } from '../base';
-import { getFirestore, setDoc, doc } from 'firebase/firestore';
-import {connectAuthEmulator} from 'firebase/auth';
-import { auth } from '../base';
+import React from "react";
+// import { provider } from '../base';
+import "./Login.css";
+import { firestore, signInWithGoogle } from "../base";
+import googlelogin from "./googlelogin";
+import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { setDoc, doc, getDoc } from "firebase/firestore";
+import { connectAuthEmulator } from "firebase/auth";
+import { auth } from "../base";
 // import {getCustomAuth} from '../base.js'
 // async function getCustomAuth() {
 //   const auth = getAuth();
@@ -22,152 +20,126 @@ import { auth } from '../base';
 //   await fetch(authUrl);
 //   connectAuthEmulator(auth, 'http://127.0.0.1:9099/',  { disableWarnings: true });
 //   return auth;
-  
+
 // };
 const Login = () => {
-  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-      const [email, setEmail] = useState("")
-      const [password, setPassword] = useState("")
+  const onEmailChange = (event) => setEmail(event.target.value);
+  const onPasswordChange = (event) => setPassword(event.target.value);
 
-      const onEmailChange = (event) => setEmail(event.target.value)
-      const onPasswordChange = (event) => setPassword(event.target.value)
-      // const auth = getCustomAuth();
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
-      
-          
-          const uid = user.uid;
-          console.log(uid);
-          // set(ref(db, "users/" + user.uid), {
-          //   firstName: user.displayName,
-          //   // lastName: lastName,
-          //   email: email,
-          //   role: "user",
-          // });
-          // const db2 = getFirestore();
-          // user.displayName = 
-          function writeData() {
-            setDoc(doc(firestore,"userRequestedWebsites", user.uid), {
-                uid: user.uid,
-                firstName: user.displayName,
-                role: "user"
-                // lastName: lname,
-                // idea: ideas,
-                
-                
-            });
-          }
-          
-            console.log("done!")
-          // navigate('/profile');
-          writeData();  
-          navigate('/profile');
-          window.location.reload();
-          console.log(user.displayName);
-          
-          // console.log("done!");
-          
-        } else {
-          // User is signed out
-          console.log("signed out");
-          // ...
-        }
-      });
-      const navSignUp = () => {
-        navigate('/signup');
-        window.location.reload();
-        
-      };
-      const onLogin = () => {
-        console.log('login');
-        googlelogin();
-        
-      };
-      const handleSubmit = (e) => {
-        // e.preventDefault();
-        // function onRegister() {
-        //   signInWithEmailAndPassword(auth, email, password).catch((error) =>
-        //     console.log(error)
-        //   );
-        // }
-        // onRegister();
-        // setEmail("")
-        // setPassword("")
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log(user.displayName, " is signed in");
+      navigate("/profile");
+      window.location.reload();
+    } else {
+      console.log("signed out");
+    }
+  });
 
-        // navigate('/home')
-        console.log(email, password)
-        // const auth2 = getCustomAuth();
-        function onRegister() {
-        signInWithEmailAndPassword(auth  , email, password)
-        .then(function(result) {
-            console.log('user signed in')
-            // const auth = getCustomAuth();
-            const user = auth.currentUser;
-            console.log(user.uid);
-            
-            
-        
-          
-            setEmail('')
-            setPassword('')
-            window.open('/profile')
-            
-        }).catch(function(error) {
-            console.log('there was an error signing in')
-            console.log(error)
-            setPassword('')
-            alert(error.message)
-        });
-        }
-        onRegister();
-      };
-      return (
-        <div className="login">
-        <TypeAnimation
-      sequence={[
-        'Login', // Types 'One'
-        
+  const navSignUp = () => {
+    navigate("/signup");
+    window.location.reload();
+  };
 
-        () => {
-          console.log('Done typing!'); // Place optional callbacks anywhere in the array
-        }
-      ]}
-      wrapper="div"
-      cursor={false}
-    //   repeat={Infinity}
-      style={{ fontSize: '2em', cursor: false }}
-    />
-    <div className='cont'>
-    <div className='section1'>
-    <button onClick={onLogin}>Login with Google</button>
-    </div>
-    <div className='middlecont'>
-    <p>OR</p>
-    </div>
-    <form>
-    <div className='formy'>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></input>
-    </div>
-    </div>
-    {/* <br></br> */}
-    <button type="submit" onClick={handleSubmit} class="btn btn-primary">Submit</button>
-    <br></br>
-    <div className='add'></div>
-    <p onClick={navSignUp}>Need to Sign Up? Click Here!</p> 
-    </form> 
-    
-    </div>
+  const onGoogleLogin = () => {
+    console.log("login");
+    googlelogin();
+  };
 
+  const addUserIfNotExists = async (user) => {
+    const usersCollection = firestore.usersCollection;
+    const userDoc = doc(usersCollection, user.uid);
+    const userDocSnap = await getDoc(userDoc);
+    if (!userDocSnap.exists()) {
+      console.log("user doesn't exist in db, adding them");
+      const split = user.displayName.split(" ");
+      if (split.length < 2) {
+        alert("Please enter your full name in your Google account");
+        return;
+      }
+      const firstName = split(" ")[0];
+      const lastName = split(" ")[1];
+      await firestore.addUser(user.uid, user.email, firstName, lastName, 0);
+    }
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log("email:", email);
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log("user signed in");
+      // await addUserIfNotExists(auth.currentUser);
+      setEmail("");
+      setPassword("");
+      navigate("/profile");
+      window.location.reload();
+    } catch (error) {
+      console.log("there was an error signing in");
+      setPassword("");
+      alert(error.message);
+    }
+  };
+
+  return (
+    <div className="login">
+      <TypeAnimation
+        sequence={[
+          "Login",
+          () => {
+            console.log("Done typing!"); // Place optional callbacks anywhere in the array
+          },
+        ]}
+        wrapper="div"
+        cursor={false}
+        //   repeat={Infinity}
+        style={{ fontSize: "2em", cursor: false }}
+      />
+      <div className="cont">
+        <div className="section1">
+          <button onClick={onGoogleLogin}>Login with Google</button>
+        </div>
+        <div className="middlecont">
+          <p>OR</p>
+        </div>
+        <form>
+          <div className="formy">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+                value={email}
+                onChange={onEmailChange}
+              ></input>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="exampleInputPassword1"
+                placeholder="Password"
+                value={password}
+                onChange={onPasswordChange}
+              ></input>
+            </div>
+          </div>
+          {/* <br></br> */}
+          <button type="submit" onClick={handleSubmit} class="btn btn-primary">
+            Submit
+          </button>
+          <br></br>
+          <div className="add"></div>
+          <p onClick={navSignUp}>Need to Sign Up? Click Here!</p>
+        </form>
+      </div>
     </div>
   );
 };

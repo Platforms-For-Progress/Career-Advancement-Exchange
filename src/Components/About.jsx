@@ -1,6 +1,7 @@
 import { TypeAnimation } from 'react-type-animation';
 import './About.css';
 import logo from '../img/CAEResize.png';
+import React from 'react';
 const About = () => {
   return (
     <div className="abouts">
@@ -50,7 +51,7 @@ const About = () => {
       
       <div className='section2'>
       <div className='rside'>
-      <img className = 'img2' src='https://media.licdn.com/dms/image/D5603AQHyqqAsXNQagw/profile-displayphoto-shrink_400_400/0/1678039342877?e=1684972800&v=beta&t=ef7VOU_9iNiBx5GnniZDOFdgO63BpIyDQo4MIPXWaK4' alt='Elisa Carrillo' width={100}/>
+      <img className = 'img2' src='https://media.licdn.com/dms/image/D5603AQFA_u1oScXWzA/profile-displayphoto-shrink_400_400/0/1681465373134?e=1686787200&v=beta&t=Hkm_HRLFHUcWfdt1aeGcessZWg7TaNxHBdeQR48E9FE' alt='Elisa Carrillo' width={100}/>
       </div>
       <div className='lside'>
       <h4>Elisa Carrillo</h4>
