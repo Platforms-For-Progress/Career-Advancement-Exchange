@@ -1,5 +1,6 @@
 .background {
-  background-image: linear-gradient(90deg, #68b5d0, #9c68d7af);
+  /* background-image: linear-gradient(90deg, #68b5d0, #9c68d7af); */
+  background-color: #F9F6E8;
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;

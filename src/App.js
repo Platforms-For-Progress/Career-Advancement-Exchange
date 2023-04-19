@@ -25,6 +25,7 @@ import ViewRequests from "./Components/ViewRequests";
 import ManageAdmin from "./Components/ManageAdmin";
 import Upload from './Components/Upload';
 import React from 'react';
+import Loading from './Pages/Loading';
 
 function App() {
   useEffect(() => {
@@ -36,10 +37,11 @@ function App() {
   }, []);
   return (
     <div className="background">
-      <Header />
+      {/* <Header /> */}
 
       <Router>
-        <Home path="/home" default />
+        <Loading path="/" />
+        {/* <Home path="/home" default />
         <About path="/about" />
         <Contact path="/contact" />
         <Involved path="/involved" />
@@ -58,7 +60,7 @@ function App() {
         <DBDashboard path="/dbdashboard" />
         <ViewRequests path="/request/:uid" />
         <ManageAdmin path="/manageadmin" />
-        <Upload path="/upload"/>
+        <Upload path="/upload"/> */}
 
       </Router>
       {/* <p>Hello Mate</p> */}

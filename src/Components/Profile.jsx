@@ -89,12 +89,12 @@ const Profile = () => {
       {auth.currentUser ? (
         <div className="rightside">
           <h1>Welcome, {auth.currentUser.displayName}</h1>
-          {/* <h2>Admin status: {userAdminStatus}</h2>
-          <div>
-            <button onClick={changeAdminStatus} className="btn btn-primary">
-              Change Admin Status
-            </button>
-          </div> */}
+              <h2>Admin status: {userAdminStatus}</h2>
+              <div>
+                <button onClick={changeAdminStatus} className="btn btn-primary">
+                  Change Admin Status
+                </button>
+              </div>
           <p onClick={logout}>Not you? Click here to log out!</p>
         </div>
       ) : (

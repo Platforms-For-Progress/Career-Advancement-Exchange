@@ -45,8 +45,8 @@ const Request = () => {
 
         // setFname(userData.firstname);
         // setLname(userData.lastname);
-        setName(userData.name);
-        setEmail(userData.email);
+        // setName(userData.name);
+        // setEmail(userData.email);
       }
     });
     return () => unsubscribe;
