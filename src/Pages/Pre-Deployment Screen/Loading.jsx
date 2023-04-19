@@ -8,7 +8,7 @@ const Loading = () => {
         // <div className="loading scre">
         <div className="loading">
             <h1 onClick={goToLinkedIn}>Coming Soon</h1>
-            {/* <p>Our team is working hard to bring you the best experience possible. Please check back soon!</p> */}
+            <p>Our team is working hard to bring you the best experience possible. Please check back soon!</p>
         </div>
 
     );

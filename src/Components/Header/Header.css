@@ -1,11 +1,16 @@
 .color-nav {
-    background-color: #9d7ad2;
-    outline: 1px solid rgb(8, 8, 8);
-    
+    /* background-color: #9d7ad2; */
+    /* outline: 1px solid rgb(8, 8, 8); */
+    background: radial-gradient(circle, #FDCC7D, #FAD9F5) 0% 0% / 100% 100%;
+    /* shift background left */
+    background-position: -10vw 5vh;
+    /* background-position: 0% 0%; */
+
 
     /* text-align: left; */
-    font-family: 'Zilla Slab', serif;
-
+    font-family: 'Prata';
+    
+    /* margin: 2rem; */
     /* margin-left: 10vh; */
     position: sticky;
     color:white;
@@ -24,17 +29,29 @@
 }
 .spacing{
     margin-left: 2vh;
+    font-size: 2vh;
     /* color: white; */
     /* margin-right: 10vh; */
 
 
 }
-
+.color-nav .navbar-brand {
+    color: #404041;
+    /* outline: 1px solid black; */
+    /* margin-right: 2vh; */
+}
+.color-nav .nav-link {
+    color: #404041;
+    font-family: 'Prata';
+    
+    /* outline: 1px solid black; */
+    margin-right: 2vh;
+}
 @media screen and (max-width: 800px) {
     .color-nav {
-        background-color: #9d7ad2; 
+        /* background-color: #9d7ad2;  */
         text-align: left;
-        font-family: 'Zilla Slab', serif;
+        /* font-family: 'Zilla Slab', serif; */
 
          /* margin-left: 10vh; */
         position: sticky;

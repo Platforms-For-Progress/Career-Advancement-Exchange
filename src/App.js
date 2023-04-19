@@ -1,9 +1,9 @@
 
 import logo from "./logo.svg";
 import "./App.css";
-import Header from "./Components/Header";
-import Home from "./Components/Home";
-import About from "./Components/About";
+import Header from "./Components/Header/Header";
+import Home from "./Pages/Home/Home";
+import About from "./Pages/About/About";
 import { Router } from "@reach/router";
 import Contact from "./Components/Contact";
 import Involved from "./Components/Involved";
@@ -25,7 +25,8 @@ import ViewRequests from "./Components/ViewRequests";
 import ManageAdmin from "./Components/ManageAdmin";
 import Upload from './Components/Upload';
 import React from 'react';
-import Loading from './Pages/Loading';
+import Loading from './Pages/Pre-Deployment Screen/Loading';
+import Portfolios from "./Pages/Portfolios/Portfolio";
 
 function App() {
   useEffect(() => {
@@ -40,6 +41,9 @@ function App() {
       {/* <Header /> */}
 
       <Router>
+        {/* <Home path="/" default /> */}
+        {/* <About path="/about" /> */}
+        {/* <Portfolios path="/pastwork " /> */}
         <Loading path="/" />
         {/* <Home path="/home" default />
         <About path="/about" />
