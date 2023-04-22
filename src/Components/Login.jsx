@@ -7,7 +7,7 @@ import React from "react";
 // import { provider } from '../base';
 import "./Login.css";
 import { firestore, signInWithGoogle } from "../base";
-import googlelogin from "./googlelogin";
+import googlelogin from "../Pages/LoginLanding/googlelogin";
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc, getDoc } from "firebase/firestore";

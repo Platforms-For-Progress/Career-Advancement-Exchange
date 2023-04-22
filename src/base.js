@@ -197,8 +197,8 @@ export const auth = getAuth();
 export const db = getDatabase(app);
 // export const db = getCustomDb();
 
-// const firestoreDb = getFirestore(app);
-const firestoreDb = getCustomFirestore();
+const firestoreDb = getFirestore(app);
+// const firestoreDb = getCustomFirestore();
 export const firestore = getFirestoreObject(firestoreDb);
 
 export const storage = getStorage(app);

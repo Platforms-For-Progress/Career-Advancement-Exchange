@@ -10,7 +10,7 @@ import Involved from "./Components/Involved";
 import PastWork from "./Components/PastWork";
 import Login from "./Components/Login";
 import SignUp from "./Components/SignUp";
-import Profile from "./Components/Profile";
+// import Profile from "./Components/Profile";
 import Request from "./Components/Request";
 import Internal from "./Components/Internal";
 import Story from "./Components/Story";
@@ -27,6 +27,11 @@ import Upload from './Components/Upload';
 import React from 'react';
 import Loading from './Pages/Pre-Deployment Screen/Loading';
 import Portfolios from "./Pages/Portfolios/Portfolio";
+import GetInvolved from "./Pages/GetInvolved/GetInvolved";
+import LoginLanding from "./Pages/LoginLanding/LoginLanding";
+import Profile from "./Pages/Profile/Profile";
+import Resources from "./Pages/Resources/Resources";
+import CAPE from "./Pages/Resources/CAPE/CAPE";
 
 function App() {
   useEffect(() => {
@@ -44,6 +49,11 @@ function App() {
         <Home path="/" default />
         <About path="/about" />
         <Portfolios path="/pastwork" />
+        <GetInvolved path="/involved" />
+        <LoginLanding path="/login" />
+        <Profile path="/profile" />
+        <Resources path="/resources" />
+        <CAPE path="/resources/cape" />
         {/* <Loading path="/" /> */}
         {/* <Home path="/home" default />
         <About path="/about" />

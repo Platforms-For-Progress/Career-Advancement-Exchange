@@ -11,17 +11,19 @@
 }
 
 .portfolio-card {
-    background-color: #E6C17B;
+    /* background-color: #E6C17B; */
     padding: 2vw;
     width: 90vw;
     display: flex;
     /* align-items: center; */
     flex-direction: row;
     justify-content: flex-start;
-   
+   background-color: rgba(240, 248, 255, 0.156);
     align-items: flex-start;
     border-radius: 2vw;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    outline: #1E1E1E, px solid;
+
   }
   
   .portfolio-card-content {
@@ -59,11 +61,11 @@
 }
 .portfolio-card a {
     margin-left: 1vw;
-    background-color: #D57D6E;
-    outline: #D57D6E, 1px solid;
-    --bs-btn-border-color: #D57D6E;
-    --bs-btn-hover-bg: #db8a7b;
-    --bs-btn-hover-border-color: #db8a7b;
+    background-color: #EFD79F;
+    outline: #EFD79F, 1px solid;
+    --bs-btn-border-color: #EFD79F;
+    --bs-btn-hover-bg: #EFD79F;
+    --bs-btn-hover-border-color: #EFD79F;
     --bs-btn-hover-color: #1E1E1E;
     font-family: 'Dongle', serif;
     font-size: 1.45rem;

@@ -1,0 +1,38 @@
+.CAPE {
+    margin: 2vw;
+}
+
+.weekName {
+    background-color: #E6C17B;
+    margin: 2vw;
+    /* padding: 2vw; */
+    width: 20vw;
+    text-align: center;
+    border-radius: 2vw;
+}
+
+.accordion {
+    width: 40vw;
+    margin: 2vw;
+    /* background-color: #E6C17B; */
+}
+
+.accordion .header {
+    /* background-color: #E6C17B; */
+    margin: 2vw;
+    /* padding: 2vw; */
+    width: 20vw;
+    text-align: center;
+   
+}
+
+.acc-item {
+    display: flex;
+
+}
+
+.content {
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+}

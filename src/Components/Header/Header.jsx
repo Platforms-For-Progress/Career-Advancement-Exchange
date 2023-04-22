@@ -50,6 +50,7 @@ function Header() {
         {/* <div className="header-right-side"> */}
         
         <Nav.Link href="/about">About</Nav.Link>
+        <Nav.Link href="/resources">Resources</Nav.Link>
         <Nav.Link href="/pastwork">Portfolios</Nav.Link>
           <Nav.Link href="/involved">Get Involved</Nav.Link>
           

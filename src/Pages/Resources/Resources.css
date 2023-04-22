@@ -1,0 +1,49 @@
+.resources {
+    margin: 2vw;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2vw;
+  }
+  
+  .Video {
+    flex: 0.5;
+    margin-left: 2vw;
+  }
+
+  .Video iframe {
+    margin-left: 1vw;
+  }
+  
+  .programs {
+    flex:2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 0;
+  }
+  
+  .program-item {
+    /* margin: 1rem; */
+    background-color: #EFD79F;
+    border-radius: 2vw;
+    width: 10vw;
+    text-align: center;
+
+    
+  }
+
+  .program-item p {
+    font-family: 'Prata', serif;
+    font-size: 2.5vh;
+    padding: 1vw;
+    line-height: 1.5vh;
+    vertical-align: middle;
+    margin-top: 1.5vh;
+    
+    
+  }
+  

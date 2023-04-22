@@ -2,7 +2,7 @@ import React from 'react';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { getFirestore, setDoc, doc } from 'firebase/firestore';
 import {connectAuthEmulator} from 'firebase/auth';
-import { auth, firestore } from '../base';
+import { auth, firestore } from '../../base';
 // function getCustomAuth() {
 //   const auth = getAuth();
 //   connectAuthEmulator(auth, 'http://127.0.0.1:9099/',  { disableWarnings: true });

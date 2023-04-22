@@ -33,14 +33,16 @@
 .home-button {
     background-color: #E6C17B;
     padding: 0.75vw;
-    border-radius: 20%;
+    border-radius: 1vw;
     color:#1E1E1E;
     font-family: 'Dongle',serif;
-    font-size: 1.5rem;
+    font-size: 2rem;
+    /* padding: 1vw; */
+    line-height: 2vh;
     /* box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2); */
     margin-top: 2vh;
     margin-bottom: 2vh;
-    box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2), inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
+    /* box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2), inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5); */
 
 
 }

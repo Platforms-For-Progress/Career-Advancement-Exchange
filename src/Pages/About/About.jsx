@@ -37,11 +37,11 @@ const About = () => {
                     </div>
                 </div>
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="..."/>
+                    <img src="https://media.licdn.com/dms/image/C4E03AQEd9o8nNm7j0w/profile-displayphoto-shrink_400_400/0/1627666596476?e=1687392000&v=beta&t=HBHbFK2yJr7aOcfGF_OTbvU4fB1EYvAN_6jbIr5ikSo" class="card-img-top" alt="Jacob Shalabi"/>
                     <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title">Jacob Shalabi</h5>
+                    <p class="card-text">Software Team Lead</p>
+                    {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
                     </div>
                 </div>
                 <div class="card">
