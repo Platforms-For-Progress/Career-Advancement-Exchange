@@ -64,15 +64,7 @@ code {
   /* padding: 2%; */
 }
 
-.viewport {
-  min-height: 50vh;
-  /* padding: 2%; */
-  border-radius: 0.5%;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-  padding-bottom: 2vw;
 
-
-}
 
 .header1 {
   font-size: 5vh;

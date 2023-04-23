@@ -1,21 +1,20 @@
 .Profile {
     margin: 2vw;
+    height: 100%;
+    width: 100vw;
 }
 
 
-.row-z {
-    /* display: flex; */
-    width: 100%;
-    /* text-align: center; */
-    
-}
+
 .column {
-    /* float: left; */
+
     outline: 1px solid black;
-    /* width: 110%; */
+   
+    max-width: 80vw;
     padding: 2%;
     margin: 2%;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 2vw;
 
 }
 .leftside {
@@ -42,12 +41,27 @@
     float: left; */
 
 }
+
+.subcolumn {
+    outline: 1px solid black;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 2vw;
+    
+
+}
+.subcolumn:hover {
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+    border-radius: 2vw;
+    
+
+}
 @media screen and (max-width:1270px) {
     .leftside {
         margin-top: -20%;
         margin-left: 7%;
         float: left;
         width: 100%;
+        height: 100%;
         /* margin:auto; */
     }
     .prof {
@@ -57,7 +71,7 @@
         /* float: left; */
         margin-bottom: 20%;
         margin-right:20%;
-
+        height: 100%;
         padding: 2%;
     }
 }

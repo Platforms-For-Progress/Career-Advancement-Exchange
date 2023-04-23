@@ -10,6 +10,7 @@ import "./Profile.css";
 const Profile = () => {
   const [userAdminStatus, setUserAdminStatus] = useState(null);
   const [userHasRequest, setUserHasRequest] = useState(false);
+  const [rid, setRid] = useState("");
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -21,12 +22,16 @@ const Profile = () => {
         console.log("admin status:", admin_status);
         setUserAdminStatus(admin_status);
         setUserHasRequest(user_requests.length > 0);
+        setRid(user_requests[0].id);
       } else {
         console.log("User is signed out");
         navigate("/signin");
         window.location.reload();
       }
+
     });
+
+    
     return () => unsubscribe;
   }, []);
 
@@ -38,7 +43,7 @@ const Profile = () => {
 
   const toReq = () => {
     // navigate("/request/" + auth.currentUser.uid);
-    navigate("/request/");
+    navigate("/request");
     window.location.reload();
   };
 
@@ -57,9 +62,34 @@ const Profile = () => {
   };
 
   const navViewRequests = () => {
-    navigate("/request/" + auth.currentUser.uid);
+    navigate("/request/" +  auth.currentUser.uid);
     window.location.reload();
+
   };
+
+  const goToCollab = () => {
+    // navigate("/collab/" + rid);
+    // window.location.reload();
+    window.location.href = "/collab/" + rid;
+    };
+
+    const goToEdit = () => {
+        // navigate("/edit/" + rid);
+        // window.location.reload();
+        window.location.href = "/edit/" + rid;
+    };
+
+    const goToStatus = () => {
+        // navigate("/status/" + rid);
+        // window.location.reload();
+        window.location.href = "/status/" + rid;
+    };
+
+    const goToMessage = () => {
+        // navigate("/message/" + rid);
+        // window.location.reload();
+        window.location.href = "/message/" + rid;
+    };
 
   const addCurrentUser = async () => {
     const user = auth.currentUser;
@@ -99,9 +129,9 @@ const Profile = () => {
         </div>
       ) : (
         <div className="rightside">
-          <h1>
+          <h2>
             Welcome, <div className="spinner-border" role="status"></div>
-          </h1>
+          </h2>
         </div>
       )}
 
@@ -137,30 +167,34 @@ const Profile = () => {
             )}
 
             <div>
-              <div className="column" onClick={toReq}>
+             
+              {userHasRequest ? (
+                <div className="column">
+                  <h3>Manage Request</h3>
+                    <div className="subcolumn" onClick={goToEdit}>
+                        <p>Edit Request Form</p>
+
+                    </div>
+                    <div className="subcolumn" onClick={goToStatus}>
+                        <p>View Request Status</p>
+                    </div>
+                    <div className="subcolumn" onClick={goToCollab}>
+                        <p>Visit Collaboration Space</p>
+                    </div>
+                    <div className="subcolumn" onClick={goToMessage}>
+                        <p>Message Admin</p>
+                    </div>
+                </div>
+              ) : (
+                <div className="column" onClick={toReq}>
                 <h3>Request a personal website</h3>
                 <p>
                   Request a personal website to showcase your skills and
                   projects
                 </p>
               </div>
-              {userHasRequest ? (
-                <div className="column" onClick={navViewRequests}>
-                  <h3>Check the status of your requests</h3>
-                  <p>
-                    Check the status of your website and see when it will be
-                    ready
-                  </p>
-                </div>
-              ) : (
-                <></>
               )}
-              <div className="column">
-                <h3>Upload Documents</h3>
-                <p>
-                  Submit documents/pictures/media to be added to your website
-                </p>
-              </div>
+              
             </div>
           </div>
 

@@ -11,13 +11,13 @@
     border-radius: 2vw;
 }
 
-.accordion {
+.week .accordion {
     width: 40vw;
     margin: 2vw;
     /* background-color: #E6C17B; */
 }
 
-.accordion .header {
+.week .accordion .header {
     /* background-color: #E6C17B; */
     margin: 2vw;
     /* padding: 2vw; */
@@ -26,7 +26,7 @@
    
 }
 
-.acc-item {
+.week .acc-item {
     display: flex;
 
 }

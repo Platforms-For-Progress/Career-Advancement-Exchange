@@ -1,0 +1,37 @@
+.request {
+    margin: 2vw;   
+}
+
+.form {
+    width: 80vw;
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
+    margin: 2vw;
+    /* align-items: center; */
+    /* text-align: center; */
+
+
+}
+.mb-3 {
+    width: 80vw;
+}
+
+
+.butt {
+    margin-left: 1vw;
+    background-color: #EFD79F;
+    outline: #EFD79F, 1px solid;
+    --bs-btn-border-color: #EFD79F;
+    --bs-btn-hover-bg: #EFD79F;
+    --bs-btn-hover-border-color: #EFD79F;
+    --bs-btn-hover-color: #1E1E1E;
+    font-family: 'Dongle', serif;
+    font-size: 1.45rem;
+    color: #1E1E1E;
+    width: 20vw;
+    text-align: center;
+    border-radius: 2vw;
+
+}

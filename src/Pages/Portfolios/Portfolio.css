@@ -18,11 +18,16 @@
     /* align-items: center; */
     flex-direction: row;
     justify-content: flex-start;
-   background-color: rgba(240, 248, 255, 0.156);
+   /* background-color: rgba(240, 248, 255, 0.156); */
     align-items: flex-start;
     border-radius: 2vw;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
     outline: #1E1E1E, px solid;
+    outline: 1px solid black;
+    /* width: 110%; */
+    padding: 2%;
+    margin: 2%;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 
   }
   

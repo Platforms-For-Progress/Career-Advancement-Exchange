@@ -20,6 +20,9 @@ import {
 import { getStorage } from "firebase/storage";
 import { GoogleAuthProvider } from "firebase/auth";
 import { connectFirestoreEmulator } from "firebase/firestore";
+import { ref, uploadBytesResumable } from "firebase/storage";
+import { listAll } from "firebase/storage";
+import { getDownloadURL } from "firebase/storage";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -100,6 +103,10 @@ function getFirestoreObject(db) {
     });
     return doc.id;
   };
+  const updateRequest = async (requestId, request_data, status) => {
+    const docRef = doc(db, "requests", requestId);
+    await setDoc(docRef, { request_data, status }, { merge: true });
+  };
   const getRequest = async (requestId) => {
     const docRef = doc(db, "requests", requestId);
     const docSnap = await getDoc(docRef);
@@ -109,6 +116,9 @@ function getFirestoreObject(db) {
       return null;
     }
   };
+
+
+
 
   // querys all requests made by userid
   const getRequestsByUser = async (userId) => {
@@ -147,6 +157,74 @@ function getFirestoreObject(db) {
       await setDoc(docRef, { admin_ids }, { merge: true });
     }
   };
+  const uploadFile = async (file, rid) => {
+    const storageRef = ref(storage, `/files/requestData/${rid}/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file).catch((error) => {
+      switch (error.code) {
+        case "storage/unauthorized":
+          console.log("User doesn't have permission to access the object");
+          // User doesn't have permission to access the object
+          break;
+        case "storage/canceled":
+          console.log("User canceled the upload");
+          break;
+
+        case "storage/unknown":
+          // Unknown error occurred, inspect error.serverResponse
+          console.log("Unknown error occurred, inspect error.serverResponse");
+          break;
+      }
+    });
+    return uploadTask;
+
+
+        
+  };
+
+  // return array of all files in firestrore storagge with their download url
+  const getFiles = async (rid) => {
+    // const listRef = ref(storage, "/files/requestData/"+rid);
+
+
+    // const result = await listAll(listRef);
+    // return result.items.map((item) => {
+    //   return item.name;
+    // });
+    const listRef = ref(storage, "/files/requestData/"+rid);
+    const result = await listAll(listRef);
+    // if (result.items.length > 0){
+
+    //   getDownloadURL(result.items[0]).then((url) => {
+    //     console.log(url);
+    //   });
+
+    // }
+    var urls = [];
+    // print size of result.items
+    console.log(result.items.length);
+    console.log(result.items);
+    for (const itemRef of result.items) {
+      // All the items under listRef.
+      console.log(itemRef);
+      // return all the urls
+      getDownloadURL(itemRef).then((url) => {
+        console.log(url);
+        urls.push(url);
+      });
+      console.log(urls);
+    }
+
+    return urls;
+
+
+
+
+
+    // return urls.map((item) => {
+    //   console.log(item);
+    //   return item;
+    // });
+  };
 
   // Return an object containing the required collections and documents
   return {
@@ -160,6 +238,9 @@ function getFirestoreObject(db) {
     changeAdminStatus,
     requestsCollection,
     addRequest,
+    uploadFile,
+    getFiles,
+    updateRequest,
     getRequest,
     getRequestsByUser,
     addRequestAdmin,

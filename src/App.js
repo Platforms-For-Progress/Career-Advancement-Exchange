@@ -11,15 +11,15 @@ import PastWork from "./Components/PastWork";
 import Login from "./Components/Login";
 import SignUp from "./Components/SignUp";
 // import Profile from "./Components/Profile";
-import Request from "./Components/Request";
+// import Request from "./Components/Request";
 import Internal from "./Components/Internal";
 import Story from "./Components/Story";
 import Edit from "./Components/Edit";
 import { useEffect } from "react";
 import Create from "./Components/Create";
 import Assign from "./Components/Assign";
-import Status from "./Components/Status";
-import Collab from "./Components/Collab";
+// import Status from "./Components/Status";
+// import Collab from "./Components/Collab";
 import DBDashboard from "./Components/DBDashboard";
 import ViewRequests from "./Components/ViewRequests";
 import ManageAdmin from "./Components/ManageAdmin";
@@ -32,6 +32,13 @@ import LoginLanding from "./Pages/LoginLanding/LoginLanding";
 import Profile from "./Pages/Profile/Profile";
 import Resources from "./Pages/Resources/Resources";
 import CAPE from "./Pages/Resources/CAPE/CAPE";
+import Request from "./Pages/Profile/Request/Request";
+import Collab from "./Pages/Profile/CollabSpace/Collab";
+import Landing from "./Pages/Profile/Request/Landing";
+import Status from "./Pages/Profile/Request/Status";
+import EditForm from "./Pages/Profile/Request/EditForm";
+import Message from "./Pages/Profile/Request/Message";
+
 
 function App() {
   useEffect(() => {
@@ -54,6 +61,12 @@ function App() {
         <Profile path="/profile" />
         <Resources path="/resources" />
         <CAPE path="/resources/cape" />
+        <Request path="/request" />
+        <Collab path="/collab/:rid" />
+        <Landing path="/request/:rid" />
+        <Status path="/status/:rid" />
+        <EditForm path="/edit/:rid" />
+        <Message path="/message/:rid" />
         {/* <Loading path="/" /> */}
         {/* <Home path="/home" default />
         <About path="/about" />

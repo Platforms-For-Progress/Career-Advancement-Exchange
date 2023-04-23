@@ -19,6 +19,7 @@
     "react-background-pattern-generator": "^0.1.4",
     "react-bootstrap": "^2.7.0",
     "react-color": "^2.17.3",
+    "react-color-palette": "^6.2.0",
     "react-curved-text": "^2.0.2",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.6.1",
