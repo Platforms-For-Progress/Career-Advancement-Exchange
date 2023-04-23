@@ -17,48 +17,54 @@ function Upload({rid, imageData, setImageData}) {
         setFile(event.target.files[0]);
     }
 
-    const handleUpload = () => {
+    const handleUpload = async() => {
         console.log("Not working yet");
-        //     if (!file) {
-        //         alert("Please upload a file first!");
-        //     }
+                if (!file) {
+                    alert("Please upload a file first!");
+                }
+                    
+                firestore.uploadFile(file, rid).then((url) => {
+                        console.log(url);
+                        alert("File uploaded successfully!");
+
+                    });
+                }
+                firestore.getFiles(rid).then((data) => {
+                    console.log("DATA:", data);
+                    console.log(data.length)
+                    for (let i = 0; i < data.length; i++) {
+                        console.log("DATA2:", data[i]);
+                        setImageData((prev) => [...prev, data[i]]);
+                    }
+                });
                 
-        //     firestore.uploadFile(file, rid).then((url) => {
-        //             console.log(url);
-        //             alert("File uploaded successfully!");
-
-        //         });
-        //     }
-        //     firestore.getFiles(rid).then((data) => {
-        //         console.log("DATA: ", data);
-        //         setImageData(data);
-        //     });
-
+                console.log("IMAGE DATA:", imageData)
 
         
     
         
     
-        // return (
-        //     <div>
-        //         <input  type="file" onChange={handleChange} />
-        //         <button  onClick={handleUpload}>Upload!</button>
-        //         {/* map the image data */}
-        //         {imageData.map((image) => {
-        //             return (
-        //                 <div>
-        //                     <img src={image } alt="uploaded image" />
+        return (
+            <div>
+                <input  type="file" onChange={handleChange} />
+                <button  onClick={handleUpload}>Upload!</button>
+                {/* map the image data */}
+                {imageData.map((image) => {
+                    return (
+                        <div>
+                            
+                            <img src={image } alt="uploaded image" />
 
 
 
-        //                 </div>
-        //             )
-        //         })}
+                        </div>
+                    )
+                })}
 
                 
-        //     </div>
-            // );
-}
+            </div>
+            );
+
 }   
 
 const Toolbar = ({setView, setFont, font, colors, setHeaderBg, headerBg, setFooterBg,footerBg, setHomeBg, homeBg, setAboutBg, setPastWorkBg, setContactBg, rid}) => {

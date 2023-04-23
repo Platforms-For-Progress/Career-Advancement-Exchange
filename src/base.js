@@ -201,17 +201,17 @@ function getFirestoreObject(db) {
     // }
     var urls = [];
     // print size of result.items
-    console.log(result.items.length);
-    console.log(result.items);
+    // console.log(result.items.length);
+    // console.log(result.items);
     for (const itemRef of result.items) {
       // All the items under listRef.
-      console.log(itemRef);
+      // console.log(itemRef);
       // return all the urls
       getDownloadURL(itemRef).then((url) => {
-        console.log(url);
+        // console.log(url);
         urls.push(url);
       });
-      console.log(urls);
+      // console.log(urls);
     }
 
     return urls;
