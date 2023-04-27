@@ -1,0 +1,39 @@
+.link-ele {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    width: 20vw;
+    margin: 2rem auto;
+    padding: 2rem;
+    text-align: center;
+    color: #1E1E1E;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    border-radius: 0.5rem;
+    background: linear-gradient(to bottom, #FAD9F5, #FDCC7D);
+}
+
+.link-ele p {
+    color: #1E1E1E;
+}
+
+.link-ele a {
+    color: #1E1E1E;
+    text-decoration: none;
+}
+.link-ele:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+}
+.links {
+    height: 100vh;
+}
+
+@media screen and (max-width: 768px) {
+    .link-ele {
+        width: 80vw;
+    }
+}
+    

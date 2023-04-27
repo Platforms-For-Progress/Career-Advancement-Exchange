@@ -38,6 +38,7 @@ import Landing from "./Pages/Profile/Request/Landing";
 import Status from "./Pages/Profile/Request/Status";
 import EditForm from "./Pages/Profile/Request/EditForm";
 import Message from "./Pages/Profile/Request/Message";
+import Links from "./Pages/Links/Links";
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
         <Status path="/status/:rid" />
         <EditForm path="/edit/:rid" />
         <Message path="/message/:rid" />
+        <Links path="/links" />
         {/* <Loading path="/" /> */}
         {/* <Home path="/home" default />
         <About path="/about" />

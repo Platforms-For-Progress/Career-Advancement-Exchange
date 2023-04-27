@@ -1,5 +1,5 @@
 .MiddleBackground    {
-    background-color: #fcf4cf;
+    /* background-color: #fcf4cf; */
     padding: 2vw;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
     border-radius: 2vw;
@@ -30,35 +30,55 @@
 .MiddleBackground button {
     
 
-    background-color: #D57D6E;
-    outline: #D57D6E, 1px solid;
-    --bs-btn-border-color: #D57D6E;
-    --bs-btn-hover-bg: #db8a7b;
-    --bs-btn-hover-border-color: #db8a7b;
-    --bs-btn-hover-color: #1E1E1E;
-    --bs-btn-active-bg: #db8a7b;
-    --bs-btn-active-border-color: #db8a7b;
-    --bs-btn-bg: #db8a7b;
-    font-family: 'Dongle', serif;
-    font-size: 1.45rem;
-    color: #1E1E1E;
-    line-height: 1.25vh;
+    background-color: #febd69;
+    /* border-radius: 2vw; */
+    box-shadow: none;
+    outline: none;
+    font-size: 1.5vh;
+    --bs-btn-bg: #febd69;
+    --bs-btn-hover-bg: #febd69;
+    --bs-btn-border-color: #1E1E1E;
+    --bs-btn-bg: #febd69;
+    --bs-btn-hover-bg: #febd69;
+    
 }
+.MiddleBackground button:hover {
+    
+
+    background-color: #febd69;
+    /* border-radius: 2vw; */
+    box-shadow: none;
+    outline: none;
+    font-size: 1.5vh;
+    --bs-btn-bg: #febd69;
+    --bs-btn-hover-bg: #febd69;
+    --bs-btn-border-color: #1E1E1E;
+    --bs-btn-bg: #febd69;
+    --bs-btn-hover-bg: #febd69;
+    
+}
+
 
 .MiddleBackground .google {
     
 
-    background-color: #D57D6E;
-    outline: #D57D6E, 1px solid;
-    --bs-btn-border-color: #D57D6E;
-    --bs-btn-hover-bg: #db8a7b;
-    --bs-btn-hover-border-color: #db8a7b;
-    --bs-btn-hover-color: #1E1E1E;
-    --bs-btn-active-bg: #db8a7b;
-    --bs-btn-active-border-color: #db8a7b;
-    --bs-btn-bg: #db8a7b;
-    font-family: 'Dongle', serif;
-    font-size: 1.45rem;
-    color: #1E1E1E;
-    line-height: 1.25vh;
+    background-color: #febd69;
+    /* border-radius: 2vw; */
+    box-shadow: none;
+    outline: none;
+    font-size: 2vh;
+    --bs-btn-bg: #febd69;
+    --bs-btn-hover-bg: #febd69;
+    --bs-btn-border-color: #1E1E1E;
+    --bs-btn-bg: #febd69;
+    --bs-btn-hover-bg: #febd69;
+    
+}
+
+.ortext p {
+    font-family: 'Prata', serif;
+    font-size: 1.5vh;
+    margin-top: 1vh;
+    padding: 1vw;
+    font-weight: 600;
 }

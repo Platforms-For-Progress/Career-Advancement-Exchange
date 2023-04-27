@@ -207,10 +207,9 @@ function getFirestoreObject(db) {
       // All the items under listRef.
       // console.log(itemRef);
       // return all the urls
-      getDownloadURL(itemRef).then((url) => {
-        // console.log(url);
-        urls.push(url);
-      });
+      const url = await getDownloadURL(itemRef);
+      urls.push(url);
+      
       // console.log(urls);
     }
 

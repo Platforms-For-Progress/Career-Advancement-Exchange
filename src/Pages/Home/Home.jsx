@@ -1,5 +1,5 @@
 import React from "react";
-import img from './image_10Globe-removebg-preview.png';
+import img from './Asset 2.png';
 import './Home.css';
 import ReactCurvedText from 'react-curved-text';
 const Home = () => {
@@ -19,9 +19,9 @@ const Home = () => {
                 // cx='0'
                 className="ReactCurvedText"
                 cy='0'
-                rx='172'
-                ry='143'
-                startOffset='23'
+                rx='182'
+                ry='153'
+                startOffset='40'
                 reversed={false}
                 text="Career Advancement Exchange"
                 textProps={{ style: { fontSize: 30},  color:" #40404", fill: "#40404" }}

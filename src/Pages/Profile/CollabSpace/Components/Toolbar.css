@@ -133,3 +133,41 @@
     --bs-btn-hover-bg: #febd69;
 
 }
+
+.toolbarImages {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.toolbarImages .img {
+    margin: 0.25vw;
+}
+
+.addHeadings {
+    margin: 1vw;
+}
+
+.addHeadings button {
+    margin: 1vw;
+}
+
+.btnHeadingOne {
+    background-color: #febd69;
+    border-radius: 2vw;
+    box-shadow: none;
+    outline: none;
+    font-size: 2vh;
+    --bs-btn-bg: #febd69;
+    --bs-btn-hover-bg: #febd69;
+    --bs-btn-border-color: #1E1E1E;
+    --bs-btn-bg: #febd69;
+    --bs-btn-hover-bg: #febd69;
+    
+
+}
+
+.popout {
+    background-color: #febd698e;
+    border-radius: 2vw;
+    padding: 1vw;
+}

@@ -8,7 +8,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage, firestore } from "../../../../base.js";
 // import {uploadFi÷\}
 
-function Upload({rid, imageData, setImageData}) {
+function Upload({rid, imageData, setImageData, setHomeMap}) {
     const [file, setFile] = useState("");
     const [percent, setPercent] = useState(0);
     
@@ -23,54 +23,90 @@ function Upload({rid, imageData, setImageData}) {
                     alert("Please upload a file first!");
                 }
                     
-                firestore.uploadFile(file, rid).then((url) => {
-                        console.log(url);
-                        alert("File uploaded successfully!");
+                const url = await firestore.uploadFile(file, rid)
+                console.log("URL:", url)
+                alert("File uploaded successfully!");
 
-                    });
-                }
-                firestore.getFiles(rid).then((data) => {
+                setImageData([]);
+                const data = await firestore.getFiles(rid) 
                     console.log("DATA:", data);
-                    console.log(data.length)
-                    for (let i = 0; i < data.length; i++) {
-                        console.log("DATA2:", data[i]);
-                        setImageData((prev) => [...prev, data[i]]);
+                    for (const item of data) {
+                        console.log("DATA2:", item);
+                        setImageData((prev) => [...prev, item]);
+
                     }
-                });
+                    
                 
                 console.log("IMAGE DATA:", imageData)
 
         
     
-        
+                }
     
         return (
             <div>
                 <input  type="file" onChange={handleChange} />
-                <button  onClick={handleUpload}>Upload!</button>
+                <button  onClick={async()=> await handleUpload()}>Upload!</button>
                 {/* map the image data */}
+                <div className="toolbarImages">
                 {imageData.map((image) => {
+                    // check if the image is a heic
+              
+
+                    
                     return (
-                        <div>
+                       
                             
-                            <img src={image } alt="uploaded image" />
+                            <img className = "img" src={image } height = {100} alt="uploaded image" />
 
 
 
-                        </div>
+                       
                     )
                 })}
+                 </div>
 
                 
             </div>
             );
+    
 
 }   
 
-const Toolbar = ({setView, setFont, font, colors, setHeaderBg, headerBg, setFooterBg,footerBg, setHomeBg, homeBg, setAboutBg, setPastWorkBg, setContactBg, rid}) => {
+const Toolbar = ({setView, setFont, font, colors, setHeaderBg, headerBg, setFooterBg,footerBg, setHomeBg, homeBg, setAboutBg, setPastWorkBg, setContactBg, rid, setImageArrayHome, setHeadingOneArrayHome, setHomeMap, homeMap, pattern, setPattern, pattern_size, setPatternSize}) => {
     const [active, setActive] = useState("text");
     const [imageData, setImageData] = useState([]);
+    const [headingOneActive, setHeadingOneActive] = useState(false);
+    const [headingOne, setHeadingOne] = useState("");
+    const [headingTwoActive, setHeadingTwoActive] = useState(false);
+    const [headingTwo, setHeadingTwo] = useState("");
+    const [headingOneArrayforHome, setHeadingOneArrayforHome] = useState([]);
+    const patterns = [
+        "checkered",
+        "grid",
+        "dots",
+        "cross-dots",
+        "diagonal lines",
+        "vertical",
+        "horizontal",
+        "diagonal stripes",
+        "vertical stripes",
+        "horizontal stripes",
+        "triangles",
+        "zigzag",
+    ]
     
+    useEffect(() => {
+        firestore.getFiles(rid).then((data) => {
+            console.log("DATA:", data);
+            for (const item of data) {
+                console.log("DATA2:", item);
+                setImageData((prev) => [...prev, item]);
+            }
+            
+        })
+    }, [rid])
+
     
 
     const setTextActive = () => {
@@ -107,7 +143,74 @@ const Toolbar = ({setView, setFont, font, colors, setHeaderBg, headerBg, setFoot
     const setViewContact = () => {
         setView("contact");
     }
-    
+    const headingOneChange= (event)=> {
+        setHeadingOne(event.target.value);
+
+    }
+    const setHeadingOneOfficially = () => {
+        // setHeadingOneArrayHome(...prev, event.target.value);
+        console.log("Heading One Array:", setHeadingOneArrayHome)
+        // setHeadingOneArrayHome(...prev, headingOne);
+        // setHeadingOneArra/yHome((prev) => [...prev, headingOne]);
+        // setHomeMap((prev) => [...prev, {type: "headingOne", content: headingOne}]);
+        const lastPage = homeMap[homeMap.length - 1]; // Get the last page in the array
+        // check if position exists if position exists then set it to lastPage otherwise use homeMap.length-1
+        var newPosition = homeMap.length - 1;
+        
+        var newPosition = 0;
+        try {
+            newPosition = lastPage.position + 1;
+        } catch (error) {
+            newPosition = 0;
+        }
+        // consider the case where it is an update on
+        // setHomeMap([...homeMap, updatedItem]);
+        console.log("Home Map:", homeMap);
+        const newItem = {
+            type: "headingOne",
+            content: headingOne,
+            position: newPosition
+        };
+        setHomeMap([...homeMap, newItem]);
+
+          
+
+          console.log("Home Map:", homeMap);
+
+        
+          
+        
+    }
+
+    const headingTwoChange= (event)=> {
+        setHeadingTwo(event.target.value);
+    }
+    const setHeadingTwoOfficially = () => {
+        const newItem = {
+            type: "headingTwo",
+            content: headingTwo,
+            position: homeMap.length
+        };
+        setHomeMap([...homeMap, newItem]);
+
+    }
+
+    const changeHeaderVal = (event) => {
+        console.log("Header Value:", event.target.value);
+        console.log("Position:", event.target.name);
+        const updatedItem = {
+            type: "headingOne",
+            content: event.target.value,
+            position: event.target.name
+        };
+        setHomeMap([...homeMap, updatedItem]);
+        console.log("Home Map:", homeMap);
+        
+        // console.log("Heading One Array:", headingOneArrayforHome);
+        
+
+
+    }
 
    
     return (
@@ -133,6 +236,62 @@ const Toolbar = ({setView, setFont, font, colors, setHeaderBg, headerBg, setFoot
                        
                     />
                     </div>
+
+                    <div className="addHeadings">
+                        <button className = "btnHeadingOne" onClick={()=>setHeadingOneActive(!headingOneActive)}>Add Heading One</button>
+                        {
+                            headingOneActive ?
+                            <div className="popout">
+                               
+                            {/* homeMap.map((item) => {
+                                if (item.type === "headingOne") {
+                                    return (
+                                        <div>
+                                            <h1>{item.content}</h1>
+                                        </div>
+                                    )
+                                }
+                            })
+                             */}
+                            {
+                                homeMap.map((item) => {
+                                    if (item.type === "headingOne" ) {
+                                        return (
+                                            <div>
+                                                {/* <in>{item.content}</h1> */}
+                                                
+                                                <input type="text" placeholder="Heading One" name={item.position} onChange={changeHeaderVal} value={item.content} />
+                                                {/* <button className = "btnHeadingOne" onClick={} >Submit</button> */}
+                                            </div>
+                                        )
+                                    }
+                                })
+                            }
+
+                             <input type="text" placeholder="Heading One" onChange = {headingOneChange}      /> 
+                            <button className = "btnHeadingOne" onClick={setHeadingOneOfficially} >Submit</button>
+                            </div>
+                            : null
+
+
+
+                        }
+
+                        <button className = "btnHeadingOne" onClick={()=> setHeadingTwoActive(!headingTwoActive)}>Add Heading Two</button>
+                        {
+                            headingTwoActive ?
+                            <div className="popout">
+                                <input type="text" placeholder="Heading Two" onChange = {headingTwoChange} />
+                                <button className = "btnHeadingOne" onClick={setHeadingTwoOfficially} >Submit</button>
+                            </div>
+                            : null
+
+
+                        }
+
+                        <button className = "btnHeadingOne">Add Heading Three</button>
+
+                    </div>
                     
 
                     </div>
@@ -145,6 +304,7 @@ const Toolbar = ({setView, setFont, font, colors, setHeaderBg, headerBg, setFoot
                         rid = {rid}
                         imageData = {imageData}
                         setImageData = {setImageData}
+                        setHomeMap={setHomeMap}
                         
                     />
                 </div> 
@@ -192,7 +352,35 @@ const Toolbar = ({setView, setFont, font, colors, setHeaderBg, headerBg, setFoot
                         </Accordion.Item>
                         <Accordion.Item eventKey="2" onClick={setViewHome}>
                             <Accordion.Header>Home</Accordion.Header>
-                            <Accordion.Body><Dropdown>
+                            <Accordion.Body>
+                                <Dropdown>
+                                <Dropdown.Toggle id="dropdown-basic">
+                                    Change Background Pattern
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    { patterns.map((pattern) => {
+                                        // log the color
+                                        console.log(pattern);
+                                        return <Dropdown.Item onClick={()=>setPattern(pattern)}>{pattern}</Dropdown.Item>
+                                    })
+                                    }
+                                </Dropdown.Menu>
+                                </Dropdown>
+                                {pattern ? 
+                                <Dropdown>
+                                <Dropdown.Toggle id="dropdown-basic">
+                                    Change Background Pattern Size
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item onClick={()=> setPatternSize("sm")}> Small </Dropdown.Item>
+                                    <Dropdown.Item onClick={()=>setPatternSize("md")} > Medium </Dropdown.Item>
+                                    <Dropdown.Item onClick={()=>setPatternSize("lg")}  > Large </Dropdown.Item>
+                                    <Dropdown.Item  onClick={()=>setPatternSize("xl")} > Extra Large </Dropdown.Item>
+                                </Dropdown.Menu>
+                                </Dropdown>
+                                : null}
+
+                            <Dropdown>
                                 <Dropdown.Toggle id="dropdown-basic">
                                     Change Background
                                 </Dropdown.Toggle>
@@ -205,7 +393,22 @@ const Toolbar = ({setView, setFont, font, colors, setHeaderBg, headerBg, setFoot
                                     })
                                     }
                                 </Dropdown.Menu>
-                                </Dropdown></Accordion.Body>
+                                </Dropdown>
+                                <Dropdown>
+                                <Dropdown.Toggle id="dropdown-basic">
+                                    Add Photo
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    { imageData.map((image) => {
+                                        // log the color
+                                        console.log(image);
+                                        return <Dropdown.Item onClick={()=> (setImageArrayHome((imageOld)=>[...imageOld, image]) && setHomeMap(setHomeMap((prev) => [...prev, {type: "image", content: image}])))} >{image}</Dropdown.Item>
+                                    })
+                                    }
+                                </Dropdown.Menu>
+                                </Dropdown>
+                            </Accordion.Body>
                         </Accordion.Item>
                         <Accordion.Item eventKey="3" onClick={setViewAbout}>
                             <Accordion.Header>About</Accordion.Header>

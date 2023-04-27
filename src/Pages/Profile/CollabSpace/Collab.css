@@ -27,7 +27,7 @@
   
   }
 .viewport .home-content {
-    height: 77vh;
+    height: 76vh;
     bottom: 0;
     position: relative;
 
@@ -156,4 +156,30 @@
     margin: 0.25rem;
     padding: 0;
     font-size: 0.75rem;
+}
+
+.applyOpacity {
+    opacity: 0.5;
+}
+
+.home-heading-one {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    /* margin-top: 1vw; */
+    /* margin-bottom: 1vw; */
+    color: #1E1E1E;
+    
+}
+
+.home-heading-two {
+    font-size: 1rem;
+    font-weight: 300;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    /* margin-top: 1vw; */
+    /* margin-bottom: 1vw; */
+    color: #1E1E1E;
+    
 }

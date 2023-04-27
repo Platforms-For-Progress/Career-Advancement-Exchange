@@ -106,12 +106,13 @@ const Login = () => {
               </div>
             </div>
             {/* <br></br> */}
+            <p onClick={navSignUp}>Need to Sign Up? Click Here!</p>
             <button type="submit" onClick={handleSubmit} class="btn btn-primary">
               Submit
             </button>
-            <p onClick={navSignUp}>Need to Sign Up? Click Here!</p>
+            
         
-            <div className="Or">
+            <div className="ortext">
             <p>OR</p>
           </div>
             <div className="GoogleLogin">
