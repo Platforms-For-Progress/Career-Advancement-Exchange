@@ -26,6 +26,7 @@ import ManageAdmin from "./Components/ManageAdmin";
 import Upload from './Components/Upload';
 import React from 'react';
 import Loading from './Pages/Loading';
+import Links from "./Pages/Links";
 
 function App() {
   useEffect(() => {
@@ -41,6 +42,7 @@ function App() {
 
       <Router>
         <Loading path="/" />
+        <Links path="/links" />
         {/* <Home path="/home" default />
         <About path="/about" />
         <Contact path="/contact" />
