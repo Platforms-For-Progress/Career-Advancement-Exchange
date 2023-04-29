@@ -10,13 +10,11 @@ const Resources = () => {
         <div className="content">
         <div className="Video">
         <h3>Intro Video</h3>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/1Q8fG0TtVAY" title="Intro Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/R5cqgAyAhZc" title="Intro Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div className="programs">
             <h3>Programs</h3>
-            <div className="program-item" onClick={goToCAPE}>
-                <p>CAPE</p>
-            </div>
+            <button className="program-item" onClick={goToCAPE}>CAPE</button>
         </div>
         </div>
         </div>

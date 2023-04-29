@@ -11,39 +11,70 @@
   .Video {
     flex: 0.5;
     margin-left: 2vw;
+    align-items: baseline;
+    margin-right: 20vw;
+    
   }
 
   .Video iframe {
     margin-left: 1vw;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 2vw;
+    padding: 2vw;
+    outline: 1px solid #222221;
   }
   
   .programs {
-    flex:2;
+    flex:1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     margin-top: 0;
+    align-items: baseline;
   }
   
   .program-item {
     /* margin: 1rem; */
-    background-color: #EFD79F;
-    border-radius: 2vw;
-    width: 10vw;
+    
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2vw;
+    margin-left: 4vw;
+    background-color: #E6C17B;
+    padding: 0.75vw;
+    border-radius: 1vw;
+    color:#1E1E1E;
+    font-family: 'Dongle',serif;
+    font-size: 2rem;
+    width: 20vw;
+    /* padding: 1vw; */
+    
 
     
   }
 
   .program-item p {
-    font-family: 'Prata', serif;
-    font-size: 2.5vh;
-    padding: 1vw;
+    background-color: #E6C17B;
+    padding: 0.75vw;
+    border-radius: 1vw;
+    color:#1E1E1E;
+    font-family: 'Dongle',serif;
+    font-size: 2rem;
+    /* padding: 1vw; */
+    
     line-height: 1.5vh;
     vertical-align: middle;
     margin-top: 1.5vh;
     
     
+    
+  }
+  .program-item:hover {
+    
+    transform: scale(1.1);
   }
   

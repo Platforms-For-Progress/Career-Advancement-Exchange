@@ -1,5 +1,6 @@
 import React from "react";
 import './Portfolio.css';
+import '../Home/Home.css';
 const Portfolios = () => {
     return (
         <div className="portfolio">
@@ -8,7 +9,7 @@ const Portfolios = () => {
             <div className="portfolio-card" >
                 <div className="portfolio-card-content" >
                     <img src="https://media.licdn.com/dms/image/C4D03AQF-lkCTdhhocw/profile-displayphoto-shrink_400_400/0/1658766873246?e=1687392000&v=beta&t=SOqAb9kUiPBpn3M5J7eI98Q4PWUPYKUP1cxJFWFRF9A" alt="Elisa Carrillo"/>
-                    <a href="https://clarisa-carrillo.web.app" class="btn btn-primary">Visit Her Portfolio</a>
+                    <button href="https://clarisa-carrillo.web.app" class="home-button">Visit Her Portfolio</button>
                 </div>
                 <div className="portfolio-card-content-text">
                 <h3>Clarisa Carrillo</h3>
