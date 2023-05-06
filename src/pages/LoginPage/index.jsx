@@ -17,6 +17,7 @@ import {
   AlertTitle,
   AlertDescription
 } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { auth } from '../../firebase';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
@@ -57,7 +58,9 @@ export default function LoginPage() {
             <Checkbox onChange={() => setRememberMe((rememberMe) => !rememberMe)}>
               Remember me
             </Checkbox>
-            <Link color={'orange.500'}>Forgot password?</Link>
+            <Link as={RouterLink} to={'/forgot-password'} color={'orange.500'}>
+              Forgot password?
+            </Link>
           </Stack>
           <Button
             colorScheme={'orange'}
@@ -72,7 +75,7 @@ export default function LoginPage() {
             variant={'outline'}
             leftIcon={<FcGoogle />}
             isLoading={loadingGoogle}
-            onClick={() => signInWithGoogle()}>
+            onClick={async () => await signInWithGoogle()}>
             <Center>
               <Text>Sign in with Google</Text>
             </Center>

@@ -16,6 +16,7 @@ import {
   Center
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { FcGoogle } from 'react-icons/fc';
 
@@ -23,6 +24,7 @@ import { auth } from '../../firebase';
 import { useSignInWithGoogle, useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 
 export default function Register() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(
@@ -87,6 +89,7 @@ export default function Register() {
             </FormControl>
             <Stack spacing={5} pt={2}>
               <Button
+                isLoading={loading}
                 loadingText="Submitting"
                 size="lg"
                 bg={'orange.400'}
@@ -97,11 +100,12 @@ export default function Register() {
                 Sign up
               </Button>
               <Button
+                isLoading={loadingGoogle}
                 w={'full'}
                 maxW={'md'}
                 variant={'outline'}
                 leftIcon={<FcGoogle />}
-                onClick={() => signInWithGoogle()}>
+                onClick={async () => await signInWithGoogle()}>
                 <Center>
                   <Text>Sign in with Google</Text>
                 </Center>
@@ -110,7 +114,7 @@ export default function Register() {
             <Stack pt={6}>
               <Text align={'center'}>
                 Already a user?{' '}
-                <Link href="/signin" color={'orange.400'}>
+                <Link as={RouterLink} to="/signin" color={'orange.400'}>
                   Login
                 </Link>
               </Text>
