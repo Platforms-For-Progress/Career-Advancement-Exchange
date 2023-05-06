@@ -1,0 +1,35 @@
+[
+    {
+        "label": "About Us",
+        "href": "/about"
+      },
+      {
+        "label": "Portfolios",
+        "href": "/portfolios"
+      },
+      {
+        "label": "Resources",
+        "children": [
+          {
+            "label": "CAPE",
+            "subLabel": "Learn about our engaging summer experience",
+            "href": "/resources/cape"
+          }
+        ]
+      },
+      {
+        "label": "Contact",
+        "children": [
+          {
+            "label": "Contact Us",
+            "subLabel": "Get in touch or join our mailing list",
+            "href": "/contactus"
+          },
+          {
+            "label": "Get Involved",
+            "subLabel": "Become a part of our team",
+            "href": "/getinvolved"
+          }
+        ]
+      }
+]
