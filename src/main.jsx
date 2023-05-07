@@ -16,11 +16,16 @@ const colors = {
 
 const theme = extendTheme({ colors });
 
+/* User Provider */
+import { UserProvider } from './utils/User';
+
 const rootElement = document.getElementById('root');
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </ChakraProvider>
   </React.StrictMode>
 );

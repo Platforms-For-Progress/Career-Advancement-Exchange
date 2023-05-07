@@ -75,17 +75,22 @@ export default function Navbar() {
             <Spinner />
           ) : !user ? (
             <>
-              <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'signin'}>
+              <Button
+                as={RouterLink}
+                fontSize={'sm'}
+                fontWeight={400}
+                variant={'link'}
+                to={'/signin'}>
                 Sign In
               </Button>
               <Button
-                as={'a'}
+                as={RouterLink}
                 display={{ base: 'none', md: 'inline-flex' }}
                 fontSize={'sm'}
                 fontWeight={600}
                 color={'white'}
                 bg={'orange.400'}
-                href={'signup'}
+                to={'/signup'}
                 _hover={{
                   bg: 'orange.300'
                 }}>

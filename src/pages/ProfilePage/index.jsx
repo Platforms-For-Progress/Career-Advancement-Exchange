@@ -15,14 +15,13 @@ import {
 } from '@chakra-ui/react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useUser } from '../../utils/User';
 
 import ProfileCard from './ProfileCard';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
-  const [user, loading, error] = useAuthState(auth);
-  console.log('user', user);
+  const { user, userInfo, loading, error } = useUser();
 
   const handleLogout = async () => {
     await auth.signOut();
