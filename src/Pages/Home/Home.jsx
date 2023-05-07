@@ -4,9 +4,9 @@ import './Home.css';
 import ReactCurvedText from 'react-curved-text';
 import { useState } from "react";
 const Home = () => {
-    const [width, setWidth] = useState(window.innerWidth);
+    const [width, setWidth] = useState(window.innerWidth / 2);
     useEffect(() => {
-        const handleResize = () => setWidth(window.innerWidth);
+        const handleResize = () => setWidth(window.innerWidth / 2);
         window.addEventListener('resize', handleResize);
         return () => {
             window.removeEventListener('resize', handleResize);
@@ -26,12 +26,12 @@ const Home = () => {
                 // cx = {()=> window.innerWidth/2}
                 // cx = {window.innerWidth/2}
                 // make cx dynamic
-                cx =  {window.innerWidth/2}
+                cx =  {width - 10}
                 // cy = {window.innerHeight/2}
                 // cx='0'
                 className="ReactCurvedText"
                 cy='0'
-                rx='155'
+                rx='165'
                 ry='153'
                 startOffset='17'
                 reversed={false}
