@@ -18,6 +18,7 @@ import { auth } from '../../firebase';
 import { useUser } from '../../utils/User';
 
 import ProfileCard from './ProfileCard';
+import { checkIfDocExists } from '../../firebase/firestore';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -86,21 +87,43 @@ const ProfilePage = () => {
         </Button>
       </Stack>
       <Stack spacing={4} direction={'column'} align={'center'} pt={6}>
-        <Button
+        {/* { checkIfDocExists('requests', user?.uid) ? (
+           
+          <Button 
           flex={1}
           fontSize={'lg'}
           rounded={'full'}
-          colorScheme={'orange'}
+          colorScheme={'brand'}
           boxShadow={
-            '0px 1px 25px -5px rgba(251, 143, 0, 0.8), 0px 1px 10px -5px rgba(251, 143, 0, 0.8)'
+            '0px 1px 25px -5px rgb(255 184 0 / 50%), 0px 10px 10px -5px rgb(255 184 0 / 50%)'
           }
           px={6}
-          py={3}>
+          py={3}
+          onClick={() => navigate('/requestHome')}
+          >
+          View Request
+        </Button>) : ( */}
+          <Button
+          flex={1}
+          fontSize={'lg'}
+          rounded={'full'}
+          colorScheme={'brand'}
+          boxShadow={
+            '0px 1px 25px -5px rgb(255 184 0 / 50%), 0px 10px 10px -5px rgb(255 184 0 / 50%)'
+          }
+          px={6}
+          py={3}
+          onClick={() => navigate('/request')}
+          >
           Make Request
-        </Button>
+        </Button> 
+        {/*    */}
+       
       </Stack>
     </ProfileCard>
   );
 };
+
+
 
 export default ProfilePage;

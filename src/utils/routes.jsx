@@ -12,9 +12,13 @@ import NotFound from '../pages/NotFoundPage';
 import ProfilePage from '../pages/ProfilePage';
 import GetInvolvedPage from '../pages/GetInvolvedPage';
 import ErrorPage from '../pages/ErrorPage';
+import LoadingPage from '../pages/LoadingPage';
+import RequestPage from '../pages/RequestPage';
+import RequestLanding from '../pages/RequestLanding';
 
 const routeElements = (
-  <Route path="/" element={<RootLayout />} errorElement={<ErrorPage />}>
+
+  <Route path="/" element={<RootLayout />} errorElement={<ErrorPage />} >
     <Route index element={<Home />} />
     <Route path="/about" element={<About />} />
     <Route path="/portfolios" element={<Portfolios />} />
@@ -23,6 +27,8 @@ const routeElements = (
     <Route path="/signin" element={<Login />} />
     <Route path="/signup" element={<Register />} />
     <Route path="/profile" element={<ProfilePage />} />
+    <Route path="/request" element={<RequestPage />} />
+    <Route path="/requestHome" element={<RequestLanding />} />
     {/* Add more routes here */}
     <Route path="*" element={<NotFound />} />
   </Route>

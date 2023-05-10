@@ -34,12 +34,14 @@ export default function Navbar() {
   return (
     <Box>
       <Flex
-        bg={useColorModeValue('white', 'gray.800')}
+        // bgGradient='linear(to-r, brand.200, brand_pink.200)'
+        bgGradient="linear(to-l, brand_pink.300, brand.400)"
+
         color={useColorModeValue('gray.600', 'white')}
         minH={'60px'}
         py={{ base: 2 }}
         px={{ base: 4 }}
-        borderBottom={1}
+        // borderBottom={1}
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
         align={'center'}>
@@ -62,7 +64,26 @@ export default function Navbar() {
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}
-            _hover={{ color: useColorModeValue('orange.500', 'gray.900') }}>
+            transition='all 0.1s ease-in'
+            margin='0 10px 0 0px'
+            _hover={{ color: useColorModeValue('brand_pink.600', 'gray.900'),
+                      bg: useColorModeValue('white.700', "grey.500"),
+                      textStroke: useColorModeValue('black.600', 'gray.900'),
+                      fontWeight: 'semibold',
+                      // textTransform: translateX(10),
+                      transition: 'all 0.8s ease-in-out',
+
+                      transitionProperty: ' color, background-color, text-shadow',
+                      transitionDuration: '0.8s',
+                      transitionTimingFunction: 'ease-in 0.34s',
+                      margin:'0px 5px 0px -5px'
+                      // transitionDelay: '0.5s',
+                      // margin: '0 -5px 0 0px',
+
+                      // transform: 'translateX(-10px)',
+                      // transition: 'all 0.2s left ease-in-out'
+                      
+                       }}>
             Career Advancement Exchange
           </Link>
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -89,10 +110,11 @@ export default function Navbar() {
                 fontSize={'sm'}
                 fontWeight={600}
                 color={'white'}
-                bg={'orange.400'}
+                bg={'brand.400'}
                 to={'/signup'}
                 _hover={{
-                  bg: 'orange.300'
+                  bg: 'brand.300'
+                  
                 }}>
                 Sign Up
               </Button>

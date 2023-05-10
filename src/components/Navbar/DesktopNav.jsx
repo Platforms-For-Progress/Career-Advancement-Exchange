@@ -21,7 +21,7 @@ import NAV_ITEMS from './NavItems';
 
 const DesktopNav = () => {
   const linkColor = useColorModeValue('gray.600', 'gray.200');
-  const linkHoverColor = useColorModeValue('orange.600', 'white');
+  const linkHoverColor = useColorModeValue('brand.700', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
   return (
@@ -85,10 +85,10 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
       display={'block'}
       p={2}
       rounded={'md'}
-      _hover={{ bg: useColorModeValue('orange.50', 'gray.900') }}>
+      _hover={{ bg: useColorModeValue('brand.50', 'gray.900') }}>
       <Stack direction={'row'} align={'center'}>
         <Box>
-          <Text transition={'all .3s ease'} _groupHover={{ color: 'orange.900' }} fontWeight={500}>
+          <Text transition={'all .3s ease'} _groupHover={{ color: 'brand.900' }} fontWeight={500}>
             {label}
           </Text>
           <Text fontSize={'sm'}>{subLabel}</Text>
