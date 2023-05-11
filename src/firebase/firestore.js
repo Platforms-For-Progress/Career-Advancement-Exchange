@@ -18,6 +18,7 @@ export const checkIfDocExists = async (collection, id) => {
         return true;
     } else {
         console.log("No such document!");
+        console.log("false")
         return false;
     }
 }

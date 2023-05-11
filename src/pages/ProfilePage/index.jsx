@@ -23,7 +23,16 @@ import { checkIfDocExists } from '../../firebase/firestore';
 const ProfilePage = () => {
   const navigate = useNavigate();
   const { user, userInfo, loading, error } = useUser();
-
+  const [userHasRequest, setUserHasRequest] = useState(false);
+  useEffect(() => {
+    const checkIfUserHasRequest = async () => {
+      const userHasRequest = await checkIfDocExists('requests', user.uid);
+      setUserHasRequest(userHasRequest);
+    };
+    if (user) {
+      checkIfUserHasRequest();
+    }
+  }, [user]);
   const handleLogout = async () => {
     await auth.signOut();
     navigate('/signin');
@@ -87,7 +96,8 @@ const ProfilePage = () => {
         </Button>
       </Stack>
       <Stack spacing={4} direction={'column'} align={'center'} pt={6}>
-        {/* { checkIfDocExists('requests', user?.uid) ? (
+        { (userHasRequest) ? (
+          
            
           <Button 
           flex={1}
@@ -102,7 +112,7 @@ const ProfilePage = () => {
           onClick={() => navigate('/requestHome')}
           >
           View Request
-        </Button>) : ( */}
+        </Button>) : (
           <Button
           flex={1}
           fontSize={'lg'}
@@ -117,7 +127,7 @@ const ProfilePage = () => {
           >
           Make Request
         </Button> 
-        {/*    */}
+        )}
        
       </Stack>
     </ProfileCard>
