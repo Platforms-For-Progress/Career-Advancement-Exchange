@@ -16,6 +16,7 @@ import {
     useColorModeValue,
     
 } from '@chakra-ui/react';
+import Status from '../Status';
 const reqLanding = () => {
     return (
         <Box 
@@ -33,7 +34,7 @@ const reqLanding = () => {
 
             <TabPanels>
                 <TabPanel>
-                <p>one!</p>
+                < Status />
                 </TabPanel>
                 <TabPanel>
                 <p>two!</p>
