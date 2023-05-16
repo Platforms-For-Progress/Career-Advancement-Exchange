@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { setDoc, doc, onSnapshot } from 'firebase/firestore';
 import { auth, firestore } from '../../firebase'; // Import your firestore instance
+import { setRequest } from '../../firebase/firestore';
 
 export const UserContext = createContext();
 
@@ -11,9 +12,16 @@ export function UserProvider({ children }) {
 
   useEffect(() => {
     if (user) {
-      const unsubscribe = onSnapshot(doc(firestore, 'users', user.uid), (docSnapshot) => {
+      const unsubscribe = onSnapshot(doc(firestore, 'users', user.uid), async (docSnapshot) => {
         if (docSnapshot.exists()) {
           setUserInfo(docSnapshot.data());
+        } else {
+          await setDoc(doc(firestore, 'users', user.uid), {
+            name: user.displayName,
+            email: user.email,
+            // admin_status: 0,
+            role: 'user'
+          });
         }
       });
 
