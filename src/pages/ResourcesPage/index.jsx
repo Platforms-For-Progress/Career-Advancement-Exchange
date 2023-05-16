@@ -69,8 +69,8 @@ const ResourcesPage= () => {
 
         </Box>
         <Box>
-        <Text fontFamily={'prata'} pos={'relative'} left={800} top={100} fontSize='5xl'>Programs</Text>
-      <Button as={RouterLink} to={'/resources/cape'} fontFamily={'prata'} pos={'relative'} w='140%' h='100px' left={800} top={150} bg={brand} color='black' fontSize='4xl'>CAPE</Button> 
+        <Text fontFamily={'prata'} pos={'relative'} left={750} top={100} fontSize='5xl'>Programs</Text>
+      <Button as={RouterLink} to={'/resources/cape'} fontFamily={'prata'} pos={'relative'} w='140%' h='100px' left={750} top={130} bg={brand} color='black' fontSize='4xl'>CAPE</Button> 
 
         </Box>
 
