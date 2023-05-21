@@ -3,7 +3,7 @@ import { doc, setDoc, getDoc, getDocs, collection } from 'firebase/firestore';
 
 export const setRequest = async (collection, id, data) => {
   //   console.log('setRequest', collection, id, data);
-  //   console.log('firestore', firestore);
+    console.log('firestore', firestore);
   await setDoc(doc(firestore, collection, id), { data });
   // console.log('userRef', userRef);
 };

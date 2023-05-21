@@ -18,26 +18,14 @@ import CreateRequest from '../pages/Requests/CreateRequest';
 import AdminDashboardLayout from '../components/AdminDashboardLayout';
 import AdminHome from '../pages/Admin';
 import AdminManage from '../pages/Admin/Manage';
+import Loading from '../Pages/Loading/Loading';
+import Links from '../Pages/Links/Links';
 
 const routeElements = (
   <>
-    <Route path="/" element={<RootLayout />} errorElement={<ErrorPage />}>
-      <Route index element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/portfolios" element={<Portfolios />} />
-      <Route path="/contactus" element={<ContactUs />} />
-      <Route path="/getinvolved" element={<GetInvolvedPage />} />
-      <Route path="/signin" element={<Login />} />
-      <Route path="/signup" element={<Register />} />
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/request" element={<RequestsHome />} />
-      <Route path="/request/create" element={<CreateRequest />} />
-      {/* Add more routes here */}
-      <Route path="/admin" element={<AdminDashboardLayout />}>
-        <Route index element={<AdminHome />} />
-        <Route path="manage" element={<AdminManage />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
+    <Route path="/" errorElement={<ErrorPage />}>
+      <Route index element={<Loading />} />
+      <Route path="/links" element={<Links />} />
       <Route path="*" element={<NotFound />} />
     </Route>
   </>

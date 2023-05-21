@@ -1,7 +1,7 @@
 {
   "hosting": {
     "site": "career-advancement-exchange",
-    "public": "build",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",
