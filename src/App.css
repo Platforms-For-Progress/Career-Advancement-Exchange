@@ -1,15 +1,4 @@
-.background {
-  /* background-image: linear-gradient(90deg, #68b5d0, #9c68d7af); */
-  background-color: #F9F6E8;
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 100vh;
-  min-width: 100vw;
-  margin: 0px;
-  padding: 0px;
-  position: relative;
-  padding-bottom: 100px;
+#root {
+  margin: 0;
+  padding: 0;
 }
-
