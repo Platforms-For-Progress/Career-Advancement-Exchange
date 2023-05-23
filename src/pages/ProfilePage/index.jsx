@@ -11,7 +11,12 @@ import {
   useColorModeValue,
   Spinner,
   Avatar,
-  StackDivider
+  StackDivider,
+  Editable,
+  useEditableControls,
+  ButtonGroup,
+  IconButton,
+  EditablePreview
 } from '@chakra-ui/react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
