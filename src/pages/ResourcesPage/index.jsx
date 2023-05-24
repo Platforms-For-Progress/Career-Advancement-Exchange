@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 import { Flex, Text, Button } from '@chakra-ui/react';
-import '@fontsource/prata';
 import { Link as RouterLink } from 'react-router-dom';
 
 const brand = '#EFD79F';
@@ -11,10 +10,10 @@ const ResourcesPage = () => {
     <Box bg="#F9F6E8" minH="95vh" maxW="full" mt={0} centerContent overflow="auto">
       <Flex direction="row">
         <Box>
-          <Text fontFamily={'prata'} pos={'relative'} right={-10} fontSize="7xl">
+          <Text fontFamily={'Prata'} pos={'relative'} right={-10} fontSize="7xl">
             Resources
           </Text>
-          <Text fontFamily={'prata'} pos={'relative'} right={-10} pt={0} fontSize="4xl">
+          <Text fontFamily={'Prata'} pos={'relative'} right={-10} pt={0} fontSize="4xl">
             About Our Resources
           </Text>
           {/* <Text   pos={'relative'} ml={900} top={-5} fontSize='5xl'>Programs</Text>
@@ -39,7 +38,7 @@ const ResourcesPage = () => {
           <Button
             as={RouterLink}
             to={'/resources/cape'}
-            fontFamily={'prata'}
+            fontFamily={'Prata'}
             pos={'relative'}
             w="140%"
             h="100px"

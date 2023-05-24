@@ -2,7 +2,6 @@ import React from 'react';
 import { Box } from '@chakra-ui/react';
 import { Flex, Text } from '@chakra-ui/react';
 
-import '@fontsource/prata';
 import { Button } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import {
@@ -23,7 +22,7 @@ const CAPEPage = () => {
     <Box bg="#F9F6E8" minH="95vh" maxW="full" mt={0}>
       <Flex direction="row">
         <Box>
-          <Text fontFamily={'prata'} pos={'relative'} right={-10} fontSize="7xl">
+          <Text fontFamily={'Prata'} pos={'relative'} right={-10} fontSize="7xl">
             CAPE
           </Text>
 
@@ -38,7 +37,7 @@ const CAPEPage = () => {
               px={20}
               py={10}
               fontSize="4xl"
-              fontFamily={'prata'}
+              fontFamily={'Prata'}
               rightIcon={<ChevronDownIcon />}></MenuButton>
             <MenuList bg={brand} height={'500px'} width={'561px'} position={'absolute'}>
               <MenuItem bg={brand}>
@@ -90,7 +89,7 @@ const CAPEPage = () => {
                 px={20}
                 py={10}
                 fontSize="4xl"
-                fontFamily={'prata'}
+                fontFamily={'Prata'}
                 rightIcon={<ChevronDownIcon />}></MenuButton>
               <MenuList bg={brand} height={'500px'} width={'561px'} position={'absolute'}>
                 <MenuItem bg={brand}>
@@ -124,7 +123,7 @@ const CAPEPage = () => {
           <Text
             position={'relative'}
             fontSize="4xl"
-            fontFamily={'prata'}
+            fontFamily={'Prata'}
             marginTop={22}
             marginLeft={58}>
             {' '}
@@ -146,7 +145,7 @@ const CAPEPage = () => {
           <Text
             position={'relative'}
             fontSize="4xl"
-            fontFamily={'prata'}
+            fontFamily={'Prata'}
             marginTop={22}
             marginLeft={58}>
             {' '}

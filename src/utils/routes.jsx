@@ -18,6 +18,9 @@ import CreateRequest from '../pages/Requests/CreateRequest';
 import AdminDashboardLayout from '../components/AdminDashboardLayout';
 import AdminHome from '../pages/Admin';
 import AdminManage from '../pages/Admin/Manage';
+import CAPEPage from '../pages/CAPEPage';
+import ResourcesPage from '../pages/ResourcesPage';
+
 
 const routeElements = (
   <>
