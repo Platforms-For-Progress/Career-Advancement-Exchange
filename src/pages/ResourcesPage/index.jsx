@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
 import { Flex, Text, Button } from '@chakra-ui/react';
-
 import { Link as RouterLink } from 'react-router-dom';
 
 const brand = '#EFD79F';

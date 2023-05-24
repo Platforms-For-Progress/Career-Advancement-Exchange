@@ -1,0 +1,45 @@
+.login {
+    font-family: 'Zilla Slab', serif;
+    font-weight: bold;
+    margin-left: 4%;
+    margin-top: 4%;
+    cursor: false;
+    /* margin: auto; */
+}
+.section1 {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    /* margin: auto;    */
+}
+.cont {
+    /* display: flex; */
+    text-align: center;
+    /* margin: auto; */
+    /* margin-left: 35%; */
+    /* margin-top: 5%;
+    margin-right: 5%; */
+    margin:auto;
+    /* transform: scale(1.4); */
+    /* transform: translate(20%, 50%); */
+    padding: 5%;
+   outline: 1px solid black;
+   background-color: rgba(155, 137, 179, 0.3)   ;
+   width: 40%
+}
+.middlecont {
+    margin: 4%;
+    align-items: center;
+}
+.form-group {
+    margin-bottom: 2%;
+    margin-block-end: 5%;
+}
+.formy {
+    /* display: flex; */
+    /* margin-left: 40%;
+    width: 20%; */
+    margin:  5%;
+}
+.add {
+    margin: 1%;
+}

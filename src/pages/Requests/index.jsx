@@ -15,12 +15,15 @@ import {
   TabPanel,
   useColorModeValue
 } from '@chakra-ui/react';
+import Status from './Status';
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { firestore } from '../../firebase';
+import MessageAdmin from './MessageAdmin';
+
 const TAB_DATA = [
-  { label: 'Status', component: <p>status</p> },
-  { label: 'Survey Responses', component: <p>Responses</p> },
-  { label: 'Collab Space', component: <p>Collab Space</p> },
-  { label: 'Message Admins', component: <p>Message Admins</p> },
-  { label: 'Delete Request', component: <p>Delete Request</p> }
+  { label: 'Status', component: <Status /> },
+  { label: 'Collab Space', component: <Link to="/request/collab-space">Launch Collab Space</Link> },
+  { label: 'Message Admins', component: <MessageAdmin /> }
 ];
 const RequestHome = () => {
   return (

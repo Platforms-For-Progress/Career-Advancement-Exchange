@@ -98,7 +98,11 @@ const CreateRequest = () => {
   const handleSubmit = async () => {
     try {
       await updateDoc(doc(firestore, 'users', user.uid), {
-        'request.survey_data': userResponses
+        'request.survey_data': Object.entries(userResponses).map(([prompt, response]) => ({
+          prompt,
+          response
+        })),
+        status: 'pending'
       });
       navigate('/request');
     } catch (error) {

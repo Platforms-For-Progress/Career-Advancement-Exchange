@@ -35,6 +35,8 @@ const routeElements = (
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/request" element={<RequestsHome />} />
       <Route path="/request/create" element={<CreateRequest />} />
+      <Route path="/resources/cape" element={<CAPEPage />} />
+      <Route path="/resources" element={<ResourcesPage />} />
       {/* Add more routes here */}
       <Route path="/admin" element={<AdminDashboardLayout />}>
         <Route index element={<AdminHome />} />
