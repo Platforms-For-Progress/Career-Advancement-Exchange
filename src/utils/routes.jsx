@@ -13,29 +13,36 @@ import ProfilePage from '../pages/ProfilePage';
 import GetInvolvedPage from '../pages/GetInvolvedPage';
 import ErrorPage from '../pages/ErrorPage';
 import LoadingPage from '../pages/LoadingPage';
-import RequestPage from '../pages/RequestPage';
-import RequestLanding from '../pages/RequestLanding';
-import ResourcesPage from '../pages/ResourcesPage';
-import CAPEPage from '../pages/CAPEPage';
+import RequestsHome from '../pages/Requests';
+import CreateRequest from '../pages/Requests/CreateRequest';
+import AdminDashboardLayout from '../components/AdminDashboardLayout';
+import AdminHome from '../pages/Admin';
+import AdminManage from '../pages/Admin/Manage';
 
 const routeElements = (
-
-  <Route path="/" element={<RootLayout />} errorElement={<ErrorPage />} >
-    <Route index element={<Home />} />
-    <Route path="/about" element={<About />} />
-    <Route path="/portfolios" element={<Portfolios />} />
-    <Route path="/contactus" element={<ContactUs />} />
-    <Route path="/getinvolved" element={<GetInvolvedPage />} />
-    <Route path="/signin" element={<Login />} />
-    <Route path="/signup" element={<Register />} />
-    <Route path="/profile" element={<ProfilePage />} />
-    <Route path="/request" element={<RequestPage />} />
-    <Route path="/requestHome" element={<RequestLanding />} />
-    <Route path="/resources/cape" element={<CAPEPage />} />
-    <Route path="/resources" element={<ResourcesPage />} />
-    {/* Add more routes here */}
-    <Route path="*" element={<NotFound />} />
-  </Route>
+  <>
+    <Route path="/" element={<RootLayout />} errorElement={<ErrorPage />}>
+      <Route index element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/portfolios" element={<Portfolios />} />
+      <Route path="/contactus" element={<ContactUs />} />
+      <Route path="/getinvolved" element={<GetInvolvedPage />} />
+      <Route path="/signin" element={<Login />} />
+      <Route path="/signup" element={<Register />} />
+      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/request" element={<RequestsHome />} />
+      <Route path="/request/create" element={<CreateRequest />} />
+      <Route path="/resources/cape" element={<CAPEPage />} />
+      <Route path="/resources" element={<ResourcesPage />} />
+      {/* Add more routes here */}
+      <Route path="/admin" element={<AdminDashboardLayout />}>
+        <Route index element={<AdminHome />} />
+        <Route path="manage" element={<AdminManage />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+      <Route path="*" element={<NotFound />} />
+    </Route>
+  </>
 );
 
 const router = createBrowserRouter(createRoutesFromElements(routeElements));

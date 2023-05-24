@@ -21,23 +21,54 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { FcGoogle } from 'react-icons/fc';
 
 import { auth } from '../../firebase';
-import { useSignInWithGoogle, useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import {
+  useSignInWithGoogle,
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+  useAuthState
+} from 'react-firebase-hooks/auth';
 
 export default function Register() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
-  const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(
-    auth,
-    { sendEmailVerification: true }
-  );
+  const [userFirstName, setUserFirstName] = useState('');
+  const [userLastName, setUserLastName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [updateProfile, updating, errorUpdateProfile] = useUpdateProfile(auth);
+
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
   const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] = useSignInWithGoogle(auth);
 
-  useEffect(() => {
-    if (user || userGoogle) {
+  // useEffect(() => {
+  //   if (user || userGoogle) {
+  //     navigate('/profile');
+  //   }
+  // }, [user, userGoogle]);
+
+  const handleSignInWithGoogle = async () => {
+    try {
+      await signInWithGoogle();
       navigate('/profile');
+    } catch (error) {
+      console.log(error);
     }
-  }, [user, userGoogle]);
+  };
+
+  const handleSignUp = async () => {
+    try {
+      const createdUser = await createUserWithEmailAndPassword(userEmail, userPassword);
+      await updateProfile({
+        displayName: userFirstName + ' ' + userLastName
+      });
+      console.log('dn', auth.currentUser.displayName);
+      navigate('/profile');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Flex
@@ -60,24 +91,40 @@ export default function Register() {
               <Box>
                 <FormControl id="firstName" isRequired>
                   <FormLabel>First Name</FormLabel>
-                  <Input type="text" />
+                  <Input
+                    type="text"
+                    value={userFirstName}
+                    onChange={(e) => setUserFirstName(e.target.value)}
+                  />
                 </FormControl>
               </Box>
               <Box>
                 <FormControl id="lastName">
                   <FormLabel>Last Name</FormLabel>
-                  <Input type="text" />
+                  <Input
+                    type="text"
+                    value={userLastName}
+                    onChange={(e) => setUserLastName(e.target.value)}
+                  />
                 </FormControl>
               </Box>
             </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input
+                type="email"
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
+              />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'} />
+                <Input
+                  type={showPassword ? 'text' : 'password'}
+                  value={userPassword}
+                  onChange={(e) => setUserPassword(e.target.value)}
+                />
                 <InputRightElement h={'full'}>
                   <Button
                     variant={'ghost'}
@@ -96,7 +143,8 @@ export default function Register() {
                 color={'white'}
                 _hover={{
                   bg: 'orange.500'
-                }}>
+                }}
+                onClick={handleSignUp}>
                 Sign up
               </Button>
               <Button
@@ -105,7 +153,7 @@ export default function Register() {
                 maxW={'md'}
                 variant={'outline'}
                 leftIcon={<FcGoogle />}
-                onClick={async () => await signInWithGoogle()}>
+                onClick={handleSignInWithGoogle}>
                 <Center>
                   <Text>Sign in with Google</Text>
                 </Center>
@@ -124,7 +172,7 @@ export default function Register() {
         {(error || errorGoogle) && (
           <Alert status="error">
             <AlertIcon />
-            <AlertTitle>Error signing in!</AlertTitle>
+            <AlertTitle>Error registering!</AlertTitle>
             <AlertDescription>Please try again.</AlertDescription>
           </Alert>
         )}

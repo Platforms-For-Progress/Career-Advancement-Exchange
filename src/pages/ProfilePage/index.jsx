@@ -11,34 +11,30 @@ import {
   useColorModeValue,
   Spinner,
   Avatar,
-  StackDivider
+  StackDivider,
+  Editable,
+  useEditableControls,
+  ButtonGroup,
+  IconButton,
+  EditablePreview
 } from '@chakra-ui/react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { useUser } from '../../utils/User';
 
 import ProfileCard from './ProfileCard';
-import { checkIfDocExists } from '../../firebase/firestore';
+import { setDoc, doc } from 'firebase/firestore';
+import { checkIfDocExists, getDocIfExists } from '../../firebase/firestore';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
   const { user, userInfo, loading, error } = useUser();
-  const [userHasRequest, setUserHasRequest] = useState(false);
-  useEffect(() => {
-    const checkIfUserHasRequest = async () => {
-      const userHasRequest = await checkIfDocExists('requests', user.uid);
-      setUserHasRequest(userHasRequest);
-    };
-    if (user) {
-      checkIfUserHasRequest();
-    }
-  }, [user]);
   const handleLogout = async () => {
     await auth.signOut();
     navigate('/signin');
   };
 
-  if (loading) {
+  if (!userInfo || loading) {
     return (
       <ProfileCard>
         <Spinner />
@@ -96,44 +92,69 @@ const ProfilePage = () => {
         </Button>
       </Stack>
       <Stack spacing={4} direction={'column'} align={'center'} pt={6}>
-        { (userHasRequest) ? (
-          
-           
-          <Button 
-          flex={1}
-          fontSize={'lg'}
-          rounded={'full'}
-          colorScheme={'brand'}
-          boxShadow={
-            '0px 1px 25px -5px rgb(255 184 0 / 50%), 0px 10px 10px -5px rgb(255 184 0 / 50%)'
-          }
-          px={6}
-          py={3}
-          onClick={() => navigate('/requestHome')}
-          >
-          View Request
-        </Button>) : (
+        {userInfo.request && (
           <Button
+            as={RouterLink}
+            to="/request"
+            flex={1}
+            fontSize={'lg'}
+            rounded={'full'}
+            bg={'brand.300'}
+            color={'white'}
+            boxShadow={
+              '0px 1px 25px -5px rgb(255 184 0 / 50%), 0px 10px 10px -5px rgb(255 184 0 / 50%)'
+            }
+            _hover={{
+              bg: 'brand.400'
+            }}
+            px={6}
+            py={3}>
+            View Request
+          </Button>
+        )}
+        <Button
+          as={RouterLink}
+          to="/request/create"
           flex={1}
           fontSize={'lg'}
           rounded={'full'}
-          colorScheme={'brand'}
+          bg={'brand.300'}
+          color={'white'}
           boxShadow={
             '0px 1px 25px -5px rgb(255 184 0 / 50%), 0px 10px 10px -5px rgb(255 184 0 / 50%)'
           }
+          _hover={{
+            bg: 'brand.400'
+          }}
           px={6}
-          py={3}
-          onClick={() => navigate('/request')}
-          >
-          Make Request
-        </Button> 
+          py={3}>
+          {userInfo.request ? 'Update Request' : 'Make Request'}
+        </Button>
+
+        {userInfo && (userInfo.role === 'admin' || userInfo.role === 'superadmin') && (
+          <Button
+            as={RouterLink}
+            to="/admin"
+            flex={1}
+            fontFamily={'mono'}
+            fontSize="lg"
+            rounded="full"
+            bg={'brand.300'}
+            color={'white'}
+            boxShadow={
+              '0px 1px 25px -5px rgb(255 184 0 / 50%), 0px 10px 10px -5px rgb(255 184 0 / 50%)'
+            }
+            _hover={{
+              bg: 'brand.400'
+            }}
+            px={6}
+            py={3}>
+            Launch Admin Dashboard
+          </Button>
         )}
-       
       </Stack>
     </ProfileCard>
   );
 };
-
-
 
 export default ProfilePage;

@@ -1,0 +1,54 @@
+.req {
+    font-family: 'Zilla Slab', serif;
+    font-weight: bold;
+    margin: 4%;
+    cursor: false;
+    /* margin:auto; */
+    
+}
+.req2 {
+    /* display: flex; */
+   
+}
+.formmy {
+    outline: 1px solid black;
+    padding: 2%;
+    background-color: rgba(155, 137, 179, 0.3)   ;
+    width: 40%;
+    /* margin-right: 20%; */
+    margin: auto;
+    text-align: center;
+    
+    /* margin-left: 20%; */
+}
+.mainform {
+    /* margin:auto; */
+}
+.row {
+    width: 40%;
+    margin: auto;
+    grid-column-gap: 2%;
+}
+.col-md {
+    margin: auto;
+    outline: 1px solid black;
+    padding: 2%;
+    background-color: rgba(155, 137, 179, 0.3);
+    /* margin-right: 20%; */
+    width: 40%;
+    margin-block: 2%;
+    
+}
+.submits {
+   
+    outline: 1px solid rgba(20, 2, 42, 0.461);
+    background-color: rgba(155, 137, 179, 0.7);
+    width:20%;
+    margin:auto;
+}
+@media screen and (max-width:1000px) {
+    .req {
+        width: 150%;
+        margin-left: -25.5%;
+    }
+}
