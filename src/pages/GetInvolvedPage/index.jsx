@@ -28,7 +28,8 @@ import {
 import girlImage from '../../assets/girlImage.png';
 import { IoLocationSharp, IoMail } from 'react-icons/io5';
 import { BsPerson } from 'react-icons/bs';
-
+import {firestore} from '../../firebase/index';
+import { doc, setDoc } from 'firebase/firestore';
 const bg_page = '#fcf4cf';
 const bg_brand_yellow = "#F5C362";
 
@@ -36,20 +37,31 @@ const GetInvolvedPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const {value, getCheckboxProps} = useCheckboxGroup({defaultValue: []})
+  const [checkedValue, setCheckedValues] = useState([]);
 
   const onNameChange = (event) => setName(event.target.value);
   const onEmailChange = (event) => setEmail(event.target.value);
   const onMessageChange = (event) => setMessage(event.target.value);
+  const onCheckChange = (values) => setCheckedValues(values);
+
 
   const submit = (event) => {
     event.preventDefault();
     console.log("Attempting submit");
-    console.log(name);
-    console.log(email);
-    console.log(message);
-    console.log(value);
-    alert('logged');
+    setDoc(doc(firestore, "getInvolved", name), {
+        Name : name,
+        Email : email,
+        Message: message,
+        Value: checkedValue
+    }).then(()=> {
+        setName("");
+        setEmail("");
+        setMessage("");
+        console.log("Submitted");
+        window.location.reload();
+    }).catch((error) => {
+      console.error("Error submiting: ", error);
+    });
   }
 
   return (
@@ -140,12 +152,12 @@ const GetInvolvedPage = () => {
 
                         <FormControl>
                             <FormLabel>Interested Team</FormLabel>    
-                            <CheckboxGroup>
+                            <CheckboxGroup value={checkedValue} onChange={onCheckChange}>
                                 <Flex direction='column'>
-                                    <Checkbox {...getCheckboxProps({value: 'team1'})}>Team 1</Checkbox>
-                                    <Checkbox {...getCheckboxProps({value: 'team2'})}>Team 2</Checkbox>
-                                    <Checkbox {...getCheckboxProps({value: 'team3'})}>Team 3</Checkbox>
-                                    <Checkbox {...getCheckboxProps({value: 'team4'})}>Team 4</Checkbox>
+                                    <Checkbox value='team1'> Team 1</Checkbox>
+                                    <Checkbox value='team2'>Team 2</Checkbox>
+                                    <Checkbox value='team3'>Team 3</Checkbox>
+                                    <Checkbox value='team4'>Team 4</Checkbox>
                                 </Flex>
                             </CheckboxGroup>
                         </FormControl>

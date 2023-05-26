@@ -30,7 +30,38 @@ import { BsGithub, BsDiscord, BsPerson } from 'react-icons/bs';
 import {FaLinkedinIn, FaTiktok, FaInstagram} from 'react-icons/fa'
 import girl from '../../assets/girlImage.png'
 
+// import { firestore } from '../../base';
+
+import { doc, setDoc } from 'firebase/firestore';
+import { useState } from 'react';
+import {firestore} from '../../firebase/index.js';
 export default function contact() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const onNameChange = (event) => setName(event.target.value);
+  const onEmailChange = (event) => setEmail(event.target.value);
+  const onMessageChange = (event) => setMessage(event.target.value);
+  
+  const submit = (event) => {
+    event.preventDefault();
+    console.log("Attempting submit");
+    setDoc(doc(firestore, "contacts", name), {
+        Name : name,
+        Email : email,
+        Message: message,
+    }).then(()=> {
+        setName("");
+        setEmail("");
+        setMessage("");
+        console.log("Submitted");
+        window.location.reload();
+    }).catch((error) => {
+      console.error("Error submiting: ", error);
+    });
+  }
+
   return (
     <Container bg="#F9F6E8" maxW="full" minH={'95vh'} mt={0} centerContent overflow="hidden">
       <Flex>
@@ -116,20 +147,20 @@ export default function contact() {
                             pointerEvents="none"
                             children={<BsPerson color="gray.800" />}
                           />
-                          <Input type="text" size="md" />
+                          <Input type="text" size="md" onChange={onNameChange} required={true} />
                         </InputGroup>
                       </FormControl>
-                      <FormControl id="name">
+                      <FormControl id="email">
                         <FormLabel>Mail</FormLabel>
                         <InputGroup borderColor="brand.800">
                           <InputLeftElement
                             pointerEvents="none"
                             children={<MdOutlineEmail color="gray.800" />}
                           />
-                          <Input type="text" size="md" />
+                          <Input type="text" size="md" onChange={onEmailChange} required={true}/>
                         </InputGroup>
                       </FormControl>
-                      <FormControl id="name">
+                      <FormControl id="message">
                         <FormLabel>Message</FormLabel>
                         <Textarea
                           borderColor="brand.800"
@@ -137,7 +168,8 @@ export default function contact() {
                             borderRadius: 'gray.300',
                           }}
                           placeholder="message"
-                          
+                          onChange={onMessageChange}
+                          required = {true}
                         />
                       </FormControl>
                       <FormControl id="name" float="right">
@@ -145,7 +177,8 @@ export default function contact() {
                           variant="solid"
                           bg="brand.400"
                           color="white"
-                          _hover={{}}>
+                          _hover={{}}
+                          onClick={submit}>
                           Send Message
                         </Button>
                       </FormControl>
