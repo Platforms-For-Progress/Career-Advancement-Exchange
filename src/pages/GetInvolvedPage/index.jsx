@@ -29,8 +29,8 @@ import girlImage from '../../assets/girlImage.png';
 import { IoLocationSharp, IoMail } from 'react-icons/io5';
 import { BsPerson } from 'react-icons/bs';
 
-const bg_page = '#fcf4cf';
-const bg_brand_yellow = "#F5C362";
+const bg_page = '#F9F6E8';
+const bg_brand_yellow = "brand.300";
 
 const GetInvolvedPage = () => {
   const [name, setName] = useState("");
@@ -152,7 +152,7 @@ const GetInvolvedPage = () => {
 
                         <Spacer h={4}></Spacer>
 
-                        <Button type='submit' mb={0} bg={bg_brand_yellow} textColor='white'>Send Message</Button>
+                        <Button type='submit' mb={0} bg={"brand.400"} textColor='white'>Send Message</Button>
                     </form>
                 </Box>
 
