@@ -20,7 +20,7 @@ import AdminHome from '../pages/Admin';
 import AdminManage from '../pages/Admin/Manage';
 import CAPEPage from '../pages/CAPEPage';
 import ResourcesPage from '../pages/ResourcesPage';
-
+import CollabPage from '../pages/CollabPage';
 
 const routeElements = (
   <>
@@ -38,6 +38,7 @@ const routeElements = (
       <Route path="/resources/cape" element={<CAPEPage />} />
       <Route path="/resources" element={<ResourcesPage />} />
       {/* Add more routes here */}
+      <Route path="/collab" element={<CollabPage />} />
       <Route path="/admin" element={<AdminDashboardLayout />}>
         <Route index element={<AdminHome />} />
         <Route path="manage" element={<AdminManage />} />
