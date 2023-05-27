@@ -179,7 +179,7 @@ const AdminManage = () => {
             Survey Responses
           </Text>
           {selectedUser?.request?.survey_data?.length && (
-            <Accordion>
+            <Accordion allowMultiple allowToggle>
               {selectedUser.request.survey_data.map((item, index) => (
                 <AccordionItem key={index}>
                   <h2>
