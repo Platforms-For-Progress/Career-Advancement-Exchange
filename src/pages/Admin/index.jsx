@@ -12,11 +12,21 @@ import {
   Accordion,
   AccordionItem,
   AccordionIcon,
-  AccordionButton
+  AccordionButton,
+  Select
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { firestore } from '../../firebase';
-import { collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  updateDoc,
+  where
+} from 'firebase/firestore';
 
 const AdminHome = () => {
   const navigate = useNavigate();
@@ -39,6 +49,25 @@ const AdminHome = () => {
     setAssignedRequestUsers(result);
   };
 
+  const handleStatusChange = (userId, e) => {
+    const updatedAssignedRequestUsers = assignedRequestUsers.map((user) => {
+      if (user.id === userId) {
+        return { ...user, request: { ...user.request, status: e.target.value } };
+      }
+      return user;
+    });
+    setAssignedRequestUsers(updatedAssignedRequestUsers);
+  };
+
+  const handleStatusSubmit = async (userId) => {
+    const user = assignedRequestUsers.find((user) => user.id === userId);
+    if (user) {
+      await updateDoc(doc(firestore, 'users', userId), {
+        'request.status': user.request.status
+      });
+    }
+  };
+
   if (error) return <Alert status="error">{error}</Alert>;
   if (loading) return <Spinner />;
   return (
@@ -52,13 +81,21 @@ const AdminHome = () => {
               <h2>
                 <AccordionButton>
                   <Box flex="1" textAlign="left">
-                    {request.name}
+                    {request.name} - {request.email}
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4}>
-                {request.email}
+                <Text fontSize="xl">Status</Text>
+                <Select
+                  value={request.request.status}
+                  onChange={(e) => handleStatusChange(request.id, e)}
+                  onBlur={() => handleStatusSubmit(request.id)}>
+                  <option value="pending">Pending</option>
+                  <option value="processing">Processing</option>
+                  <option value="complete">Complete</option>
+                </Select>
                 <Text fontSize="xl">Survey Data</Text>
                 {request.request?.survey_data?.length ? (
                   <Accordion allowMultiple allowToggle>

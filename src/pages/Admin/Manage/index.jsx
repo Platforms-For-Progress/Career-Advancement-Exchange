@@ -212,7 +212,9 @@ const AdminManage = () => {
           <Box maxW={'500px'} overflowY={'scroll'} border={'1px'} borderRadius={'lg'}>
             {assignedAdmins.map((admin) => (
               <Flex key={admin.id} justify="space-between">
-                <Text>{admin.name}</Text>
+                <Text>
+                  {admin.name} - {admin.email}
+                </Text>
                 <Button onClick={() => handleDeleteAdmin(admin.id)}>Delete</Button>
               </Flex>
             ))}
