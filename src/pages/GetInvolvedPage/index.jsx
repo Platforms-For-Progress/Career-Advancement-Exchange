@@ -1,28 +1,28 @@
 import React from 'react';
 
-import { useState } from "react";
-import {FaLinkedinIn, FaTiktok} from "react-icons/fa";
-import {RiInstagramFill} from "react-icons/ri";
-import {HiOutlineMail} from "react-icons/hi";
+import { useState } from 'react';
+import { FaLinkedinIn, FaTiktok } from 'react-icons/fa';
+import { RiInstagramFill } from 'react-icons/ri';
+import { HiOutlineMail } from 'react-icons/hi';
 
 import {
-    Flex,
-    Box,
-    Text,
-    Input,
-    Button,
-    Image,
-    Spacer,
-    FormControl,
-    FormLabel,
-    IconButton,
-    HStack,
-    InputGroup,
-    InputLeftElement,
-    Textarea,
-    CheckboxGroup,
-    Checkbox,
-    useCheckboxGroup
+  Flex,
+  Box,
+  Text,
+  Input,
+  Button,
+  Image,
+  Spacer,
+  FormControl,
+  FormLabel,
+  IconButton,
+  HStack,
+  InputGroup,
+  InputLeftElement,
+  Textarea,
+  CheckboxGroup,
+  Checkbox,
+  useCheckboxGroup
 } from '@chakra-ui/react';
 
 import girlImage from '../../assets/girlImage.png';
@@ -31,7 +31,7 @@ import { BsPerson } from 'react-icons/bs';
 import {firestore} from '../../firebase/index';
 import { doc, setDoc } from 'firebase/firestore';
 const bg_page = '#fcf4cf';
-const bg_brand_yellow = "#F5C362";
+const bg_brand_yellow = '#F5C362';
 
 const GetInvolvedPage = () => {
   const [name, setName] = useState("");
@@ -167,37 +167,98 @@ const GetInvolvedPage = () => {
                         <Button type='submit' mb={0} bg={bg_brand_yellow} textColor='white'>Send Message</Button>
                     </form>
                 </Box>
-
             </Flex>
 
-            <Flex align='center' direction='row'>
-                <a href='https://www.linkedin.com/company/career-advancement-exchange' target='_blank'>
-                    <IconButton 
-                        colorScheme='blackAlpha' 
-                        variant="ghost" 
-                        aria-label='LinkedIn' 
-                        icon={<FaLinkedinIn size={25} />} />
-                </a>
-                
-                <a href='https://www.tiktok.com/@caexchange' target='_blank'>
-                    <IconButton 
-                        colorScheme='blackAlpha' 
-                        variant="ghost" 
-                        aria-label='TikTok' 
-                        icon={<FaTiktok size={20}/>} 
-                        role='link' />
-                </a>
-                
-                <a href='https://www.instagram.com/caexchange/' target='_blank'>
-                    <IconButton 
-                        colorScheme='blackAlpha' 
-                        variant="ghost" 
-                        aria-label='Instagram' 
-                        icon={<RiInstagramFill size={25}/>} />
-                </a>
-            </Flex>
+            <Image align="right" height="200px" src={girlImage}></Image>
+          </Box>
 
+          <Box p={7} bg="white" borderRadius={10}>
+            {/* <FormControl mb={5} onSubmit={submit} > */}
+            <form onSubmit={(event) => submit(event)}>
+              <FormControl isRequired>
+                <FormLabel>Your Name</FormLabel>
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none" size="xs">
+                    <BsPerson color="gray.300" />
+                  </InputLeftElement>
+                  <Input type="name" required={true} onChange={onNameChange} />
+                </InputGroup>
+              </FormControl>
+
+              <Spacer h={4}></Spacer>
+
+              <FormControl isRequired>
+                <FormLabel>Your Email</FormLabel>
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none" size="xs">
+                    <HiOutlineMail color="gray.300" />
+                  </InputLeftElement>
+                  <Input type="email" required={true} onChange={onEmailChange} />
+                </InputGroup>
+              </FormControl>
+              <Spacer h={4}></Spacer>
+
+              <FormControl>
+                <FormLabel>Message</FormLabel>
+                <Textarea onChange={onMessageChange} />
+              </FormControl>
+
+              <Spacer h={4}></Spacer>
+
+              <FormControl>
+                <FormLabel>Interested Team</FormLabel>
+                <CheckboxGroup>
+                  <Flex direction="column">
+                    <Checkbox {...getCheckboxProps({ value: 'team1' })}>Team 1</Checkbox>
+                    <Checkbox {...getCheckboxProps({ value: 'team2' })}>Team 2</Checkbox>
+                    <Checkbox {...getCheckboxProps({ value: 'team3' })}>Team 3</Checkbox>
+                    <Checkbox {...getCheckboxProps({ value: 'team4' })}>Team 4</Checkbox>
+                  </Flex>
+                </CheckboxGroup>
+              </FormControl>
+
+              <Spacer h={4}></Spacer>
+
+              <Button type="submit" mb={0} bg={bg_brand_yellow} textColor="white">
+                Send Message
+              </Button>
+            </form>
+          </Box>
         </Flex>
+
+        <Flex align="center" direction="row">
+          <a
+            href="https://www.linkedin.com/company/career-advancement-exchange"
+            target="_blank"
+            rel="noreferrer">
+            <IconButton
+              colorScheme="blackAlpha"
+              variant="ghost"
+              aria-label="LinkedIn"
+              icon={<FaLinkedinIn size={25} />}
+            />
+          </a>
+
+          <a href="https://www.tiktok.com/@caexchange" target="_blank" rel="noreferrer">
+            <IconButton
+              colorScheme="blackAlpha"
+              variant="ghost"
+              aria-label="TikTok"
+              icon={<FaTiktok size={20} />}
+              role="link"
+            />
+          </a>
+
+          <a href="https://www.instagram.com/caexchange/" target="_blank" rel="noreferrer">
+            <IconButton
+              colorScheme="blackAlpha"
+              variant="ghost"
+              aria-label="Instagram"
+              icon={<RiInstagramFill size={25} />}
+            />
+          </a>
+        </Flex>
+      </Flex>
     </Box>
   );
 };
