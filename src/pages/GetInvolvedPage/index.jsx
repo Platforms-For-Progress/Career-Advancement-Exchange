@@ -28,67 +28,145 @@ import {
 import girlImage from '../../assets/girlImage.png';
 import { IoLocationSharp, IoMail } from 'react-icons/io5';
 import { BsPerson } from 'react-icons/bs';
-
+import {firestore} from '../../firebase/index';
+import { doc, setDoc } from 'firebase/firestore';
 const bg_page = '#fcf4cf';
 const bg_brand_yellow = '#F5C362';
 
 const GetInvolvedPage = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const { value, getCheckboxProps } = useCheckboxGroup({ defaultValue: [] });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [checkedValue, setCheckedValues] = useState([]);
 
   const onNameChange = (event) => setName(event.target.value);
   const onEmailChange = (event) => setEmail(event.target.value);
   const onMessageChange = (event) => setMessage(event.target.value);
+  const onCheckChange = (values) => setCheckedValues(values);
+
 
   const submit = (event) => {
     event.preventDefault();
-    console.log('Attempting submit');
-    console.log(name);
-    console.log(email);
-    console.log(message);
-    console.log(value);
-    alert('logged');
-  };
+    console.log("Attempting submit");
+    setDoc(doc(firestore, "getInvolved", name), {
+        Name : name,
+        Email : email,
+        Message: message,
+        Value: checkedValue
+    }).then(()=> {
+        setName("");
+        setEmail("");
+        setMessage("");
+        console.log("Submitted");
+        window.location.reload();
+    }).catch((error) => {
+      console.error("Error submiting: ", error);
+    });
+  }
 
   return (
-    <Box bg={bg_page} minH="95vh" p={4}>
-      <Flex
-        margin="0 auto"
-        mt="2vh"
-        justify="center"
-        align="center"
-        direction="column"
-        bg={bg_brand_yellow}
-        width={{ base: '100%', md: '50vw' }}
-        style={{
-          backdropFilter: 'blur(15px)',
-          background: bg_brand_yellow,
-          //border: "1px solid rgba(255, 255, 255, 0.25)",
-          boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
-          borderRadius: '2vw'
-          //outline: "1px solid #222221"
-        }}>
-        <Flex align="center" direction="row" p={10}>
-          <Box m={10}>
-            <Text fontSize="3xl">
-              <b>Get Involved</b>
-            </Text>
+    <Box
+        bg={bg_page}
+        minH='95vh'
+        p={4}
+    >
+        <Flex
+            margin="0 auto"
+            mt="2vh"
+            justify="center"
+            align="center"
+            direction="column"
+            bg={bg_brand_yellow}
+            width={{ base: '100%', md: '50vw' }}
+            style={{
+              backdropFilter: "blur(15px)",
+              background: bg_brand_yellow,
+              //border: "1px solid rgba(255, 255, 255, 0.25)",
+              boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.2)",
+              borderRadius: "2vw",
+              //outline: "1px solid #222221"
+            }}    
+        >
+            <Flex
+                align='center'
+                direction='row'
+                p = {10}
+            >
+                <Box m = {10}>
+                    <Text fontSize='3xl'><b>Get Involved</b></Text>
 
-            <Spacer h={4}></Spacer>
-            <Flex direction="column" pl={5}>
-              <Box pr={4}>
-                <HStack>
-                  <IoMail />
-                  <Text>team@careeradvancementexchange.com</Text>
-                </HStack>
-                <Spacer h={4}></Spacer>
-                <HStack>
-                  <IoLocationSharp />
-                  <Text>Champaign, IL</Text>
-                </HStack>
-              </Box>
+                    <Spacer h={4}></Spacer>
+                    <Flex direction='column' pl={5}>
+                        <Box pr={4}>
+                            <HStack>
+                                <IoMail />
+                                <Text>team@careeradvancementexchange.com</Text>
+                            </HStack>
+                            <Spacer h={4}></Spacer>
+                            <HStack>
+                                <IoLocationSharp/>
+                                <Text>Champaign, IL</Text>
+                            </HStack>
+                        </Box>
+                    </Flex>
+                        
+                    <Image align='right' height='200px' src={girlImage}></Image>
+                </Box>
+                
+                <Box p = {7} bg = 'white' borderRadius={10}>
+                    {/* <FormControl mb={5} onSubmit={submit} > */}
+                    <form onSubmit={(event) => submit(event)}>
+                        <FormControl isRequired>
+                            <FormLabel>Your Name</FormLabel>
+                            <InputGroup>
+                                <InputLeftElement
+                                    pointerEvents="none"
+                                    children={<BsPerson color="gray.300" />}
+                                    size="xs"
+                                    />
+                                <Input type='name' required={true} onChange={onNameChange}/>
+                            </InputGroup>
+                        </FormControl>
+
+                        <Spacer h={4}></Spacer>
+
+                        <FormControl isRequired>
+                            <FormLabel>Your Email</FormLabel>
+                            <InputGroup>
+                                <InputLeftElement
+                                    pointerEvents="none"
+                                    children={<HiOutlineMail color="gray.300" />}
+                                    size="xs"
+                                    />
+                                <Input type='email' required={true} onChange={onEmailChange}/>
+                            </InputGroup>
+                        </FormControl>
+                        <Spacer h={4}></Spacer>
+
+                        <FormControl>
+                            <FormLabel>Message</FormLabel>
+                            <Textarea onChange={onMessageChange}/>
+                        </FormControl>
+
+                        <Spacer h={4}></Spacer>
+
+                        <FormControl>
+                            <FormLabel>Interested Team</FormLabel>    
+                            <CheckboxGroup value={checkedValue} onChange={onCheckChange}>
+                                <Flex direction='column'>
+                                    <Checkbox value='team1'> Team 1</Checkbox>
+                                    <Checkbox value='team2'>Team 2</Checkbox>
+                                    <Checkbox value='team3'>Team 3</Checkbox>
+                                    <Checkbox value='team4'>Team 4</Checkbox>
+                                </Flex>
+                            </CheckboxGroup>
+                        </FormControl>
+
+                        <Spacer h={4}></Spacer>
+
+                        <Button type='submit' mb={0} bg={bg_brand_yellow} textColor='white'>Send Message</Button>
+                    </form>
+                </Box>
             </Flex>
 
             <Image align="right" height="200px" src={girlImage}></Image>
