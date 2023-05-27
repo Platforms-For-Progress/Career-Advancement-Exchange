@@ -20,6 +20,7 @@ import AdminHome from '../pages/Admin';
 import AdminManage from '../pages/Admin/Manage';
 import CAPEPage from '../pages/CAPEPage';
 import ResourcesPage from '../pages/ResourcesPage';
+import MessagePage from '../Pages/MessagePage';
 
 
 const routeElements = (
@@ -38,6 +39,7 @@ const routeElements = (
       <Route path="/resources/cape" element={<CAPEPage />} />
       <Route path="/resources" element={<ResourcesPage />} />
       {/* Add more routes here */}
+      <Route path='/message' element={<MessagePage/>}/>
       <Route path="/admin" element={<AdminDashboardLayout />}>
         <Route index element={<AdminHome />} />
         <Route path="manage" element={<AdminManage />} />

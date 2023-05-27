@@ -34,6 +34,10 @@ const ProfilePage = () => {
     navigate('/signin');
   };
 
+  const handleMessage = () => {
+    navigate('/message')
+  }
+
   if (!userInfo || loading) {
     return (
       <ProfileCard>
@@ -91,6 +95,22 @@ const ProfilePage = () => {
           Logout
         </Button>
       </Stack>
+      {/* Added button to access messaging platform (only allowed for users and admin) */}
+      <Stack direction={"row"} align={"center"} pt={6}>
+        <Button
+          flex={1}
+          fontSize={'sm'}
+          rounded={'full'}
+          bg={'gray.200'}
+          color={'gray.700'}
+          _hover={{
+            bg: 'gray.300'
+          }}
+          onClick={handleMessage}>
+            Message
+        </Button>
+      </Stack>
+
       <Stack spacing={4} direction={'column'} align={'center'} pt={6}>
         {userInfo.request && (
           <Button
