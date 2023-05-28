@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Box, Input, Stack, Text, Button, useStatStyles } from '@chakra-ui/react'
 import Chat from '../../Components/Chat/Chat'
 import Chats from '../../Components/Chat/Chats'
+import Search from '../../Components/Chat/Search'
 
 
 
@@ -41,17 +42,8 @@ const MessagePage = () => {
             onClick={() => setNewMessage(!newMessage)}
             >+</Button>
         </Box>
-        {newMessage ? 
-        <Box borderBottom={"0.5px solid #d5d9db"}>
-            <Text fontSize={"25px"} pl={"15px"}>Start a new message</Text>
-            <Input 
-            placeholder='Type Name'
-            border={"none"}
-            _focusVisible={false}
-            />
-        </Box>
-        :
-        <></>
+        {newMessage && 
+        <Search/>
         }
 
         <Chats/>   
