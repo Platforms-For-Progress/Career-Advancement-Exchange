@@ -10,3 +10,4 @@ used as a reference to the question in the database design.
 2. `select-one`
 3. `free-response`
 4. `select-one-image`
+5. `select-multiple-image`

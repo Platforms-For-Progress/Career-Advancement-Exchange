@@ -150,20 +150,6 @@ const CreateRequest = () => {
       </Stepper>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         {steps[activeStep].content}
-        {/* <Stack align={'center'}>
-          {survey[activeStep].questions.map((question, index) => (
-            <div key={index}>
-              <Text fontSize={'2xl'} fontWeight="bold" color="black" textAlign="center" mt="10vh">
-                {question}
-              </Text>
-              <Textarea
-                size="lg"
-                onChange={(response) => handleResponseChange(index, response)}
-                value={userResponses[[survey[activeStep].questions[index]]]}
-              />
-            </div>
-          ))}
-        </Stack> */}
         <Flex direction={'column'}>
           <Center flex flexDir="row" justifyContent={'space-around'}>
             <Button

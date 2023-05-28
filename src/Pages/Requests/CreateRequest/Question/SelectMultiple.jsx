@@ -6,12 +6,13 @@ import {
   Radio,
   Stack,
   Checkbox,
-  CheckboxGroup
+  CheckboxGroup,
+  Center
 } from '@chakra-ui/react';
 
 function SelectMultiple({ prompt, options }) {
   return (
-    <Box m={4}>
+    <Box>
       <FormControl>
         <FormLabel>{prompt}</FormLabel>
         <CheckboxGroup colorScheme="blue">
