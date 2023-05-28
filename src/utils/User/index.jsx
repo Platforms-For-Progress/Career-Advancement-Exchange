@@ -22,7 +22,6 @@ export function UserProvider({ children }) {
             // admin_status: 0,
             role: 'user'
           });
-          await setDoc(doc(firestore, "userChats", user.displayName), {});
         }
       });
 

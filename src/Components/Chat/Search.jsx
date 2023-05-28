@@ -41,19 +41,46 @@ const Search = () => {
           const res = await getDoc(doc(firestore, "chats", combinedId));
           if (!res.exists()) {
             await setDoc(doc(firestore, "chats", combinedId), {messages:[]})
-            await updateDoc(doc(firestore, "userChats", userInfo.name), {
-              [combinedId+".userInfo"]: {
-                name: user_.name,
-              },
-              [combinedId+".date"]: serverTimestamp()
-            });
-    
-            await updateDoc(doc(firestore, "userChats", user_.name), {
-              [combinedId+".userInfo"]: {
-                name: userInfo.name,
-              },
-              [combinedId+".date"]: serverTimestamp()
-            });
+
+            const user1 = await getDoc(doc(firestore, "userChats", userInfo.name));
+            const user2 = await getDoc(doc(firestore, "userChats", user_.name));
+
+            if (!user1.exists()) {
+              await setDoc(doc(firestore, "userChats", userInfo.name), {
+                [combinedId]: {
+                  date: serverTimestamp(),
+                  userInfo: {
+                    name: user_.name
+                  }
+                }
+              });
+            } else {
+              await updateDoc(doc(firestore, "userChats", userInfo.name), {
+                [combinedId+".userInfo"]: {
+                  name: user_.name,
+                },
+                [combinedId+".date"]: serverTimestamp()
+              });
+            }
+            
+            
+            if (!user2.exists()) {
+              await setDoc(doc(firestore, "userChats", user_.name), {
+                [combinedId]: {
+                  date: serverTimestamp(),
+                  userInfo: {
+                    name: userInfo.name
+                  }
+                }
+              });
+            } else {
+              await updateDoc(doc(firestore, "userChats", user_.name), {
+                [combinedId+".userInfo"]: {
+                  name: userInfo.name,
+                },
+                [combinedId+".date"]: serverTimestamp()
+              });
+            }
           } 
         } catch(err) {}
         setUser_(null)
