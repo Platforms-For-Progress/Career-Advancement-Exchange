@@ -1,0 +1,17 @@
+[
+    {
+        "label": "desktop-layout",
+        "prompt": "Select your preferred desktop layouts",
+        "type": "select-multiple-image",
+        "options": [
+            {
+                "label": "Aside Layout",
+                "image": "/survey/desktop-layout-0.svg"
+            },
+            {
+                "label": "Header Layout",
+                "image": "/survey/desktop-layout-1.svg"
+            }
+        ]
+    }
+]

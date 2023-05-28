@@ -31,31 +31,36 @@ import { setDoc, doc, updateDoc } from 'firebase/firestore';
 import { auth, firestore } from '../../../firebase';
 import { useUser } from '../../../utils/User';
 
+import StepTemplate from './StepTemplate';
+import introQuestions from './survey/intro_questions.json';
+import contentQuestions from './survey/content_questions.json';
+import designQuestions from './survey/design_questions.json';
+import endQuestions from './survey/end_questions.json';
+import survey from './survey/survey.json';
+
 const steps = [
   {
-    title: 'First',
-    questions: [
-      'What do you do for work/study? What do you enjoy most about it?',
-      'What are your hobbies/interests? How did you get interested in them?'
-    ]
+    label: 'Introduction',
+    description: 'Tell us about yourself',
+    content: <StepTemplate questions={introQuestions} />
   },
   {
-    title: 'Second',
-    questions: [
-      'What is your favorite book/movie/TV show and why?',
-      "What's something you've always wanted to try but haven't yet?",
-      "What are your values? What's important to you in life?"
-    ]
+    label: 'Content',
+    description: "What's on your website?",
+    content: <StepTemplate questions={contentQuestions} />
   },
   {
-    title: 'Third',
-    questions: [
-      "What's something you're passionate about?",
-      "What's a challenge you've faced in your life and how did you overcome it?",
-      "What's something that makes you happy?"
-    ]
+    label: 'Design',
+    description: 'Tell us what you envision',
+    content: <StepTemplate questions={designQuestions} />
+  },
+  {
+    label: 'Wrapping Up',
+    description: 'Almost there!',
+    content: <StepTemplate questions={endQuestions} />
   }
 ];
+
 const CreateRequest = () => {
   const navigate = useNavigate();
   const { user, userInfo, loading, error } = useUser();
@@ -64,7 +69,7 @@ const CreateRequest = () => {
     count: steps.length
   });
   const [userResponses, setUserResponses] = useState(
-    steps
+    survey
       .flatMap((step) => step.questions)
       .reduce((acc, question) => {
         acc[question] = '';
@@ -72,12 +77,9 @@ const CreateRequest = () => {
       }, {})
   );
   useEffect(() => {
-    if (!userInfo) {
-      navigate('/signin');
-    }
     if (userInfo?.request?.survey_data) {
       setUserResponses((previous) =>
-        steps
+        survey
           .flatMap((step) => step.questions)
           .reduce((acc, question) => {
             acc[question] = userInfo.request.survey_data[question] ?? previous[question];
@@ -90,7 +92,7 @@ const CreateRequest = () => {
     setUserResponses((previous) => {
       return {
         ...previous,
-        [steps[activeStep].questions[questionIndex]]: event.target.value
+        [survey[activeStep].questions[questionIndex]]: event.target.value
       };
     });
   };
@@ -111,10 +113,25 @@ const CreateRequest = () => {
     }
   };
 
+  const handleSave = async () => {
+    try {
+      await updateDoc(doc(firestore, 'users', user.uid), {
+        'request.survey_data': Object.entries(userResponses).map(([prompt, response]) => ({
+          prompt,
+          response
+        })),
+        status: 'pending'
+      });
+    } catch (error) {
+      alert('There was an error saving your request, please try again');
+      console.log(error);
+    }
+  };
+
   return (
     <Box bg="white" minH="95vh" p={4}>
-      <Stepper size="lg" index={activeStep} colorScheme="brand">
-        {steps.map((step, index) => (
+      <Stepper size="lg" index={activeStep} colorScheme="brand" mx={10}>
+        {steps.map(({ label, description, content }, index) => (
           <Step key={index} onClick={() => setActiveStep(index)}>
             <StepIndicator>
               <StepStatus
@@ -123,19 +140,18 @@ const CreateRequest = () => {
                 active={<StepNumber />}
               />
             </StepIndicator>
-
             <Box flexShrink="0">
-              {/* <StepTitle>{step.title}</StepTitle>
-              <StepDescription>{step.description}</StepDescription> */}
+              <StepTitle>{label}</StepTitle>
+              <StepDescription>{description ?? ''}</StepDescription>
             </Box>
-
             <StepSeparator />
           </Step>
         ))}
       </Stepper>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-        <Stack align={'center'}>
-          {steps[activeStep].questions.map((question, index) => (
+        {steps[activeStep].content}
+        {/* <Stack align={'center'}>
+          {survey[activeStep].questions.map((question, index) => (
             <div key={index}>
               <Text fontSize={'2xl'} fontWeight="bold" color="black" textAlign="center" mt="10vh">
                 {question}
@@ -143,35 +159,64 @@ const CreateRequest = () => {
               <Textarea
                 size="lg"
                 onChange={(response) => handleResponseChange(index, response)}
-                value={userResponses[[steps[activeStep].questions[index]]]}
+                value={userResponses[[survey[activeStep].questions[index]]]}
               />
             </div>
           ))}
-          {/* {activeStep} */}
-          {/* <Text fontSize={'2xl'} fontWeight="bold" color="black" textAlign="center" mt="10vh">What do you do for work/study? What do you enjoy most about it?</Text> */}
-        </Stack>
-        {activeStep === steps.length - 1 ? (
-          <Button
-            fontFamily={'heading'}
-            mt={8}
-            w={'full'}
-            bgGradient="linear(to-r, brand.300, brand.400)"
-            color={'white'}
-            _hover={{
-              bgGradient: 'linear(to-r, brand.400, brand.300)'
-            }}
-            onClick={handleSubmit}>
-            Submit Request
+        </Stack> */}
+        <Flex direction={'column'}>
+          <Center flex flexDir="row" justifyContent={'space-around'}>
+            <Button
+              onClick={() => setActiveStep(activeStep - 1)}
+              w={'full'}
+              ml={5}
+              isDisabled={activeStep === 0}>
+              Previous
+            </Button>
+            <Button
+              onClick={() => setActiveStep(activeStep + 1)}
+              w={'full'}
+              ml={5}
+              isDisabled={activeStep === survey.length - 1}>
+              Next
+            </Button>
+          </Center>
+          {activeStep === survey.length - 1 ? (
+            <Button
+              fontFamily={'heading'}
+              mt={8}
+              w={'full'}
+              bgGradient="linear(to-r, brand.300, brand.400)"
+              color={'white'}
+              _hover={{
+                bgGradient: 'linear(to-r, brand.400, brand.300)'
+              }}
+              onClick={handleSubmit}>
+              Submit Request
+            </Button>
+          ) : (
+            <>
+              <Button
+                fontFamily={'heading'}
+                mt={8}
+                w={'full'}
+                bgGradient="linear(to-r, brand.300, brand.400)"
+                color={'white'}
+                _hover={{
+                  bgGradient: 'linear(to-r, brand.400, brand.300)'
+                }}
+                onClick={handleSave}>
+                Save responses
+              </Button>
+            </>
+          )}
+        </Flex>
+        <Center>
+          <Button colorScheme="orange" as={RouterLink} to="/profile">
+            Back to Profile
           </Button>
-        ) : (
-          <Button onClick={() => setActiveStep(activeStep + 1)}>Next</Button>
-        )}
+        </Center>
       </Stack>
-      <Center>
-        <Button colorScheme="orange" as={RouterLink} to="/profile">
-          Back to Profile
-        </Button>
-      </Center>
     </Box>
   );
 };
