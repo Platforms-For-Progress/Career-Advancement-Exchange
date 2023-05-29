@@ -57,7 +57,7 @@ export default function Status() {
             <Button as={RouterLink} to="/request/create" mt="1rem">
               View survey responses
             </Button>
-            <Button as={RouterLink} to="/profile" mt="1rem" colorScheme="orange" size="lg">
+            <Button as={RouterLink} to="/profile" mt="1rem" colorScheme="brand" size="lg">
               Go to profile
             </Button>
           </Stack>

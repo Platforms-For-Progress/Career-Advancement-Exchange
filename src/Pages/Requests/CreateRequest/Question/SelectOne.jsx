@@ -7,7 +7,7 @@ function SelectOne({ prompt, label, options, userResponses, handleResponseChange
       <FormControl>
         <FormLabel>{prompt}</FormLabel>
         <RadioGroup
-          colorScheme="orange"
+          colorScheme="brand"
           onChange={(value) => handleResponseChange(label, value)}
           value={userResponses[label]}>
           <Stack direction="column">

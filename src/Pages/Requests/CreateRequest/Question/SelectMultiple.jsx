@@ -15,7 +15,7 @@ function SelectMultiple({ prompt, label, options, userResponses, handleResponseC
     <Box>
       <FormControl>
         <FormLabel>{prompt}</FormLabel>
-        <CheckboxGroup colorScheme="orange">
+        <CheckboxGroup colorScheme="brand">
           <Stack direction="column">
             {options.map((option, index) => (
               <Checkbox
