@@ -121,9 +121,7 @@ const ProfilePage = () => {
             rounded={'full'}
             bg={'brand.300'}
             color={'white'}
-            boxShadow={
-              '0px 1px 25px -5px rgb(255 184 0 / 50%), 0px 10px 10px -5px rgb(255 184 0 / 50%)'
-            }
+            
             _hover={{
               bg: 'brand.400'
             }}
@@ -140,9 +138,7 @@ const ProfilePage = () => {
             rounded={'full'}
             bg={'brand.300'}
             color={'white'}
-            boxShadow={
-              '0px 1px 25px -5px rgb(255 184 0 / 50%), 0px 10px 10px -5px rgb(255 184 0 / 50%)'
-            }
+            
             _hover={{
               bg: 'brand.400'
             }}
@@ -151,6 +147,22 @@ const ProfilePage = () => {
             Make Request
           </Button>
         )}
+        <Button
+          as={RouterLink}
+          to="/request/create"
+          flex={1}
+          fontSize={'lg'}
+          rounded={'full'}
+          bg={'brand.300'}
+          color={'white'}
+          
+          _hover={{
+            bg: 'brand.400'
+          }}
+          px={6}
+          py={3}>
+          {userInfo.request ? 'Update Request' : 'Make Request'}
+        </Button>
 
         {userInfo && (userInfo.role === 'admin' || userInfo.role === 'superadmin') && (
           <Button
@@ -162,9 +174,7 @@ const ProfilePage = () => {
             rounded="full"
             bg={'brand.300'}
             color={'white'}
-            boxShadow={
-              '0px 1px 25px -5px rgb(255 184 0 / 50%), 0px 10px 10px -5px rgb(255 184 0 / 50%)'
-            }
+            
             _hover={{
               bg: 'brand.400'
             }}

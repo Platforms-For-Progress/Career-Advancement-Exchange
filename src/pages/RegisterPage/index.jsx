@@ -139,10 +139,10 @@ export default function Register() {
                 isLoading={loading}
                 loadingText="Submitting"
                 size="lg"
-                bg={'orange.400'}
+                bg={'brand.400'}
                 color={'white'}
                 _hover={{
-                  bg: 'orange.500'
+                  bg: 'brand.500'
                 }}
                 onClick={handleSignUp}>
                 Sign up
@@ -162,7 +162,7 @@ export default function Register() {
             <Stack pt={6}>
               <Text align={'center'}>
                 Already a user?{' '}
-                <Link as={RouterLink} to="/signin" color={'orange.400'}>
+                <Link as={RouterLink} to="/signin" color={'brand.400'}>
                   Login
                 </Link>
               </Text>

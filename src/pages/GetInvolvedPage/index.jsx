@@ -63,18 +63,18 @@ const GetInvolvedPage = () => {
   };
 
   return (
-    <Box bg={bg_page} minH="95vh" p={4}>
+    <Box bg={'background.400'} minH="95vh" p={4}>
       <Flex
         margin="0 auto"
         mt="2vh"
         justify="center"
         align="center"
         direction="column"
-        bg={bg_brand_yellow}
+        bg={'brand.200'}
         width={{ base: '100%', md: '50vw' }}
         style={{
           backdropFilter: 'blur(15px)',
-          background: bg_brand_yellow,
+          background: 'brand.700',
           //border: "1px solid rgba(255, 255, 255, 0.25)",
           boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
           borderRadius: '2vw'
@@ -145,17 +145,17 @@ const GetInvolvedPage = () => {
                 <FormLabel>Interested Team</FormLabel>
                 <CheckboxGroup value={checkedValue} onChange={onCheckChange}>
                   <Flex direction="column">
-                    <Checkbox value="team1"> Team 1</Checkbox>
-                    <Checkbox value="team2">Team 2</Checkbox>
-                    <Checkbox value="team3">Team 3</Checkbox>
-                    <Checkbox value="team4">Team 4</Checkbox>
+                    <Checkbox value="team1">Software</Checkbox>
+                    <Checkbox value="team2">Fundraising</Checkbox>
+                    <Checkbox value="team3">Business</Checkbox>
+                    <Checkbox value="team4">Marketing</Checkbox>
                   </Flex>
                 </CheckboxGroup>
               </FormControl>
 
               <Spacer h={4}></Spacer>
 
-              <Button type="submit" mb={0} bg={bg_brand_yellow} textColor="white">
+              <Button type="submit" mb={0} bg={'brand.400'} textColor="white">
                 Send Message
               </Button>
             </form>

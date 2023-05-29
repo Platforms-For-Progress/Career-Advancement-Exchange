@@ -230,7 +230,7 @@ const CreateRequest = () => {
           )}
         </Flex>
         <Center>
-          <Button colorScheme="orange" as={RouterLink} to="/profile">
+          <Button colorScheme="brand" as={RouterLink} to="/profile">
             Back to Profile
           </Button>
           {/* <Button
