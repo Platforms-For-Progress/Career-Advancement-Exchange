@@ -2,8 +2,11 @@ import React from 'react';
 import { Box } from '@chakra-ui/react';
 import { Flex, Text } from '@chakra-ui/react';
 
+import Butty from './Butty';
+
 import '@fontsource/prata';
 import { Button } from '@chakra-ui/react';
+import VideoButton from '../../components/VideoButton/VideoButton';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import {
   Menu,
@@ -21,142 +24,42 @@ const brand = '#EFD79F';
 const CAPEPage = () => {
   return (
     <Box bg="#F9F6E8" minH="95vh" maxW="full" mt={0}>
-      <Flex direction="row">
+    
         <Box>
           <Text fontFamily={'prata'} pos={'relative'} right={-10} fontSize="7xl">
             CAPE
           </Text>
 
-          <Menu>
-            <MenuButton
-              as={Button}
-              bg={brand}
-              right={-10}
-              width={'561px'}
-              top={20}
-              height={'121px'}
-              px={20}
-              py={10}
-              fontSize="4xl"
-              fontFamily={'prata'}
-              rightIcon={<ChevronDownIcon />}></MenuButton>
-            <MenuList bg={brand} height={'500px'} width={'561px'} position={'absolute'}>
-              <MenuItem bg={brand}>
-                <Box
-                  pos={'relative'}
-                  title="HIIIIIIIIIIIi"
-                  textColor={'black'}
-                  width="44%"
-                  height="33%"
-                  as="iframe"
-                  src="https://drive.google.com/file/d/1gTBuCoMupZofPuOLTaYPsshrIoiCcu8h/preview"
-                  sx={{
-                    aspectRatio: '16/9'
-                  }}></Box>
-                <span>
-                  <Text fontFamily={'prata'}> youtube vid 1</Text>
-                </span>
-              </MenuItem>
-              <MenuItem bg={brand}>
-                <Box
-                  pos={'relative'}
-                  title="HIIIIIIIIIIIi"
-                  width="44%"
-                  height="33%"
-                  as="iframe"
-                  src="https://www.youtube.com/embed/CdzgZ0JxtQw"
-                  sx={{
-                    aspectRatio: '16/9'
-                  }}></Box>
-                <span> youtube vid 2</span>
-              </MenuItem>
-            </MenuList>
-          </Menu>
+         
 
-          {/* <Text   pos={'relative'} ml={900} top={-5} fontSize='5xl'>Programs</Text>
-      <Button  pos={'relative'} w='20%' h='100px'ml={900} top={5} colorScheme='brand'color='black' fontSize='4xl'>CAPE</Button> */}
+      
         </Box>
 
-        <Box>
-          <Flex direction={'column'}>
-            <Menu>
-              <MenuButton
-                as={Button}
-                bg={brand}
-                left={400}
-                top={190}
-                width={'561px'}
-                height={'121px'}
-                px={20}
-                py={10}
-                fontSize="4xl"
-                fontFamily={'prata'}
-                rightIcon={<ChevronDownIcon />}></MenuButton>
-              <MenuList bg={brand} height={'500px'} width={'561px'} position={'absolute'}>
-                <MenuItem bg={brand}>
-                  <Box
-                    position={'relative'}
-                    width="44%"
-                    height="33%"
-                    as="iframe"
-                    src="https://www.youtube.com/embed/CdzgZ0JxtQw"
-                    sx={{
-                      aspectRatio: '16/9'
-                    }}></Box>
-                  <Text fontFamily={'prata'}>Week 2 vid</Text>
-                </MenuItem>
-              </MenuList>
-            </Menu>
-            {/* <Button  pos={'relative'} w='33%' h='100px' ml={800} top={150} bg={brand} color='black' fontSize='4xl'>CAPE</Button>  */}
-          </Flex>
-        </Box>
+        
+    
+      
+
+      <Flex direction="row" mt={68} ml={10} gap={"20%"}>
+        
+        <Butty weekName="Week 0" videoData={{
+          "This lesson is all about Git! Learn about git, download git, and prepare git to be used with VSCode and GitHub! Click to learn more!": "https://drive.google.com/file/d/16ZnykVD0YiGRqeGuCekLnwXN55triE77/preview",
+          "github lesson": "https://drive.google.com/file/d/1J42CxOVAMVNn0EWj9-HmGLayHccMcNlq/preview",
+          "vscode lesson": "https://drive.google.com/file/d/1vYUzCiak_QO-VkCr9g35RvTkec12gmX8/preview"
+
+        }}>
+
+        </Butty>
+        <Butty  weekName="Week 1" videoData={{
+          "COMING SOON": ""
+        }}>
+
+        </Butty>
       </Flex>
-      <Flex direction="row">
-        <Box
-          pos={'relative'}
-          borderRadius={'10px'}
-          top={-67}
-          left={20}
-          title="656uhgfgh"
-          width="259px"
-          height="88px"
-          bg={'#E6C17B'}>
-          <Text
-            position={'relative'}
-            fontSize="4xl"
-            fontFamily={'prata'}
-            marginTop={22}
-            marginLeft={58}>
-            {' '}
-            Week 1
-          </Text>
-        </Box>
-      </Flex>
+      {/* //add more flexs to add more weeks  
+      IM KILLING MYSELF
+      */}
 
-      <Flex direction="row">
-        <Box
-          pos={'relative'}
-          borderRadius={'10px'}
-          top={-150}
-          left={1000}
-          title="656uhgfgh"
-          width="259px"
-          height="88px"
-          bg={'#E6C17B'}>
-          <Text
-            position={'relative'}
-            fontSize="4xl"
-            fontFamily={'prata'}
-            marginTop={22}
-            marginLeft={58}>
-            {' '}
-            Week 2
-          </Text>
-        </Box>
-      </Flex>
-
-      {/* <Text   pos={'relative'} ml={900} top={-5} fontSize='5xl'>Programs</Text>
-      <Button  pos={'relative'} w='20%' h='100px'ml={900} top={5} colorScheme='brand'color='black' fontSize='4xl'>CAPE</Button> */}
+      
     </Box>
   );
 };
