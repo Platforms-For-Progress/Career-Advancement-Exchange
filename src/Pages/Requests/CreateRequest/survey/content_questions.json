@@ -15,5 +15,11 @@
             "A blog",
             "A contact page"
         ]
+    }, 
+    {
+        "label": "content-explanation",
+        "prompt": "Explain everything you want included for each box checked above",
+        "type": "free-response"
+
     }
 ]
