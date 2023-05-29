@@ -6,11 +6,11 @@ import SelectOne from './SelectOne';
 import SelectOneImage from './SelectOneImage';
 import SelectMultipleImage from './SelectMultipleImage';
 
-const QuestionAdapter = ({ question, userResponses, setUserResponses }) => {
+const QuestionAdapter = ({ question, userResponses, handleResponseChange }) => {
   const commonProps = {
     ...question,
     userResponses,
-    setUserResponses
+    handleResponseChange
   };
   switch (question.type) {
     case 'free-response':

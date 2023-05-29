@@ -1,4 +1,5 @@
 import { Box, FormControl, FormLabel, Textarea } from '@chakra-ui/react';
+import { useState } from 'react';
 
 function FreeResponseQuestion({ prompt, label, userResponses, handleResponseChange }) {
   return (
@@ -8,6 +9,7 @@ function FreeResponseQuestion({ prompt, label, userResponses, handleResponseChan
         <Textarea
           maxW={'500px'}
           placeholder="Type your response here..."
+          value={userResponses[label]}
           onChange={(e) => handleResponseChange(label, e.target.value)}
         />
       </FormControl>

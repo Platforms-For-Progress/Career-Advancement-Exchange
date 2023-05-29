@@ -64,78 +64,77 @@ const steps = [
 const CreateRequest = () => {
   const navigate = useNavigate();
   const { user, userInfo, loading, error } = useUser();
+
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(false);
+
   const { activeStep, setActiveStep } = useSteps({
     index: 0,
     count: steps.length
   });
   const [userResponses, setUserResponses] = useState({});
 
-  const handleResponseChange = (questionLabel, response) => {
-    setUserResponses((previous) => {
-      return {
-        ...previous,
-        [questionLabel]: response
-      };
+  const handleResponseChange = (questionLabel, response, action) => {
+    if (action == 'add') {
+      setUserResponses((previous) => {
+        const updatedResponses = { ...previous };
+        if (!updatedResponses[questionLabel]) {
+          updatedResponses[questionLabel] = [];
+        }
+        updatedResponses[questionLabel] = [...updatedResponses[questionLabel], response];
+        return updatedResponses;
+      });
+    } else if (action == 'remove') {
+      setUserResponses((previous) => {
+        return {
+          ...previous,
+          [questionLabel]: previous[questionLabel].filter((item) => item != response)
+        };
+      });
+    } else {
+      setUserResponses((previous) => {
+        return {
+          ...previous,
+          [questionLabel]: response
+        };
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (userInfo?.request?.survey_data) {
+      setUserResponses(userInfo.request.survey_data);
+    }
+  }, [userInfo]);
+
+  const saveResponses = async () => {
+    await updateDoc(doc(firestore, 'users', user.uid), {
+      'request.survey_data': userResponses,
+      status: 'pending'
     });
   };
-  // const [userResponses, setUserResponses] = useState(
-  //   survey
-  //     .flatMap((step) => step.questions)
-  //     .reduce((acc, question) => {
-  //       acc[question] = '';
-  //       return acc;
-  //     }, {})
-  // );
-  // useEffect(() => {
-  //   if (userInfo?.request?.survey_data) {
-  //     setUserResponses((previous) =>
-  //       survey
-  //         .flatMap((step) => step.questions)
-  //         .reduce((acc, question) => {
-  //           acc[question] = userInfo.request.survey_data[question] ?? previous[question];
-  //           return acc;
-  //         }, {})
-  //     );
-  //   }
-  // }, [userInfo]);
-  // const handleResponseChange = (questionIndex, event) => {
-  //   setUserResponses((previous) => {
-  //     return {
-  //       ...previous,
-  //       [survey[activeStep].questions[questionIndex]]: event.target.value
-  //     };
-  //   });
-  // };
 
   const handleSubmit = async () => {
-    // try {
-    //   await updateDoc(doc(firestore, 'users', user.uid), {
-    //     'request.survey_data': Object.entries(userResponses).map(([prompt, response]) => ({
-    //       prompt,
-    //       response
-    //     })),
-    //     status: 'pending'
-    //   });
-    //   navigate('/request');
-    // } catch (error) {
-    //   alert('There was an error submitting your request, please try again');
-    //   console.log(error);
-    // }
+    setSubmitLoading(true);
+    try {
+      await saveResponses();
+      navigate('/request');
+    } catch (error) {
+      alert('There was an error submitting your request, please try again');
+      console.log(error);
+    }
+    setSubmitLoading(false);
   };
 
   const handleSave = async () => {
-    // try {
-    //   await updateDoc(doc(firestore, 'users', user.uid), {
-    //     'request.survey_data': Object.entries(userResponses).map(([prompt, response]) => ({
-    //       prompt,
-    //       response
-    //     })),
-    //     status: 'pending'
-    //   });
-    // } catch (error) {
-    //   alert('There was an error saving your request, please try again');
-    //   console.log(error);
-    // }
+    setSaveLoading(true);
+    try {
+      await saveResponses();
+    } catch (error) {
+      alert('There was an error saving your request, please try again');
+      console.log(error);
+    }
+    setSaveLoading(false);
   };
 
   return (
@@ -182,18 +181,36 @@ const CreateRequest = () => {
             </Button>
           </Center>
           {activeStep === survey.length - 1 ? (
-            <Button
-              fontFamily={'heading'}
-              mt={8}
-              w={'full'}
-              bgGradient="linear(to-r, brand.300, brand.400)"
-              color={'white'}
-              _hover={{
-                bgGradient: 'linear(to-r, brand.400, brand.300)'
-              }}
-              onClick={handleSubmit}>
-              Submit Request
-            </Button>
+            <Stack>
+              <Button
+                fontFamily={'heading'}
+                mt={8}
+                w={'full'}
+                bgGradient="linear(to-r, brand.300, brand.400)"
+                color={'white'}
+                _hover={{
+                  bgGradient: 'linear(to-r, brand.400, brand.300)'
+                }}
+                onClick={handleSave}
+                loadingText="Saving"
+                isLoading={saveLoading}>
+                Save responses
+              </Button>
+              <Button
+                fontFamily={'heading'}
+                mt={8}
+                w={'full'}
+                bgGradient="linear(to-r, brand.300, brand.400)"
+                color={'white'}
+                _hover={{
+                  bgGradient: 'linear(to-r, brand.400, brand.300)'
+                }}
+                onClick={handleSubmit}
+                loadingText="Submitting"
+                isLoading={submitLoading}>
+                Submit Request
+              </Button>
+            </Stack>
           ) : (
             <>
               <Button
@@ -205,7 +222,9 @@ const CreateRequest = () => {
                 _hover={{
                   bgGradient: 'linear(to-r, brand.400, brand.300)'
                 }}
-                onClick={handleSave}>
+                onClick={handleSave}
+                loadingText="Saving"
+                isLoading={saveLoading}>
                 Save responses
               </Button>
             </>

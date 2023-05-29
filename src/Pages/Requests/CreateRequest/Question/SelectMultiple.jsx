@@ -10,15 +10,21 @@ import {
   Center
 } from '@chakra-ui/react';
 
-function SelectMultiple({ prompt, options }) {
+function SelectMultiple({ prompt, label, options, userResponses, handleResponseChange }) {
   return (
     <Box>
       <FormControl>
         <FormLabel>{prompt}</FormLabel>
-        <CheckboxGroup colorScheme="blue">
+        <CheckboxGroup colorScheme="orange">
           <Stack direction="column">
             {options.map((option, index) => (
-              <Checkbox key={index} value={option}>
+              <Checkbox
+                key={index}
+                value={option}
+                isChecked={userResponses[label] && userResponses[label].includes(option)}
+                onChange={(e) =>
+                  handleResponseChange(label, e.target.value, e.target.checked ? 'add' : 'remove')
+                }>
                 {option}
               </Checkbox>
             ))}

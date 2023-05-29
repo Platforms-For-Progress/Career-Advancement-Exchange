@@ -1,6 +1,5 @@
 import { Center, Flex, HStack, Stack } from '@chakra-ui/react';
 import React from 'react';
-import FreeResponseQuestion from './Question/FreeResponse';
 import QuestionAdapter from './Question';
 
 const StepTemplate = ({ questions, userResponses, handleResponseChange }) => {

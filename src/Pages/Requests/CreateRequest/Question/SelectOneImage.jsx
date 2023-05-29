@@ -1,18 +1,19 @@
-import { Box, FormControl, FormLabel, Image, Flex, Text, Checkbox } from '@chakra-ui/react';
+import {
+  Box,
+  FormControl,
+  FormLabel,
+  Image,
+  Flex,
+  Text,
+  Checkbox,
+  Button,
+  RadioGroup,
+  Radio
+} from '@chakra-ui/react';
 import { CheckIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 
-function ImageChoiceQuestion({ prompt, options }) {
-  const [selected, setSelected] = useState([]);
-
-  const handleSelect = (label) => {
-    setSelected([...selected, label]);
-  };
-
-  const handleUnselect = (label) => {
-    setSelected(selected.filter((item) => item !== label));
-  };
-
+function SelectOneImage({ prompt, options, label, userResponses, handleResponseChange }) {
   return (
     <Box m={4}>
       <FormControl>
@@ -20,30 +21,19 @@ function ImageChoiceQuestion({ prompt, options }) {
         <Flex wrap="wrap">
           {options.map((choice, index) => (
             <Box key={index} position="relative">
-              <Checkbox
-                value={choice.label}
-                onChange={(e) =>
-                  e.target.checked ? handleSelect(choice.label) : handleUnselect(choice.label)
-                }
-                display="none"
-              />
               <Box
-                onClick={() =>
-                  selected.includes(choice.label)
-                    ? handleUnselect(choice.label)
-                    : handleSelect(choice.label)
-                }
                 cursor="pointer"
-                mx="10px">
+                mx="10px"
+                onClick={() => handleResponseChange(label, choice.label)}>
                 <Text>{choice.label}</Text>
                 <Image
                   outline="1.5px solid black"
                   src={choice.image}
                   alt={choice.label}
                   height="200px"
-                  opacity={selected.includes(choice.label) ? 0.5 : 1}
+                  opacity={userResponses[label] === choice.label ? 0.5 : 1}
                 />
-                {selected.includes(choice.label) && (
+                {userResponses[label] === choice.label && (
                   <CheckIcon
                     position="absolute"
                     boxSize={10}
@@ -61,4 +51,4 @@ function ImageChoiceQuestion({ prompt, options }) {
   );
 }
 
-export default ImageChoiceQuestion;
+export default SelectOneImage;

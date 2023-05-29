@@ -3,16 +3,6 @@ import { CheckIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 
 function SelectMultipleImage({ prompt, options, label, userResponses, handleResponseChange }) {
-  const [selected, setSelected] = useState([]);
-
-  const handleSelect = (label) => {
-    setSelected([...selected, label]);
-  };
-
-  const handleUnselect = (label) => {
-    setSelected(selected.filter((item) => item !== label));
-  };
-
   return (
     <Box m={4}>
       <FormControl>
@@ -22,28 +12,35 @@ function SelectMultipleImage({ prompt, options, label, userResponses, handleResp
             <Box key={index} position="relative">
               <Checkbox
                 value={choice.label}
+                isChecked={userResponses[label] && userResponses[label].includes(choice.label)}
                 onChange={(e) =>
-                  e.target.checked ? handleSelect(choice.label) : handleUnselect(choice.label)
+                  handleResponseChange(label, e.target.value, e.target.checked ? 'add' : 'remove')
                 }
                 display="none"
               />
               <Box
-                onClick={() =>
-                  selected.includes(choice.label)
-                    ? handleUnselect(choice.label)
-                    : handleSelect(choice.label)
-                }
                 cursor="pointer"
-                mx="10px">
+                mx="10px"
+                onClick={() =>
+                  handleResponseChange(
+                    label,
+                    choice.label,
+                    userResponses[label] && userResponses[label].includes(choice.label)
+                      ? 'remove'
+                      : 'add'
+                  )
+                }>
                 <Text>{choice.label}</Text>
                 <Image
                   outline="1.5px solid black"
                   src={choice.image}
                   alt={choice.label}
                   height="200px"
-                  opacity={selected.includes(choice.label) ? 0.5 : 1}
+                  opacity={
+                    userResponses[label] && userResponses[label].includes(choice.label) ? 0.5 : 1
+                  }
                 />
-                {selected.includes(choice.label) && (
+                {userResponses[label] && userResponses[label].includes(choice.label) && (
                   <CheckIcon
                     position="absolute"
                     boxSize={10}

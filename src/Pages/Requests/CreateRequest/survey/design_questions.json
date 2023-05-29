@@ -1,8 +1,8 @@
 [
     {
         "label": "desktop-layout",
-        "prompt": "Select your preferred desktop layouts",
-        "type": "select-multiple-image",
+        "prompt": "Select your preferred desktop layout",
+        "type": "select-one-image",
         "options": [
             {
                 "label": "Aside Layout",
