@@ -27,7 +27,7 @@ const Home = () => {
 
   return (
     <Box bg="#FFFDFD" minH="95vh" maxW="full" mt={0} centerContent overflow="auto">
-      <Flex direction="row">
+      <Flex direction={{base:"column", md:"row"}}>
         <Box>
           <Image
             pos={'relative'}
@@ -51,9 +51,9 @@ const Home = () => {
             textAlign={'right'}
             fontWeight={'medium'}
             
-            mr={'10px'}
+            mr={{base: 5, md:'10px'}}
             color={'#65391A'}
-            mt={'15vh'}
+            mt={{base: 5, md:'15vh'}}
 
             
             fontSize="6xl">
@@ -69,7 +69,7 @@ const Home = () => {
             alignItems={'flex-end'}
             alignSelf={'flex-end'}
             fontWeight={'bold'}
-            mr={'8vw'}
+            mr={{base: -150, md:'8vw'}}
             fontSize={'6xl'}
             color={"#D65947"}
             
@@ -81,11 +81,11 @@ const Home = () => {
             fontFamily={Epilogue}
             pos={'relative'}
             textAlign={'right'}
-            justifyContent={'flex-end'}
-            alignItems={'flex-end'}
-            alignSelf={'flex-end'}
-            align = {'flex-end'}
-            mr={'8vw'}
+            justifyContent={{ md: 'flex-end'}}
+            alignItems={{ md: 'flex-end'}}
+            alignSelf={{ md: 'flex-end'}}
+            align = {{ md: 'flex-end'}}
+            mr={{base: -150, md:'8vw'}}
             fontSize={'6xl'}
             textDecoration={'underline'}
             fontWeight={'medium'}
@@ -104,7 +104,7 @@ const Home = () => {
             alignItems={'flex-end'}
             alignSelf={'flex-end'}
             align = {'flex-end'}
-            mr={'8vw'}
+            mr={{base: -150, md:'8vw'}}
             fontWeight={'medium'}
             fontSize={'6xl'}
             color={'#65391A'}
@@ -123,7 +123,7 @@ const Home = () => {
             alignItems={'flex-end'}
             alignSelf={'flex-end'}
             align = {'flex-end'}
-            mr={'8vw'}
+            mr={{base: -150, md:'8vw'}}
             fontWeight={'medium'}
             fontSize={'4xl'}
             color={'#CD4910'}
@@ -139,7 +139,7 @@ const Home = () => {
             alignItems={'flex-end'}
             alignSelf={'flex-end'}
             align = {'flex-end'}
-            mr={'8vw'}
+            mr={{base: -150, md:'8vw'}}
             fontWeight={'medium'}
             fontSize={'4xl'}
             color={'#CD4910'}
@@ -152,11 +152,12 @@ const Home = () => {
             to={'/signup'}
             fontFamily={Inter}
             pos={'relative'}
-            ml={'20vw'}
+            ml={{base: '50%', md:'20vw'}}
             bg={'#FF985E'}
             color={'#2C3134'}
             fontSize="3xl"
-            mt={'10vh'}
+            mt={{base: 5, md:'10vh'}}
+            mb={{base: 5, md:'10vh'}}
             
             _hover={{
               bg: '#FF985E',
