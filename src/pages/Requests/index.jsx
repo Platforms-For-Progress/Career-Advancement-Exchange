@@ -22,8 +22,7 @@ import MessageAdmin from './MessageAdmin';
 
 const TAB_DATA = [
   { label: 'Status', component: <Status /> },
-  { label: 'Collab Space', component: <Link to="/request/collab-space">Launch Collab Space</Link> },
-  { label: 'Message Admins', component: <MessageAdmin /> }
+  
 ];
 const RequestHome = () => {
   return (

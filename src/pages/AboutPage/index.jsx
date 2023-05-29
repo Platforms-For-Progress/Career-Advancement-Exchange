@@ -179,21 +179,21 @@ export default function BasicStatistics() {
       fontFamily={Inter}>
       <SplitWithImage />
       <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
-        <chakra.h1 textAlign={'center'} fontSize={'4xl'} py={10} fontWeight={'bold'}>
+        {/* <chakra.h1 textAlign={'center'} fontSize={'4xl'} py={10} fontWeight={'bold'}>
           Our Progress
         </chakra.h1>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
           <StatsCard title={'We Have'} stat={'7 website deployments'} />
           <StatsCard title={'In'} stat={'2 different states'} />
           <StatsCard title={'With Over'} stat={'8000 website views'} />
-        </SimpleGrid>
+        </SimpleGrid> */}
       </Box>
-      <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
+      {/* <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
         <chakra.h1 textAlign={'center'} fontSize={'4xl'} py={10} fontWeight={'bold'}>
           Our Team
         </chakra.h1>
         <Carousel />
-      </Box>
+      </Box> */}
     </Box>
   );
 }
@@ -251,8 +251,7 @@ function SplitWithImage() {
         <Stack spacing={4}>
           <Heading>Celebrating your background, together</Heading>
           <Text color={'gray.500'} fontSize={'lg'}>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-            invidunt ut labore
+            We believe that your background should not be a barrier to your success. We are dedicated to helping you achieve your career goals.
           </Text>
           <Stack
             spacing={4}
@@ -262,7 +261,7 @@ function SplitWithImage() {
               iconBg={useColorModeValue('brand.100', 'yellow.900')}
               title={'ePortfolios'}
               children={
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+                'We create free personalized ePortfolios for underrepresented individuals. We will work with you to create a website that showcases your skills and accomplishments.'
               }
             />
             <Feature
@@ -270,7 +269,7 @@ function SplitWithImage() {
               iconBg={useColorModeValue('brand.100', 'yellow.900')}
               title={'Education'}
               children={
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+                'Our CAPE program teaches the basics of HTML, CSS, Javascript, and React. We drop new lessons each week.'
               }
               // color={'green.800'}
             />
