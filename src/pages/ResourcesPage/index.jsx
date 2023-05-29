@@ -10,9 +10,9 @@ const brand = '#EFD79F';
 const ResourcesPage = () => {
   return (
     <Box bg="background.400" minH="95vh" maxW="full" mt={0} centerContent overflow="auto">
-      <Flex direction="row">
+      <Flex direction={{ base: 'column', md: 'row' }}>
         <Box>
-          <Text fontFamily={Epilogue} pos={'relative'} right={-10} fontSize="7xl">
+          <Text fontFamily={Epilogue} pos={'relative'} right={{base: 0, md: -10}} fontSize={{ base: '4xl', md: '7xl' }}>
             Resources
           </Text>
           
@@ -22,8 +22,8 @@ const ResourcesPage = () => {
             pos={'relative'}
             borderWidth={20}
             borderColor={'brand.300'}
-            right={-30}
-            width="200%"
+            right={{base: 0, md: -30}}
+            width={{ base: '100%', md: '200%' }}
             height="100%"
             mt={10}
             as="iframe"
@@ -33,7 +33,7 @@ const ResourcesPage = () => {
             }}></Box>
         </Box>
         <Box>
-          <Text fontFamily={Epilogue} pos={'relative'} left={750} top={100} fontSize="5xl">
+          <Text fontFamily={Epilogue} pos={'relative'} left={{base: 0, md: 750}} top={100} fontSize={{ base: '3xl', md: '5xl' }}>
             Programs
           </Text>
           <Button
@@ -41,13 +41,13 @@ const ResourcesPage = () => {
             to={'/resources/cape'}
             fontFamily={Inter}
             pos={'relative'}
-            w="140%"
+            w={{ base: '100%', md: '140%' }}
             h="100px"
-            left={750}
+            left={{base: 0, md: 750}}
             top={130}
             bg={"brand.300"}
             color="black"
-            fontSize="4xl">
+            fontSize={{ base: '2xl', md: '4xl' }}>
             CAPE
           </Button>
         </Box>

@@ -19,8 +19,8 @@ const brand = '#EFD79F';
 
 const CAPEPage = () => {
   return (
-    <Box bg="background.400" minH="95vh" maxW="full" mt={0}>
-      <Flex direction="row">
+    <Box bg="background.400" minH="95vh" minW ="100vw" mt={0}>
+      <Flex direction={{base: 'column', md: 'row'}}>
         <Box>
           <Text fontFamily={'Prata'} pos={'relative'} right={-10} fontSize="7xl">
             CAPE
@@ -29,9 +29,9 @@ const CAPEPage = () => {
           <Menu>
             <MenuButton
               as={Button}
-              bg={"brand.400"}
+              bg={"brand.300"}
               right={-10}
-              width={'561px'}
+              width={{base: '300px', md:'561px'}}
               top={20}
               height={'121px'}
               px={20}
@@ -78,14 +78,14 @@ const CAPEPage = () => {
         </Box>
 
         <Box>
-          <Flex direction={'column'}>
+          <Flex direction={{base:'column', md:'row'}}>
             <Menu>
               <MenuButton
                 as={Button}
                 bg={"brand.300"}
-                left={400}
+                left={{base: 10, md: 400}}
                 top={190}
-                width={'561px'}
+                width={{base: '300px', md:'561px'}}
                 height={'121px'}
                 px={20}
                 py={10}
@@ -115,8 +115,8 @@ const CAPEPage = () => {
         <Box
           pos={'relative'}
           borderRadius={'10px'}
-          top={-67}
-          left={20}
+          top={{base:'-30vh', md:-67}}
+          left={{base: 10, md:20}}
           title="656uhgfgh"
           width="259px"
           height="88px"
@@ -137,8 +137,10 @@ const CAPEPage = () => {
         <Box
           pos={'relative'}
           borderRadius={'10px'}
-          top={-150}
-          left={1000}
+          // top={-150}
+          // left={1000}
+          top={{base:'-10vh', md:-150}}
+          left={{base: 10, md:1000}}
           title="656uhgfgh"
           width="259px"
           height="88px"
