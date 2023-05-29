@@ -18,8 +18,10 @@ import {
   AccordionButton,
   AccordionIcon,
   AccordionPanel,
-  Spacer
+  Spacer,
+  Stack
 } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   doc,
   updateDoc,
@@ -51,26 +53,14 @@ export default function Status() {
           <Text fontSize="2xl" fontWeight="bold" color="black" textAlign="center" mt="1rem">
             We will get back to you soon!
           </Text>
-          <Text fontWeight={600} fontSize={'xl'} mb={2} pt={2}>
-            Survey Responses
-          </Text>
-          {userInfo?.request?.survey_data?.length && (
-            <Accordion>
-              {userInfo.request.survey_data.map((item, index) => (
-                <AccordionItem key={index}>
-                  <h2>
-                    <AccordionButton>
-                      <Box flex="1" textAlign="left">
-                        {item.prompt}
-                      </Box>
-                      <AccordionIcon />
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel pb={4}>{item.response}</AccordionPanel>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          )}
+          <Stack direction="column" spacing={4} maxW={'500px'}>
+            <Button as={RouterLink} to="/request/create" mt="1rem">
+              View survey responses
+            </Button>
+            <Button as={RouterLink} to="/profile" mt="1rem" colorScheme="orange" size="lg">
+              Go to profile
+            </Button>
+          </Stack>
           <Flex flexDir="row" justifyContent="center" alignItems="center" mt="2rem">
             <IconButton
               icon={<DeleteIcon />}

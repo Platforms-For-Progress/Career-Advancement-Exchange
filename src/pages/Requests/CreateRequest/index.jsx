@@ -36,7 +36,6 @@ import introQuestions from './survey/intro_questions.json';
 import contentQuestions from './survey/content_questions.json';
 import designQuestions from './survey/design_questions.json';
 import endQuestions from './survey/end_questions.json';
-import survey from './survey/survey.json';
 
 const steps = [
   {
@@ -176,11 +175,11 @@ const CreateRequest = () => {
               onClick={() => setActiveStep(activeStep + 1)}
               w={'full'}
               ml={5}
-              isDisabled={activeStep === survey.length - 1}>
+              isDisabled={activeStep === steps.length - 1}>
               Next
             </Button>
           </Center>
-          {activeStep === survey.length - 1 ? (
+          {activeStep === steps.length - 1 ? (
             <Stack>
               <Button
                 fontFamily={'heading'}
@@ -234,12 +233,12 @@ const CreateRequest = () => {
           <Button colorScheme="orange" as={RouterLink} to="/profile">
             Back to Profile
           </Button>
-          <Button
+          {/* <Button
             onClick={() => {
               console.log(userResponses);
             }}>
             Test
-          </Button>
+          </Button> */}
         </Center>
       </Stack>
     </Box>
