@@ -61,7 +61,7 @@ export default function Loading() {
     <Box bg={"#f9f6e8"}
             minH={'100vh'} >
       {/* <Text>Loading</Text> */}
-      <Countdown date={new Date(2023, 4, 29)} renderer={renderer} />
+      <Countdown date={new Date(2023, 4, 30)} renderer={renderer} />
       <Simple />
     </Box>
   );

@@ -19,13 +19,13 @@ import AdminDashboardLayout from '../components/AdminDashboardLayout';
 import AdminHome from '../pages/Admin';
 import AdminManage from '../pages/Admin/Manage';
 import Loading from '../Pages/Loading/Loading';
-import Links from '../Pages/Links/Links';
+// import Links from '../Pages/Links/Links';
 
 const routeElements = (
   <>
     <Route path="/" errorElement={<ErrorPage />}>
       <Route index element={<Loading />} />
-      <Route path="/links" element={<Links />} />
+      {/* <Route path="/links" element={<Links />} /> */}
       <Route path="*" element={<NotFound />} />
     </Route>
   </>
