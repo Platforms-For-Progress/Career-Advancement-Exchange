@@ -1,8 +1,8 @@
-import { Box, FormControl, FormLabel, Image, Flex, Text, Checkbox } from '@chakra-ui/react';
+import { Box, FormControl, FormLabel, Image, Flex, Text, Checkbox, Button } from '@chakra-ui/react';
 import { CheckIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 
-function SelectMultipleImage({ prompt, options }) {
+function SelectMultipleImage({ prompt, options, label, userResponses, handleResponseChange }) {
   const [selected, setSelected] = useState([]);
 
   const handleSelect = (label) => {

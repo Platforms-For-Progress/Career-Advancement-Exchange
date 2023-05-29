@@ -6,18 +6,23 @@ import SelectOne from './SelectOne';
 import SelectOneImage from './SelectOneImage';
 import SelectMultipleImage from './SelectMultipleImage';
 
-const QuestionAdapter = ({ question }) => {
+const QuestionAdapter = ({ question, userResponses, setUserResponses }) => {
+  const commonProps = {
+    ...question,
+    userResponses,
+    setUserResponses
+  };
   switch (question.type) {
     case 'free-response':
-      return <FreeResponse {...question} />;
+      return <FreeResponse {...commonProps} />;
     case 'select-one':
-      return <SelectOne {...question} />;
+      return <SelectOne {...commonProps} />;
     case 'select-multiple':
-      return <SelectMultiple {...question} />;
+      return <SelectMultiple {...commonProps} />;
     case 'select-one-image':
-      return <SelectOneImage {...question} />;
+      return <SelectOneImage {...commonProps} />;
     case 'select-multiple-image':
-      return <SelectMultipleImage {...question} />;
+      return <SelectMultipleImage {...commonProps} />;
     default:
       return null;
   }

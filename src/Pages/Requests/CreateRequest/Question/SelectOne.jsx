@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, FormControl, FormLabel, RadioGroup, Radio, Stack } from '@chakra-ui/react';
 
-function MultipleChoiceQuestion({ prompt, options }) {
+function SelectOne({ prompt, options }) {
   return (
     <Box m={4}>
       <FormControl>
@@ -20,4 +20,4 @@ function MultipleChoiceQuestion({ prompt, options }) {
   );
 }
 
-export default MultipleChoiceQuestion;
+export default SelectOne;

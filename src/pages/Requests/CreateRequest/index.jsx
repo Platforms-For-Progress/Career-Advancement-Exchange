@@ -42,22 +42,22 @@ const steps = [
   {
     label: 'Introduction',
     description: 'Tell us about yourself',
-    content: <StepTemplate questions={introQuestions} />
+    questions: introQuestions
   },
   {
     label: 'Content',
     description: "What's on your website?",
-    content: <StepTemplate questions={contentQuestions} />
+    questions: contentQuestions
   },
   {
     label: 'Design',
-    description: 'Tell us what you envision',
-    content: <StepTemplate questions={designQuestions} />
+    description: 'What do you envision?',
+    questions: designQuestions
   },
   {
     label: 'Wrapping Up',
     description: 'Almost there!',
-    content: <StepTemplate questions={endQuestions} />
+    questions: endQuestions
   }
 ];
 
@@ -68,64 +68,74 @@ const CreateRequest = () => {
     index: 0,
     count: steps.length
   });
-  const [userResponses, setUserResponses] = useState(
-    survey
-      .flatMap((step) => step.questions)
-      .reduce((acc, question) => {
-        acc[question] = '';
-        return acc;
-      }, {})
-  );
-  useEffect(() => {
-    if (userInfo?.request?.survey_data) {
-      setUserResponses((previous) =>
-        survey
-          .flatMap((step) => step.questions)
-          .reduce((acc, question) => {
-            acc[question] = userInfo.request.survey_data[question] ?? previous[question];
-            return acc;
-          }, {})
-      );
-    }
-  }, [userInfo]);
-  const handleResponseChange = (questionIndex, event) => {
+  const [userResponses, setUserResponses] = useState({});
+
+  const handleResponseChange = (questionLabel, response) => {
     setUserResponses((previous) => {
       return {
         ...previous,
-        [survey[activeStep].questions[questionIndex]]: event.target.value
+        [questionLabel]: response
       };
     });
   };
+  // const [userResponses, setUserResponses] = useState(
+  //   survey
+  //     .flatMap((step) => step.questions)
+  //     .reduce((acc, question) => {
+  //       acc[question] = '';
+  //       return acc;
+  //     }, {})
+  // );
+  // useEffect(() => {
+  //   if (userInfo?.request?.survey_data) {
+  //     setUserResponses((previous) =>
+  //       survey
+  //         .flatMap((step) => step.questions)
+  //         .reduce((acc, question) => {
+  //           acc[question] = userInfo.request.survey_data[question] ?? previous[question];
+  //           return acc;
+  //         }, {})
+  //     );
+  //   }
+  // }, [userInfo]);
+  // const handleResponseChange = (questionIndex, event) => {
+  //   setUserResponses((previous) => {
+  //     return {
+  //       ...previous,
+  //       [survey[activeStep].questions[questionIndex]]: event.target.value
+  //     };
+  //   });
+  // };
 
   const handleSubmit = async () => {
-    try {
-      await updateDoc(doc(firestore, 'users', user.uid), {
-        'request.survey_data': Object.entries(userResponses).map(([prompt, response]) => ({
-          prompt,
-          response
-        })),
-        status: 'pending'
-      });
-      navigate('/request');
-    } catch (error) {
-      alert('There was an error submitting your request, please try again');
-      console.log(error);
-    }
+    // try {
+    //   await updateDoc(doc(firestore, 'users', user.uid), {
+    //     'request.survey_data': Object.entries(userResponses).map(([prompt, response]) => ({
+    //       prompt,
+    //       response
+    //     })),
+    //     status: 'pending'
+    //   });
+    //   navigate('/request');
+    // } catch (error) {
+    //   alert('There was an error submitting your request, please try again');
+    //   console.log(error);
+    // }
   };
 
   const handleSave = async () => {
-    try {
-      await updateDoc(doc(firestore, 'users', user.uid), {
-        'request.survey_data': Object.entries(userResponses).map(([prompt, response]) => ({
-          prompt,
-          response
-        })),
-        status: 'pending'
-      });
-    } catch (error) {
-      alert('There was an error saving your request, please try again');
-      console.log(error);
-    }
+    // try {
+    //   await updateDoc(doc(firestore, 'users', user.uid), {
+    //     'request.survey_data': Object.entries(userResponses).map(([prompt, response]) => ({
+    //       prompt,
+    //       response
+    //     })),
+    //     status: 'pending'
+    //   });
+    // } catch (error) {
+    //   alert('There was an error saving your request, please try again');
+    //   console.log(error);
+    // }
   };
 
   return (
@@ -149,7 +159,11 @@ const CreateRequest = () => {
         ))}
       </Stepper>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-        {steps[activeStep].content}
+        <StepTemplate
+          questions={steps[activeStep].questions}
+          userResponses={userResponses}
+          handleResponseChange={handleResponseChange}
+        />
         <Flex direction={'column'}>
           <Center flex flexDir="row" justifyContent={'space-around'}>
             <Button
@@ -200,6 +214,12 @@ const CreateRequest = () => {
         <Center>
           <Button colorScheme="orange" as={RouterLink} to="/profile">
             Back to Profile
+          </Button>
+          <Button
+            onClick={() => {
+              console.log(userResponses);
+            }}>
+            Test
           </Button>
         </Center>
       </Stack>
