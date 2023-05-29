@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Box, Text, Input, Avatar, Button } from "@chakra-ui/react"
 import { UserContext } from '../../utils/User';
-import { useUser } from '../../utils/User';
 import { query, collection, where, getDocs, doc, getDoc, setDoc, updateDoc, serverTimestamp} from 'firebase/firestore';
 import { firestore } from '../../firebase';
 
@@ -9,17 +8,16 @@ const Search = () => {
     const [username, setUsername] = useState("");
     const [user_, setUser_] = useState(null);
     const [err, setErr] = useState(false);
-
-    const {user, userInfo, loading, error} = useUser()
+    const {user, userInfo, loading, error} = useContext(UserContext)
 
     const handleSearch = async () => {
-    const q = query(collection(firestore, "users"), where("name", "==", username));
-    // let q;
-    // if (userInfo.role === "user") {
-    //     q = query(collection(firestore, "users"), where("name", "==", username), where("role", "==", "admin"));
-    // } else {
-    //     q = query(collection(firestore, "users"), where("name", "==", username), where("role", "==", "user"));
-    // }
+    let q;
+    // q = query(collection(firestore, "users"), where("name", "==", username));        // used to test messaging
+    if (userInfo.role === "user") {
+        q = query(collection(firestore, "users"), where("name", "==", username), where("role", "==", "admin")); 
+    } else {
+        q = query(collection(firestore, "users"), where("name", "==", username), where("role", "==", "user"));
+    }
     try {
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
@@ -36,7 +34,8 @@ const Search = () => {
     };
 
     const handleSelect = async() => {
-        const combinedId = userInfo.name + user_.name
+        const combinedId = userInfo.name.length > user_.name.length ? userInfo.name + user_.name : user_.name + userInfo.name
+        console.log(combinedId)
         try {
           const res = await getDoc(doc(firestore, "chats", combinedId));
           if (!res.exists()) {
@@ -111,6 +110,7 @@ const Search = () => {
             onClick={handleCancel}
             >X</Button>
         </Box>
+        {err && <Text> No user found!</Text>}
         {user_ &&
         <Box
         paddingTop={"25px"}
@@ -125,8 +125,8 @@ const Search = () => {
         onClick={handleSelect}
         >
             <Avatar
-            src={user_?.photoURL} 
-            alt={user_?.displayName}
+            name={user_?.name}
+            src={user_?.photoURL}
             width={"81px"}
             height={"81px"}
             borderRadius={"25%"}

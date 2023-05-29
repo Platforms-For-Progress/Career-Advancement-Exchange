@@ -1,13 +1,15 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import { Box, Input, Stack, Text, Button, useStatStyles } from '@chakra-ui/react'
 import Chat from '../../Components/Chat/Chat'
 import Chats from '../../Components/Chat/Chats'
 import Search from '../../Components/Chat/Search'
+import { ChatContext } from '../../Components/Chat/ChatContext'
 
 
 
 const MessagePage = () => {
-  const [newMessage, setNewMessage] = useState(false);  
+  {/* state to open/close search bar */}
+  const [newMessage, setNewMessage] = useState(false);                            
 
   return (
     <Stack direction={"row"} w={"100vw"} bg={"#d5d9db"} spacing={0}>
@@ -17,7 +19,7 @@ const MessagePage = () => {
             boxShadow={"2xl"}
             overflow={"scroll"}
         >
-        {/* navbar with "message" label and new chat button */}
+        {/* navbar with "message" label and "create" button */}
         <Box
         display={"flex"}
         alignItems={"center"}
@@ -29,6 +31,7 @@ const MessagePage = () => {
         borderBottom={"0.5px solid #d5d9db"}
         >
             <Text fontSize={"20px"}> Messages</Text>
+
             <Button
             height={"40px"}
             width={"35px"}
@@ -40,13 +43,14 @@ const MessagePage = () => {
             _hover={"none"}
             _focusVisible={"none"}
             onClick={() => setNewMessage(!newMessage)}
-            >+</Button>
+            >{newMessage ? "x" : "+"}</Button>
+
+
         </Box>
         {newMessage && 
         <Search/>
         }
-
-        <Chats/>   
+        <Chats/>
         </Box>
 
         <Box flex={2}>

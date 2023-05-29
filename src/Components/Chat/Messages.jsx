@@ -1,10 +1,22 @@
-import React from 'react'
+import React, {useContext, useEffect, useState}from 'react'
 import { Box, Text } from '@chakra-ui/react'
 import Message from './Message'
-import pic from "/src/assets/ElisaCarrillo.png"
-import pic2 from "/src/assets/jacobshalabi.jpeg"
+import { ChatContext } from './ChatContext'
+import { onSnapshot, doc } from 'firebase/firestore'
+import { firestore } from '../../firebase'
 
 const Messages = () => {
+  const [messages, setMessages] = useState([])
+  const { data } = useContext(ChatContext)
+
+  useEffect(() => {
+    const unsub = onSnapshot(doc(firestore, "chats", data.chatId), (doc) => {
+      doc.exists() && setMessages(doc.data().messages)
+    });
+    return () => {
+      unsub()
+    }
+  }, [data.chatId])
   return (
     <Box
     bg={"lightgray"}
@@ -13,10 +25,9 @@ const Messages = () => {
     overflow={"scroll"}
 
     >
-      <Message message={"Hello"} img={pic} side={false}/>
-      <Message message={"Hello"} img={pic2} side={true}/>
-      <Message message={"I want to talk about my current page"} img={pic} side={false}/>
-      <Message message={"Sure. What do you wanna discus?"} img={pic2} side={true}/>
+    {messages.map(m => (
+      <Message message={m.text} user={m} key={m.id}/>
+    ))}
     </Box>
   )
 }
