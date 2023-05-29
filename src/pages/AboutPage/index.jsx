@@ -33,6 +33,7 @@ import React from 'react';
 import { IconButton, useBreakpointValue } from '@chakra-ui/react';
 // Here we have used react-icons package for the icons
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
+import Inter from '../../assets/Inter-VariableFont_slnt,wght.ttf';
 // And react-slick as our Carousel Lib
 // import Slider, { SliderRef, Settings } from 'react-slick';
 
@@ -108,7 +109,7 @@ function Carousel() {
   ];
 
   return (
-    <Flex w="100%" h="100%" align="center" justify="center" flexWrap={'wrap'}>
+    <Flex w="100%" h="100%" align="center" justify="center" flexWrap={'wrap'} fontFamily={Inter}>
       {data.map((item) => (
         <Box
           maxW={'270px'}
@@ -154,7 +155,8 @@ const StatsCard = (props) => {
       shadow={'xl'}
       border={'1px solid'}
       borderColor={useColorModeValue('gray.800', 'gray.500')}
-      rounded={'lg'}>
+      rounded={'lg'}
+      fontFamily={Inter}>
       <StatLabel fontWeight={'medium'} isTruncated>
         {title}
       </StatLabel>
@@ -173,7 +175,8 @@ export default function BasicStatistics() {
       mx={'auto'}
       py={5}
       px={{ base: 2, sm: 12, md: 17 }}
-      bg={useColorModeValue('#F9F6E8', 'gray.900')}>
+      bg={useColorModeValue('background.400', 'gray.900')}
+      fontFamily={Inter}>
       <SplitWithImage />
       <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
         <chakra.h1 textAlign={'center'} fontSize={'4xl'} py={10} fontWeight={'bold'}>
@@ -205,8 +208,10 @@ const Feature = (props) => {
           h={12}
           w={12}
           rounded={'full'}
+          fontFamily={Inter}
           bg={props.iconBg}>
           {props.icon}
+          
         </Flex>
       </Flex>
       <Box ml={4}>
@@ -238,7 +243,10 @@ function SplitWithImage() {
       rounded={'lg'}
       padding={'16'}
       paddingY={'24'}
-      borderRadius={'2xl'}>
+      borderRadius={'2xl'}
+      fontFamily={Inter}
+      
+      >
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
         <Stack spacing={4}>
           <Heading>Celebrating your background, together</Heading>
@@ -251,7 +259,7 @@ function SplitWithImage() {
             divider={<StackDivider borderColor={useColorModeValue('gray.100', 'gray.700')} />}>
             <Feature
               icon={<Icon as={CgWebsite} color={'orange.500'} w={5} h={5} />}
-              iconBg={useColorModeValue('yellow.100', 'yellow.900')}
+              iconBg={useColorModeValue('brand.100', 'yellow.900')}
               title={'ePortfolios'}
               children={
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
@@ -259,7 +267,7 @@ function SplitWithImage() {
             />
             <Feature
               icon={<Icon as={FaChalkboardTeacher} color={'orange.500'} w={5} h={5} />}
-              iconBg={useColorModeValue('yellow.100', 'yellow.900')}
+              iconBg={useColorModeValue('brand.100', 'yellow.900')}
               title={'Education'}
               children={
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'

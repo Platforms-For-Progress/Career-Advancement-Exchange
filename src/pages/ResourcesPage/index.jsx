@@ -7,7 +7,7 @@ const brand = '#EFD79F';
 
 const ResourcesPage = () => {
   return (
-    <Box bg="#F9F6E8" minH="95vh" maxW="full" mt={0} centerContent overflow="auto">
+    <Box bg="background.400" minH="95vh" maxW="full" mt={0} centerContent overflow="auto">
       <Flex direction="row">
         <Box>
           <Text fontFamily={'Prata'} pos={'relative'} right={-10} fontSize="7xl">
@@ -21,7 +21,7 @@ const ResourcesPage = () => {
           <Box
             pos={'relative'}
             borderWidth={20}
-            borderColor={'#EFD79F'}
+            borderColor={'brand.300'}
             right={-30}
             width="200%"
             height="100%"
@@ -44,7 +44,7 @@ const ResourcesPage = () => {
             h="100px"
             left={750}
             top={130}
-            bg={brand}
+            bg={"brand.300"}
             color="black"
             fontSize="4xl">
             CAPE

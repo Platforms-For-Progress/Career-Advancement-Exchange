@@ -56,10 +56,10 @@ export default function contact() {
   }
 
   return (
-    <Container bg="#F9F6E8" maxW="full" minH={'95vh'} mt={0} centerContent overflow="hidden">
+    <Container bg="background.400" maxW="full" minH={'95vh'} mt={0} centerContent overflow="hidden">
       <Flex>
         <Box
-          bg={'brand.300'}
+          bg={'brand.200'}
           color="brand.700"
           m={{ sm: 4, md: 16, lg: 10 }}
           pt={{ sm: 5, md: 5, lg: 16 }}

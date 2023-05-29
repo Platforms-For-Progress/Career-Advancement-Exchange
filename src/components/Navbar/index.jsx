@@ -35,7 +35,7 @@ export default function Navbar() {
     <Box>
       <Flex
         // bgGradient='linear(to-r, brand.200, brand_pink.200)'
-        bgGradient="linear(to-l, brand_pink.300, brand.400)"
+        bg = {useColorModeValue('#F28C8C', 'brand_pink.200')}
 
         color={useColorModeValue('gray.600', 'white')}
         minH={'60px'}
@@ -66,24 +66,7 @@ export default function Navbar() {
             color={useColorModeValue('gray.800', 'white')}
             transition='all 0.1s ease-in'
             margin='0 10px 0 0px'
-            _hover={{ color: useColorModeValue('brand_pink.600', 'gray.900'),
-                      bg: useColorModeValue('white.700', "grey.500"),
-                      textStroke: useColorModeValue('black.600', 'gray.900'),
-                      fontWeight: 'semibold',
-                      // textTransform: translateX(10),
-                      transition: 'all 0.8s ease-in-out',
-
-                      transitionProperty: ' color, background-color, text-shadow',
-                      transitionDuration: '0.8s',
-                      transitionTimingFunction: 'ease-in 0.34s',
-                      margin:'0px 5px 0px -5px'
-                      // transitionDelay: '0.5s',
-                      // margin: '0 -5px 0 0px',
-
-                      // transform: 'translateX(-10px)',
-                      // transition: 'all 0.2s left ease-in-out'
-                      
-                       }}>
+            >
             Career Advancement Exchange
           </Link>
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>

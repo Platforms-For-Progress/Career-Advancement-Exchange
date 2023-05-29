@@ -19,7 +19,7 @@ const brand = '#EFD79F';
 
 const CAPEPage = () => {
   return (
-    <Box bg="#F9F6E8" minH="95vh" maxW="full" mt={0}>
+    <Box bg="background.400" minH="95vh" maxW="full" mt={0}>
       <Flex direction="row">
         <Box>
           <Text fontFamily={'Prata'} pos={'relative'} right={-10} fontSize="7xl">
@@ -29,7 +29,7 @@ const CAPEPage = () => {
           <Menu>
             <MenuButton
               as={Button}
-              bg={brand}
+              bg={"brand.400"}
               right={-10}
               width={'561px'}
               top={20}
@@ -38,9 +38,10 @@ const CAPEPage = () => {
               py={10}
               fontSize="4xl"
               fontFamily={'Prata'}
+              
               rightIcon={<ChevronDownIcon />}></MenuButton>
-            <MenuList bg={brand} height={'500px'} width={'561px'} position={'absolute'}>
-              <MenuItem bg={brand}>
+            <MenuList bg={"brand.300"} height={'500px'} width={'561px'} position={'absolute'}>
+              <MenuItem bg={"brand.300"}>
                 <Box
                   pos={'relative'}
                   title="HIIIIIIIIIIIi"
@@ -56,7 +57,7 @@ const CAPEPage = () => {
                   <Text fontFamily={'prata'}> youtube vid 1</Text>
                 </span>
               </MenuItem>
-              <MenuItem bg={brand}>
+              <MenuItem bg={"brand.300"}>
                 <Box
                   pos={'relative'}
                   title="HIIIIIIIIIIIi"
@@ -81,7 +82,7 @@ const CAPEPage = () => {
             <Menu>
               <MenuButton
                 as={Button}
-                bg={brand}
+                bg={"brand.300"}
                 left={400}
                 top={190}
                 width={'561px'}
@@ -91,8 +92,8 @@ const CAPEPage = () => {
                 fontSize="4xl"
                 fontFamily={'Prata'}
                 rightIcon={<ChevronDownIcon />}></MenuButton>
-              <MenuList bg={brand} height={'500px'} width={'561px'} position={'absolute'}>
-                <MenuItem bg={brand}>
+              <MenuList bg={"brand.300"} height={'500px'} width={'561px'} position={'absolute'}>
+                <MenuItem bg={"brand.300"}>
                   <Box
                     position={'relative'}
                     width="44%"
@@ -119,7 +120,7 @@ const CAPEPage = () => {
           title="656uhgfgh"
           width="259px"
           height="88px"
-          bg={'#E6C17B'}>
+          bg={'red.400'}>
           <Text
             position={'relative'}
             fontSize="4xl"
@@ -141,7 +142,7 @@ const CAPEPage = () => {
           title="656uhgfgh"
           width="259px"
           height="88px"
-          bg={'#E6C17B'}>
+          bg={'red.400'}>
           <Text
             position={'relative'}
             fontSize="4xl"
