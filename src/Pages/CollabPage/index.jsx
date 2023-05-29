@@ -1,11 +1,14 @@
 import React from 'react';
-import { Box, Flex, HStack, Spacer } from '@chakra-ui/react';
+import { Box, Container, Flex, HStack, Spacer } from '@chakra-ui/react';
 import { useState } from "react";
 import {AiOutlinePlus} from 'react-icons/ai';
 import {RxText} from 'react-icons/rx';
 import {BsSquare, BsLink, BsLightbulb, BsUpload} from 'react-icons/bs';
 import ColorSelectorItem from './colorSelectorItem';
 import Layer from './Layer';
+import InspirationInput from './collab_components/InspirationInput';
+import IdeaInput from './collab_components/IdeaInput';
+import FontView from './collab_components/FontView';
 
 
 const CollabPage = () => {
@@ -14,6 +17,27 @@ const CollabPage = () => {
     const changeColor = (hee) => {
         setColor(hee)
         alert(color);
+    }
+
+    const [idea, setIdea] = useState('');
+    const [inspiration, setInspiration] = useState([]);
+    const [font, setFont] = useState([]);
+    
+    const [currState, setCurrState] = useState(0);
+
+    const renderViewport = () => {
+        switch (currState) {
+            case 0:
+               return <FontView value={font} setValue={setFont}/>
+               break;
+            case 2:
+                return <InspirationInput value={inspiration} setValue={setInspiration} />
+                break;
+            case 3:
+                return <IdeaInput value={idea} setValue={setIdea}/>
+            default:
+                return <></>;
+        }
     }
 
     return (
@@ -43,23 +67,23 @@ const CollabPage = () => {
                     }} 
                 >
 
-                    <Box style={{borderRadius: '20px'}} p='20px' bg='#CCA6A6'>
-                        <RxText m={20} size={35}/>
+                    <Box style={{borderRadius: '20px'}} p='20px' bg='#CCA6A6' onClick={() => setCurrState(0)}>
+                        <RxText size={35}/>
                     </Box>
 
-                    <Box style={{borderRadius: '20px'}} p='20px' bg='#CCA6A6'>
+                    <Box style={{borderRadius: '20px'}} p='20px' bg='#CCA6A6' onClick={() => setCurrState(1)}>
                         <BsSquare p={'20px'} size={35}/>
                     </Box>
 
-                    <Box style={{borderRadius: '20px'}} p='20px' bg='#CCA6A6'>
+                    <Box style={{borderRadius: '20px'}} p='20px' bg='#CCA6A6' onClick={() => setCurrState(2)}>
                         <BsLink m={20} size={35}/>
                     </Box>
 
-                    <Box style={{borderRadius: '20px'}} p='20px' bg='#CCA6A6'>
+                    <Box style={{borderRadius: '20px'}} p='20px' bg='#CCA6A6' onClick={() => setCurrState(3)}>
                         <BsLightbulb m={20} size={35}/>
                     </Box>
 
-                    <Box style={{borderRadius: '20px'}} p='20px' bg='#CCA6A6'>
+                    <Box style={{borderRadius: '20px'}} p='20px' bg='#CCA6A6' onClick={() => setCurrState(4)}>
                         <BsUpload m={20} size={35}/>
                     </Box>
                 </Flex>
@@ -68,6 +92,14 @@ const CollabPage = () => {
                     <Box bg='#AACBC9' h='5vh' w='full'>
 
                     </Box>
+                    <Container maxHeight={'59vh'} overflowY='auto' maxWidth={'full'}>
+                        {
+                            renderViewport()
+                        }
+                        
+                        {/* <InspirationInput ></InspirationInput> */}
+                    </Container>
+                    
                 </Box>
             </Flex>
 
