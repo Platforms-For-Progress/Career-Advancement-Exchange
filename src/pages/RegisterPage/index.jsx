@@ -79,10 +79,10 @@ export default function Register() {
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'} textAlign={'center'}>
-            Join our community
+            Sign Up
           </Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
-            and get access to our career advancement resources!
+            to request a personal website
           </Text>
         </Stack>
         <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
