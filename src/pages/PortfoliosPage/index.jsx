@@ -1,9 +1,13 @@
 import React from "react";
-import { Box, Flex, Heading, Text, Avatar, Link, Button } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Avatar, Link, Button, useBreakpointValue } from "@chakra-ui/react";
 import info from "./portfolio.json"
 import Inter from '../../assets/Inter-VariableFont_slnt,wght.ttf';
 
 const Portfolios = () => {
+  const boxWidth = useBreakpointValue({ base: "100%", md: "90vw" });
+  const flexDirection = useBreakpointValue({ base: "column", md: "row" });
+  const justifyFlexStart = useBreakpointValue({ base: "center", md: "flex-start" });
+  const alignItemsFlexStart = useBreakpointValue({ base: "center", md: "flex-start" });
   return (
     <Box m="2vw" mt={"4vw"}>
      
@@ -11,10 +15,10 @@ const Portfolios = () => {
       
         <Flex
           p="2vw"
-          w={["90vw"]}
-          direction="row"
-          justify="flex-start"
-          alignItems="flex-start"
+          w={boxWidth}
+          direction={flexDirection}
+          justify={justifyFlexStart}
+          alignItems={alignItemsFlexStart}
           borderRadius="2vw"
           boxShadow="0 0 10px 0 rgba(0, 0, 0, 0.2)"
           outline="1px solid black"

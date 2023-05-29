@@ -138,7 +138,7 @@ const CreateRequest = () => {
 
   return (
     <Box bg="white" minH="95vh" p={4}>
-      <Stepper size="lg" index={activeStep} colorScheme="brand" mx={10}>
+      <Stepper size="lg" index={activeStep} colorScheme="brand" mx={10} display={{base: "none"}}>
         {steps.map(({ label, description, content }, index) => (
           <Step key={index} onClick={() => setActiveStep(index)}>
             <StepIndicator>

@@ -73,7 +73,7 @@ export default function contact() {
           <Box p={4}>
             <Wrap spacing={{ base: 20, sm: 3, md: 5, lg: 20 }}>
               <WrapItem>
-                <Box>
+                <Box ml={{base: 10, md: 0}}>
                   <Heading>Contact</Heading>
 
                   <Box py={{ base: 5, sm: 5, md: 8, lg: 10 }}>
@@ -100,7 +100,7 @@ export default function contact() {
                       </Button>
                     </VStack>
                   </Box>
-                  <Image
+                  {/* <Image
                     src={girl}
                     maxH="280px"
                     minW={{ base: '220px', md: 'auto' }}
@@ -111,8 +111,8 @@ export default function contact() {
                     // align={'center'}
                     // justifyContent={'center'}
                     alignItems={'flex-end'}
-                    opacity={0.6}
-                  />
+                    opacity={0.6} */}
+                  
                   {/* <HStack
                     mt={{ lg: 10, md: 10 }}
                     spacing={5}
@@ -124,8 +124,8 @@ export default function contact() {
                 </Box>
               </WrapItem>
               <WrapItem>
-                <Box bg="white" borderRadius="lg">
-                  <Box m={8} color="#0B0E3F">
+                <Box bg="white" borderRadius="lg" ml={{base:10, md: 0}}>
+                  <Box m={{base: 10, md:8}} color="#0B0E3F">
                     <VStack spacing={5}>
                       <FormControl id="name">
                         <FormLabel>Your Name</FormLabel>

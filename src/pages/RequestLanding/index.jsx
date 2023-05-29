@@ -27,7 +27,7 @@ const reqLanding = () => {
             <Tabs colorScheme='brand' variant='soft-rounded' align='center'>
             <TabList>
                 <Tab>Status</Tab>
-                <Tab>Collab Space</Tab>
+                
                 <Tab>Message Admins</Tab>
                 <Tab>Delete Request</Tab>
             </TabList>

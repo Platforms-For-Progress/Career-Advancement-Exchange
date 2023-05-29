@@ -69,26 +69,32 @@ const GetInvolvedPage = () => {
         mt="2vh"
         justify="center"
         align="center"
-        direction="column"
+        direction={{ base: "column", md: "row" }}
         bg={'brand.200'}
-        width={{ base: '100%', md: '50vw' }}
+        width={{ base: '100%', md: '50vw', lg: '40vw', xl: '30vw' }}
+        maxW="90%"
         style={{
           backdropFilter: 'blur(15px)',
           background: 'brand.700',
-          //border: "1px solid rgba(255, 255, 255, 0.25)",
           boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
           borderRadius: '2vw'
-          //outline: "1px solid #222221"
-        }}>
-        <Flex align="center" direction="row" p={10}>
-          <Box m={10}>
-            <Text fontSize="3xl">
+        }}
+        >
+        <Flex 
+          align="center" 
+          direction={{ base: "column", md: "row" }} 
+          p={10} 
+          my={8}
+          // ml={{ base: 0, md: 8, lg: 12, xl: 16 }}
+          >
+          {/* <Box m={10}> */}
+            <Text fontSize={{ base: "2xl", md: "3xl" }} mb={4}>
               <b>Get Involved</b>
             </Text>
 
             <Spacer h={4}></Spacer>
             <Flex direction="column" pl={5}>
-              <Box pr={4}>
+              <Box pr={4} ml={{base: "2vw", md: 0}}>
                 <HStack>
                   <IoMail />
                   <Text>team@careeradvancementexchange.com</Text>
@@ -101,10 +107,10 @@ const GetInvolvedPage = () => {
               </Box>
             </Flex>
 
-            <Image align="right" height="200px" src={girlImage}></Image>
-          </Box>
+            
+          {/* </Box> */}
 
-          <Box p={7} bg="white" borderRadius={10}>
+          <Box p={7} bg="white" borderRadius={10}  mt = {{base: 10, md: 0}}>
             {/* <FormControl mb={5} onSubmit={submit} > */}
             <form onSubmit={(event) => submit(event)}>
               <FormControl isRequired>
@@ -162,7 +168,7 @@ const GetInvolvedPage = () => {
           </Box>
         </Flex>
 
-        <Flex align="center" direction="row">
+        <Flex align="center" direction={"row"}>
           <a
             href="https://www.linkedin.com/company/career-advancement-exchange"
             target="_blank"
