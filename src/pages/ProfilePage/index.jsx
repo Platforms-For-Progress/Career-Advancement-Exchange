@@ -138,9 +138,7 @@ const ProfilePage = () => {
             rounded={'full'}
             bg={'brand.300'}
             color={'white'}
-            boxShadow={
-              '0px 1px 25px -5px rgb(255 184 0 / 50%), 0px 10px 10px -5px rgb(255 184 0 / 50%)'
-            }
+            
             _hover={{
               bg: 'brand.400'
             }}
@@ -176,9 +174,7 @@ const ProfilePage = () => {
             rounded="full"
             bg={'brand.300'}
             color={'white'}
-            boxShadow={
-              '0px 1px 25px -5px rgb(255 184 0 / 50%), 0px 10px 10px -5px rgb(255 184 0 / 50%)'
-            }
+            
             _hover={{
               bg: 'brand.400'
             }}
