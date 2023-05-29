@@ -35,8 +35,8 @@ const ProfilePage = () => {
   };
 
   const handleMessage = () => {
-    navigate('/message')
-  }
+    navigate('/message');
+  };
 
   if (!userInfo || loading) {
     return (
@@ -96,7 +96,7 @@ const ProfilePage = () => {
         </Button>
       </Stack>
       {/* Added button to access messaging platform (only allowed for users and admin) */}
-      <Stack direction={"row"} align={"center"} pt={6}>
+      <Stack direction={'row'} align={'center'} pt={6}>
         <Button
           flex={1}
           fontSize={'sm'}
@@ -107,12 +107,12 @@ const ProfilePage = () => {
             bg: 'gray.300'
           }}
           onClick={handleMessage}>
-            Message
+          Message
         </Button>
       </Stack>
 
       <Stack spacing={4} direction={'column'} align={'center'} pt={6}>
-        {userInfo.request && (
+        {userInfo.request ? (
           <Button
             as={RouterLink}
             to="/request"
@@ -128,6 +128,25 @@ const ProfilePage = () => {
             px={6}
             py={3}>
             View Request
+          </Button>
+        ) : (
+          <Button
+            as={RouterLink}
+            to="/request/create"
+            flex={1}
+            fontSize={'lg'}
+            rounded={'full'}
+            bg={'brand.300'}
+            color={'white'}
+            boxShadow={
+              '0px 1px 25px -5px rgb(255 184 0 / 50%), 0px 10px 10px -5px rgb(255 184 0 / 50%)'
+            }
+            _hover={{
+              bg: 'brand.400'
+            }}
+            px={6}
+            py={3}>
+            Make Request
           </Button>
         )}
         <Button
