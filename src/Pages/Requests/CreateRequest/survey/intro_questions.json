@@ -1,15 +1,22 @@
 [
     {
         "label": "occupation",
-        "prompt": "Which best describes your current occupation?",
+        "prompt": "Which closely best describes your current occupation?",
         "type": "select-one",
         "options": [
             "Student",
-            "Education",
-            "dfasdfasdf",
-            "software engineer",
-            "illustrator",
-            "cool guy 😎"
+            "Teacher",
+            "Programmer",
+            "Artist",
+            "Designer",
+            "Photographer",
+            "Other"
         ]
+    },
+    {
+        "label": "Request Reasoning",
+        "prompt": "Why do you want your own portfolio website?",
+        "type": "free-response"
+
     }
 ]
