@@ -1,10 +1,8 @@
 import React from 'react';
-
 import { useState } from 'react';
 import { FaLinkedinIn, FaTiktok } from 'react-icons/fa';
 import { RiInstagramFill } from 'react-icons/ri';
 import { HiOutlineMail } from 'react-icons/hi';
-
 import {
   Flex,
   Box,
@@ -24,11 +22,11 @@ import {
   Checkbox,
   useCheckboxGroup
 } from '@chakra-ui/react';
-
 import girlImage from '../../assets/girlImage.png';
 import { IoLocationSharp, IoMail } from 'react-icons/io5';
 import { BsPerson } from 'react-icons/bs';
-
+import { firestore } from '../../firebase/index';
+import { doc, setDoc } from 'firebase/firestore';
 const bg_page = '#fcf4cf';
 const bg_brand_yellow = '#F5C362';
 
@@ -36,20 +34,32 @@ const GetInvolvedPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const { value, getCheckboxProps } = useCheckboxGroup({ defaultValue: [] });
+  const [checkedValue, setCheckedValues] = useState([]);
 
   const onNameChange = (event) => setName(event.target.value);
   const onEmailChange = (event) => setEmail(event.target.value);
   const onMessageChange = (event) => setMessage(event.target.value);
+  const onCheckChange = (values) => setCheckedValues(values);
 
   const submit = (event) => {
     event.preventDefault();
     console.log('Attempting submit');
-    console.log(name);
-    console.log(email);
-    console.log(message);
-    console.log(value);
-    alert('logged');
+    setDoc(doc(firestore, 'getInvolved', name), {
+      Name: name,
+      Email: email,
+      Message: message,
+      Value: checkedValue
+    })
+      .then(() => {
+        setName('');
+        setEmail('');
+        setMessage('');
+        console.log('Submitted');
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error('Error submiting: ', error);
+      });
   };
 
   return (
@@ -100,9 +110,11 @@ const GetInvolvedPage = () => {
               <FormControl isRequired>
                 <FormLabel>Your Name</FormLabel>
                 <InputGroup>
-                  <InputLeftElement pointerEvents="none" size="xs">
-                    <BsPerson color="gray.300" />
-                  </InputLeftElement>
+                  <InputLeftElement
+                    pointerEvents="none"
+                    children={<BsPerson color="gray.300" />}
+                    size="xs"
+                  />
                   <Input type="name" required={true} onChange={onNameChange} />
                 </InputGroup>
               </FormControl>
@@ -112,9 +124,11 @@ const GetInvolvedPage = () => {
               <FormControl isRequired>
                 <FormLabel>Your Email</FormLabel>
                 <InputGroup>
-                  <InputLeftElement pointerEvents="none" size="xs">
-                    <HiOutlineMail color="gray.300" />
-                  </InputLeftElement>
+                  <InputLeftElement
+                    pointerEvents="none"
+                    children={<HiOutlineMail color="gray.300" />}
+                    size="xs"
+                  />
                   <Input type="email" required={true} onChange={onEmailChange} />
                 </InputGroup>
               </FormControl>
@@ -129,12 +143,12 @@ const GetInvolvedPage = () => {
 
               <FormControl>
                 <FormLabel>Interested Team</FormLabel>
-                <CheckboxGroup>
+                <CheckboxGroup value={checkedValue} onChange={onCheckChange}>
                   <Flex direction="column">
-                    <Checkbox {...getCheckboxProps({ value: 'team1' })}>Team 1</Checkbox>
-                    <Checkbox {...getCheckboxProps({ value: 'team2' })}>Team 2</Checkbox>
-                    <Checkbox {...getCheckboxProps({ value: 'team3' })}>Team 3</Checkbox>
-                    <Checkbox {...getCheckboxProps({ value: 'team4' })}>Team 4</Checkbox>
+                    <Checkbox value="team1"> Team 1</Checkbox>
+                    <Checkbox value="team2">Team 2</Checkbox>
+                    <Checkbox value="team3">Team 3</Checkbox>
+                    <Checkbox value="team4">Team 4</Checkbox>
                   </Flex>
                 </CheckboxGroup>
               </FormControl>
@@ -160,7 +174,6 @@ const GetInvolvedPage = () => {
               icon={<FaLinkedinIn size={25} />}
             />
           </a>
-
           <a href="https://www.tiktok.com/@caexchange" target="_blank" rel="noreferrer">
             <IconButton
               colorScheme="blackAlpha"
@@ -170,7 +183,6 @@ const GetInvolvedPage = () => {
               role="link"
             />
           </a>
-
           <a href="https://www.instagram.com/caexchange/" target="_blank" rel="noreferrer">
             <IconButton
               colorScheme="blackAlpha"
@@ -184,5 +196,4 @@ const GetInvolvedPage = () => {
     </Box>
   );
 };
-
 export default GetInvolvedPage;

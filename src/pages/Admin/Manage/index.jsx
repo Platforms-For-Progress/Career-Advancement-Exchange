@@ -25,7 +25,8 @@ import {
   where,
   collection,
   getDoc,
-  arrayRemove
+  arrayRemove,
+  onSnapshot
 } from 'firebase/firestore';
 
 const AdminManage = () => {
@@ -36,6 +37,22 @@ const AdminManage = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedRole, setSelectedRole] = useState(null);
   const [assignedAdmins, setAssignedAdmins] = useState([]);
+
+  // useEffect(() => {
+  //   if (!selectedUser?.request?.admins?.length) return;
+  //   const adminsQuery = query(
+  //     collection(firestore, 'users'),
+  //     where('id', 'in', selectedUser?.request?.admins)
+  //   );
+  //   getDocs(adminsQuery).then((adminsSnapshot) => {
+  //     if (!adminsSnapshot.empty) {
+  //       setAssignedAdmins([
+  //         ...assignedAdmins,
+  //         adminsSnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+  //       ]);
+  //     }
+  //   });
+  // }, [selectedUser]);
 
   useEffect(() => {
     if (userInfo?.role !== 'superadmin') {
@@ -64,15 +81,21 @@ const AdminManage = () => {
       setSelectedUser(user);
       setSelectedRole(user.role);
     }
-    if (!selectedUser?.request?.admins.length) return;
-    const adminsQuery = query(
-      collection(firestore, 'users'),
-      where('id', 'in', selectedUser?.request?.admins)
-    );
-    const adminsSnapshot = await getDocs(adminsQuery);
-    if (!adminsSnapshot.empty) {
-      setAssignedAdmins(adminsSnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    }
+    if (!selectedUser?.request?.admins?.length) return;
+    const adminsSnapshotPromises = selectedUser.request.admins.map(async (adminId) => {
+      const adminDocRef = doc(firestore, 'users', adminId);
+      const adminDocSnapshot = await getDoc(adminDocRef);
+      if (adminDocSnapshot.exists()) {
+        return { ...adminDocSnapshot.data(), id: adminId };
+      }
+      return null;
+    });
+
+    const adminsSnapshotResults = await Promise.all(adminsSnapshotPromises);
+    const validAdminsSnapshot = adminsSnapshotResults.filter((snapshot) => snapshot !== null);
+    console.log(validAdminsSnapshot);
+
+    setAssignedAdmins((prevAssignedAdmins) => [...prevAssignedAdmins, ...validAdminsSnapshot]);
   };
 
   const handleAssignSubmit = async () => {
@@ -156,7 +179,7 @@ const AdminManage = () => {
             Survey Responses
           </Text>
           {selectedUser?.request?.survey_data?.length && (
-            <Accordion>
+            <Accordion allowMultiple allowToggle>
               {selectedUser.request.survey_data.map((item, index) => (
                 <AccordionItem key={index}>
                   <h2>
@@ -189,7 +212,9 @@ const AdminManage = () => {
           <Box maxW={'500px'} overflowY={'scroll'} border={'1px'} borderRadius={'lg'}>
             {assignedAdmins.map((admin) => (
               <Flex key={admin.id} justify="space-between">
-                <Text>{admin.name}</Text>
+                <Text>
+                  {admin.name} - {admin.email}
+                </Text>
                 <Button onClick={() => handleDeleteAdmin(admin.id)}>Delete</Button>
               </Flex>
             ))}
