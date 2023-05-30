@@ -37,7 +37,7 @@ const Portfolios = () => {
               alignSelf="flex-start"
             />
             <Link href={portfolio.link} isExternal>
-              <Button bg={"brand.200"} fontFamily="Dongle" fontSize="1.45rem" textAlign={'center'} alignSelf="flex-start" fontFamily={Inter}>
+              <Button bg={"brand.200"}  fontSize="1.45rem" textAlign={'center'} alignSelf="flex-start" fontFamily={Inter}>
                 Visit Her Portfolio
               </Button>
             </Link>
