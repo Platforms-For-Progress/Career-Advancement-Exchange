@@ -34,7 +34,10 @@
         ]
       },
       {
-        "label": "Request Website",
+        "label" : "Links",
+        "href" : "/links"
+      },
+      { "label": "Request Website",
         "children": [
           {
             "label": "Request",

@@ -4,7 +4,7 @@ import { useState } from "react";
 import {AiOutlinePlus} from 'react-icons/ai';
 import {RxText} from 'react-icons/rx';
 import {BsSquare, BsLink, BsLightbulb, BsUpload} from 'react-icons/bs';
-import ColorSelectorItem from './colorSelectorItem';
+import ColorSelectorItem from './ColorSelectorItem';
 import Layer from './Layer';
 import InspirationInput from './collab_components/InspirationInput';
 import IdeaInput from './collab_components/IdeaInput';

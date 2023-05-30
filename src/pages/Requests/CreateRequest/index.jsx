@@ -31,7 +31,8 @@ import { setDoc, doc, updateDoc } from 'firebase/firestore';
 import { auth, firestore } from '../../../firebase';
 import { useUser } from '../../../utils/User';
 
-import StepTemplate from './StepTemplate';
+
+// import StepTemplate from './StepTemplate';
 import introQuestions from './survey/intro_questions.json';
 import contentQuestions from './survey/content_questions.json';
 import designQuestions from './survey/design_questions.json';

@@ -1,0 +1,7 @@
+[
+    {
+        "label": "other-info",
+        "prompt": "Is there any other information you wish to provide us?",
+        "type": "free-response"
+    }
+]
