@@ -1,15 +1,5 @@
 [
     {
-        "label": "features",
-        "prompt": "What specific features would you like to include?",
-        "type": "select-multiple",
-        "options": [
-            "A landing page",
-            "A blog",
-            "A contact page"
-        ]
-    },
-    {
         "label": "content",
         "prompt": "What content would you like to include?",
         "type": "select-multiple",
@@ -21,7 +11,15 @@
             "Skills",
             "Awards",
             "Passions",
-            "Positive Feedback"
+            "Positive Feedback",
+            "A blog",
+            "A contact page"
         ]
+    }, 
+    {
+        "label": "content-explanation",
+        "prompt": "Explain everything you want included for each box checked above",
+        "type": "free-response"
+
     }
 ]

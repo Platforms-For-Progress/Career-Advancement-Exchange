@@ -1,17 +1,37 @@
 [
     {
         "label": "desktop-layout",
-        "prompt": "Select your preferred desktop layout",
+        "prompt": "Select your preferred navbar layout",
         "type": "select-one-image",
         "options": [
             {
                 "label": "Aside Layout",
-                "image": "/survey/desktop-layout-0.svg"
+                "image": "/survey/group0.svg"
             },
             {
-                "label": "Header Layout",
-                "image": "/survey/desktop-layout-1.svg"
+                "label": "Top Layout",
+                "image": "/survey/group1.svg"
+            },
+            {
+                "label": "Top Corner Layout",
+                "image": "/survey/group2.svg"
+            },
+            {
+                "label": "Top No Bar Layout",
+                "image": "/survey/group3.svg"
             }
+            
+        ]
+    },
+    {
+        "label": "pages",
+        "prompt": "What page layout would you prefer?",
+        "type": "select-one",
+        "options": [
+            "Single Page: one long scrolling page",
+            "Multi Page: multiple non scrollable pages"
         ]
     }
+    
+  
 ]
