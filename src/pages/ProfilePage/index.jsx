@@ -147,6 +147,8 @@ const ProfilePage = () => {
             Make Request
           </Button>
         )}
+        {userInfo.request ? (
+
         <Button
           as={RouterLink}
           to="/request/create"
@@ -161,8 +163,9 @@ const ProfilePage = () => {
           }}
           px={6}
           py={3}>
-          {userInfo.request ? 'Update Request' : 'Make Request'}
+          {userInfo.request ? 'Update Request' : ''}
         </Button>
+        ) : ( "")}
 
         {userInfo && (userInfo.role === 'admin' || userInfo.role === 'superadmin') && (
           <Button
