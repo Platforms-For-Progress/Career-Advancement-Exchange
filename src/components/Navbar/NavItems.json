@@ -32,5 +32,15 @@
             "href": "/getinvolved"
           }
         ]
+      },
+      {
+        "label": "Request Website",
+        "children": [
+          {
+            "label": "Request",
+            "subLabel": "Create your own portfolio website with the CAE team!",
+            "href": "/request"
+          }
+        ]
       }
 ]
