@@ -1,0 +1,27 @@
+[
+    {
+        "label": "features",
+        "prompt": "What specific features would you like to include?",
+        "type": "select-multiple",
+        "options": [
+            "A landing page",
+            "A blog",
+            "A contact page"
+        ]
+    },
+    {
+        "label": "content",
+        "prompt": "What content would you like to include?",
+        "type": "select-multiple",
+        "options": [
+            "Personal Introduction",
+            "Projects",
+            "Education",
+            "Services you Offer",
+            "Skills",
+            "Awards",
+            "Passions",
+            "Positive Feedback"
+        ]
+    }
+]

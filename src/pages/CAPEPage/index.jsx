@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@chakra-ui/react';
 import { Flex, Text } from '@chakra-ui/react';
 
-import Butty from './Butty';
+import Butty from './butty';
 
 import '@fontsource/prata';
 import { Button } from '@chakra-ui/react';

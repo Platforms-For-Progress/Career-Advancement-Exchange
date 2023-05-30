@@ -21,8 +21,8 @@ import AdminManage from '../pages/Admin/Manage';
 import CAPEPage from '../pages/CAPEPage';
 import ResourcesPage from '../pages/ResourcesPage';
 import MessagePage from '../Pages/MessagePage';
-
-import CollabPage from '../pages/CollabPage';
+import Links from '../pages/Links';
+import CollabPage from '../Pages/CollabPage';
 
 const routeElements = (
   <>
@@ -39,6 +39,7 @@ const routeElements = (
       <Route path="/request/create" element={<CreateRequest />} />
       <Route path="/resources/cape" element={<CAPEPage />} />
       <Route path="/resources" element={<ResourcesPage />} />
+      <Route path="/links" element={<Links/>} />
       {/* Add more routes here */}
       <Route path='/message' element={<MessagePage/>}/>
       <Route path="/collab" element={<CollabPage />} />
