@@ -20,7 +20,8 @@ import {
   Textarea,
   CheckboxGroup,
   Checkbox,
-  useCheckboxGroup
+  useCheckboxGroup,
+  Wrap
 } from '@chakra-ui/react';
 import girlImage from '../../assets/girlImage.png';
 import { IoLocationSharp, IoMail } from 'react-icons/io5';
@@ -69,10 +70,10 @@ const GetInvolvedPage = () => {
         mt="2vh"
         justify="center"
         align="center"
-        direction={{ base: "column", md: "row" }}
+        direction={"column" }
         bg={'brand.200'}
-        width={{ base: '100%', md: '50vw', lg: '40vw', xl: '30vw' }}
-        maxW="90%"
+        width={{ base: '95vw', md: '70vw', lg: '40vw', xl: '30vw' }}
+     
         style={{
           backdropFilter: 'blur(15px)',
           background: 'brand.700',
@@ -82,8 +83,8 @@ const GetInvolvedPage = () => {
         >
         <Flex 
           align="center" 
-          direction={{ base: "column", md: "row" }} 
-          p={10} 
+          direction={"column" } 
+          
           my={8}
           // ml={{ base: 0, md: 8, lg: 12, xl: 16 }}
           >
@@ -94,10 +95,12 @@ const GetInvolvedPage = () => {
 
             <Spacer h={4}></Spacer>
             <Flex direction="column" pl={5}>
-              <Box pr={4} ml={{base: "2vw", md: 0}}>
+              <Box pr={4} ml={{base: "2vw", md: 0}} mb={ "2vh"}>
                 <HStack>
                   <IoMail />
+                 
                   <Text>team@careeradvancementexchange.com</Text>
+          
                 </HStack>
                 <Spacer h={4}></Spacer>
                 <HStack>
@@ -110,7 +113,7 @@ const GetInvolvedPage = () => {
             
           {/* </Box> */}
 
-          <Box p={7} bg="white" borderRadius={10}  mt = {{base: 10, md: 0}}>
+          <Box p={7} bg="white" borderRadius={10}  mt = { 0}>
             {/* <FormControl mb={5} onSubmit={submit} > */}
             <form onSubmit={(event) => submit(event)}>
               <FormControl isRequired>
