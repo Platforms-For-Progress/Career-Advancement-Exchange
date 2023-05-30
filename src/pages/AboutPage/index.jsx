@@ -34,6 +34,8 @@ import { IconButton, useBreakpointValue } from '@chakra-ui/react';
 // Here we have used react-icons package for the icons
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 import Inter from '../../assets/Inter-VariableFont_slnt,wght.ttf';
+import Epilogue from '../../assets/Epilogue-VariableFont_wght.ttf'
+// import Inter from '../../assets/Inter-VariableFont_slnt,wght.ttf'
 // And react-slick as our Carousel Lib
 // import Slider, { SliderRef, Settings } from 'react-slick';
 
@@ -176,7 +178,7 @@ export default function BasicStatistics() {
       py={5}
       px={{ base: 2, sm: 12, md: 17 }}
       bg={useColorModeValue('background.400', 'gray.900')}
-      fontFamily={Inter}>
+      fontFamily={Epilogue}>
       <SplitWithImage />
       <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
         {/* <chakra.h1 textAlign={'center'} fontSize={'4xl'} py={10} fontWeight={'bold'}>
@@ -244,12 +246,12 @@ function SplitWithImage() {
       padding={'16'}
       paddingY={'24'}
       borderRadius={'2xl'}
-      fontFamily={Inter}
+      fontFamily={Epilogue}
       
       >
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
         <Stack spacing={4}>
-          <Heading>Celebrating your background, together</Heading>
+          <Heading fontFamily={Epilogue}>Celebrating your background, together</Heading>
           <Text color={'gray.500'} fontSize={'lg'}>
             We believe that your background should not be a barrier to your success. We are dedicated to helping you achieve your career goals.
           </Text>

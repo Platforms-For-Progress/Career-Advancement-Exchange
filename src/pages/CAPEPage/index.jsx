@@ -18,20 +18,22 @@ import {
   MenuOptionGroup,
   MenuDivider
 } from '@chakra-ui/react';
+import Epilogue from '../../assets/Epilogue-VariableFont_wght.ttf'
 
 const brand = '#EFD79F';
+
 
 const CAPEPage = () => {
   return (
 
-    <Box bg="#F9F6E8" minH="95vh" maxW="full" mt={0} marginBottom={'300px'}>
+    <Box bg="background.400" minH="95vh" maxW="full" mt={0} marginBottom={'300px'}>
       <Box>
-        <Text fontFamily={'prata'} pos={'relative'} right={-10} fontSize="7xl">
+        <Text fontFamily={Epilogue} pos={'relative'} right={-10} fontSize="7xl">
           CAPE
         </Text>
       </Box>
 
-      <Flex direction="row" mt={68} ml={10} gap={'20%'}>
+      <Flex direction={{base: "column", md:"row"}} mt={68} ml={10} gap={'20%'}>
         <Butty
           weekName="Week 0"
           videoData={{
