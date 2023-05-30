@@ -1,0 +1,15 @@
+[
+    {
+        "label": "occupation",
+        "prompt": "Which best describes your current occupation?",
+        "type": "select-one",
+        "options": [
+            "Student",
+            "Education",
+            "dfasdfasdf",
+            "software engineer",
+            "illustrator",
+            "cool guy 😎"
+        ]
+    }
+]

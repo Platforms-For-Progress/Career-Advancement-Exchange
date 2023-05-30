@@ -23,6 +23,7 @@ const brand = '#EFD79F';
 
 const CAPEPage = () => {
   return (
+
     <Box bg="#F9F6E8" minH="95vh" maxW="full" mt={0} marginBottom={'300px'}>
       <Box>
         <Text fontFamily={'prata'} pos={'relative'} right={-10} fontSize="7xl">
@@ -47,6 +48,7 @@ const CAPEPage = () => {
       </Flex>
       {/* //add more flexs to add more weeks
       */}
+
     </Box>
   );
 };

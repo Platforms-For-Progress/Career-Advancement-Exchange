@@ -58,12 +58,12 @@ export default function LoginPage() {
             <Checkbox onChange={() => setRememberMe((rememberMe) => !rememberMe)}>
               Remember me
             </Checkbox>
-            <Link as={RouterLink} to={'/forgot-password'} color={'orange.500'}>
+            <Link as={RouterLink} to={'/forgot-password'} color={'brand.500'}>
               Forgot password?
             </Link>
           </Stack>
           <Button
-            colorScheme={'orange'}
+            colorScheme={'brand'}
             variant={'solid'}
             isLoading={loading}
             onClick={async () => await signInWithEmailAndPassword(email, password)}>
