@@ -23,43 +23,30 @@ const brand = '#EFD79F';
 
 const CAPEPage = () => {
   return (
-    <Box bg="#F9F6E8" minH="95vh" maxW="full" mt={0}>
-    
-        <Box>
-          <Text fontFamily={'prata'} pos={'relative'} right={-10} fontSize="7xl">
-            CAPE
-          </Text>
+    <Box bg="#F9F6E8" minH="95vh" maxW="full" mt={0} marginBottom={'300px'}>
+      <Box>
+        <Text fontFamily={'prata'} pos={'relative'} right={-10} fontSize="7xl">
+          CAPE
+        </Text>
+      </Box>
 
-         
-
-      
-        </Box>
-
-        
-    
-      
-
-      <Flex direction="row" mt={68} ml={10} gap={"20%"}>
-        
-        <Butty weekName="Week 0" videoData={{
-          "This lesson is all about Git! Learn about git, download git, and prepare git to be used with VSCode and GitHub! Click to learn more!": "https://drive.google.com/file/d/16ZnykVD0YiGRqeGuCekLnwXN55triE77/preview",
-          "github lesson": "https://drive.google.com/file/d/1J42CxOVAMVNn0EWj9-HmGLayHccMcNlq/preview",
-          "vscode lesson": "https://drive.google.com/file/d/1vYUzCiak_QO-VkCr9g35RvTkec12gmX8/preview"
-
-        }}>
-
-        </Butty>
-        <Butty  weekName="Week 1" videoData={{
-          "COMING SOON": ""
-        }}>
-
-        </Butty>
+      <Flex direction="row" mt={68} ml={10} gap={'20%'}>
+        <Butty
+          weekName="Week 0"
+          videoData={{
+            'Welcome video from our founder Elisa Carrillo!':
+              'https://drive.google.com/file/d/12DpwqSssO8shYg7qbrmtsEXA9suS0htn/preview',
+            'This lesson is all about Git! Learn about git, download git, and prepare git to be used with VSCode and GitHub! Click to learn more!':
+              'https://drive.google.com/file/d/16ZnykVD0YiGRqeGuCekLnwXN55triE77/preview',
+            'What is GitHub? In this video you will make your own GitHub account and your first own repository! At the end resources will be shared to get you started.':
+              'https://drive.google.com/file/d/1J42CxOVAMVNn0EWj9-HmGLayHccMcNlq/preview',
+            'What is VSCode? Here you will download VSCode, learn how to navigate folders and files, and Basic Commands via the Command Line':
+              'https://drive.google.com/file/d/1vYUzCiak_QO-VkCr9g35RvTkec12gmX8/preview'
+          }}></Butty>
+        <Butty weekName="Week 1" videoData={{}}></Butty>
       </Flex>
-      {/* //add more flexs to add more weeks  
-      IM KILLING MYSELF
+      {/* //add more flexs to add more weeks
       */}
-
-      
     </Box>
   );
 };

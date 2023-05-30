@@ -19,7 +19,7 @@ import {
 const brand = '#EFD79F';
 const Butty = (props) => {
   return (
-    <Box >
+    <Box>
       <Menu>
         <MenuButton
           as={Button}
@@ -32,24 +32,24 @@ const Butty = (props) => {
           fontFamily={'prata'}
           rightIcon={<ChevronDownIcon />}></MenuButton>
         <MenuList bg={brand} height={'500px'} width={'561px'} position={'relative'}>
-          
-            {
-             Object.keys(props.videoData).map((key)=> {return(
-              <MenuItem bg={brand}>
-              <Box
-              position={'relative'}
-              width="44%"
-              height="33%"
-              as="iframe"
-              src={props.videoData[key]}
-              sx={{
-                aspectRatio: '16/9'
-              }}></Box> 
-              <Text fontFamily={'prata'}>{key}</Text>
+          {Object.keys(props.videoData).map((key) => {
+            return (
+              <MenuItem bg={brand} _hover={{ backgroundColor: '#F1CB71' }}>
+                <Box
+                  position={'relative'}
+                  width="44%"
+                  height="33%"
+                  as="iframe"
+                  marginRight={'15px'}
+                  src={props.videoData[key]}
+                  sx={{
+                    aspectRatio: '16/9'
+                  }}></Box>
+                <Text fontFamily={'prata'}>{key}</Text>
               </MenuItem>
-             )})
-            }
-            {/* <Box
+            );
+          })}
+          {/* <Box
               position={'relative'}
               width="44%"
               height="33%"
@@ -58,13 +58,11 @@ const Butty = (props) => {
               sx={{
                 aspectRatio: '16/9'
               }}></Box> */}
-           
-          
         </MenuList>
       </Menu>
       <Box
-      top={-150}
-      left={10}
+        top={-150}
+        left={10}
         pos={'relative'}
         borderRadius={'10px'}
         width="259px"
@@ -74,8 +72,8 @@ const Butty = (props) => {
           position={'absolute'}
           fontSize="4xl"
           fontFamily={'prata'}
-          justifyContent={"center"}
-          alignContent={"center"}
+          justifyContent={'center'}
+          alignContent={'center'}
           marginTop={22}
           marginLeft={58}>
           {' '}
