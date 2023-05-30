@@ -60,7 +60,7 @@ export default function contact() {
       <Flex>
         <Box
           bg={'brand.200'}
-          color="brand.700"
+         
           m={{ sm: 4, md: 16, lg: 10 }}
           pt={{ sm: 5, md: 5, lg: 16 }}
           pl={{ sm: 5, md: 5, lg: 16 }}
@@ -83,9 +83,9 @@ export default function contact() {
                         height="48px"
                         width="400px"
                         variant="ghost"
-                        color="brand.700"
+                        
                         _hover={{ border: '2px solid brand.200' }}
-                        leftIcon={<MdEmail color="brand.700" size="20px" />}>
+                        leftIcon={<MdEmail color="black" size="20px" />}>
                         team@careeradvancementexchange.com
                       </Button>
                       <Button
@@ -93,9 +93,9 @@ export default function contact() {
                         height="48px"
                         width="195px"
                         variant="ghost"
-                        color="brand.700"
+                       
                         _hover={{ border: '2px solid brand.200' }}
-                        leftIcon={<MdLocationOn color="brand.700" size="20px" />}>
+                        leftIcon={<MdLocationOn color="black" size="20px" />}>
                         Champaign, IL
                       </Button>
                     </VStack>
