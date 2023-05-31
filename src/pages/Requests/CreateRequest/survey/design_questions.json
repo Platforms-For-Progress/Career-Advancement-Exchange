@@ -1,37 +1,72 @@
 [
-    {
-        "label": "desktop-layout",
-        "prompt": "Select your preferred navbar layout",
-        "type": "select-one-image",
-        "options": [
-            {
-                "label": "Aside Layout",
-                "image": "/survey/group0.svg"
-            },
-            {
-                "label": "Top Layout",
-                "image": "/survey/group1.svg"
-            },
-            {
-                "label": "Top Corner Layout",
-                "image": "/survey/group2.svg"
-            },
-            {
-                "label": "Top No Bar Layout",
-                "image": "/survey/group3.svg"
-            }
-            
-        ]
-    },
-    {
-        "label": "pages",
-        "prompt": "What page layout would you prefer?",
-        "type": "select-one",
-        "options": [
-            "Single Page: one long scrolling page",
-            "Multi Page: multiple non scrollable pages"
-        ]
-    }
-    
-  
+   {
+       "label": "desktop-layout",
+       "prompt": "Select your preferred desktop layout",
+       "type": "select-one-image",
+       "options": [
+           {
+               "label": "Aside Layout",
+               "image": "/survey/group0.svg"
+           },
+           {
+               "label": "Header Layout",
+               "image": "/survey/group1.svg"
+           },
+           {
+               "label": "Top Corner Layout",
+               "image": "/survey/group2.svg"
+           },
+           {
+               "label": "Top No Bar Layout",
+               "image": "/survey/group3.svg"
+           }
+          
+       ]
+   },
+   {
+       "label": "pages",
+       "prompt": "What page layout would you prefer?",
+       "type": "select-one",
+       "options": [
+           "Single Page: one long scrolling page",
+           "Multi Page: multiple non scrollable pages"
+       ]
+   },
+   {
+       "label": "style",
+       "prompt": "What style or mood would you like your website to convey?",
+       "type": "select-one",
+       "options": [
+           "modern",
+           "minimalist",
+           "playful",
+           "professional",
+           "other"
+       ]
+   },
+   {
+       "label": "documents",
+       "prompt": "What documents would you like to include in your website?",
+       "type": "select-multiple",
+       "options": [
+           "Resume",
+           "Images of self",
+           "Gallery of visual work",
+           "Awards/Achievements"
+       ]
+   },
+   {
+       "label": "inspo",
+       "prompt": "Do you have an inspiration website you would like to reference to our designers?",
+       "type": "select-one",
+       "options": [
+           "yes",
+           "no"
+       ]
+   },
+   {
+       "label": "overall design",
+       "prompt": "In detail, what do you envision your portfolio website to look like?",
+       "type": "free-response"
+   }
 ]
