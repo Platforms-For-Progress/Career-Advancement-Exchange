@@ -38,8 +38,8 @@ import {
 export default function Status() {
   const navigate = useNavigate();
   const { user, userInfo, loading, error } = useUser();
-  if (userInfo && !userInfo.requeset) {
-    navigate('/profile');
+  if (userInfo && !userInfo.request) {
+    navigate('/request/create');
   }
   if (loading) return <Spinner />;
   if (error) return <Alert status="error" />;

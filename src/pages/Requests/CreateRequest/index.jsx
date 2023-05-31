@@ -31,8 +31,7 @@ import { setDoc, doc, updateDoc } from 'firebase/firestore';
 import { auth, firestore } from '../../../firebase';
 import { useUser } from '../../../utils/User';
 
-
-// import StepTemplate from './StepTemplate';
+import StepTemplate from './StepTemplate';
 import introQuestions from './survey/intro_questions.json';
 import contentQuestions from './survey/content_questions.json';
 import designQuestions from './survey/design_questions.json';
@@ -139,7 +138,7 @@ const CreateRequest = () => {
 
   return (
     <Box bg="white" minH="95vh" p={4}>
-      <Stepper size="lg" index={activeStep} colorScheme="brand" mx={10} display={{base: "none"}}>
+      <Stepper size="lg" index={activeStep} colorScheme="brand" mx={10} display={{ base: 'none' }}>
         {steps.map(({ label, description, content }, index) => (
           <Step key={index} onClick={() => setActiveStep(index)}>
             <StepIndicator>
@@ -234,12 +233,6 @@ const CreateRequest = () => {
           <Button colorScheme="brand" as={RouterLink} to="/profile">
             Back to Profile
           </Button>
-          {/* <Button
-            onClick={() => {
-              console.log(userResponses);
-            }}>
-            Test
-          </Button> */}
         </Center>
       </Stack>
     </Box>
