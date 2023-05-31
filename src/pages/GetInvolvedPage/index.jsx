@@ -21,15 +21,31 @@ import {
   CheckboxGroup,
   Checkbox,
   useCheckboxGroup,
-  Wrap
+  Wrap,
+  Center
 } from '@chakra-ui/react';
 import girlImage from '../../assets/girlImage.png';
 import { IoLocationSharp, IoMail } from 'react-icons/io5';
 import { BsPerson } from 'react-icons/bs';
 import { firestore } from '../../firebase/index';
-import { doc, setDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 const bg_page = '#fcf4cf';
 const bg_brand_yellow = '#F5C362';
+
+const teams = [
+  {
+    name: 'Software/Web Development'
+  },
+  {
+    name: 'Marketing & Fundraising'
+  },
+  {
+    name: 'Business'
+  },
+  {
+    name: 'UI/UX'
+  }
+];
 
 const GetInvolvedPage = () => {
   const [name, setName] = useState('');
@@ -45,11 +61,11 @@ const GetInvolvedPage = () => {
   const submit = (event) => {
     event.preventDefault();
     console.log('Attempting submit');
-    setDoc(doc(firestore, 'getInvolved', name), {
-      Name: name,
-      Email: email,
-      Message: message,
-      Value: checkedValue
+    addDoc(collection(firestore, 'getinvolved_applications'), {
+      name: name,
+      email: email,
+      message: message,
+      interested_teams: checkedValue
     })
       .then(() => {
         setName('');
@@ -60,6 +76,7 @@ const GetInvolvedPage = () => {
       })
       .catch((error) => {
         console.error('Error submiting: ', error);
+        alert('Something went wrong submitting. Please try again.');
       });
   };
 
@@ -68,52 +85,48 @@ const GetInvolvedPage = () => {
       <Flex
         margin="0 auto"
         mt="2vh"
+        px={10}
         justify="center"
         align="center"
-        direction={"column" }
+        direction={'column'}
         bg={'brand.200'}
         width={{ base: '95vw', md: '70vw', lg: '40vw', xl: '30vw' }}
-     
         style={{
           backdropFilter: 'blur(15px)',
           background: 'brand.700',
           boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.2)',
           borderRadius: '2vw'
-        }}
-        >
-        <Flex 
-          align="center" 
-          direction={"column" } 
-          
+        }}>
+        <Flex
+          align="center"
+          direction={'column'}
           my={8}
           // ml={{ base: 0, md: 8, lg: 12, xl: 16 }}
-          >
+        >
           {/* <Box m={10}> */}
-            <Text fontSize={{ base: "2xl", md: "3xl" }} mb={4}>
-              <b>Get Involved</b>
-            </Text>
+          <Text fontSize={{ base: '2xl', md: '3xl' }} mb={4}>
+            <b>Get Involved</b>
+          </Text>
 
-            <Spacer h={4}></Spacer>
-            <Flex direction="column" pl={5}>
-              <Box pr={4} ml={{base: "2vw", md: 0}} mb={ "2vh"}>
-                <HStack>
-                  <IoMail />
-                 
-                  <Text>team@careeradvancementexchange.com</Text>
-          
-                </HStack>
-                <Spacer h={4}></Spacer>
-                <HStack>
-                  <IoLocationSharp />
-                  <Text>Champaign, IL</Text>
-                </HStack>
-              </Box>
-            </Flex>
+          <Spacer h={4}></Spacer>
+          <Flex direction="column" pl={5}>
+            <Box pr={4} ml={{ base: '2vw', md: 0 }} mb={'2vh'}>
+              <HStack>
+                <IoMail />
 
-            
+                <Text>team@careeradvancementexchange.com</Text>
+              </HStack>
+              <Spacer h={4}></Spacer>
+              <HStack>
+                <IoLocationSharp />
+                <Text>Champaign, IL</Text>
+              </HStack>
+            </Box>
+          </Flex>
+
           {/* </Box> */}
 
-          <Box p={7} bg="white" borderRadius={10}  mt = { 0}>
+          <Box p={7} bg="white" borderRadius={10} mt={0}>
             {/* <FormControl mb={5} onSubmit={submit} > */}
             <form onSubmit={(event) => submit(event)}>
               <FormControl isRequired>
@@ -144,7 +157,7 @@ const GetInvolvedPage = () => {
               <Spacer h={4}></Spacer>
 
               <FormControl>
-                <FormLabel>Message</FormLabel>
+                <FormLabel>Why are you interested in joining the CAE team?</FormLabel>
                 <Textarea onChange={onMessageChange} />
               </FormControl>
 
@@ -154,24 +167,24 @@ const GetInvolvedPage = () => {
                 <FormLabel>Interested Team</FormLabel>
                 <CheckboxGroup value={checkedValue} onChange={onCheckChange}>
                   <Flex direction="column">
-                    <Checkbox value="team1">Software</Checkbox>
-                    <Checkbox value="team2">Fundraising</Checkbox>
-                    <Checkbox value="team3">Business</Checkbox>
-                    <Checkbox value="team4">Marketing</Checkbox>
+                    {teams.map((team) => (
+                      <Checkbox value={team.name}>{team.name}</Checkbox>
+                    ))}
                   </Flex>
                 </CheckboxGroup>
               </FormControl>
 
               <Spacer h={4}></Spacer>
-
-              <Button type="submit" mb={0} bg={'brand.400'} textColor="white">
-                Send Message
-              </Button>
+              <Center>
+                <Button type="submit" mb={0} bg={'brand.400'} textColor="white">
+                  Submit
+                </Button>
+              </Center>
             </form>
           </Box>
         </Flex>
 
-        <Flex align="center" direction={"row"}>
+        <Flex align="center" direction={'row'}>
           <a
             href="https://www.linkedin.com/company/career-advancement-exchange"
             target="_blank"
