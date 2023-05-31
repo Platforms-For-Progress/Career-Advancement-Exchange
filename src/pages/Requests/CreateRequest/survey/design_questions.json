@@ -13,5 +13,16 @@
                 "image": "/survey/desktop-layout-1.svg"
             }
         ]
+    }, 
+    {
+        "label": "style",
+        "prompt": "What style or mood would you like your website to convey?",
+        "options": [
+            "modern",
+            "minimalist", 
+            "playful",
+            "professional",
+            "other"
+        ]
     }
 ]
