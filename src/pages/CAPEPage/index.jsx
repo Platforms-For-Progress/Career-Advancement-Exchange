@@ -18,14 +18,12 @@ import {
   MenuOptionGroup,
   MenuDivider
 } from '@chakra-ui/react';
-import Epilogue from '../../assets/Epilogue-VariableFont_wght.ttf'
+import Epilogue from '../../assets/Epilogue-VariableFont_wght.ttf';
 
 const brand = '#EFD79F';
 
-
 const CAPEPage = () => {
   return (
-
     <Box bg="background.400" minH="95vh" maxW="full" mt={0} marginBottom={'300px'}>
       <Box>
         <Text fontFamily={Epilogue} pos={'relative'} right={-10} fontSize="7xl">
@@ -33,7 +31,7 @@ const CAPEPage = () => {
         </Text>
       </Box>
 
-      <Flex direction={{base: "column", md:"row"}} mt={68} ml={10} gap={'20%'}>
+      <Flex direction={{ base: 'column', md: 'row' }} mt={68} ml={10} gap={'20%'}>
         <Butty
           weekName="Week 0"
           videoData={{
@@ -46,11 +44,17 @@ const CAPEPage = () => {
             'What is VSCode? Here you will download VSCode, learn how to navigate folders and files, and Basic Commands via the Command Line':
               'https://drive.google.com/file/d/1vYUzCiak_QO-VkCr9g35RvTkec12gmX8/preview'
           }}></Butty>
-        <Butty weekName="Week 1" videoData={{}}></Butty>
+        <Butty
+          weekName="Week 1"
+          videoData={{
+            'Introduction to Front-End development! What is HTML & CSS? What is Javascript? Find out how these languages all work together to form a website!':
+              'https://drive.google.com/file/d/1XNzWhHAWqD2hfOmphHVQ9JiIpPxwGS9T/preview',
+            ' Start creating your first ever website! In this tutorial you will learn how to build your website with HTML & CSS. Afterwards, you will create your own page and submit to GitHub.':
+              'https://drive.google.com/file/d/1lonXUoEG4av_SkgQle5CbTcrwFNWNvPI/preview'
+          }}></Butty>
       </Flex>
       {/* //add more flexs to add more weeks
-      */}
-
+       */}
     </Box>
   );
 };
