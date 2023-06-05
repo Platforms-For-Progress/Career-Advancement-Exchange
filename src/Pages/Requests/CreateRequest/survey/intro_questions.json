@@ -5,7 +5,6 @@
         "type": "select-one",
         "options": [
             "Student",
-            "Teacher",
             "Programmer",
             "Artist",
             "Designer",
