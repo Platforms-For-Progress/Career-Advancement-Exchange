@@ -32,7 +32,8 @@ const MessagePage = () => {
         >
             <Text fontSize={"20px"}> Messages</Text>
 
-            <Button
+            {/* removed search feature as chats will appear for users */}
+            {/* <Button
             height={"40px"}
             width={"35px"}
             borderRadius={"100%"}
@@ -43,13 +44,14 @@ const MessagePage = () => {
             _hover={"none"}
             _focusVisible={"none"}
             onClick={() => setNewMessage(!newMessage)}
-            >{newMessage ? "x" : "+"}</Button>
+            >{newMessage ? "x" : "+"}</Button> */}
 
 
         </Box>
-        {newMessage && 
+        {/* removed search feature as chats will appear for users */}
+        {/* {newMessage && 
         <Search/>
-        }
+        } */}
         <Chats/>
         </Box>
 

@@ -26,7 +26,9 @@ import {
   collection,
   getDoc,
   arrayRemove,
-  onSnapshot
+  onSnapshot,
+  setDoc,
+  serverTimestamp
 } from 'firebase/firestore';
 
 const AdminManage = () => {
@@ -37,6 +39,7 @@ const AdminManage = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedRole, setSelectedRole] = useState(null);
   const [assignedAdmins, setAssignedAdmins] = useState([]);
+
 
   // useEffect(() => {
   //   if (!selectedUser?.request?.admins?.length) return;
@@ -53,6 +56,54 @@ const AdminManage = () => {
   //     }
   //   });
   // }, [selectedUser]);
+
+  //automatically creates a chat when a user is assigned an admin - might move to a separate file 
+  const autoMessage = async(user, admin) => {
+    const combinedId = user.name.length > admin.name.length ? user.name + admin.name : admin.name + user.name
+    try {
+      const res = await getDoc(doc(firestore, "chats", combinedId));
+      if (!res.exists()) {
+        await setDoc(doc(firestore, "chats", combinedId), {messages:[]})
+      }
+        const user1 = await getDoc(doc(firestore, "userChats", user.name));
+        const user2 = await getDoc(doc(firestore, "userChats", admin.name));
+
+        if (!user1.exists()) {
+          await setDoc(doc(firestore, "userChats", user.name), {
+            [combinedId]: {
+              date: serverTimestamp(),
+              userInfo: {
+                name: admin.name
+              }
+            }
+          });
+        } else {
+          await updateDoc(doc(firestore, "userChats", user.name), {
+            [combinedId+".userInfo"]: {
+              name: admin.name,
+            },
+            [combinedId+".date"]: serverTimestamp()
+          });
+        }
+        if (!user2.exists()) {
+          await setDoc(doc(firestore, "userChats", admin.name), {
+            [combinedId]: {
+              date: serverTimestamp(),
+              userInfo: {
+                name: user.name
+              }
+            }
+          });
+        } else {
+          await updateDoc(doc(firestore, "userChats", admin.name), {
+            [combinedId+".userInfo"]: {
+              name: user.name,
+            },
+            [combinedId+".date"]: serverTimestamp()
+          });
+        }
+    } catch(err) {}
+}
 
   useEffect(() => {
     if (userInfo?.role !== 'superadmin') {
@@ -124,6 +175,7 @@ const AdminManage = () => {
         id: adminId
       }
     ]);
+    autoMessage(selectedUser, adminData);
   };
 
   const handleDeleteAdmin = async (adminId) => {
