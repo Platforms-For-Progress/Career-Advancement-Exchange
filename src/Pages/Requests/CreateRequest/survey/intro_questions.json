@@ -6,11 +6,22 @@
         "options": [
             "Student",
             "Programmer",
+            "Engineer",
+            "Entrepreneur",
+            "Human Resources",
+            "Business",
+            "Medical",
+            "Teacher",
             "Artist",
             "Designer",
             "Photographer",
             "Other"
         ]
+    },
+    {
+        "label": "occupation-explanation",
+        "prompt": "Use this space to elaborate further on your occupation.",
+        "type": "free-response"
     },
     {
         "label": "Request Reasoning",
