@@ -65,6 +65,8 @@ const Butty = (props) => {
       <Box
         top={-150}
         left={{base: 0, md: 10}}
+        justifyContent={'center'}
+        alignItems={'center'}
         pos={'relative'}
         borderRadius={'10px'}
         width={{base: "200px" , md: "259px"}}
