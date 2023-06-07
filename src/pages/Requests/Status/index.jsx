@@ -32,23 +32,46 @@ import {
   getDoc,
   arrayRemove,
   deleteDoc,
-  deleteField
+  deleteField,
+  onSnapshot
 } from 'firebase/firestore';
 
 export default function Status() {
   const navigate = useNavigate();
   const { user, userInfo, loading, error } = useUser();
+  const [adminUserInfo, setAdminUserInfo] = useState(null);
+
+  useEffect(() => {
+      if (userInfo?.request?.admins) {
+          const data = onSnapshot(doc(firestore, 'users', userInfo.request.admins[0]), async (docSnapshot) => {
+              if (docSnapshot.exists()) {
+                  setAdminUserInfo(docSnapshot.data());
+              } else {
+                  setAdminUserInfo(null);
+              }
+          });
+
+          return () => data;
+      } else {
+          setAdminUserInfo(null);
+      }
+  }, [userInfo]);
+
   if (userInfo && !userInfo.request) {
     navigate('/request/create');
   }
   if (loading) return <Spinner />;
   if (error) return <Alert status="error" />;
+  
   return (
     <Box maxW="100vw" minH="95vh" mx={'auto'} py={5} px={6}>
       <Flex flexWrap="wrap" justifyContent="center" alignItems="center">
         <Box w="100%" p={4}>
           <Text fontSize="2xl" fontWeight="bold" color="black" textAlign="center" mt="10vh">
             Your request status is: {userInfo?.request?.status ?? 'Pending'}
+          </Text>
+          <Text fontSize="2xl" fontWeight="bold" color="black" textAlign="center" mt="1rem">
+              The email of your assigned admin is: {adminUserInfo?.email ?? 'Pending'}
           </Text>
           <Text fontSize="2xl" fontWeight="bold" color="black" textAlign="center" mt="1rem">
             We will get back to you soon!
