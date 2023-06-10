@@ -16,7 +16,9 @@ import {
   useDisclosure
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
-
+import { useState, useEffect } from 'react';
+import { auth } from '../../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 import NAV_ITEMS from './NavItems';
 
 const MobileNav = () => {
@@ -33,7 +35,22 @@ export default MobileNav;
 
 const MobileNavItem = ({ label, children, href }) => {
   const { isOpen, onToggle } = useDisclosure();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    const log = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
 
+    return () => log();
+  }, []);
+  let newHref = href;
+  if (!isLoggedIn && href == '/request') {
+    newHref = '/signin';
+  }
   return (
     <Stack spacing={4} onClick={children && onToggle}>
       <Flex

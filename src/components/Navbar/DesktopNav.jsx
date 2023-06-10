@@ -16,13 +16,18 @@ import {
   useDisclosure
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
-
+import { useState, useEffect } from 'react';
 import NAV_ITEMS from './NavItems';
+import { auth } from '../../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+
+
 
 const DesktopNav = () => {
   const linkColor = useColorModeValue('gray.600', 'gray.200');
   const linkHoverColor = useColorModeValue('brand.700', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
+  
 
   return (
     <Stack direction={'row'} spacing={4}>
@@ -78,9 +83,28 @@ const DesktopNav = () => {
 export default DesktopNav;
 
 const DesktopSubNav = ({ label, href, subLabel }) => {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    const log = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    });
+
+    return () => log();
+  }, []);
+  let newHref = href;
+  if (!isLoggedIn && href == '/request') {
+    newHref = '/signin';
+  }
+
+  
   return (
     <Link
-      href={href}
+      href={newHref}
       role={'group'}
       display={'block'}
       p={2}
