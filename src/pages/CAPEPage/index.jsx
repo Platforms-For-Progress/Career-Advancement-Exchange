@@ -1,13 +1,15 @@
-import React from 'react';
-import { Box } from '@chakra-ui/react';
-import { Flex, Text } from '@chakra-ui/react';
+import React, {Button, useState } from 'react'
+import { 
+  Card, 
+  CardHeader, 
+  CardBody, 
+  Heading, 
+  Stack, 
+  StackDivider, 
+  Box, 
+  Text, 
+  AspectRatio } from '@chakra-ui/react'
 
-import Butty from './butty';
-
-import '@fontsource/prata';
-import { Button } from '@chakra-ui/react';
-import VideoButton from '../../components/VideoButton/VideoButton';
-import { ChevronDownIcon } from '@chakra-ui/icons';
 import {
   Menu,
   MenuButton,
@@ -16,49 +18,52 @@ import {
   MenuItemOption,
   MenuGroup,
   MenuOptionGroup,
-  MenuDivider
-} from '@chakra-ui/react';
-import Epilogue from '../../assets/Epilogue-VariableFont_wght.ttf';
+  MenuDivider,
+  Portal
+} from '@chakra-ui/react'
+import Content from './Content'
+import { ChevronDownIcon } from '@chakra-ui/icons'
 
 const brand = '#EFD79F';
 
 const CAPEPage = () => {
+  const [menuLabel, setMenuLabel] = useState("Week 0")
   return (
-    <Box bg="background.400" minH="95vh" maxW="full" mt={0} marginBottom={'300px'}>
+    
+    <Stack spacing={"50px"} padding={"25px"} flex={1}>
       <Box>
-        <Text fontFamily={Epilogue} pos={'relative'} right={-10} fontSize="7xl">
-          CAPE
-        </Text>
-      </Box>
+            <Menu closeOnSelect={true} isLazy={true}>
+            <MenuButton 
+              width={{sm: "100%", md: "250px", lg: "250px"}}
+              as={Button} 
+              bgColor={"#f2bfb8"} 
+              padding={"5"}
+              borderRadius={"5px"}
+              textColor={"light grey"}
+              boxShadow={"0px 0px 5px 0px #e1e3e3"}
+              > {menuLabel} <ChevronDownIcon/> </MenuButton>
 
-      <Flex direction={{ base: 'column', md: 'row' }} mt={68} ml={10} gap={'20%'}>
-        <Butty
-          weekName="Week 0"
-          videoData={{
-            'Welcome video from our founder Elisa Carrillo!':
-              'https://drive.google.com/file/d/12DpwqSssO8shYg7qbrmtsEXA9suS0htn/preview',
-            'This lesson is all about Git! Learn about git, download git, and prepare git to be used with VSCode and GitHub! Click to learn more!':
-              'https://drive.google.com/file/d/16ZnykVD0YiGRqeGuCekLnwXN55triE77/preview',
-            'What is GitHub? In this video you will make your own GitHub account and your first own repository! At the end resources will be shared to get you started.':
-              'https://drive.google.com/file/d/1J42CxOVAMVNn0EWj9-HmGLayHccMcNlq/preview',
-            'What is VSCode? Here you will download VSCode, learn how to navigate folders and files, and Basic Commands via the Command Line':
-              'https://drive.google.com/file/d/1vYUzCiak_QO-VkCr9g35RvTkec12gmX8/preview'
-          }}></Butty>
-        <Butty
-          weekName="Week 1"
-          videoData={{
-            'Introduction to Front-End development! What is HTML & CSS? What is Javascript? Find out how these languages all work together to form a website!':
-              'https://drive.google.com/file/d/1XNzWhHAWqD2hfOmphHVQ9JiIpPxwGS9T/preview',
-            ' Start creating your first ever website! In this tutorial you will learn how to build your website with HTML & CSS. Afterwards, you will create your own page and submit to GitHub.':
-              'https://drive.google.com/file/d/1lonXUoEG4av_SkgQle5CbTcrwFNWNvPI/preview'
-          }}></Butty>
-      </Flex>
-      {/* //add more flexs to add more weeks
-       */}
-    </Box>
-  );
+            <Portal>
+              <MenuList 
+              width={"250px"}
+              bgColor={"#f0a89e"}
+              borderRadius={"5px"}
+              padding={"5px"}
+              boxShadow={"0px 0px 5px 0px #e1e3e3"}
+              borderColor={"#f0a89e"}
+
+              >
+                <MenuItem _hover={{ bg: '#FDC0C0', borderRadius: "5px"}} bgColor={"#f0a89e"} padding={"10px"} onClick={() => setMenuLabel("Week 0")}>Week 0</MenuItem>
+                <MenuItem _hover={{ bg: '#FDC0C0', borderRadius: "5px"}} bgColor={"#f0a89e"} padding={"10px"} onClick={() => setMenuLabel("Week 1")}>Week 1</MenuItem>
+                <MenuItem _hover={{ bg: '#FDC0C0', borderRadius: "5px"}} bgColor={"#f0a89e"} padding={"10px"} onClick={() => setMenuLabel("Week 2")}>Week 2</MenuItem>
+              </MenuList>
+            </Portal>  
+            </Menu>
+       </Box>
+       <Content week={menuLabel}/>
+    </Stack>
+  )
 };
 
-// 2. Call `extendTheme` and pass your custom values
 
 export default CAPEPage;

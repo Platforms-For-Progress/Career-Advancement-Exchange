@@ -1,0 +1,65 @@
+[
+    {
+        "0" : {
+            "Title" : "Welcome CAPE Video",
+            "Description" : "Welcome video from our founder Elisa Carrillo!",
+            "Video" : "https://drive.google.com/file/d/12DpwqSssO8shYg7qbrmtsEXA9suS0htn/preview"
+        },
+        "1" : {
+            "Title" : "Git",
+            "Description" : "This lesson is all about Git! Learn about git, download git, and prepare git to be used with VSCode and GitHub! Click to learn more!",
+            "Video" : "https://drive.google.com/file/d/16ZnykVD0YiGRqeGuCekLnwXN55triE77/preview"
+        },
+        "2" : {
+            "Title" : "GitHub",
+            "Description" : "What is GitHub? In this video you will make your own GitHub account and your first own repository! At the end resources will be shared to get you started.",
+            "Video" : "https://drive.google.com/file/d/1J42CxOVAMVNn0EWj9-HmGLayHccMcNlq/preview"
+        },
+        "3" : {
+            "Title" : "VSCode",
+            "Description" : "What is VSCode? Here you will download VSCode, learn how to navigate folders and files, and Basic Commands via the Command Line.",
+            "Video" : "https://drive.google.com/file/d/1vYUzCiak_QO-VkCr9g35RvTkec12gmX8/preview"
+        }
+    }, 
+    {
+        "0" : {
+            "Title" : "HTML & CSS",
+            "Description" : "Introduction to Front-End development! What is HTML & CSS? What is Javascript? Find out how these languages all work together to form a website!",
+            "Video" : "https://drive.google.com/file/d/1XNzWhHAWqD2hfOmphHVQ9JiIpPxwGS9T/preview"
+        },
+        "1" : {
+            "Title" : "DEMO",
+            "Description" : "Start creating your first ever website! In this tutorial you will learn how to build your website with HTML & CSS. Afterwards, you will create your own page and submit to GitHub.",
+            "Video" : "https://drive.google.com/file/d/1lonXUoEG4av_SkgQle5CbTcrwFNWNvPI/preview"
+        }
+    },
+
+    {
+        "0" : {
+            "Title" : "Introduction to JavaScript",
+            "Description" : "Introduction to Javascript! What is JavaScript? Why it is important for web development?",
+            "Video" : "https://drive.google.com/file/d/1NypeRcGM6CpLksgeCfujYkMbISIemmxQ/view?usp=sharing"
+        },
+        "1" : {
+            "Title" : "JavaScript Syntax",
+            "Description" : "Begin learning to program in JavaScript. In this video, learn about commmon JavaScript syntax, variables, and data types!",
+            "Video" : "https://drive.google.com/file/d/1miNPp_lUpQPByxmDgRBouZEkk6CZX430/view?usp=sharing"
+        },
+        "2" : {
+            "Title" : "JavaScript Control Structures",
+            "Description" : "Continuing learning about JavaScript and control structures and loops! This video introduces if...else and switch case statements as well as while and for loops!",
+            "Video" : "https://drive.google.com/file/d/1q7mi6dMojAYEZVL9T3TCnq17K1tvOn5z/view?usp=share_link"
+        },
+        "3" : {
+            "Title" : "Error Handling",
+            "Description" : "Errors are going to happen! In this video, learn about try...catch statements for expected errors!",
+            "Video" : "https://drive.google.com/file/d/1KRudok1tiSp20Fu8kMB956XmC5KxWBcA/view?usp=sharing"
+        },
+        "4" : {
+            "Title" : "DOM Manipulation",
+            "Description" : "Learn to create an interactive and responsive webpage. In this video, learn to use DOM methods and get a brief introduction to event handlers!",
+            "Video" : "https://drive.google.com/file/d/10UucbzuBaQO3nrnKnHM0ckc2felQ6osj/view?usp=sharing"
+        }
+    }
+
+]
