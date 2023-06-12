@@ -1,0 +1,31 @@
+[
+    {
+        "0" : {
+            "Lesson Slides" : ["https://docs.google.com/presentation/d/1XY2ks1x4Bja2ynaVSh9KlFGBgfFbZLyAQ7QWeZdV4bY/edit?usp=sharing", 
+                               "https://docs.google.com/presentation/d/1cuWH8hDzQwVC1Hoysg9MTOjEyJDdbCVkrDTeY5LJ7BU/edit?usp=share_link",
+                               "https://docs.google.com/presentation/d/1XcpgUGVyUfSkk7AUj7VEl_a1sL6A6fmxltF1AlMNJQk/edit?usp=share_link"],
+
+            "Project Write-up" : "https://docs.google.com/document/d/18Uioq2CJ4vlhV8roE3Od7o7uAZWuMFsFsg7buoBKyzc/edit?usp=share_link"
+
+        }
+
+    },
+    {
+        "0" : {
+            "Lesson Slides" : "https://docs.google.com/presentation/d/1WjAQ9FkMShbImQoynMqM1Buu8KrHy65KentEMaX9Zo8/edit?usp=share_link",
+            "Project Write-up" : "https://docs.google.com/document/d/1sUmCm_ZSZDViAUiJyFnuSU8HUlti6Bik0ryhC8HxLH0/edit?usp=share_link"
+
+        }
+    },
+    {
+        "0" : {
+            "Lesson Slides" : ["https://docs.google.com/presentation/d/1-dAuFxsWvvHrYRuL4bxPIQYGoZkghjOU6ClC2M2qnXM/edit?usp=sharing", 
+                                "https://docs.google.com/presentation/d/1qz6UjMMQFJ2lX1ao-5RO2uCWGTXofDkIbMobGIL7c6s/edit?usp=sharing",
+                                "https://docs.google.com/presentation/d/1yb048GLt4kPgGGri-NHRHeXi7OS9WhlU8r6TZjtaPyw/edit?usp=sharing",
+                                "https://docs.google.com/presentation/d/1MWE6LBFCkio1UYjRKQVWhnmuReNXjPbEzdZkKYry-OQ/edit?usp=sharing",
+                                "https://docs.google.com/presentation/d/1WjAQ9FkMShbImQoynMqM1Buu8KrHy65KentEMaX9Zo8/edit?usp=sharing"],
+            "Project Write-up" : "https://docs.google.com/document/d/1B3RXyC8ORuTOiFWuFstER1G5hmyFkmX1hiO9m27caWY/edit?usp=sharing"
+
+        }
+    }
+]
