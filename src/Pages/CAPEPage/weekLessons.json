@@ -38,27 +38,32 @@
         "0" : {
             "Title" : "Introduction to JavaScript",
             "Description" : "Introduction to Javascript! What is JavaScript? Why it is important for web development?",
-            "Video" : "https://drive.google.com/file/d/1NypeRcGM6CpLksgeCfujYkMbISIemmxQ/view?usp=sharing"
+            "Video" : "https://drive.google.com/file/d/1NypeRcGM6CpLksgeCfujYkMbISIemmxQ/preview"
         },
         "1" : {
             "Title" : "JavaScript Syntax",
             "Description" : "Begin learning to program in JavaScript. In this video, learn about commmon JavaScript syntax, variables, and data types!",
-            "Video" : "https://drive.google.com/file/d/1miNPp_lUpQPByxmDgRBouZEkk6CZX430/view?usp=sharing"
+            "Video" : "https://drive.google.com/file/d/1miNPp_lUpQPByxmDgRBouZEkk6CZX430/preview"
         },
         "2" : {
-            "Title" : "JavaScript Control Structures",
-            "Description" : "Continuing learning about JavaScript and control structures and loops! This video introduces if...else and switch case statements as well as while and for loops!",
-            "Video" : "https://drive.google.com/file/d/1q7mi6dMojAYEZVL9T3TCnq17K1tvOn5z/view?usp=share_link"
+            "Title" : "Control Structures",
+            "Description" : "Continue learning about JavaScript and control structures and loops! This video introduces if...else and switch case statements as well as while and for loops!",
+            "Video" : "https://drive.google.com/file/d/1q7mi6dMojAYEZVL9T3TCnq17K1tvOn5z/preview"
         },
         "3" : {
             "Title" : "Error Handling",
             "Description" : "Errors are going to happen! In this video, learn about try...catch statements for expected errors!",
-            "Video" : "https://drive.google.com/file/d/1KRudok1tiSp20Fu8kMB956XmC5KxWBcA/view?usp=sharing"
+            "Video" : "https://drive.google.com/file/d/1KRudok1tiSp20Fu8kMB956XmC5KxWBcA/preview"
         },
         "4" : {
             "Title" : "DOM Manipulation",
             "Description" : "Learn to create an interactive and responsive webpage. In this video, learn to use DOM methods and get a brief introduction to event handlers!",
-            "Video" : "https://drive.google.com/file/d/10UucbzuBaQO3nrnKnHM0ckc2felQ6osj/view?usp=sharing"
+            "Video" : "https://drive.google.com/file/d/10UucbzuBaQO3nrnKnHM0ckc2felQ6osj/preview"
+        },
+        "5" : {
+            "Title" : "Event Handlers",
+            "Description" : "Continue to make an interactive webpage. This videos works with creating buttons that change components made in HTML and CSS!",
+            "Video" : "https://drive.google.com/file/d/1UxoQFxeNZBDNzMD0h1lQKdnVjaLlLPS-/preview"
         }
     }
 
