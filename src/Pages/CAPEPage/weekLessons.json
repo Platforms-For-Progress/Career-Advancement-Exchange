@@ -60,6 +60,23 @@
             "Description" : "Learn to create an interactive and responsive webpage. In this video, learn to use DOM methods and get a brief introduction to event handlers!",
             "Video" : "https://drive.google.com/file/d/10UucbzuBaQO3nrnKnHM0ckc2felQ6osj/view?usp=sharing"
         }
+    },
+    {
+        "0" : {
+            "Title": "Introduction to React",
+            "Description": "Understanding the fundamentals of React",
+            "Video": "https://drive.google.com/file/d/1ve49op5nZuxDHt2sa6buhYRArGmHgi7B/view?usp=sharing"
+        },
+        "1": {
+            "Title": "Intro to Components and Props in React",
+            "Description": "Learn about functional components in React, and how to create your own",
+            "Video": "https://drive.google.com/file/d/1e4zdhkRJ-5QK0jabDqEHP8u1EL2D6sSs/view?usp=share_link"
+        },
+        "2": {
+            "Title": "Intro to JSX",
+            "Description": "Learn about using JSX in React, and embedding JavaScript expressions inside JSX",
+            "Video": "https://drive.google.com/file/d/1BXL_Xv_jtAVK5tctIsGyI5n9fYm_jl95/view?usp=sharing"
+        }
     }
 
 ]
