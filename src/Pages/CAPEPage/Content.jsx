@@ -13,7 +13,15 @@ const CAPEResources = ({week}) => {
             <Card key={title}>
                 <CardBody boxShadow={"0px 0px 10px 0px #e1e3e3"} background={"#f0a89e"} borderRadius={"5px"} minWidth={"250px"} maxWidth={"500px"}>
                     <CardHeader>
-                        <Heading fontWeight={500} fontSize={"lg"}>{title}</Heading> {/* Title of the cards for "Lesson Resources" */}
+                        {(title == "Lesson Slides") 
+                        ? 
+                        <Box>
+                            <Heading fontWeight={500} fontSize={"lg"}>{title}</Heading> 
+                            <Text paddingTop={"5px"}> The lesson slides follow the same order as the lesson videos </Text>
+                        </Box>
+                        :
+                        <Heading fontWeight={500} fontSize={"lg"}>{title}</Heading> 
+                        }
                     </CardHeader>
                     <Stack direction={"column"}>
                         <ResourcesLinks obj={obj} title={title}/> {/* Displays the links for each individual card */}
