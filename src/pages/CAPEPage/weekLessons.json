@@ -94,6 +94,23 @@
             "Description": "Some advanced concepts, such as nested routing, routing by id, and useNavigate",
             "Video": "https://drive.google.com/file/d/1-76QBh5q9hLNmOyE_GYIIPTD8O2xLvjE/view?usp=sharing"
         }
+    },
+    {
+      "0": {
+        "Title": "State and useState",
+        "Description": "An introduction/overview to state and useState and some possible use cases for them.",
+        "Video": "https://drive.google.com/file/d/11mssBAZOIpl4dGf8wR6KpFFovpKiPLkk/view?usp=drive_link"
+      },
+      "1": {
+        "Title": "State and useState demo",
+        "Description": "A demo that uses state and useState with an example of why not to use variables instead of state.",
+        "Video": "https://drive.google.com/file/d/1ODpk9xAfa70DVwZnfLlzHYwSUv2OLUII/view?usp=drive_link"
+      },
+      "2": {
+        "Title": "Week 5 Project Walkthrough/Tips",
+        "Description": "A walkthrough of what is expected from the week 5 project and some tips to help code the project.",
+        "Video": "https://drive.google.com/file/d/1yQncGTcQDtdPBzjBrIJfy9bkm0-sTSQ9/view?usp=drive_link"
+      }
     }
 
 ]
