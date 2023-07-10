@@ -59,6 +59,7 @@ const CAPEPage = () => {
                 <MenuItem _hover={{ bg: '#FDC0C0', borderRadius: "5px"}} bgColor={"#f0a89e"} padding={"10px"} onClick={() => setMenuLabel("Week 3")}>Week 3</MenuItem>
                 <MenuItem _hover={{ bg: '#FDC0C0', borderRadius: "5px"}} bgColor={"#f0a89e"} padding={"10px"} onClick={() => setMenuLabel("Week 4")}>Week 4</MenuItem>
                 <MenuItem _hover={{ bg: '#FDC0C0', borderRadius: "5px" }} bgColor={"#f0a89e"} padding={"10px"} onClick={() => setMenuLabel("Week 5")}>Week 5</MenuItem>
+                <MenuItem _hover={{ bg: '#FDC0C0', borderRadius: "5px" }} bgColor={"#f0a89e"} padding={"10px"} onClick={() => setMenuLabel("Week 6")}>Week 6</MenuItem>
               </MenuList>
             </Portal>  
             </Menu>

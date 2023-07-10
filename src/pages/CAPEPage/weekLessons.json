@@ -111,6 +111,18 @@
         "Description": "A walkthrough of what is expected from the week 5 project and some tips to help code the project.",
         "Video": "https://drive.google.com/file/d/1yQncGTcQDtdPBzjBrIJfy9bkm0-sTSQ9/view?usp=drive_link"
       }
-    }
+    },
+    {
+        "0": {
+          "Title": "Form Introduction",
+          "Description": "Introduction to Forms in react",
+          "Video": "https://drive.google.com/file/d/1DuQEdwKa3qMVWn-Eg0RhKJCMYDl2Ze_y/view?usp=sharing"
+        },
+        "1": {
+          "Title": "Form Validation",
+          "Description": "Introduction to Form Validation",
+          "Video": "https://drive.google.com/file/d/1V8X5Foz0WDtnV7XcgZXyh1wEBlxmTN6Y/view?usp=sharing"
+        }
+      }
 
 ]
